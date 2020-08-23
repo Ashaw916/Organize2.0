@@ -1,0 +1,21 @@
+Organize
+
+An app that is a central hub for events/news/information surrounding social justice. Two sides to front-end, an admin side for leaders of groups and organizations to add, edit and delete what is shown to the public. And the public side where visitors may view only but can filter information by organization.
+
+It would be designed so that each city or state would have their own hub.
+
+Currently other social media is used to share information but to find complete information multiple social media platforms must be traversed. Organize fixes that problem, providing a platform for all that information to be in one location.
+
+Vanessa Bautista - frontend
+Stephen Mayfield - frontend
+Sandra Arredondo - frontend
+Saular Moaddeli - backend
+Aaron Young - backend
+
+Technologies:
+- calendar.js
+- material ui
+- formik
+- news api
+- auth0
+
