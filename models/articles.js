@@ -7,7 +7,8 @@ const articleSchema = new Schema({
   body: { type: String, required: true },
   date_added: { type: Date, default: Date.now },
   description: { type: String, required: true },
-  source: { type: String, required: true }
+  source: { type: String, required: true },
+  type: { type: String, required: true }
 });
 
 const Articles = mongoose.model("Articles", articleSchema);
