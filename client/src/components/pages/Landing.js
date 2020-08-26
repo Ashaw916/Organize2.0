@@ -1,4 +1,5 @@
 import React from "react";
+import "../css/Landing.css";
 
 function Landing() {
   return (
@@ -58,10 +59,10 @@ function Landing() {
           </div>
         </div>
 
-        <div className="container" style={{ textAlign: "center" }}>
+        <div className="container" id="bottom-info">
           <div className="row">
             <div className="col">
-              <h4 style={{ textAlign: "center" }}>About us title</h4>
+              <h4>About us title</h4>
             </div>
           </div>
 
