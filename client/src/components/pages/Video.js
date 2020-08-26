@@ -5,7 +5,7 @@ function Video(props) {
   console.log(props);
 
   return (
-    <div>
+    <div className="container">
       <h1>Video Page</h1>
       <p>
         Nunc pharetra finibus est at efficitur. Praesent sed congue diam.

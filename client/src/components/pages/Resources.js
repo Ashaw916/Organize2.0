@@ -2,7 +2,7 @@ import React from "react";
 
 function Resources() {
   return (
-    <div>
+    <div className="container">
       <h1>Articles and Community Resources</h1>
       <p>
         Donec a volutpat quam. Curabitur nec varius justo, sed rutrum ligula.

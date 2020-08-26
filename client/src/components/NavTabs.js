@@ -8,12 +8,12 @@ function NavTabs() {
   const location = useLocation();
 
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <a className="navbar-brand" href="#">
         Navbar
       </a>
       <button
-        class="navbar-toggler"
+        className="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbarNav"
@@ -21,11 +21,11 @@ function NavTabs() {
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon"></span>
+        <span className="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
+      <div className="collapse navbar-collapse" id="navbarNav">
+        <ul className="navbar-nav">
+          <li className="nav-item active">
             <Link
               to="/"
               className={
@@ -35,7 +35,7 @@ function NavTabs() {
               Home
             </Link>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <Link
               to="/about"
               className={
@@ -45,7 +45,7 @@ function NavTabs() {
               Video
             </Link>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <Link
               to="/resources"
               className={
@@ -57,7 +57,7 @@ function NavTabs() {
               Resources
             </Link>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <Link
               to="/contact"
               className={
@@ -67,6 +67,16 @@ function NavTabs() {
               }
             >
               Contact
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              to="/admin"
+              className={
+                location.pathname === "/admin" ? "nav-link active" : "nav-link"
+              }
+            >
+              Admin
             </Link>
           </li>
           {/* <li className="nav-item">
