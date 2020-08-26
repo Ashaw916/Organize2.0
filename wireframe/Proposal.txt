@@ -13,9 +13,18 @@ Saular Moaddeli - backend
 Aaron Young - backend
 
 Technologies:
-- calendar.js
+- Fullcalendar
 - material ui
 - formik
 - news api
-- auth0
+- passport (auth0 maybe)
+- bcrypt
+- mongo
 
+MVP
+- calendar
+- articles/resources/links
+- registration submission and approval by super-admin then the new user is sent their credentials
+    - on the first login they are forced to create a new password
+- Live video stream embeded in page (at least video)
+- admin area and ability to CRUD DB
