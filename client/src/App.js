@@ -5,6 +5,7 @@ import Landing from "./components/pages/Landing";
 import Video from "./components/pages/Video";
 import Resources from "./components/pages/Resources";
 import Contact from "./components/pages/Contact";
+import Admin from "./components/pages/Admin";
 import Footer from "./components/Footer/Footer";
 
 function App() {
@@ -13,9 +14,10 @@ function App() {
       <div>
         <NavTabs />
         <Route exact path="/" component={Landing} />
-        <Route exact path="/about" component={Video} />
         <Route exact path="/resources" component={Resources} />
+        <Route exact path="/about" component={Video} />
         <Route path="/contact" component={Contact} />
+        <Route exact path="/Admin" component={Admin} />
       </div>
       <Footer />
     </Router>
