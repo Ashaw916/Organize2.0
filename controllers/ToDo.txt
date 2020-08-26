@@ -20,3 +20,7 @@ user profiles
 
 joins
 - everything and user
+
+cors policy
+
+Enter email into invite form. when user goes to register. their email is checked against tthis table and only allows them to register if their email is in the table. No link to registration page on public site. Only in email.
