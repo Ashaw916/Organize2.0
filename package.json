@@ -1,12 +1,13 @@
 {
-  "name": "mern",
-  "version": "1.0.0",
+  "name": "organize",
+  "version": "2.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "dev": "nodemon server.js",
     "client": "cd client && npm run start",
     "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install",
@@ -16,14 +17,28 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^4.1.0",
+    "concurrently": "^5.3.0",
     "nodemon": "^1.18.7"
   },
   "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
     "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "ejs": "^3.1.5",
     "express": "^4.16.3",
+    "express-ejs-layouts": "^2.5.0",
+    "express-session": "^1.17.1",
     "if-env": "^1.0.4",
     "mongoose": "^5.3.16",
+    "node": "^14.8.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "^3.4.3",
     "react-router-dom": "^5.2.0"
   }
 }
