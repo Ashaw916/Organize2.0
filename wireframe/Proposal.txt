@@ -19,3 +19,10 @@ Technologies:
 - news api
 - auth0
 
+
+APIs:
+For voter information and with an address can look up who represents that location at all levels of gov:
+* google civic information api: https://developers.google.com/civic-information
+* https://tool.votinginfoproject.org/cms/index.html
+
+News api:
