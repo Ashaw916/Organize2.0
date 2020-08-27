@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/ResourceCard.css";
+import "../../pages/css/ResourceCard.css";
 
 function ResourceCard(props) {
   return (

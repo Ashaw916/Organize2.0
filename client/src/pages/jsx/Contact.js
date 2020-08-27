@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, Route } from "react-router-dom";
-import EmployeeTable from "../OrgContacts/OrgContacts";
 
 function Contact(props) {
   return (
