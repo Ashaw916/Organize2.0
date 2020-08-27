@@ -1,7 +1,8 @@
 //CREATE THE EMPLOYEE TABLE COMPONENT
 //DEPENDENCIES
 import React, { Component } from "react";
-import TableHeader from "../TableHeader/tableHeader";
+import TableHeader from "../TableHeader";
+import './style.css';
 
 //CREATE COMPONENT CLASS
 class EmployeesTable extends Component {
