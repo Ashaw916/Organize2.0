@@ -1,12 +1,10 @@
 import React from "react";
 import { Link, Route } from "react-router-dom";
 import Learn from "./Learn";
-import PageWrapper from "./PageWrapper";
 
 function Admin(props) {
   return (
     <div className="container">
-      <PageWrapper />
       <h1>Admin Page</h1>
       <p>Login and registration stuff</p>
       <Link

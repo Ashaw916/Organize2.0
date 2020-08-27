@@ -83,6 +83,28 @@ function NavTabs() {
               Admin
             </Link>
           </li>
+          <li className="nav-item">
+            <Link
+              to="/manage"
+              className={
+                location.pathname === "/manage" ? "nav-link active" : "nav-link"
+              }
+            >
+              Manage
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              to="/profile"
+              className={
+                location.pathname === "/profile"
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+              Profile
+            </Link>
+          </li>
           {/* <li className="nav-item">
             <Link
               to="/contact/learn"
