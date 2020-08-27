@@ -35,16 +35,7 @@ function NavTabs() {
               Home
             </Link>
           </li>
-          <li className="nav-item">
-            <Link
-              to="/about"
-              className={
-                location.pathname === "/about" ? "nav-link active" : "nav-link"
-              }
-            >
-              Video
-            </Link>
-          </li>
+
           <li className="nav-item">
             <Link
               to="/resources"
@@ -57,6 +48,18 @@ function NavTabs() {
               Resources
             </Link>
           </li>
+
+          <li className="nav-item">
+            <Link
+              to="/video"
+              className={
+                location.pathname === "/video" ? "nav-link active" : "nav-link"
+              }
+            >
+              Video
+            </Link>
+          </li>
+
           <li className="nav-item">
             <Link
               to="/contact"
