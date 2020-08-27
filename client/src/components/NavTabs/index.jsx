@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import './style.css';
 
 function NavTabs() {
   // We'll go into the Hooks API later, for now, we are just using some code
@@ -35,16 +36,7 @@ function NavTabs() {
               Home
             </Link>
           </li>
-          <li className="nav-item">
-            <Link
-              to="/about"
-              className={
-                location.pathname === "/about" ? "nav-link active" : "nav-link"
-              }
-            >
-              Video
-            </Link>
-          </li>
+
           <li className="nav-item">
             <Link
               to="/resources"
@@ -57,6 +49,18 @@ function NavTabs() {
               Resources
             </Link>
           </li>
+
+          <li className="nav-item">
+            <Link
+              to="/video"
+              className={
+                location.pathname === "/video" ? "nav-link active" : "nav-link"
+              }
+            >
+              Video
+            </Link>
+          </li>
+
           <li className="nav-item">
             <Link
               to="/contact"
@@ -77,6 +81,28 @@ function NavTabs() {
               }
             >
               Admin
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              to="/manage"
+              className={
+                location.pathname === "/manage" ? "nav-link active" : "nav-link"
+              }
+            >
+              Manage
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              to="/profile"
+              className={
+                location.pathname === "/profile"
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+              Profile
             </Link>
           </li>
           {/* <li className="nav-item">
