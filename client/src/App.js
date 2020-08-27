@@ -6,7 +6,7 @@ import Video from "./pages/jsx/Video";
 import Resources from "./pages/jsx/Resources";
 import Contact from "./pages/jsx/Contact";
 import Admin from "./pages/jsx/Admin";
-import Footer from "./components/Footer/Footer";
+import Footer from "./components/Footer";
 import Manage from "./pages/jsx/Manage";
 import Profile from "./pages/jsx/Profile";
 
