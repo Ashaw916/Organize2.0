@@ -1,5 +1,5 @@
 import React from "react";
-import ResourceCard from "../ResourceCard/ResourceCard";
+import ResourceCard from "../../components/ResourceCard";
 
 function Resources() {
   return (

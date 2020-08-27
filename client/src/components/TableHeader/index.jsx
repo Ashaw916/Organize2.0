@@ -1,5 +1,6 @@
 //DEPENDENCIES
 import React, { Component } from "react";
+import "./style.css";
 
 //CREATE COMPONENT CLASS
 //interface of this component
