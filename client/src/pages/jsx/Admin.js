@@ -1,23 +1,30 @@
 import React from "react";
 import { Link, Route } from "react-router-dom";
-import Learn from "./Learn";
+
+import Registration from "../../components/Registration/Registration.js";
+import Login from "../../components/Login/Login.js";
 
 function Admin(props) {
   return (
     <div className="container">
-      <h1>Admin Page</h1>
-      <p>Login and registration stuff</p>
-      <Link
-        to={`${props.match.url}/learn`}
-        role="button"
-        className="btn btn-link"
-      >
-        Learn More
-      </Link>{" "}
-      <Link to="/admin" role="button" className="btn btn-link">
-        Learn Less
-      </Link>
-      <Route exact path={`${props.match.url}/learn`} component={Learn} />
+      <div className="row">
+        <div className="col">
+          <h1>Admin Page</h1>
+          <p>
+            Administrators are by invitation only. If you have received an
+            invitation please register to set up your account.
+          </p>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <Login />
+        </div>
+
+        <div className="col">
+          <Registration />
+        </div>
+      </div>
     </div>
   );
 }
