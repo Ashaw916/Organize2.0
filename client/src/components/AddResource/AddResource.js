@@ -39,11 +39,11 @@ function AddResource() {
               ></textarea>
             </div>
             <div className="form-group">
-              <label for="resource-description">Description</label>
+              <label for="resource-description">Brief Description</label>
               <textarea
                 className="form-control"
                 id="description"
-                rows="3"
+                rows="1"
               ></textarea>
             </div>
             <div className="form-row">
