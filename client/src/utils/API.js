@@ -41,5 +41,26 @@ export default {
   // Updates an article
   updateArticle: function (id, articleData) {
     return axios.put("/api/articles/" + id, articleData);
+  },
+
+  // Gets all links
+  getLinks: function () {
+    return axios.get("/api/links");
+  },
+  // Gets the link with the given id
+  getLink: function (id) {
+    return axios.get("/api/links/" + id);
+  },
+  // Deletes the link with the given id
+  deleteLink: function (id) {
+    return axios.delete("/api/links/" + id);
+  },
+  // Saves a link to the database
+  saveLink: function (linkData) {
+    return axios.post("/api/links", linkData);
+  },
+  // Updates a link
+  updateLink: function (id, linkData) {
+    return axios.put("/api/links/" + id, linkData);
   }
 };
