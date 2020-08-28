@@ -28,6 +28,16 @@ const articleSeed = [
   }
 ];
 
+const linkSeed = [
+  {
+    title: "link test title",
+    date_added: new Date(Date.now()),
+    description: "link test description",
+    url: "link test url",
+    type: "link test type"
+  }
+];
+
 db.Events.remove({})
   .then(() => db.Events.collection.insertMany(eventSeed))
   .then((data) => {
@@ -49,3 +59,14 @@ db.Articles.remove({})
     console.error(err);
     process.exit(1);
   });
+
+db.Links.remove({})
+  .then(() => db.Links.collection.insertMany(linkSeed))
+  .then((data) => {
+    console.log(data.result.n + " records inserted!");
+    process.exit(0);
+  })
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });  
