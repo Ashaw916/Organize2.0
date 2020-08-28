@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, Route } from "react-router-dom";
+import VideoArchive from "../../components/VideoArchive/VideoArchive.js";
+import VideoLiveStream from "../../components/VideoLiveStream/VideoLiveStream";
 
 function Video(props) {
   console.log(props);
@@ -10,57 +12,14 @@ function Video(props) {
         <h1>Video Page</h1>
       </div>
       <div className="row">
-        <div
-          className="video-wrapper"
-          style={{ height: "300px", backgroundColor: "#379683", width: "100%" }}
-        >
-          Video here
-        </div>
+        <VideoLiveStream />
       </div>
 
       <div className="row">
         <h2>Video Links Archive</h2>
       </div>
       <div className="row">
-        <div className="col">
-          <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action active">
-              Video Archive Links
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-              Dapibus ac facilisis in
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-              Morbi leo risus
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-              Porta ac consectetur ac
-            </a>
-            <a href="#" class="list-group-item list-group-item-action disabled">
-              Vestibulum at eros
-            </a>
-          </div>
-        </div>
-
-        <div className="col">
-          <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action active">
-              Video Archive Links
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-              Dapibus ac facilisis in
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-              Morbi leo risus
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-              Porta ac consectetur ac
-            </a>
-            <a href="#" class="list-group-item list-group-item-action disabled">
-              Vestibulum at eros
-            </a>
-          </div>
-        </div>
+        <VideoArchive />
       </div>
     </div>
   );
