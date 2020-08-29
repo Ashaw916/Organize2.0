@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Axios from "axios";
 
-function Login() {
+function LoginUser() {
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const login = (e) => {
@@ -67,4 +67,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginUser;

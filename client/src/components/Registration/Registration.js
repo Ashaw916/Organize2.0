@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import Axios from "axios";
 
 function Registration() {
+  const [regUsername, setRegUsername] = useState("");
+  const [regPassword, setRegPassword] = useState("");
+  const register = (e) => {
+    e.preventDefault();
+    console.log("submit");
+    Axios({
+      method: "POST",
+      data: {
+        username: regUsername,
+        password: regPassword,
+      },
+      withCredentials: true,
+      url: "/users/register",
+    }).then((res) => console.log(res));
+  };
   return (
     <>
       <div className="card">
@@ -15,6 +31,7 @@ function Registration() {
                   className="form-control"
                   id="inputEmail4"
                   placeholder="Email"
+                  onChange={(e) => setRegUsername(e.target.value)}
                 />
               </div>
               <div className="form-group col-md-6">
@@ -24,6 +41,7 @@ function Registration() {
                   className="form-control"
                   id="inputPassword4"
                   placeholder="Password"
+                  onChange={(e) => setRegPassword(e.target.value)}
                 />
               </div>
             </div>
@@ -74,7 +92,11 @@ function Registration() {
                 </label>
               </div>
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={register}
+            >
               Sign in
             </button>
           </form>
