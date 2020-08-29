@@ -1,2 +1,5 @@
 node_modules
 password.txt
+keys.js
+.env
+package-lock.json
