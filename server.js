@@ -5,10 +5,8 @@ const routes = require("./routes");
 const cors = require("cors");
 const app = express();
 const session = require("express-session");
-const cookieParser = require("cookie-parser");
-
+// const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const flash = require("connect-flash");
 const PORT = process.env.PORT || 3001;
 
 // Passport Config
@@ -35,11 +33,15 @@ app.use(
     saveUninitialized: true,
   })
 );
-app.use(cookieParser("svsas"));
+// app.use(cookieParser("svsas"));
 //routes
 app.use(routes);
 app.use("/", require("./routes/index"));
 app.use("/users", require("./routes/api/users"));
+// app.use("/userprofiles", require("./routes/api/userProfiles"));
+app.use("/events", require("./routes/api/events"));
+app.use("/articles", require("./routes/api/articles"));
+app.use("/links", require("./routes/api/links"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

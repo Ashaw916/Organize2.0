@@ -10,7 +10,7 @@ function Invite() {
         <p>Please enter information for the user you would like to invite</p>
         <form>
           <div className="form-group">
-            <label for="exampleFormControlInput1">Email address</label>
+            <label HTMLFor="exampleFormControlInput1">Email address</label>
             <input
               type="email"
               className="form-control"
@@ -20,9 +20,7 @@ function Invite() {
           </div>
 
           <div className="form-group">
-            <label for="organization">Organization Name</label>
-            <input
-              type="text"
+
               className="form-control"
               id="organization"
               placeholder="Please enter the name of the organization you would like to invite"
