@@ -9,6 +9,8 @@ const eventSchema = new Schema({
   description: { type: String, required: true },
   location: { type: String, required: true },
   organization: { type: String, required: true },
+  start_time: { type: String, required: true },
+  event_url: { type: String, required: true }
 });
 
 const Events = mongoose.model("Events", eventSchema);

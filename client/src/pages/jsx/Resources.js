@@ -1,6 +1,7 @@
 import React from "react";
 import ResourceCard from "../../components/ResourceCard";
 import SearchForm from "../../components/SearchForm/SearchForm";
+import Pagination from "../../components/Pagination/Pagination";
 
 function Resources() {
   return (
@@ -10,9 +11,11 @@ function Resources() {
       </div>
       <div className="row">
         <SearchForm />
+        <Pagination />
       </div>
-
-      <div className="card-wrapper">
+      <div className="row">
+        <ResourceCard />
+        <ResourceCard />
         <ResourceCard />
       </div>
     </div>

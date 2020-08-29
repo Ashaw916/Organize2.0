@@ -1,4 +1,5 @@
 import React from "react";
+import Pagination from "../Pagination/Pagination";
 
 function VideoArchive() {
   return (
@@ -20,6 +21,7 @@ function VideoArchive() {
           <a href="#" class="list-group-item list-group-item-action disabled">
             Vestibulum at eros
           </a>
+          <Pagination />
         </div>
       </div>
     </>

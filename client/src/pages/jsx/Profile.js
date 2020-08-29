@@ -11,7 +11,7 @@ function Profile() {
         <div className="card" id="profile-container">
           Area for user profile information
         </div>
-
+        <h1>Invite Another Organization</h1>
         <div className="card" id="invite-wrapper">
           <Invite />
         </div>
