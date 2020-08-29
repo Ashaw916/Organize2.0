@@ -26,7 +26,11 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
+    "cookie-parse": "^0.4.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "ejs": "^3.1.5",
     "express": "^4.16.3",
     "express-ejs-layouts": "^2.5.0",
@@ -35,10 +39,6 @@
     "mongoose": "^5.3.16",
     "node": "^14.8.0",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.3",
-    "react-router-dom": "^5.2.0"
+    "passport-local": "^1.0.0"
   }
 }
