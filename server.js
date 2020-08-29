@@ -36,16 +36,11 @@ app.use(
   })
 );
 app.use(cookieParser("svsas"));
-
 //routes
 app.use(routes);
 app.use("/", require("./routes/index"));
 app.use("/users", require("./routes/api/users"));
 
-// // EJS
-// app.use(expressLayouts);
-// app.set("view engine", "ejs");
-// Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
@@ -55,11 +50,11 @@ mongoose
   .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
-// mongodb+srv://admin:<password>@cluster0.ozd49.mongodb.net/<dbname>?retryWrites=true&w=majority
 
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+require("./config/auth")(passport);
 
 // Start the API server
 app.listen(PORT, function () {

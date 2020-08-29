@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Axios from "axios";
 
 function Registration() {
-  const [regUsername, setRegUsername] = useState("");
+  const [regEmail, setRegUsername] = useState("");
   const [regPassword, setRegPassword] = useState("");
   const register = (e) => {
     e.preventDefault();
@@ -10,7 +10,7 @@ function Registration() {
     Axios({
       method: "POST",
       data: {
-        username: regUsername,
+        email: regEmail,
         password: regPassword,
       },
       withCredentials: true,
@@ -29,7 +29,7 @@ function Registration() {
                 <input
                   type="email"
                   className="form-control"
-                  id="inputEmail4"
+                  id="email"
                   placeholder="Email"
                   onChange={(e) => setRegUsername(e.target.value)}
                 />
@@ -39,7 +39,7 @@ function Registration() {
                 <input
                   type="password"
                   className="form-control"
-                  id="inputPassword4"
+                  id="ipassword"
                   placeholder="Password"
                   onChange={(e) => setRegPassword(e.target.value)}
                 />
