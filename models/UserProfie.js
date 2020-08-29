@@ -1,20 +1,38 @@
 const mongoose = require("mongoose");
 
-const UserProfileSchema = new mongoose.Schema({
+const userProfile = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+  },
   organization: {
     type: String,
     required: true,
   },
   role: {
-    type: String,
+    type: "admin",
     required: true,
   },
-  date: {
+  facebook: {
+    type: String,
+    required: false,
+  },
+  twitter: {
+    type: String,
+    required: false,
+  },
+  instagram: {
+    type: String,
+    required: false,
+  },
+  website: {
+    type: String,
+    required: false,
+  }
+  date_added: {
     type: Date,
     default: Date.now,
   },
 });
 
-const UserProfile = mongoose.model("UserProfile", UserProfileSchema);
-
-module.exports = UserProfile;
+module.exports = mongoose.model("UserProfile", userProfile);

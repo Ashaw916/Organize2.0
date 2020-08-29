@@ -39,7 +39,7 @@ function Registration() {
                 <input
                   type="password"
                   className="form-control"
-                  id="ipassword"
+                  id="password"
                   placeholder="Password"
                   onChange={(e) => setRegPassword(e.target.value)}
                 />
