@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import Axios from "axios";
 
 function Registration() {
+  const [regUsername, setRegUsername] = useState("");
+  const [regPassword, setRegPassword] = useState("");
+  const register = (e) => {
+    e.preventDefault();
+    console.log("submit");
+    Axios({
+      method: "POST",
+      data: {
+        username: regUsername,
+        password: regPassword,
+      },
+      withCredentials: true,
+      url: "/users/register",
+    }).then((res) => console.log(res));
+  };
   return (
     <>
       <div className="card">
@@ -9,26 +25,28 @@ function Registration() {
           <form id="registration">
             <div className="form-row">
               <div className="form-group col-md-6">
-                <label for="inputEmail4">Email</label>
+                <label htmlFor="inputEmail4">Email</label>
                 <input
                   type="email"
                   className="form-control"
                   id="inputEmail4"
                   placeholder="Email"
+                  onChange={(e) => setRegUsername(e.target.value)}
                 />
               </div>
               <div className="form-group col-md-6">
-                <label for="inputPassword4">Password</label>
+                <label htmlFor="inputPassword4">Password</label>
                 <input
                   type="password"
                   className="form-control"
                   id="inputPassword4"
                   placeholder="Password"
+                  onChange={(e) => setRegPassword(e.target.value)}
                 />
               </div>
             </div>
             <div className="form-group">
-              <label for="inputAddress">Address</label>
+              <label htmlFor="inputAddress">Address</label>
               <input
                 type="text"
                 className="form-control"
@@ -37,7 +55,7 @@ function Registration() {
               />
             </div>
             <div className="form-group">
-              <label for="inputAddress2">Address 2</label>
+              <label htmlFor="inputAddress2">Address 2</label>
               <input
                 type="text"
                 className="form-control"
@@ -47,18 +65,18 @@ function Registration() {
             </div>
             <div className="form-row">
               <div className="form-group col-md-6">
-                <label for="inputCity">City</label>
+                <label htmlFor="inputCity">City</label>
                 <input type="text" className="form-control" id="inputCity" />
               </div>
               <div className="form-group col-md-4">
-                <label for="inputState">State</label>
-                <select id="inputState" className="form-control">
-                  <option selected>Choose...</option>
+                <label htmlFor="inputState">State</label>
+                <select id="inputState" className="form-control" defaultValue>
+                  <option>Choose...</option>
                   <option>...</option>
                 </select>
               </div>
               <div className="form-group col-md-2">
-                <label for="inputZip">Zip</label>
+                <label htmlFor="inputZip">Zip</label>
                 <input type="text" className="form-control" id="inputZip" />
               </div>
             </div>
@@ -69,12 +87,16 @@ function Registration() {
                   type="checkbox"
                   id="gridCheck"
                 />
-                <label className="form-check-label" for="gridCheck">
+                <label className="form-check-label" htmlFor="gridCheck">
                   Check me out
                 </label>
               </div>
             </div>
-            <button type="submit" class="btn btn-primary">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={register}
+            >
               Sign in
             </button>
           </form>
