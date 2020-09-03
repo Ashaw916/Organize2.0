@@ -14,9 +14,13 @@ function VideoLiveStream() {
           margin: "15px",
         }}
       >
-        <p>I am the VideoLiveStream Component</p>
-
-        <p>LiveStream Video will go here</p>
+        <iframe 
+        style={{
+          height: "300px",
+          width: "100%",
+        }}
+        src="https://www.youtube.com/embed/Xgis2DQdBuM" allowfullscreen>
+    </iframe>
       </div>
     </>
   );
