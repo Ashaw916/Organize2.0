@@ -14,6 +14,7 @@ function ProfileCard() {
 
         <div className="card-body">
           <h4>View and update your Organization's profile information</h4>
+
           <table className="table table-striped">
             <thead>
               <tr>
