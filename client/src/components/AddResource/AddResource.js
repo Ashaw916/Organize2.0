@@ -63,10 +63,7 @@ function AddResource() {
             </button>
           </form>
         </div>
-        <div className="card-footer text-muted">
-          When this is submitted we need to make sure a date is added to the db
-          with the title 'date_added' so that it matches the schema
-        </div>
+        <div className="card-footer text-muted"></div>
       </div>
     </>
   );

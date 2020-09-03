@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Axios from "axios";
+import Manage from "../../pages/jsx/Manage";
 
 function LoginUser() {
   const [loginUsername, setLoginUsername] = useState("");
@@ -15,7 +16,7 @@ function LoginUser() {
       },
       withCredentials: true,
       url: "/users/login",
-    }).then((res) => console.log(res));
+    });
   };
   return (
     <>
@@ -46,16 +47,6 @@ function LoginUser() {
                 placeholder="Password"
                 onChange={(e) => setLoginPassword(e.target.value)}
               />
-            </div>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="exampleCheck1"
-              />
-              <label className="form-check-label" htmlFor="exampleCheck1">
-                Check me out
-              </label>
             </div>
             <button type="submit" className="btn btn-primary" onClick={login}>
               Submit
