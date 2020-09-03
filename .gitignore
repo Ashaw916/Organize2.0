@@ -3,3 +3,6 @@ password.txt
 keys.js
 .env
 package-lock.json
+
+client/package-lock.json
+
