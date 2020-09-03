@@ -1,5 +1,7 @@
 import React from "react";
 import "../css/Landing.css";
+import Calendar from "../../components/Calendar/Calendar";
+// import SearchForm from "../../components/SearchForm/SearchForm";
 
 function Landing() {
   return (
@@ -51,11 +53,7 @@ function Landing() {
 
         <div className="jumbotron jumbotron-fluid mt-5">
           <div className="container">
-            <h1 className="display-4">Display Calendar here</h1>
-            <p className="lead">
-              This is a modified jumbotron that occupies the entire horizontal
-              space of its parent.
-            </p>
+            <Calendar />
           </div>
         </div>
 
@@ -87,3 +85,11 @@ function Landing() {
 }
 
 export default Landing;
+
+/*
+<h1 className="display-4">Display Calendar here</h1>
+            <p className="lead">
+              This is a modified jumbotron that occupies the entire horizontal
+              space of its parent.
+            </p>
+*/
