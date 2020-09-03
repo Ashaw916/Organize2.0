@@ -23,25 +23,25 @@ function Landing() {
         </div>
 
         <div className="row">
-          <div className="card col-3">
+          <div className="card col" id="tile">
             <div className="card-body">
               <h5 className="card-title">Community Resources</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
             </div>
           </div>
-          <div className="card col-3">
+          <div className="card col" id="tile">
             <div className="card-body">
               <h5 className="card-title">Video Links</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
             </div>
           </div>
-          <div className="card col-3">
+          <div className="card col" id="tile">
             <div className="card-body">
               <h5 className="card-title">Connect</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
             </div>
           </div>
-          <div className="card col-3">
+          <div className="card col" id="tile">
             <div className="card-body">
               <h5 className="card-title">Register/Login</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
