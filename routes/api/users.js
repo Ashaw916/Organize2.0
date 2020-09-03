@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const usersController = require("../../controllers/usersController");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
+const authToken = require("../../config/authToken");
 // User model
 const User = require("../../models/User");
 
@@ -12,19 +15,29 @@ router.use(passport.session());
 require("../../config/auth")(passport);
 
 // Login
-router.post("/login", (req, res, next) => {
+router.post("/login", (req, res) => {
   console.log("hit login");
-  passport.authenticate("local", (err, user, info) => {
+  passport.authenticate("local", (err, user) => {
+    console.log("user 1", user);
     if (err) throw err;
     if (!user) res.send("No User Exists");
     else {
       req.logIn(user, (err) => {
+        // console.log("user", );
+        const username = req.body.username;
+        const user = { name: username };
+        console.log({ user });
+        jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
+          // console.log({ user });
+          if (err) {
+            console.log(err);
+          }
+          res.json({ token });
+        });
         if (err) throw err;
-        res.send("Success");
-        console.log("Success");
       });
     }
-  })(req, res, next);
+  })(req, res);
 });
 
 // Register
@@ -48,7 +61,14 @@ router.post("/register", (req, res) => {
 });
 
 //get users
-router.get("/", (req, res) => {
-  res.send(req.users); // The req.user stores the entire user that has been authenticated inside of it.
-});
+// router.get("/users", authToken, (req, res) => {
+//   res.send(req.users);
+// });
+router
+  .route("/users", authToken)
+  .get(usersController.findAll)
+  .put(usersController.update)
+  .delete(usersController.remove);
+
 module.exports = router;
+// module.exports = authenticateToken;

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Axios from "axios";
-import Manage from "../../pages/jsx/Manage";
 
 function LoginUser() {
   const [loginUsername, setLoginUsername] = useState("");

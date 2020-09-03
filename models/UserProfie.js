@@ -28,7 +28,7 @@ const userProfile = new mongoose.Schema({
   website: {
     type: String,
     required: false,
-  }
+  },
   date_added: {
     type: Date,
     default: Date.now,

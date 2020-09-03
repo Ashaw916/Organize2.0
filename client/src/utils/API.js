@@ -62,5 +62,5 @@ export default {
   // Updates a link
   updateLink: function (id, linkData) {
     return axios.put("/api/links/" + id, linkData);
-  }
+  },
 };

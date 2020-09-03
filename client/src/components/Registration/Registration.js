@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Axios from "axios";
 
 function Registration() {
-  const [regEmail, setRegUsername] = useState("");
+  const [regEmail, setRegEmail] = useState("");
   const [regPassword, setRegPassword] = useState("");
   const register = (e) => {
     e.preventDefault();
@@ -31,7 +31,7 @@ function Registration() {
                   className="form-control"
                   id="email"
                   placeholder="Email"
-                  onChange={(e) => setRegUsername(e.target.value)}
+                  onChange={(e) => setRegEmail(e.target.value)}
                 />
               </div>
               <div className="form-group col-md-6">
