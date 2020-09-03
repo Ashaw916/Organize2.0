@@ -3,20 +3,46 @@ import React from "react";
 function AddVideo() {
   return (
     <>
-      <div className="card text-center">
-        <div className="card-header">I am an "AddVideo" Component</div>
-        <div className="card-body">
-          <h5 className="card-title">Add Video Material Here</h5>
-          <p className="card-text">
-            I need to add functionality to add a Event Title, location, date and
-            time, url, text, record the date, and have it save to a db and
-            render in the calendar
-          </p>
-          <a href="#" className="btn btn-primary">
-            Do Something
-          </a>
+      <div className="card">
+        <div className="card-header">
+          I am an "AddVideo" Component<h5>Add Video Information Here</h5>
         </div>
-        <div className="card-footer text-muted">Posted: 8-27-20</div>
+        <div className="card-body">
+          <form>
+            <div className="form-group">
+              <label for="videoTitle">Video Title</label>
+              <input
+                type="text"
+                className="form-control"
+                id="videoTitle"
+                placeholder="Enter Title for video"
+              />
+            </div>
+
+            <div className="form-group">
+              <label for="exampleFormControlTextarea1">Brief Description</label>
+              <textarea
+                className="form-control"
+                id="videoDescription"
+                rows="2"
+              ></textarea>
+            </div>
+
+            <div className="form-group">
+              <label for="videoUrl">Video Url</label>
+              <input
+                type="url"
+                className="form-control"
+                id="videoUrl"
+                placeholder="Video url"
+              />
+            </div>
+          </form>
+          <button type="submit" className="btn btn-primary">
+            Add Video
+          </button>
+        </div>
+        <div className="card-footer text-muted"></div>
       </div>
     </>
   );

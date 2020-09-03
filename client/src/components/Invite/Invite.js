@@ -27,6 +27,9 @@ function Invite() {
               placeholder="Please enter the name of the organization you would like to invite"
             />
           </div>
+          <button type="button" className="btn btn-secondary">
+            Submit
+          </button>
         </form>
       </div>
     </>

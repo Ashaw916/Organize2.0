@@ -59,7 +59,7 @@ function AddResource() {
               </div>
             </div>
             <button type="submit" className="btn btn-primary">
-              Submit
+              Add Resource
             </button>
           </form>
         </div>
