@@ -7,6 +7,9 @@ import { set } from "mongoose";
 function Landing() {
   const [event, setEvent] = useState([]);
 
+  /////////figure out how to modify debounced hook to stop api from being hit constently
+
+
   //call api route to get all events
   function loadEvents() {
     API.getEvents()
@@ -30,7 +33,7 @@ function Landing() {
           eventsArray.push(eventObj);
         }
         console.log(eventsArray);
-        setEvent(eventsArray);//this is working now, but it's not turning up in calendar
+        setEvent(eventsArray);
         console.log(event);
       })
       .catch(err => console.log(err));
