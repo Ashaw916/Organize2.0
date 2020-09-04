@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, Route } from "react-router-dom";
+import "../css/Admin.css";
 
 import Registration from "../../components/Registration/Registration.js";
 import Login from "../../components/Login/Login.js";

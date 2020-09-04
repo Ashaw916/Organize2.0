@@ -1,4 +1,5 @@
 import React from "react";
+import "./Table.css";
 
 function Table() {
   return (
@@ -9,29 +10,38 @@ function Table() {
           <table className="table table-sm">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Organization Name</th>
+                <th scope="col">Contact Email</th>
+                <th scope="col">Website</th>
+                <th scope="col">FB</th>
+                <th scope="col">Instagram</th>
+                <th scope="col">Twitter</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <th scope="row">Organize2.0</th>
+                <td>organizeapp@email.com</td>
+                <td>www.organizetest.com</td>
+                <td>http://facebook/organize.com</td>
+                <td>@organizetestapp</td>
+                <td>@organizetestapp</td>
               </tr>
               <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
+                <th scope="row">Organize2.0</th>
+                <td>organizeapp@email.com</td>
+                <td>www.organizetest.com</td>
+                <td>http://facebook/organize.com</td>
+                <td>@organizetestapp</td>
+                <td>@organizetestapp</td>
               </tr>
               <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
+                <th scope="row">Organize2.0</th>
+                <td>organizeapp@email.com</td>
+                <td>www.organizetest.com</td>
+                <td>http://facebook/organize.com</td>
+                <td>@organizetestapp</td>
+                <td>@organizetestapp</td>
               </tr>
             </tbody>
           </table>

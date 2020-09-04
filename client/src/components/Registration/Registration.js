@@ -56,6 +56,7 @@ function Registration() {
                 />
               </div>
             </div>
+
             <div className="form-group">
               <label htmlFor="organization">Organization Name</label>
               <input
@@ -65,6 +66,50 @@ function Registration() {
                 placeholder="Enter your Organization's name"
               />
             </div>
+
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <label htmlFor="website">Organization's website</label>
+                <input
+                  type="website"
+                  className="form-control"
+                  id="website"
+                  placeholder="Website url"
+                />
+              </div>
+
+              <div className="form-group col-md-6">
+                <label htmlFor="facebook">Facebook Page</label>
+                <input
+                  type="facebook"
+                  className="form-control"
+                  id="facebook"
+                  placeholder="FB url"
+                />
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <label htmlFor="instagram">Instagram</label>
+                <input
+                  type="instagram"
+                  className="form-control"
+                  id="instagram"
+                  placeholder="Insta handle @"
+                />
+              </div>
+              <div className="form-group col-md-6">
+                <label htmlFor="twitter">Twitter</label>
+                <input
+                  type="twitter"
+                  className="form-control"
+                  id="twitter"
+                  placeholder="Twitter handle @"
+                />
+              </div>
+            </div>
+
             <button
               type="submit"
               className="btn btn-primary"
