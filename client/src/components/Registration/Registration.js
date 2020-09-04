@@ -25,7 +25,7 @@ function Registration() {
           <form id="registration">
             <div className="form-row">
               <div className="form-group col-md-6">
-                <label htmlFor="inputEmail4">Email</label>
+                <label htmlFor="inputEmail">Email</label>
                 <input
                   type="email"
                   className="form-control"

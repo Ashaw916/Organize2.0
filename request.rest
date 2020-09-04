@@ -7,7 +7,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3001/users
+GET http://localhost:3001/users/users
 
 
 

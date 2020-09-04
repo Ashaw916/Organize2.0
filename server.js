@@ -46,6 +46,7 @@ app.use("/users", require("./routes/api/users"));
 app.use("/events", require("./routes/api/events"));
 app.use("/articles", require("./routes/api/articles"));
 app.use("/links", require("./routes/api/links"));
+// app.use("/invites", require("./routes/api/invite.js"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -76,4 +77,3 @@ require("./config/auth")(passport);
 app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
-console.log();

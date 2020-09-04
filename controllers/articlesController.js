@@ -17,7 +17,7 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   create: function (req, res) {
-    console.log("CREATE:", req.body);
+    console.log("CREATE:", req);
     authToken(req, res, function (req, res) {
       console.log("controller ", req);
       db.Articles.create(req.body)

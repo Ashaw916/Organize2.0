@@ -1,13 +1,13 @@
 require("dotenv").config();
-const express = require("express");
+// const express = require("express");
 const jwt = require("jsonwebtoken");
 
 // auth token
 function authToken(req, res, next) {
-  // console.log("auth:", req.body);
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
-  console.log(token);
+  console.log("auth:", req);
+  // const authHeader = req.headers["xAuthToken"];
+  const token = req.token;
+  console.log("token", token);
   if (token == null) return res.sendStatus(401);
 
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
