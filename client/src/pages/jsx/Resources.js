@@ -30,12 +30,6 @@ function Resources() {
         <SearchForm />
         <Pagination />
       </div>
-
-
-
-
-
-
       {recCard.length ? (
         <div className="row">
           {recCard.map(article => (
@@ -49,15 +43,9 @@ function Resources() {
             />
           ))}
         </div>
-
-
-
-
-
       ) : (
           <h3>No articles to display</h3>
         )}
-
     </div>
   );
 }
