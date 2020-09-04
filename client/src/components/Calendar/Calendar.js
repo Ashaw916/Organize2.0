@@ -6,13 +6,23 @@ function Calendar(props) {
     return (
         <FullCalendar
             plugins={[dayGridPlugin]}
-            initialView="dayGridMonth"
+            dayMaxEvents={true}
+            moreLinkClick={"popover"}
+            views= {{
+                dayGrid: {
+                    titleFormat: {year: "numeric", month: "2-digit", day:"2-digit"}
+                },
+                timeGrid: {
+                    dayMaxEvents: 2
+                }
+            }}
             headerToolbar={{
                 left: "prev,next today",
                 center: "title",
                 right: "dayGridMonth,timeGridWeek,timeGridDay"
             }}
             events={props.events}
+            
         />
     )
 };
