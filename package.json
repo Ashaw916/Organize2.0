@@ -42,6 +42,7 @@
     "express": "^4.16.3",
     "express-ejs-layouts": "^2.5.0",
     "express-session": "^1.17.1",
+    "font-awesome": "^4.7.0",
     "if-env": "^1.0.4",
     "mongoose": "^5.3.16",
     "node": "^14.8.0",
