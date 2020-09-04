@@ -10,13 +10,11 @@ function Manage() {
         <h1>Administration Management Page here</h1>
         <div className="row">
           <div className="col m-2">
-            <AddResource />
-          </div>
-          <div className="col m-2">
             <AddEvent />
           </div>
-        </div>
-        <div className="row">
+          <div className="col m-2">
+            <AddResource />
+          </div>
           <div className="col m-2">
             <AddVideo />
           </div>
