@@ -1,19 +1,33 @@
-import React, { Component } from "react";
-import FullCalendar from "@fullcalendar/react";
+import React from "react";
+import FullCalendar, { isPropsEqual } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"
 
-export default class Calendar extends Component {
-    render() {
-        return (
-            <FullCalendar 
-                plugins={[ dayGridPlugin ]}
-                initialView="dayGridMonth"
-                headerToolbar={{
-                    left: "prev, next today",
-                    center: "title",
-                    right: "dayGridMonth,timeGridWeek,timeGridDay"
-                }}
-            />
-        )
-    }
+function Calendar(props) {
+    return (
+        <FullCalendar
+            plugins={[dayGridPlugin]}
+            initialView="dayGridMonth"
+            headerToolbar={{
+                left: "prev,next today",
+                center: "title",
+                right: "dayGridMonth,timeGridWeek,timeGridDay"
+            }}
+            events={props.events}
+        />
+    )
 };
+
+export default Calendar;
+
+/*
+[{
+                groupId: "blm",
+                start: "2020-08-29",
+                title: "sandra event",
+                url: "www.google.com",
+                description: "work dammit",
+                extendedProps: {
+                  location: "Sacramento"
+                }
+              }]
+*/
