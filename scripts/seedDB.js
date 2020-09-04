@@ -99,35 +99,35 @@ const linkSeed = [
     title: "Nightly news",
     date_added: new Date(Date.now()),
     description: "Nightly news September 1, 2020",
-    url: "https://www.youtube.com/embed/JU9g16VIVM8",
+    src: "https://www.youtube.com/embed/JU9g16VIVM8",
     type: "Youtube video",
   },
   {
     _id: "0002",
     title: "Nightly news",
     description: "Nightly news September 1, 2020",
-    url: "https://www.youtube.com/embed/JU9g16VIVM8",
+    src: "https://www.youtube.com/embed/JU9g16VIVM8",
     type: "Youtube video",
   },
   {
     _id: "0003",
     title: "Nightly news",
     description: "Nightly news September 1, 2020",
-    url: "https://www.youtube.com/embed/JU9g16VIVM8",
+    src: "https://www.youtube.com/embed/JU9g16VIVM8",
     type: "Youtube video",
   },
   {
     _id: "0004",
     title: "Nightly news",
     description: "Nightly news September 1, 2020",
-    url: "https://www.youtube.com/embed/JU9g16VIVM8",
+    src: "https://www.youtube.com/embed/JU9g16VIVM8",
     type: "Youtube video",
   },
   {
     _id: "0005",
     title: "Nightly news",
     description: "Nightly news September 1, 2020",
-    url: "https://www.youtube.com/embed/JU9g16VIVM8",
+    src: "https://www.youtube.com/embed/JU9g16VIVM8",
     type: "Youtube video",
   },
 ];
@@ -139,40 +139,75 @@ const userProfile = [
     email: "doctorsUni@seedemail.com",
     password: "doctorspassword",
     organization: "Doctors United",
+    role: "admin",
     website: "www.doctors.fakeweb.com",
     facebook: "http://facebook/doctorsunifake.com",
     instagram: "@doctorsunited.seed",
     twitter: "@doctorsunitedseed",
+    date_added: new Date(Date.now()),
   },
   {
     _id: "0002",
     email: "teachersUni@seedemail.com",
     password: "teacherspassword",
     organization: "Teachers United",
+    role: "admin",
     website: "www.teachers.fakeweb.com",
     facebook: "http://facebook/teachersunifake.com",
     instagram: "@teachersunited.seed",
     twitter: "@teachersunitedseed",
+    date_added: new Date(Date.now()),
   },
   {
     _id: "0003",
     email: "lawyersUni@seedemail.com",
     password: "lawyerspassword",
     organization: "Lawyers United",
+    role: "admin",
     website: "www.lawyers.fakeweb.com",
     facebook: "http://facebook/lawyersunifake.com",
     instagram: "@lawyersunited.seed",
     twitter: "@lawyersunitedseed",
+    date_added: new Date(Date.now()),
   },
   {
     _id: "0004",
     email: "volunteersUni@seedemail.com",
     password: "volunteerspassword",
     organization: "Volunteers United",
+    role: "admin",
     website: "www.volunteers.fakeweb.com",
     facebook: "http://facebook/volunteersunifake.com",
     instagram: "@volunteersunited.seed",
     twitter: "@volunteersunitedseed",
+    date_added: new Date(Date.now()),
+  },
+];
+
+const user = [
+  {
+    _id: "0001",
+    email: "doctorsUni@seedemail.com",
+    password: "doctorspassword",
+    date_added: new Date(Date.now()),
+  },
+  {
+    _id: "0002",
+    email: "teachersUni@seedemail.com",
+    password: "teacherspassword",
+    date_added: new Date(Date.now()),
+  },
+  {
+    _id: "0003",
+    email: "lawyersUni@seedemail.com",
+    password: "lawyerspassword",
+    date_added: new Date(Date.now()),
+  },
+  {
+    _id: "0004",
+    email: "volunteersUni@seedemail.com",
+    password: "volunteerspassword",
+    date_added: new Date(Date.now()),
   },
 ];
 
@@ -210,6 +245,17 @@ db.Links.remove({})
   });
 
 // db.UserProfiles.remove({})
+//   .then(() => db.UserProfiles.collection.insertMany(userProfileSeed))
+//   .then((data) => {
+//     console.log(data.result.n + " records inserted!");
+//     process.exit(0);
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//     process.exit(1);
+//   });
+
+// db.Users.remove({})
 //   .then(() => db.Users.collection.insertMany(userSeed))
 //   .then((data) => {
 //     console.log(data.result.n + " records inserted!");

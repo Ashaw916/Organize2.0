@@ -6,11 +6,6 @@ import SearchForm from "../../components/SearchForm/SearchForm";
 import Pagination from "../../components/Pagination/Pagination";
 
 function Resources() {
-  // state = {
-
-  //   articles: API.getArticles(),
-  // };
-
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
