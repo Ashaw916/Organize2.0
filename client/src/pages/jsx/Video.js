@@ -31,13 +31,13 @@ class Video extends Component {
                   <div className="list-group-item list-group-item-action">
                     <iframe
                       style={{ height: "300px", width: "auto" }}
-                      src={video.src}
+                      src={video.url}
                       allowfullscreen
                     ></iframe>
 
                     <h5> Title: {video.title} </h5>
                     <p>Description: {video.description}</p>
-                    <a href={video.src}>Source: {video.src}</a>
+                    <a href={video.url}>Source: {video.url}</a>
                   </div>
                 ))}
               </div>

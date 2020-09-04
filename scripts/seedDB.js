@@ -5,44 +5,135 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/organize");
 
 const eventSeed = [
   {
-    title: "test title",
-    start_date: "08/31/2020 12:00pm",
-    end_date: "08/31/2020 9:00pm",
+    title: "Protest planning meeting",
+    start_date: "09/30/2020 03:00pm",
+    end_date: "09/30/2020 06:00pm",
+    date_added: new Date(Date.now()),
+    description: "Gathering to plan and coordinate protest logistics",
+    location: "california state capitol",
+    organization: "Lawyers United",
+    start_time: "3:00pm",
+    event_url: "https://www.google.com/",
+  },
+  {
+    title: "City budget hearing",
+    start_date: "09/22/2020 12:00pm",
+    end_date: "09/22/2020 03:00pm",
     date_added: new Date(Date.now()),
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur diam enim, vel ultrices libero vulputate ac. Phasellus ornare erat non dolor luctus, sit amet varius sapien accumsan. Aliquam quis varius sem. Sed eros mauris, vehicula sit amet facilisis ut, scelerisque at diam. Donec ultricies mollis enim, sit amet convallis eros varius non. Fusce varius risus id ipsum placerat, euismod vehicula enim tempus. Nulla ullamcorper felis vel est accumsan pulvinar. Praesent malesuada, dolor vitae tincidunt egestas, nisl leo vulputate erat, id porttitor mi purus sit amet nunc. Nunc pharetra mi mi, id tristique arcu euismod ac. Suspendisse vitae eros felis. Cras at commodo ligula. ",
-    location: "california state capitol",
-    organization: "test organization",
-    start_time: "3:00pm",
-    event_url: "event test url",
+      "City budget hearing, community members can speak to local impact",
+    location: "City Hall: 915 I Street, Sacramento, CA 95814",
+    organization: "Volunteers United",
+    start_time: "12:00pm",
+    event_url: "https://www.google.com/",
+  },
+  {
+    title: "School Funding March",
+    start_date: "09/28/2020 11:00am",
+    end_date: "09/28/2020 02:00am",
+    date_added: new Date(Date.now()),
+    description: "Community March for more school funding",
+    location: "California State Capitol: 1315 10th Street, ",
+    organization: "Teachers United",
+    start_time: "11:00am",
+    event_url: "https://www.google.com/",
   },
 ];
 
 const articleSeed = [
   {
-    title: "article test title",
-    author: "article test author",
-    body:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur diam enim, vel ultrices libero vulputate ac. Phasellus ornare erat non dolor luctus, sit amet varius sapien accumsan. Aliquam quis varius sem. Sed eros mauris, vehicula sit amet facilisis ut, scelerisque at diam. Donec ultricies mollis enim, sit amet convallis eros varius non. Fusce varius risus id ipsum placerat, euismod vehicula enim tempus. Nulla ullamcorper felis vel est accumsan pulvinar. Praesent malesuada, dolor vitae tincidunt egestas, nisl leo vulputate erat, id porttitor mi purus sit amet nunc. Nunc pharetra mi mi, id tristique arcu euismod ac. Suspendisse vitae eros felis. Cras at commodo ligula. ",
+    title: "World Pays Tribute to ChadWick Boseman",
+    author: "Multiple",
+    body: "Photos illustrating tribute to recently passed Icon",
     date_added: new Date(Date.now()),
-    description: "article test description",
-    source: "article test source",
-    type: "article test type",
+    description: "Photos illustrating tribute to recently passed Icon",
+    source:
+      "https://www.usatoday.com/picture-gallery/news/2020/09/04/world-pays-tribute-chadwick-boseman/5712110002/",
+    type: "News Article",
+  },
+  {
+    title: "How to Prepare to attend a protest",
+    author: "Volunteers United",
+    body:
+      "In order to prepare be sure to: get all relevant information. Park safely. Atttend with friends. Dress apropriately. Bring water.",
+    date_added: new Date(Date.now()),
+    description: "Overview on attending a protest",
+    source: "Volunteers United",
+    type: "Blog post",
+  },
+  {
+    title: "Community Health Clinic",
+    author: "N/A",
+    body: "Local resource for community health",
+    date_added: new Date(Date.now()),
+    description: "Sacramento resource in community health",
+    source: "https://onecommunityhealth.com/",
+    type: "Community resource",
+  },
+  {
+    title: "Checklist for planning a community protest",
+    author: "Lawyers United",
+    body:
+      "In planning a peaceful protest there are many guidelines that are helpful to follow to plan impactful and productive community events that lead to positive change ....",
+    date_added: new Date(Date.now()),
+    description: "How-to article",
+    source: "Lawyers United",
+    type: "Blog",
+  },
+  {
+    title:
+      "Sacramento police chief calls out 'second-guessing' over his handling of latest protests",
+    author: "Molly Sullivan",
+    body:
+      "After downtown endured another recent surge in demonstrations over the mistreatment of Blacks and other minorities at the hands of law enforcement, Sacramento Police Chief Daniel Hahn rebuked some local officials for “second-guessing” him in an op-ed published by The Sacramento Bee...",
+    date_added: new Date(Date.now()),
+    description: "Local law-enforcement article",
+    source: "https://www.sacbee.com/news/local/crime/article245474115.html",
+    type: "News Article",
   },
 ];
 
 const linkSeed = [
   {
-    title: "link test title",
+    _id: "0001",
+    title: "Nightly news",
     date_added: new Date(Date.now()),
-    description: "link test description",
-    url: "link test url",
-    type: "link test type",
+    description: "Nightly news September 1, 2020",
+    url: "https://www.youtube.com/embed/JU9g16VIVM8",
+    type: "Youtube video",
+  },
+  {
+    _id: "0002",
+    title: "Nightly news",
+    description: "Nightly news September 1, 2020",
+    url: "https://www.youtube.com/embed/JU9g16VIVM8",
+    type: "Youtube video",
+  },
+  {
+    _id: "0003",
+    title: "Nightly news",
+    description: "Nightly news September 1, 2020",
+    url: "https://www.youtube.com/embed/JU9g16VIVM8",
+    type: "Youtube video",
+  },
+  {
+    _id: "0004",
+    title: "Nightly news",
+    description: "Nightly news September 1, 2020",
+    url: "https://www.youtube.com/embed/JU9g16VIVM8",
+    type: "Youtube video",
+  },
+  {
+    _id: "0005",
+    title: "Nightly news",
+    description: "Nightly news September 1, 2020",
+    url: "https://www.youtube.com/embed/JU9g16VIVM8",
+    type: "Youtube video",
   },
 ];
 
 //This seed is in the client/resources folder
-const users = [
+const userProfile = [
   {
     _id: "0001",
     email: "doctorsUni@seedemail.com",
@@ -118,13 +209,13 @@ db.Links.remove({})
     process.exit(1);
   });
 
-db.Users.remove({})
-  .then(() => db.Users.collection.insertMany(userSeed))
-  .then((data) => {
-    console.log(data.result.n + " records inserted!");
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
+// db.UserProfiles.remove({})
+//   .then(() => db.Users.collection.insertMany(userSeed))
+//   .then((data) => {
+//     console.log(data.result.n + " records inserted!");
+//     process.exit(0);
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//     process.exit(1);
+//   });

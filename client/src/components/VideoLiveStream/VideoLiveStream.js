@@ -20,7 +20,7 @@ function VideoLiveStream() {
             width: "auto",
           }}
           src="https://www.youtube.com/embed/Xgis2DQdBuM"
-          allowfullscreen
+          // allowfullscreen should this be allowFullScreen
         ></iframe>
       </div>
     </>
