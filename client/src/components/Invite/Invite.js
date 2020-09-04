@@ -21,7 +21,7 @@ function Invite() {
 
           <div className="form-group">
 
-              className="form-control"
+            <div className="form-control"
               id="organization"
               placeholder="Please enter the name of the organization you would like to invite"
             />

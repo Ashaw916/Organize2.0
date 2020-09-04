@@ -1,9 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../css/Landing.css";
 import Calendar from "../../components/Calendar/Calendar";
-// import SearchForm from "../../components/SearchForm/SearchForm";
+import API from "../../utils/API";
+import { set } from "mongoose";
 
 function Landing() {
+  const [event, setEvent] = useState([]);
+
+  //call api route to get all events
+  function loadEvents() {
+    API.getEvents()
+      .then(res => {
+        // console.log(res);
+        // console.log(res.data);
+        const eventsArray = []
+        const events = res.data;
+        for (let i = 0; i < events.length; i++) {
+          const eventObj = {
+            id: events[i]._id,
+            groupId: events[i].organization,
+            start: events[i].start_date,
+            title: events[i].title,
+            url: events[i].eventurl,
+            description: events[i].description,
+            extendedProps: {
+              location: events[i].location
+            }
+          }
+          eventsArray.push(eventObj);
+        }
+        console.log(eventsArray);
+        setEvent(eventsArray);//this is working now, but it's not turning up in calendar
+        console.log(event);
+      })
+      .catch(err => console.log(err));
+  }
+
+  useEffect(() => {
+    loadEvents();
+  });
+
   return (
     <>
       <div className="container">
@@ -53,7 +89,9 @@ function Landing() {
 
         <div className="jumbotron jumbotron-fluid mt-5">
           <div className="container">
-            <Calendar />
+            <Calendar 
+            events={event}
+            />
           </div>
         </div>
 
@@ -92,4 +130,7 @@ export default Landing;
               This is a modified jumbotron that occupies the entire horizontal
               space of its parent.
             </p>
+*/
+/*
+// 
 */
