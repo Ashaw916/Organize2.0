@@ -52,8 +52,8 @@ function AddEvent() {
                 />
               </div>
               <div className="form-group col-md-2">
-                <label for="am-pm">AM/PM</label>
-                <select className="custom-select " id="inlineFormCustomSelect">
+                <label for="am-pm"></label>
+                <select className="custom-select " id="timeSelect">
                   <option selected></option>
                   <option value="am">AM</option>
                   <option value="pm">PM</option>
@@ -69,8 +69,8 @@ function AddEvent() {
                 />
               </div>
               <div className="form-group col-md-2">
-                <label for="am-pm">AM/PM</label>
-                <select className="custom-select " id="inlineFormCustomSelect">
+                <label for="am-pm"></label>
+                <select className="custom-select" id="timeSelect">
                   <option selected></option>
                   <option value="am">AM</option>
                   <option value="pm">PM</option>
@@ -85,12 +85,18 @@ function AddEvent() {
                     type="text"
                     className="form-control"
                     id="organization"
+                    placeholder="Org Name"
                   />
                 </div>
               </div>
               <div className="form-group col">
-                <label for="source">Event Website(url)</label>
-                <input type="text" className="form-control" id="event_url" />
+                <label for="source">Event(url)</label>
+                <input
+                  type="url"
+                  className="form-control"
+                  id="event_url"
+                  placeholder="Website"
+                />
               </div>
             </div>
             <div className="form-group">
@@ -98,7 +104,7 @@ function AddEvent() {
               <textarea
                 className="form-control"
                 id="description"
-                rows="2"
+                rows="1"
               ></textarea>
             </div>
             <div className="form-group">
@@ -106,12 +112,12 @@ function AddEvent() {
               <textarea
                 className="form-control"
                 id="location"
-                rows="2"
+                rows="1"
               ></textarea>
             </div>
 
             <button type="submit" className="btn btn-primary">
-              Submit
+              Add Event
             </button>
           </form>
         </div>

@@ -21,7 +21,9 @@ function LoginUser() {
   return (
     <>
       <div className="card">
-        <div className="card-header">Login</div>
+        <div className="card-header">
+          Login<h4>I am a Login component</h4>
+        </div>
         <div className="card-body">
           <form id="login">
             <div className="form-group">
@@ -49,7 +51,7 @@ function LoginUser() {
               />
             </div>
             <button type="submit" className="btn btn-primary" onClick={login}>
-              Submit
+              Login
             </button>
           </form>
         </div>
