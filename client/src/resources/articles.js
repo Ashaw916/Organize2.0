@@ -56,11 +56,11 @@ export function getArticles() {
   return articles;
 }
 
-export function getUser(id) {
+export function getArticle(id) {
   return articles.find((a) => a._id === id);
 }
 
-export function deleteUser(id) {
+export function deleteArticle(id) {
   let articleInDb = articles.find((a) => a._id === id);
   articles.splice(articles.indexOf(articleInDb), 1);
   return articleInDb;

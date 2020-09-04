@@ -44,9 +44,8 @@ class Contact extends Component {
                       <a href={user.website} target="_blank">
                         <td>{user.website}</td>
                       </a>
-                      {/* <a href={user.facebook} target="_blank"> */}
                       <td>{user.facebook}</td>
-                      {/* </a> */}
+
                       <td>{user.instagram}</td>
                       <td>{user.twitter}</td>
                     </tr>
