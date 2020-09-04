@@ -36,15 +36,17 @@ class Contact extends Component {
                     <th scope="col">Twitter</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody style={{ fontSize: "10px" }}>
                   {this.state.users.map((user) => (
                     <tr>
-                      <td style={{ fontSize: "12px", fontWeight: "bold" }}>
-                        {user.organization}
-                      </td>
+                      <td>{user.organization}</td>
                       <td>{user.email}</td>
-                      <td>{user.website}</td>
+                      <a href={user.website} target="_blank">
+                        <td>{user.website}</td>
+                      </a>
+                      {/* <a href={user.facebook} target="_blank"> */}
                       <td>{user.facebook}</td>
+                      {/* </a> */}
                       <td>{user.instagram}</td>
                       <td>{user.twitter}</td>
                     </tr>
