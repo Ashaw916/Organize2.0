@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
@@ -5,8 +6,10 @@ const routes = require("./routes");
 const cors = require("cors");
 const app = express();
 const session = require("express-session");
-// const cookieParser = require("cookie-parser");
+const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
+const jwt = require("jsonwebtoken");
+//port
 const PORT = process.env.PORT || 3001;
 
 // Passport Config
@@ -33,7 +36,7 @@ app.use(
     saveUninitialized: true,
   })
 );
-// app.use(cookieParser("svsas"));
+app.use(cookieParser("svsas"));
 //routes
 app.use(routes);
 app.use("/", require("./routes/index"));
@@ -49,12 +52,19 @@ if (process.env.NODE_ENV === "production") {
 
 // Connect to the Mongo DB
 mongoose
-  .connect("mongodb://localhost/organize", {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
+// mongoose
+//   .connect(process.env.MONGODB_URI, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => console.log("MongoDB Connected"))
+//   .catch((err) => console.log(err));
 
 // Passport middleware
 app.use(passport.initialize());
