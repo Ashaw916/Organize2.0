@@ -1,7 +1,8 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 const db = require("../models");
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/organize");
+mongoose.connect(process.env.MONGODB_URI);
 
 const eventSeed = [
   {
@@ -94,6 +95,45 @@ const articleSeed = [
 ];
 
 const linkSeed = [
+  {
+    _id: "0001",
+    title: "American Civil Liberties",
+    date_added: new Date(Date.now()),
+    description: "Donate",
+    src: "google.com",
+    type: "Donation source",
+  },
+  {
+    _id: "0002",
+    title: "Nightly news",
+    description: "Donate",
+    src: "google.com",
+    type: "Donation source",
+  },
+  {
+    _id: "0003",
+    title: "Nightly news",
+    description: "Donate",
+    src: "google.com",
+    type: "Donation source",
+  },
+  {
+    _id: "0004",
+    title: "Nightly news",
+    description: "Donate",
+    src: "google.com",
+    type: "Donation source",
+  },
+  {
+    _id: "0005",
+    title: "Nightly news",
+    description: "Donate",
+    src: "google.com",
+    type: "Donation source",
+  },
+];
+
+const videoSeed = [
   {
     _id: "0001",
     title: "Nightly news",
@@ -235,6 +275,17 @@ db.Articles.remove({})
 
 db.Links.remove({})
   .then(() => db.Links.collection.insertMany(linkSeed))
+  .then((data) => {
+    console.log(data.result.n + " records inserted!");
+    process.exit(0);
+  })
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+
+db.Videos.remove({})
+  .then(() => db.Videos.collection.insertMany(videoSeed))
   .then((data) => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);
