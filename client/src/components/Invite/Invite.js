@@ -26,7 +26,7 @@ function Invite() {
         <p>Please enter information for the user you would like to invite</p>
         <form>
           <div className="form-group">
-            <label htmlFor="exampleFormControlInput1">Email address</label>
+            <label HTMLFor="email">Email address</label>
             <input
               type="email"
               className="form-control"
@@ -36,6 +36,7 @@ function Invite() {
           </div>
 
           <div className="form-group">
+            <label HTMLFor="organization">Organization Name</label>
             <input
               className="form-control"
               id="organization"
@@ -43,6 +44,9 @@ function Invite() {
           the name of the organization you would like to invite"
             />
           </div>
+          <button type="button" className="btn btn-secondary">
+            Submit
+          </button>
         </form>
       </div>
     </>

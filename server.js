@@ -16,9 +16,8 @@ const PORT = process.env.PORT || 3001;
 require("./config/passport")(passport);
 
 // DB Config
-const db = require("./config/keys").mongoURI;
-// //JWT
-// app.use(express.json());
+// const db = require("./config/keys").mongoURI;
+
 // middleware here
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

@@ -1,9 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../css/Landing.css";
 import Calendar from "../../components/Calendar/Calendar";
-// import SearchForm from "../../components/SearchForm/SearchForm";
+import API from "../../utils/API";
+import { set } from "mongoose";
 
 function Landing() {
+  const [event, setEvent] = useState([]);
+
+  //call api route to get all events
+  function loadEvents() {
+    API.getEvents()
+      .then(res => {
+        // console.log(res);
+        // console.log(res.data);
+        const eventsArray = []
+        const events = res.data;
+        for (let i = 0; i < events.length; i++) {
+          const eventObj = {
+            id: events[i]._id,
+            groupId: events[i].organization,
+            start: events[i].start_date,
+            title: events[i].title,
+            url: events[i].eventurl,
+            description: events[i].description,
+            extendedProps: {
+              location: events[i].location
+            }
+          }
+          eventsArray.push(eventObj);
+        }
+        console.log(eventsArray);
+        setEvent(eventsArray);//this is working now, but it's not turning up in calendar
+        console.log(event);
+      })
+      .catch(err => console.log(err));
+  }
+
+  useEffect(() => {
+    loadEvents();
+  });
+
   return (
     <>
       <div className="container">
@@ -25,25 +61,25 @@ function Landing() {
         </div>
 
         <div className="row">
-          <div className="card col-3">
+          <div className="card col" id="tile">
             <div className="card-body">
               <h5 className="card-title">Community Resources</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
             </div>
           </div>
-          <div className="card col-3">
+          <div className="card col" id="tile">
             <div className="card-body">
               <h5 className="card-title">Video Links</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
             </div>
           </div>
-          <div className="card col-3">
+          <div className="card col" id="tile">
             <div className="card-body">
               <h5 className="card-title">Connect</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
             </div>
           </div>
-          <div className="card col-3">
+          <div className="card col" id="tile">
             <div className="card-body">
               <h5 className="card-title">Register/Login</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
@@ -53,7 +89,9 @@ function Landing() {
 
         <div className="jumbotron jumbotron-fluid mt-5">
           <div className="container">
-            <Calendar />
+            <Calendar 
+            events={event}
+            />
           </div>
         </div>
 
@@ -92,4 +130,7 @@ export default Landing;
               This is a modified jumbotron that occupies the entire horizontal
               space of its parent.
             </p>
+*/
+/*
+// 
 */

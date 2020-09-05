@@ -6,21 +6,22 @@ function VideoLiveStream() {
       <div
         className="video-wrapper"
         style={{
-          height: "300px",
-          width: "100%",
+          height: "100%",
+          width: "auto",
           borderRadius: "5px",
           border: "1px gray solid",
           padding: "10px",
           margin: "15px",
         }}
       >
-        <iframe 
-        style={{
-          height: "300px",
-          width: "100%",
-        }}
-        src="https://www.youtube.com/embed/Xgis2DQdBuM" allowfullscreen>
-    </iframe>
+        <iframe
+          style={{
+            height: "300px",
+            width: "auto",
+          }}
+          src="https://www.youtube.com/embed/Xgis2DQdBuM"
+          // allowfullscreen should this be allowFullScreen
+        ></iframe>
       </div>
     </>
   );
