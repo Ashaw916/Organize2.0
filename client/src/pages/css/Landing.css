@@ -12,3 +12,9 @@
 #bottom-header {
   text-align: center;
 }
+
+@media screen and (max-width: 375px) {
+  #tile {
+    width: 100%;
+  }
+}

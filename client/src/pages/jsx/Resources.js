@@ -25,29 +25,33 @@ function Resources() {
           <h1>Articles and Community Resources</h1>
         </div>
         <div className="row">
-          <SearchForm />
-          <Pagination />
+          <div className="col-12">
+            <SearchForm />
+          </div>
+          <div className="col-12">
+            <Pagination />
+          </div>
         </div>
         <div className="row">
           {articles.map((article) => (
-            <div className="row">
-              <div className="col-2 mb-4" id="resource-image">
-                Sidebar or images here
-              </div>
-
-              <div className="col-10 mb-4">
-                <div className="card">
-                  <div className="card-header">
-                    <h4>Title: {article.title}</h4>
-                  </div>
-                  <div className="card-body">
-                    <h5 className="card-title">Author: {article.author}</h5>
-                    <p>Brief Description: {article.description}</p>
-                    <p className="card-text">{article.body}</p>
-                    <a href={article.source} className="btn btn-primary">
-                      source: {article.source}
-                    </a>
-                  </div>
+            <div className="col-12" key={article._id}>
+              <div className="card mb-5">
+                <img
+                  className="card-img-top"
+                  src="https://as1.ftcdn.net/jpg/03/68/24/20/500_F_368242078_CHu01PzCx3vuOcUmbkledyiGZug6hOPk.jpg"
+                  alt="Card image cap"
+                  style={{ width: "100%", height: "50px" }}
+                />
+                <div className="card-header">
+                  <h4>Title: {article.title}</h4>
+                </div>
+                <div className="card-body">
+                  <h5 className="card-title">Author: {article.author}</h5>
+                  <p>Brief Description: {article.description}</p>
+                  <p className="card-text">{article.body}</p>
+                  <a href={article.source} className="btn btn-primary">
+                    source: {article.source}
+                  </a>
                 </div>
               </div>
             </div>

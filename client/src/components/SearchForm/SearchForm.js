@@ -5,29 +5,24 @@ function SearchForm() {
     <>
       <form className="form-inline">
         <div className="form-group mb-2">
-          <label for="staticEmail2" className="sr-only">
-            Email
-          </label>
           <input
             type="text"
-            readonly
+            readOnly
             className="form-control-plaintext"
-            id="staticEmail2"
+            id="searchArticles"
             value="Search Articles"
           />
         </div>
         <div className="form-group mx-sm-3 mb-2">
-          <label for="inputPassword2" className="sr-only">
-            Type to search by term
-          </label>
+          <label className="sr-only">Type to search by term</label>
           <input
-            type="password"
+            type="text"
             className="form-control"
-            id="inputPassword2"
+            id="searchTerm"
             placeholder="Type to search by term"
           />
         </div>
-        <button type="submit" className="btn btn-primary mb-2">
+        <button type="submit" className="btn btn-primary mb-2 ml-2">
           Submit
         </button>
       </form>
