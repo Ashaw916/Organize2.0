@@ -1,30 +1,30 @@
 const db = require("../models");
 
-// Defining methods for the eventsController
+// Defining methods for the users
 module.exports = {
   findAll: function (req, res) {
-    db.Events.find(req.query)
+    db.Users.find(req.query)
       .sort({ date: -1 })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   findById: function (req, res) {
-    db.Events.findById(req.params.id)
+    db.User.findById(req.params.id)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   create: function (req, res) {
-    db.Events.create(req.body)
+    db.User.create(req.body)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   update: function (req, res) {
-    db.Events.findOneAndUpdate({ _id: req.params.id }, req.body)
+    db.User.findOneAndUpdate({ _id: req.params.id }, req.body)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   remove: function (req, res) {
-    db.Events.findById({ _id: req.params.id })
+    db.User.findById({ _id: req.params.id })
       .then((dbModel) => dbModel.remove())
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
