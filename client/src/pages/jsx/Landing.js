@@ -89,8 +89,8 @@ function Landing() {
 
         <div className="jumbotron jumbotron-fluid mt-5">
           <div className="container">
-            <Calendar 
-            events={event}
+            <Calendar
+              events={event}
             />
           </div>
         </div>
@@ -132,5 +132,5 @@ export default Landing;
             </p>
 */
 /*
-// 
+//
 */
