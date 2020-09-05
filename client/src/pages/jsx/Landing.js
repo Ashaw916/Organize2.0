@@ -23,6 +23,7 @@ function Landing() {
             id: events[i]._id,
             groupId: events[i].organization,
             start: events[i].start_date,
+            end: events[i].end_date,
             title: events[i].title,
             url: events[i].eventurl,
             description: events[i].description,

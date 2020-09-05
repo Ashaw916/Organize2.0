@@ -1,21 +1,23 @@
-import React, { Component } from "react";
-import { getEvents } from "../../resources/events";
-import { getArticles } from "../../resources/articles";
-import { getVideos } from "../../resources/videos";
+import React, { useState, useEffect } from "react";
+// import { getEvents } from "../../resources/events";
+// import { getArticles } from "../../resources/articles";
+// import { getVideos } from "../../resources/videos";
 import AddResource from "../../components/AddResource/AddResource";
 import AddEvent from "../../components/AddEvent/AddEvent";
 import AddVideo from "../../components/AddVideo/AddVideo";
 
 import ListVideo from "../../components/ListVideo/ListVideo";
 
-class Manage extends Component {
-  state = {
-    events: getEvents(),
-    articles: getArticles(),
-    videos: getVideos(),
-  };
+function Manage() {
+  // state = {
+  //   events: getEvents(),
+  //   articles: getArticles(),
+  //   videos: getVideos(),
+  // };
 
-  render() {
+ //cocatenate dates and times together with a T together
+ //will need to convert 12hr times to 24 before concatenating
+
     return (
       <>
         <div className="container">
@@ -91,7 +93,6 @@ class Manage extends Component {
         </div>
       </>
     );
-  }
 }
 
 export default Manage;

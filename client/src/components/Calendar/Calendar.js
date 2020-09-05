@@ -6,15 +6,15 @@ function Calendar(props) {
     return (
         <FullCalendar
             plugins={[dayGridPlugin]}
-            dayMaxEventRows={true}
+            // dayMaxEventRows={true}
             // eventDidMount={}
             views= {{
                 dayGrid: {
                     titleFormat: {year: "numeric", month: "2-digit", day:"2-digit"}
-                },
-                timeGrid: {
-                    dayMaxEventRows: 3
                 }
+                // timeGrid: {
+                //     dayMaxEventRows: 3
+                // }
             }}
             headerToolbar={{
                 left: "prev,next today",
