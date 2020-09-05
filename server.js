@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3001;
 require("./config/passport")(passport);
 
 // DB Config
-const db = require("./config/keys").mongoURI;
+// const db = require("./config/keys").mongoURI;
 
 // middleware here
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -49,7 +49,10 @@ if (process.env.NODE_ENV === "production") {
 
 // Connect to the Mongo DB
 mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect("mongodb://localhost/organize", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
