@@ -6,14 +6,14 @@ function Calendar(props) {
     return (
         <FullCalendar
             plugins={[dayGridPlugin]}
-            dayMaxEvents={true}
-            moreLinkClick={"popover"}
+            dayMaxEventRows={true}
+            // eventDidMount={}
             views= {{
                 dayGrid: {
                     titleFormat: {year: "numeric", month: "2-digit", day:"2-digit"}
                 },
                 timeGrid: {
-                    dayMaxEvents: 2
+                    dayMaxEventRows: 3
                 }
             }}
             headerToolbar={{
@@ -40,4 +40,15 @@ export default Calendar;
                   location: "Sacramento"
                 }
               }]
-*/
+
+function(info) {
+    var tooltip = new Tooltip(info.el, {
+        title: info.event.extendedProps.description,
+        placement: "top",
+        trigger: "hover",
+        container: "body"
+    })
+}
+
+
+              */

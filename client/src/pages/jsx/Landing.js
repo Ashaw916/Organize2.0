@@ -8,7 +8,7 @@ function Landing() {
   const [event, setEvent] = useState([]);
 
   /////////figure out how to modify debounced hook to stop api from being hit constently
-
+  /////////use window.location? 
 
   //call api route to get all events
   function loadEvents() {
@@ -41,7 +41,7 @@ function Landing() {
 
   useEffect(() => {
     loadEvents();
-  });
+  }, []);
 
   return (
     <>

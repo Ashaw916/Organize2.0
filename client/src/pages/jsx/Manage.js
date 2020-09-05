@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AddResource from "../../components/AddResource/AddResource";
 import AddEvent from "../../components/AddEvent/AddEvent";
 import AddVideo from "../../components/AddVideo/AddVideo";
@@ -7,6 +7,14 @@ import ListResources from "../../components/ListResources/ListResources";
 import ListVideo from "../../components/ListVideo/ListVideo";
 
 function Manage() {
+  // const [addEvent, setAddEvent] = useState({});
+
+  // useEffect(() => {
+
+  // });
+
+  //concatenate date and time together? to create a javascript date object? to be read by calendar
+
   return (
     <>
       <div className="container">
