@@ -1,0 +1,10 @@
+#video-main {
+  height: 300px;
+  width: auto;
+}
+
+#livestream-wrapper,
+#videoMain-wrapper {
+  background-color: #64778d;
+  padding-top: 5px;
+}

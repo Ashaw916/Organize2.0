@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "../css/Profile.css";
 import Invite from "../../components/Invite/Invite.js";
-import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import { getUsers } from "../../resources/users";
+// import ProfileCard from "../../components/ProfileCard/ProfileCard";
 
 class Profile extends Component {
   state = {

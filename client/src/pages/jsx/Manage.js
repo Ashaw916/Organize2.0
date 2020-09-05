@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getEvents } from "../../resources/events";
+import { getEvents, deleteEvent } from "../../resources/events";
 import { getArticles } from "../../resources/articles";
 import { getVideos } from "../../resources/videos";
 import AddResource from "../../components/AddResource/AddResource";
@@ -14,6 +14,13 @@ class Manage extends Component {
     articles: getArticles(),
     videos: getVideos(),
   };
+
+  //Use when this is a functional component week 21, activity 5 pages/books.js
+  // function deleteEvent(id) {
+  //   API.deleteEvent(id)
+  //     .then(res => getEvents())
+  //     .catch(err => console.log(err));
+  // }
 
   render() {
     return (
@@ -32,7 +39,11 @@ class Manage extends Component {
                     {this.state.events.map((event) => (
                       <li className="list-group-item">
                         {event.title}: {event.start_date}{" "}
-                        <button type="button" className="btn btn-danger btn-sm">
+                        <button
+                          type="button"
+                          className="btn btn-danger btn-sm"
+                          onClick={() => deleteEvent(event._id)}
+                        >
                           Delete
                         </button>
                       </li>
