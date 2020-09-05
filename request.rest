@@ -1,0 +1,35 @@
+POST http://localhost:3001/users/login
+Content-Type: application/json
+
+{
+    "username": "test10@test.com",
+    "password": "test"
+}
+
+###
+GET http://localhost:3001/users
+
+
+
+
+###
+POST http://localhost:3001/users/register
+Content-Type: application/json
+
+{
+    "email": "test1233@test.com",
+    "password": "test"
+}
+
+###
+POST http://localhost:3001/api/articles
+Content-Type: application/json
+
+    {
+  "title": "test12",
+  "author": "test",
+  "body": "test",
+  "description": "test",
+  "source": "test",
+  "type": "test"
+    }
