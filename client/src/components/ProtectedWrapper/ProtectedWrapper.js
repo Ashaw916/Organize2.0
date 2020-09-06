@@ -4,30 +4,31 @@
 
 //wrapper that authenticates
 
-import React from 'react';
-import { LinearProgress } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
-import Can from 'components/helpers/Can';
-import LoginDialog from '../auth/LoginDialog';
-import { appError, appInfo } from 'actions/notifications';
-import { register } from 'common/serviceWorker';
+import React from "react";
+import { LinearProgress } from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
+import Can from "components/helpers/Can";
+import LoginDialog from "../auth/LoginDialog";
+import { appError, appInfo } from "actions/notifications";
+import { register } from "common/serviceWorker";
 
 // Helper function to notify user of service worker status
 const handleAuthenticated = (error, info) => {
-  const onFailure = (title = '') => {
-    title = title || 'Unknown error. App will NOT work offline.';
+  const onFailure = (title = "") => {
+    title = title || "Unknown error. App will NOT work offline.";
     error({ title });
   };
-  const onSuccess = () => info({ title: 'App is available for offline mode' });
+  const onSuccess = () => info({ title: "App is available for offline mode" });
   const onUpdate = () =>
-    info({ title: 'Updated app. click below to refresh and update.' });
+    info({ title: "Updated app. click below to refresh and update." });
   // Authenticated user - register service worker
   register({ onFailure, onSuccess, onUpdate });
 };
 
 // Higher Order Component which uses code splitting techniques to separate "Restricted" Components
 //  Example of call:
-export default protectedComponent(() => import('./CreateUser'), { //this line is component
+export default protectedComponent(() => import("./CreateUser"), {
+  //this line is component
   action: action.USER_CREATE, //this is user permision
 });
 
