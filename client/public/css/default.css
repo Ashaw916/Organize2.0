@@ -1,0 +1,19 @@
+body {
+  background-color: #ebf0fffb;
+}
+.navbar {
+  background-color: #64778d;
+}
+.nav-link {
+  color: #e3e9fffb;
+}
+
+.nav-item,
+.active {
+  color: darkred;
+}
+
+.navbar-brand {
+  color: darkred;
+  font-weight: bold;
+}
