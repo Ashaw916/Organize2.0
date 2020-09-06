@@ -1,6 +1,6 @@
 const db = require("../models");
 
-// Defining methods for the linksController
+// Defining methods for the VideosController
 module.exports = {
   findAll: function (req, res) {
     db.Videos.find(req.query)
