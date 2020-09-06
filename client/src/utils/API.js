@@ -44,23 +44,44 @@ export default {
   },
 
   // Gets all links
-  getVideos: function () {
+  getLinks: function () {
     return axios.get("/api/links");
   },
   // Gets the link with the given id
-  getVideo: function (id) {
+  getLink: function (id) {
     return axios.get("/api/links/" + id);
   },
   // Deletes the link with the given id
-  deleteVideo: function (id) {
+  deleteLink: function (id) {
     return axios.delete("/api/links/" + id);
   },
   // Saves a link to the database
-  saveVideo: function (linkData) {
+  saveLink: function (linkData) {
     return axios.post("/api/links", linkData);
   },
   // Updates a link
-  updateVideo: function (id, linkData) {
+  updateLink: function (id, linkData) {
     return axios.put("/api/links/" + id, linkData);
+  },
+
+  // Gets all videos
+  getVideos: function () {
+    return axios.get("/api/videos");
+  },
+  // Gets the link with the given id
+  getVideo: function (id) {
+    return axios.get("/api/videos/" + id);
+  },
+  // Deletes the link with the given id
+  deleteVideo: function (id) {
+    return axios.delete("/api/videos/" + id);
+  },
+  // Saves a link to the database
+  saveVideo: function (linkData) {
+    return axios.post("/api/videos", linkData);
+  },
+  // Updates a link
+  updateVideo: function (id, linkData) {
+    return axios.put("/api/videos/" + id, linkData);
   },
 };

@@ -18,6 +18,13 @@ function Manage() {
  //cocatenate dates and times together with a T together
  //will need to convert 12hr times to 24 before concatenating
 
+  //Use when this is a functional component week 21, activity 5 pages/books.js
+  // function deleteEvent(id) {
+  //   API.deleteEvent(id)
+  //     .then(res => getEvents())
+  //     .catch(err => console.log(err));
+  // }
+
     return (
       <>
         <div className="container">
@@ -34,7 +41,11 @@ function Manage() {
                     {this.state.events.map((event) => (
                       <li className="list-group-item">
                         {event.title}: {event.start_date}{" "}
-                        <button type="button" className="btn btn-danger btn-sm">
+                        <button
+                          type="button"
+                          className="btn btn-danger btn-sm"
+                          onClick={() => deleteEvent(event._id)}
+                        >
                           Delete
                         </button>
                       </li>

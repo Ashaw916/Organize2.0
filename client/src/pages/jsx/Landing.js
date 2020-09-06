@@ -34,7 +34,7 @@ function Landing() {
         }
         setEvent(eventsArray);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }
 
   useEffect(() => {
@@ -62,27 +62,27 @@ function Landing() {
         </div>
 
         <div className="row">
-          <div className="card col" id="tile">
+          <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Community Resources</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
             </div>
           </div>
-          <div className="card col" id="tile">
+          <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Video Links</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
             </div>
           </div>
-          <div className="card col" id="tile">
+          <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Connect</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
             </div>
           </div>
-          <div className="card col" id="tile">
+          <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
-              <h5 className="card-title">Register/Login</h5>
+              <h5 className="card-title">Donate</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
             </div>
           </div>
@@ -102,15 +102,15 @@ function Landing() {
           </div>
 
           <div className="row">
-            <div className="col-4">
+            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
               <h6>Information Block 1</h6>
               <p>Information verbiage</p>
             </div>
-            <div className="col-4">
+            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
               <h6>Information Block 2</h6>
               <p>Information verbiage</p>
             </div>
-            <div className="col-4">
+            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
               <h6>Information Block 3</h6>
               <p>Information verbiage</p>
             </div>
