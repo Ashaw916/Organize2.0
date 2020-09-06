@@ -5,9 +5,9 @@ import API from "../../utils/API";
 import { set } from "mongoose";
 import { Link } from "react-router-dom";
 
-function Landing() {
+function Landing(props) {
   const [event, setEvent] = useState([]);
-
+  console.log(props);
 
   //call api route to get all events
   function loadEvents() {

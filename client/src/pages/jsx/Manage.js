@@ -5,7 +5,6 @@ import React, { useState, useEffect } from "react";
 import AddResource from "../../components/AddResource/AddResource";
 import AddEvent from "../../components/AddEvent/AddEvent";
 import AddVideo from "../../components/AddVideo/AddVideo";
-
 import ListVideo from "../../components/ListVideo/ListVideo";
 import API from "../../utils/API";
 
@@ -117,7 +116,6 @@ function Manage() {
               </div>
             </div>
           </div>
-
           <div className="row">
             <div className="col-5 m-1">
               <AddResource />
@@ -144,7 +142,6 @@ function Manage() {
               </div>
             </div>
           </div>
-
           <div className="row">
             <div className="col-5 m-1">
               <AddVideo />
@@ -174,6 +171,6 @@ function Manage() {
         </div>
       </>
     );
+  }
 }
-
 export default Manage;

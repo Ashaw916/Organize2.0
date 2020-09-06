@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Axios from "axios";
 
-function LoginUser() {
+function LoginUser(props) {
+  console.log(props);
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const login = (e) => {
@@ -18,6 +19,9 @@ function LoginUser() {
     }).then((response) => {
       console.log("token", response.data);
       localStorage.setItem("token", response.data);
+      // const token = localStorage.getItem("token", response.data);
+
+      props.history.push("/profile");
     });
   };
   return (
