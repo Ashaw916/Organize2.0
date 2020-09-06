@@ -62,38 +62,34 @@ function Landing() {
         </div>
 
         <div className="row">
-          <Link to="/resources">
           <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Community Resources</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <Link to="/resources" className="stretched-link"></Link>
             </div>
           </div>
-          </Link>
-          <Link to="/video">
           <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Video Links</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <Link to="/video" className="stretched-link"></Link>
             </div>
           </div>
-          </Link>
-          <Link to="/contact">
           <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Connect</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <Link to="/contact" className="stretched-link"></Link>
             </div>
           </div>
-          </Link>
-          <Link to="/donate">
           <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Donate</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <Link to="/donate" className="stretched-link"></Link>
             </div>
           </div>
-          </Link>
         </div>
 
         <div className="jumbotron jumbotron-fluid mt-5">
