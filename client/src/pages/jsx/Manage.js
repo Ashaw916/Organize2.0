@@ -1,19 +1,22 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { getEvents, deleteEvent } from "../../resources/events";
-import { getArticles } from "../../resources/articles";
-import { getVideos } from "../../resources/videos";
+// import { getArticles } from "../../resources/articles";
+// import { getVideos } from "../../resources/videos";
 import AddResource from "../../components/AddResource/AddResource";
 import AddEvent from "../../components/AddEvent/AddEvent";
 import AddVideo from "../../components/AddVideo/AddVideo";
 
 import ListVideo from "../../components/ListVideo/ListVideo";
 
-class Manage extends Component {
-  state = {
-    events: getEvents(),
-    articles: getArticles(),
-    videos: getVideos(),
-  };
+function Manage() {
+  // state = {
+  //   events: getEvents(),
+  //   articles: getArticles(),
+  //   videos: getVideos(),
+  // };
+
+ //cocatenate dates and times together with a T together
+ //will need to convert 12hr times to 24 before concatenating
 
   //Use when this is a functional component week 21, activity 5 pages/books.js
   // function deleteEvent(id) {
@@ -22,7 +25,6 @@ class Manage extends Component {
   //     .catch(err => console.log(err));
   // }
 
-  render() {
     return (
       <>
         <div className="container">
@@ -102,7 +104,6 @@ class Manage extends Component {
         </div>
       </>
     );
-  }
 }
 
 export default Manage;

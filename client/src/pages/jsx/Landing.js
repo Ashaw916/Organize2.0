@@ -3,9 +3,11 @@ import "../css/Landing.css";
 import Calendar from "../../components/Calendar/Calendar";
 import API from "../../utils/API";
 import { set } from "mongoose";
+import { Link } from "react-router-dom";
 
 function Landing() {
   const [event, setEvent] = useState([]);
+
 
   //call api route to get all events
   function loadEvents() {
@@ -20,6 +22,7 @@ function Landing() {
             id: events[i]._id,
             groupId: events[i].organization,
             start: events[i].start_date,
+            end: events[i].end_date,
             title: events[i].title,
             url: events[i].eventurl,
             description: events[i].description,
@@ -29,15 +32,14 @@ function Landing() {
           };
           eventsArray.push(eventObj);
         }
-
-        setEvent(eventsArray); //this is working now, but it's not turning up in calendar
+        setEvent(eventsArray);
       })
       .catch((err) => console.log(err));
   }
 
   useEffect(() => {
     loadEvents();
-  });
+  }, []);
 
   return (
     <>
@@ -64,24 +66,28 @@ function Landing() {
             <div className="card-body">
               <h5 className="card-title">Community Resources</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <Link to="/resources" className="stretched-link"></Link>
             </div>
           </div>
           <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Video Links</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <Link to="/video" className="stretched-link"></Link>
             </div>
           </div>
           <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Connect</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <Link to="/contact" className="stretched-link"></Link>
             </div>
           </div>
           <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Donate</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <Link to="/donate" className="stretched-link"></Link>
             </div>
           </div>
         </div>
