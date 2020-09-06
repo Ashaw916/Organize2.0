@@ -18,7 +18,7 @@ function authToken(req, res, next) {
       message: "auth success",
       user,
     });
-    next(req);
+    next(req, res);
   });
 }
 

@@ -1,6 +1,7 @@
 import React from "react";
 
-function AddResource() {
+function AddResource(props) {
+  console.log(props);
   return (
     <>
       <div className="card ">
