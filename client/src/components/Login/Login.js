@@ -15,6 +15,9 @@ function LoginUser() {
       },
       withCredentials: true,
       url: "/users/login",
+    }).then((response) => {
+      console.log("token", response.data);
+      localStorage.setItem("token", response.data);
     });
   };
   return (
