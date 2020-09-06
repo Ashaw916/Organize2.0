@@ -3,20 +3,19 @@ import "../css/Landing.css";
 import Calendar from "../../components/Calendar/Calendar";
 import API from "../../utils/API";
 import { set } from "mongoose";
+import { Link } from "react-router-dom";
 
 function Landing() {
   const [event, setEvent] = useState([]);
 
-  /////////figure out how to modify debounced hook to stop api from being hit constently
-  /////////use window.location? 
 
   //call api route to get all events
   function loadEvents() {
     API.getEvents()
-      .then(res => {
+      .then((res) => {
         // console.log(res);
         // console.log(res.data);
-        const eventsArray = []
+        const eventsArray = [];
         const events = res.data;
         for (let i = 0; i < events.length; i++) {
           const eventObj = {
@@ -28,14 +27,12 @@ function Landing() {
             url: events[i].eventurl,
             description: events[i].description,
             extendedProps: {
-              location: events[i].location
-            }
-          }
+              location: events[i].location,
+            },
+          };
           eventsArray.push(eventObj);
         }
-        console.log(eventsArray);
         setEvent(eventsArray);
-        console.log(event);
       })
       .catch(err => console.log(err));
   }
@@ -93,9 +90,7 @@ function Landing() {
 
         <div className="jumbotron jumbotron-fluid mt-5">
           <div className="container">
-            <Calendar 
-            events={event}
-            />
+            <Calendar events={event} />
           </div>
         </div>
 

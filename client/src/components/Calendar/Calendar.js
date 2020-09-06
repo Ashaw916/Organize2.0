@@ -1,30 +1,61 @@
 import React from "react";
-import FullCalendar, { isPropsEqual } from "@fullcalendar/react";
+import FullCalendar, { isPropsEqual, Component } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"
+import { render } from "ejs";
 
-function Calendar(props) {
-    return (
-        <FullCalendar
-            plugins={[dayGridPlugin]}
-            // dayMaxEventRows={true}
-            // eventDidMount={}
-            views= {{
-                dayGrid: {
-                    titleFormat: {year: "numeric", month: "2-digit", day:"2-digit"}
-                }
-                // timeGrid: {
-                //     dayMaxEventRows: 3
-                // }
-            }}
-            headerToolbar={{
-                left: "prev,next today",
-                center: "title",
-                right: "dayGridMonth,timeGridWeek,timeGridDay"
-            }}
-            events={props.events}
-            
-        />
-    )
+class Calendar extends Component {
+    calendarComponentRef = React.createRef();
+
+    render() {
+        const { events } = this.props;
+        return (
+            <FullCalendar
+                plugins={[dayGridPlugin]}
+                // dayMaxEventRows={true}
+                // eventDidMount={}
+                // views= {{
+                //     month: {
+                //         type: "dayGridMonth"
+                //     }
+                // }}
+                views={{
+                    month: {
+                        type: "dayGridMonth",
+                    },
+                    week: {
+                        type: "dayGridWeek"
+                    },
+                    day: {
+                        type: "dayGridDay"
+                    }
+                }}
+                headerToolbar={{
+                    left: "prev,next",
+                    center: "title",
+                    right: "today"
+                }}
+                footerToolbar={{
+                    center: 'dayGridMonth,timeGridWeek,timeGridDay'
+                }}
+                // windowResize={this.handleWindowResize}
+                events={events}
+                // ref={this.calendarComponentRef}
+                
+            />
+        )
+    }
+
+    // handleWindowResize = () => {
+    //     if (window.screen.width < 320) {
+    //         this.calendarComponentRef.current
+    //             .getApi()
+    //             .changeView("dayGridDay")
+    //     }
+    //     else {
+    //         this.calendarComponentRef.current.getApi("dayGridMonth");
+    //     }
+    // }
+
 };
 
 export default Calendar;
@@ -49,6 +80,8 @@ function(info) {
         container: "body"
     })
 }
+
+
 
 
               */
