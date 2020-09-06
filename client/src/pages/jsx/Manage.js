@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { getEvents } from "../../resources/events";
+import { getEvents, deleteEvent } from "../../resources/events";
 // import { getArticles } from "../../resources/articles";
 // import { getVideos } from "../../resources/videos";
 import AddResource from "../../components/AddResource/AddResource";
