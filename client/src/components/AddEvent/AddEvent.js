@@ -1,6 +1,6 @@
 import React from "react";
-
-function AddEvent() {
+//add a disabled class for button for extra validation?
+function AddEvent({  }) {
   return (
     <>
       <div className="card">
@@ -18,6 +18,7 @@ function AddEvent() {
                   className="form-control"
                   id="event-title"
                   placeholder="Event Title"
+                  name="title"
                 />
               </div>
             </div>
@@ -28,7 +29,7 @@ function AddEvent() {
                   type="text"
                   className="form-control"
                   id="start_date"
-                  placeholder="MM/DD/YY"
+                  placeholder="MM/DD/YYYY"
                 />
               </div>
               <div className="form-group col-md-6">
@@ -37,7 +38,7 @@ function AddEvent() {
                   type="text"
                   className="form-control"
                   id="end_date"
-                  placeholder="MM/DD/YY"
+                  placeholder="MM/DD/YYYY"
                 />
               </div>
             </div>
@@ -86,6 +87,7 @@ function AddEvent() {
                     className="form-control"
                     id="organization"
                     placeholder="Org Name"
+                    name="organization"
                   />
                 </div>
               </div>
@@ -96,6 +98,7 @@ function AddEvent() {
                   className="form-control"
                   id="event_url"
                   placeholder="Website"
+                  name="event_url"
                 />
               </div>
             </div>
@@ -105,6 +108,7 @@ function AddEvent() {
                 className="form-control"
                 id="description"
                 rows="1"
+                name="description"
               ></textarea>
             </div>
             <div className="form-group">
@@ -113,9 +117,10 @@ function AddEvent() {
                 className="form-control"
                 id="location"
                 rows="1"
+                name="location"
               ></textarea>
             </div>
-
+            {/*add a disabled class for button? for extra validation?*/}
             <button type="submit" className="btn btn-primary">
               Add Event
             </button>
