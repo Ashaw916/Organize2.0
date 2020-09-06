@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Axios from "axios";
 
 function LoginUser(props) {
-  console.log(props);
+  // console.log(props);
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const login = (e) => {
@@ -17,11 +17,15 @@ function LoginUser(props) {
       withCredentials: true,
       url: "/users/login",
     }).then((response) => {
-      console.log("token", response.data);
-      localStorage.setItem("token", response.data);
-      // const token = localStorage.getItem("token", response.data);
-
-      props.history.push("/profile");
+      if (response.data === "No User Exists") {
+        alert("You are not registered");
+      }
+      if (response.data != "No User Exists") {
+        localStorage.setItem("token", response.data);
+        props.history.push("/profile");
+      } else {
+        props.history.push("/");
+      }
     });
   };
   return (
