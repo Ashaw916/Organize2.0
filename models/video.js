@@ -9,6 +9,6 @@ const videoSchema = new Schema({
   type: { type: String, required: true },
 });
 
-const Links = mongoose.model("Videos", videoSchema);
+const Videos = mongoose.model("Videos", videoSchema);
 
 module.exports = Videos;

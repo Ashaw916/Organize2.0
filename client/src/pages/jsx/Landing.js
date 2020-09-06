@@ -3,42 +3,43 @@ import "../css/Landing.css";
 import Calendar from "../../components/Calendar/Calendar";
 import API from "../../utils/API";
 import { set } from "mongoose";
+import { Link } from "react-router-dom";
 
 function Landing() {
   const [event, setEvent] = useState([]);
 
+
   //call api route to get all events
   function loadEvents() {
     API.getEvents()
-      .then(res => {
+      .then((res) => {
         // console.log(res);
         // console.log(res.data);
-        const eventsArray = []
+        const eventsArray = [];
         const events = res.data;
         for (let i = 0; i < events.length; i++) {
           const eventObj = {
             id: events[i]._id,
             groupId: events[i].organization,
             start: events[i].start_date,
+            end: events[i].end_date,
             title: events[i].title,
             url: events[i].eventurl,
             description: events[i].description,
             extendedProps: {
-              location: events[i].location
-            }
-          }
+              location: events[i].location,
+            },
+          };
           eventsArray.push(eventObj);
         }
-        console.log(eventsArray);
-        setEvent(eventsArray);//this is working now, but it's not turning up in calendar
-        console.log(event);
+        setEvent(eventsArray);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }
 
   useEffect(() => {
     loadEvents();
-  });
+  }, []);
 
   return (
     <>
@@ -65,33 +66,35 @@ function Landing() {
             <div className="card-body">
               <h5 className="card-title">Community Resources</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <Link to="/resources" className="stretched-link"></Link>
             </div>
           </div>
           <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Video Links</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <Link to="/video" className="stretched-link"></Link>
             </div>
           </div>
           <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Connect</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <Link to="/contact" className="stretched-link"></Link>
             </div>
           </div>
           <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
-              <h5 className="card-title">Register/Login</h5>
+              <h5 className="card-title">Donate</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <Link to="/donate" className="stretched-link"></Link>
             </div>
           </div>
         </div>
 
         <div className="jumbotron jumbotron-fluid mt-5">
           <div className="container">
-            <Calendar 
-            events={event}
-            />
+            <Calendar events={event} />
           </div>
         </div>
 
