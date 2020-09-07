@@ -4,9 +4,9 @@ const jwt = require("jsonwebtoken");
 
 // auth token
 function authToken(req, res, next) {
-  // console.log("auth:", req.body);
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
+  console.log("auth:", req.headers);
+  const token = req.headers.authorization;
+  // const token = authHeader && authHeader.split(" ")[1];
   console.log(token);
   if (token == null) return res.sendStatus(401);
 
@@ -18,7 +18,7 @@ function authToken(req, res, next) {
       message: "auth success",
       user,
     });
-    next();
+    next(req, res);
   });
 }
 

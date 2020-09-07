@@ -1,14 +1,14 @@
 const router = require("express").Router();
-const linksController = require("../../controllers/linksController");
+const videosController = require("../../controllers/videosController");
 
-// Matches with "/api/posts"
-router.route("/").get(linksController.findAll).post(linksController.create);
+// Matches with "/api/videos"
+router.route("/").get(videosController.findAll).post(videosController.create);
 
-// Matches with "/api/posts/:id"
+// Matches with "/api/videos/:id"
 router
   .route("/:id")
-  .get(linksController.findById)
-  .put(linksController.update)
-  .delete(linksController.remove);
+  .get(videosController.findById)
+  .put(videosController.update)
+  .delete(videosController.remove);
 
 module.exports = router;

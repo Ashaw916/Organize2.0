@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import './style.css';
 
 function NavTabs() {
   // We'll go into the Hooks API later, for now, we are just using some code
@@ -9,9 +8,9 @@ function NavTabs() {
   const location = useLocation();
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg">
       <a className="navbar-brand" href="#">
-        Navbar
+        Organize 2.0
       </a>
       <button
         className="navbar-toggler"
@@ -47,6 +46,17 @@ function NavTabs() {
               }
             >
               Resources
+            </Link>
+          </li>
+
+          <li className="nav-item">
+            <Link
+              to="/donate"
+              className={
+                location.pathname === "/donate" ? "nav-link active" : "nav-link"
+              }
+            >
+              Donate
             </Link>
           </li>
 

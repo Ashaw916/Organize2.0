@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
-// import { getVideos } from "../../resources/videos";
 import API from "../../utils/API";
 import VideoLiveStream from "../../components/VideoLiveStream/VideoLiveStream";
 import "../css/Video.css";
-
-// import { Link, Route } from "react-router-dom";
-// import VideoArchive from "../../components/VideoArchive/VideoArchive.js";
 
 function Video() {
   const [videos, setVideos] = useState([]);

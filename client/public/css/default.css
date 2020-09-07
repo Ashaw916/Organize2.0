@@ -1,0 +1,25 @@
+body {
+  background-color: #ebf0fffb;
+}
+.navbar {
+  background-color: #64778d;
+  margin-bottom: 25px;
+}
+.nav-link {
+  color: #ebf0fffb;
+}
+
+.nav-item,
+.active {
+  color: darkred;
+}
+
+.navbar-brand {
+  color: darkred;
+  font-weight: bold;
+}
+footer {
+  margin-top: 50px;
+  background-color: #64778d;
+  color: #ebf0fffb;
+}

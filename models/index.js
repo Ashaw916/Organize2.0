@@ -1,5 +1,6 @@
 module.exports = {
   Events: require("./events"),
   Articles: require("./articles"),
-  Links: require("./links")
+  Links: require("./links"),
+  Videos: require("./video")
 };
