@@ -44,24 +44,28 @@ function Landing(props) {
   return (
     <>
       <div className="container">
-        <div className="jumbotron jumbotron-fluid">
-          <div className="container">
-            <h1 className="display-4">Fluid jumbotron</h1>
-            <p className="lead">
-              This is a modified jumbotron that occupies the entire horizontal
-              space of its parent.
+        <div className="row" id="landing-r1">
+          <div className="jumbotron jumbotron-fluid col" id="landing-jumbo">
+            <div className="container">
+              <h1 className="display-4" id="landing-header">
+                Organize 2.0
+              </h1>
+              <p className="lead">Say something here</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="row" id="landing-r2">
+          <div className="col">
+            <h4 id="jumbo-h4">Connect || Share || Mobilize</h4>
+            <p>
+              events, resources, and organizations that are changing our society
+              for the better
             </p>
           </div>
         </div>
 
-        <div className="row">
-          <div className="col">
-            <h4>Some about us Heading here</h4>
-            <p>Some about us verbiage so people know how to use our website</p>
-          </div>
-        </div>
-
-        <div className="row">
+        <div className="row" id="landing-r3">
           <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Community Resources</h5>
@@ -92,9 +96,11 @@ function Landing(props) {
           </div>
         </div>
 
-        <div className="jumbotron jumbotron-fluid mt-5">
-          <div className="container">
-            <Calendar events={event} />
+        <div className="row" id="landing-r4">
+          <div className="jumbotron jumbotron-fluid col" id="calendar-jumbo">
+            <div className="container">
+              <Calendar events={event} />
+            </div>
           </div>
         </div>
 
@@ -105,7 +111,7 @@ function Landing(props) {
             </div>
           </div>
 
-          <div className="row">
+          <div className="row" id="landing-r5">
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
               <h6>Information Block 1</h6>
               <p>Information verbiage</p>

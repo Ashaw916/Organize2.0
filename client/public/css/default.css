@@ -3,9 +3,10 @@ body {
 }
 .navbar {
   background-color: #64778d;
+  margin-bottom: 25px;
 }
 .nav-link {
-  color: #e3e9fffb;
+  color: #ebf0fffb;
 }
 
 .nav-item,
@@ -16,4 +17,9 @@ body {
 .navbar-brand {
   color: darkred;
   font-weight: bold;
+}
+footer {
+  margin-top: 50px;
+  background-color: #64778d;
+  color: #ebf0fffb;
 }
