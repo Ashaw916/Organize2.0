@@ -1,21 +1,21 @@
 import React from "react";
 import FullCalendar, { isPropsEqual } from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid"
+import dayGridPlugin from "@fullcalendar/daygrid";
 
 function Calendar(props) {
-    return (
-        <FullCalendar
-            plugins={[dayGridPlugin]}
-            initialView="dayGridMonth"
-            headerToolbar={{
-                left: "prev,next today",
-                center: "title",
-                right: "dayGridMonth,timeGridWeek,timeGridDay"
-            }}
-            events={props.events}
-        />
-    )
-};
+  return (
+    <FullCalendar
+      plugins={[dayGridPlugin]}
+      initialView="dayGridMonth"
+      headerToolbar={{
+        left: "prev,next today",
+        center: "title",
+        right: "dayGridMonth,timeGridWeek,timeGridDay",
+      }}
+      events={props.events}
+    />
+  );
+}
 
 export default Calendar;
 
