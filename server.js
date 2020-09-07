@@ -3,12 +3,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const routes = require("./routes");
-const cors = require("cors");
+// const cors = require("cors");
 const app = express();
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const jwt = require("jsonwebtoken");
+
 //port
 const PORT = process.env.PORT || 3001;
 
@@ -22,13 +22,13 @@ require("./config/passport")(passport);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // cors
-app.use(
-  cors({
-    origin: "http://localhost:3001",
-    credentials: true,
-    saveUninitialized: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: "http://localhost:3001",
+//     credentials: true,
+//     saveUninitialized: true,
+//   })
+// );
 app.use(
   session({
     secret: "svsas",
