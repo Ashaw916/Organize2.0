@@ -6,7 +6,7 @@ import { getUsers } from "../../resources/users";
 
 class Contact extends Component {
   state = {
-    users: getUsers(),
+    users: getUsers(),//link up with atlas instead
   };
 
   render() {

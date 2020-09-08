@@ -2,6 +2,7 @@ import React from "react";
 import FullCalendar, { isPropsEqual, Component } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"
 import { render } from "ejs";
+import $ from "jquery";
 
 class Calendar extends Component {
     calendarComponentRef = React.createRef();
@@ -11,13 +12,6 @@ class Calendar extends Component {
         return (
             <FullCalendar
                 plugins={[dayGridPlugin]}
-                // dayMaxEventRows={true}
-                // eventDidMount={}
-                // views= {{
-                //     month: {
-                //         type: "dayGridMonth"
-                //     }
-                // }}
                 views={{
                     month: {
                         type: "dayGridMonth",
@@ -30,14 +24,10 @@ class Calendar extends Component {
                     }
                 }}
                 headerToolbar={{
-                    left: "prev,next",
+                    left: "prev,next today",
                     center: "title",
-                    right: "today"
+                    right: "dayGridMonth,timeGridWeek,timeGridDay"
                 }}
-                footerToolbar={{
-                    center: 'dayGridMonth,timeGridWeek,timeGridDay'
-                }}
-                // windowResize={this.handleWindowResize}
                 events={events}
                 // ref={this.calendarComponentRef}
                 
@@ -45,7 +35,29 @@ class Calendar extends Component {
         )
     }
 
-    // handleWindowResize = () => {
+    
+
+};
+
+export default Calendar;
+
+/*
+//maybe i don't have the right plugins /imported??
+eventRender: function(info) {
+    var tooltip = new Tooltip(info.el, {
+        title: info.event.extendedProps.description,
+        placement: "top",
+        trigger: "hover",
+        container: "body"
+    })
+}
+
+///////////////////////////////////wishlist////////////////////////
+
+/////////////////////////on viewport change, the view changes to dayGridDay///////////////////
+// windowResize={this.handleWindowResize}
+
+// handleWindowResize = () => {
     //     if (window.screen.width < 320) {
     //         this.calendarComponentRef.current
     //             .getApi()
@@ -55,33 +67,6 @@ class Calendar extends Component {
     //         this.calendarComponentRef.current.getApi("dayGridMonth");
     //     }
     // }
-
-};
-
-export default Calendar;
-
-/*
-[{
-                groupId: "blm",
-                start: "2020-08-29",
-                title: "sandra event",
-                url: "www.google.com",
-                description: "work dammit",
-                extendedProps: {
-                  location: "Sacramento"
-                }
-              }]
-
-function(info) {
-    var tooltip = new Tooltip(info.el, {
-        title: info.event.extendedProps.description,
-        placement: "top",
-        trigger: "hover",
-        container: "body"
-    })
-}
-
-
 
 
               */
