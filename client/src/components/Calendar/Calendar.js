@@ -59,8 +59,8 @@ class Calendar extends Component {
                 }}
                 // windowResize={this.handleWindowResize}
                 events={events}
-                // ref={this.calendarComponentRef}
-                
+            // ref={this.calendarComponentRef}
+
             />
         )
     }
@@ -96,17 +96,11 @@ export default Calendar;
 */
 
 
-function(info) {
-    var tooltip = new Tooltip(info.el, {
-        title: info.event.extendedProps.description,
-        placement: "top",
-        trigger: "hover",
-        container: "body"
-    })
-}
-
-
-
-
-              */
-
+// (info) => {
+//     new Tooltip(info.el, {
+//         title: info.event.extendedProps.description,
+//         placement: "top",
+//         trigger: "hover",
+//         container: "body"
+//     })
+// }
