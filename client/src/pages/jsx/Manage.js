@@ -105,7 +105,7 @@ function Manage() {
 
   //same handleinputchange for start date, time and am/pm ==> concatenate all three values together and save into state (startDate)
   //for the date, use toISOString for date and then slice it after the T and concatenate the returned 24hr time to it
-  function twelveHoursToTwentyFourHours(inputTime, amPm) {
+  function twelveHoursToTwentyFourHours(inputTime, amPm) {////////////////////this needs to be tested
     //concatenate variables to be fed into next set of lines
     var time = `${inputTime} ${amPm}`;
 
@@ -123,8 +123,9 @@ function Manage() {
     return sHours + ':' + sMinutes;
   };
 
-  function isoDate() {
-
+  function isoDate(eventDate) {///////////////////////this needs to be tested too
+    const date = new Date(eventDate);
+    return date.toISOString();
   };
 
   //for grabbing the start time and end time values
@@ -162,7 +163,7 @@ function Manage() {
   //cocatenate dates and times together with a T together
   //will need to convert 12hr times to 24 before concatenating
   // add validation here!
-  handleFormSubmit = (e) => {
+  handleFormSubmit = (e) => {//////////////////////////////////////////////test this as is first and then insert validation, if else the heck out of it and then else= all the function callbacks
     e.preventDefault();
     
     const startTime = twelveHoursToTwentyFourHours(dateObject.start_time, dateObject.startAMPM);
