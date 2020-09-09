@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 // auth token
 function authToken(req, res, next) {
   // console.log("req.body.token", req.body.token);
-
   const token = req.body.token.replace(/['"]+/g, "");
   // console.log("token:", token);
   // console.log(token);

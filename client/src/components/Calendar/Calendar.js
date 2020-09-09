@@ -1,4 +1,24 @@
 import React from "react";
+//Start vanessa section I dont want to mess anything up on either end so I just commented my push out
+// import FullCalendar, { isPropsEqual } from "@fullcalendar/react";
+// import dayGridPlugin from "@fullcalendar/daygrid";
+
+// function Calendar(props) {
+//   return (
+//     <FullCalendar
+//       plugins={[dayGridPlugin]}
+//       initialView="dayGridMonth"
+//       headerToolbar={{
+//         left: "prev,next today",
+//         center: "title",
+//         right: "dayGridMonth,timeGridWeek,timeGridDay",
+//       }}
+//       events={props.events}
+//     />
+//   );
+// }
+//End of Vanessa Section 
+
 import FullCalendar, { isPropsEqual, Component } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"
 import { render } from "ejs";
@@ -39,8 +59,8 @@ class Calendar extends Component {
                 }}
                 // windowResize={this.handleWindowResize}
                 events={events}
-                // ref={this.calendarComponentRef}
-                
+            // ref={this.calendarComponentRef}
+
             />
         )
     }
@@ -58,6 +78,7 @@ class Calendar extends Component {
 
 };
 
+
 export default Calendar;
 
 /*
@@ -72,16 +93,14 @@ export default Calendar;
                 }
               }]
 
-function(info) {
-    var tooltip = new Tooltip(info.el, {
-        title: info.event.extendedProps.description,
-        placement: "top",
-        trigger: "hover",
-        container: "body"
-    })
-}
+*/
 
 
-
-
-              */
+// (info) => {
+//     new Tooltip(info.el, {
+//         title: info.event.extendedProps.description,
+//         placement: "top",
+//         trigger: "hover",
+//         container: "body"
+//     })
+// }

@@ -78,6 +78,12 @@ function Manage(props) {
   // //all other states for values that must be modified before pushing to backend
   // const [start, ]
 
+  //////////////////////// FOR EVENT FORM /////////////////////////
+  //state for values that can go straight into state
+  // const [formObject, setFormObject] = useState({});
+  // //all other states for values that must be modified before pushing to backend
+  // const [start, ]
+
   //cocatenate dates and times together with a T together
   //will need to convert 12hr times to 24 before concatenating
 
