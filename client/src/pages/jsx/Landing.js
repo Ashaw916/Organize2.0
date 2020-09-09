@@ -48,14 +48,18 @@ function Landing() {
               <h1 className="display-4" id="landing-header">
                 Organize 2.0
               </h1>
-              <p className="lead">Say something here</p>
+              <p className="lead"></p>
             </div>
           </div>
         </div>
 
         <div className="row" id="landing-r2">
           <div className="col">
-            <h4 id="jumbo-h4">Connect || Share || Mobilize</h4>
+            <h4 id="jumbo-h4">
+              Organize 2.0 <span className="color-span">||</span> Connect{" "}
+              <span className="color-span">||</span> Share{" "}
+              <span className="color-span">||</span> Mobilize
+            </h4>
             <p>
               events, resources, and organizations that are changing our society
               for the better
@@ -67,25 +71,35 @@ function Landing() {
           <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Community Resources</h5>
-              <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <h6 className="card-subtitle mb-2 text-muted">
+                Articles and Resources
+              </h6>
             </div>
           </div>
+
+          <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
+            <div className="card-body">
+              <h5 className="card-title">Donate</h5>
+              <h6 className="card-subtitle mb-2 text-muted">
+                Organizations and Causes
+              </h6>
+            </div>
+          </div>
+
           <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Video Links</h5>
-              <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <h6 className="card-subtitle mb-2 text-muted">
+                Live and Archived Streams
+              </h6>
             </div>
           </div>
           <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Connect</h5>
-              <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            </div>
-          </div>
-          <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
-            <div className="card-body">
-              <h5 className="card-title">Donate</h5>
-              <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <h6 className="card-subtitle mb-2 text-muted">
+                Connect to Contributors
+              </h6>
             </div>
           </div>
         </div>
@@ -94,29 +108,6 @@ function Landing() {
           <div className="jumbotron jumbotron-fluid col" id="calendar-jumbo">
             <div className="container">
               <Calendar events={event} />
-            </div>
-          </div>
-        </div>
-
-        <div className="container" id="bottom-info">
-          <div className="row">
-            <div className="col">
-              <h4>About us title</h4>
-            </div>
-          </div>
-
-          <div className="row" id="landing-r5">
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <h6>Information Block 1</h6>
-              <p>Information verbiage</p>
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <h6>Information Block 2</h6>
-              <p>Information verbiage</p>
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <h6>Information Block 3</h6>
-              <p>Information verbiage</p>
             </div>
           </div>
         </div>

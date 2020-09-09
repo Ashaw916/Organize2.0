@@ -24,6 +24,15 @@
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
 }
+#landing-header {
+  /* margin-left: 15px;
+  color: #ebf0fffb;
+	text-shadow: 5px 2px 5px black; */
+  visibility: hidden;
+}
+.color-span {
+  color: #ebf0fffb;
+}
 
 #tile {
   box-sizing: border-box;
@@ -59,18 +68,6 @@ h5 {
 .fc-button-primary {
   background-color: darkred !important;
   border: 1px darkred solid !important;
-}
-#bottom-info {
-  text-align: center;
-  margin-top: 50px;
-  background-color: #bfd1d3;
-  padding: 25px 0px 25px 0px;
-  border-radius: 5px;
-  color: #6c757d;
-}
-
-#bottom-header {
-  text-align: center;
 }
 
 @media screen and (max-width: 767px) {

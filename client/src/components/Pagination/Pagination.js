@@ -4,7 +4,7 @@ function Pagination() {
   return (
     <>
       <div>
-        <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example" id="resources-paginate">
           <ul className="pagination">
             <li className="page-item disabled">
               <a className="page-link" href="#" tabIndex="-1">
