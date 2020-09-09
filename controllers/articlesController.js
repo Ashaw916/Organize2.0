@@ -1,7 +1,6 @@
 require("dotenv").config();
 const db = require("../models");
 const authToken = require("../config/authToken");
-8;
 
 // Defining methods for the articlesController
 module.exports = {

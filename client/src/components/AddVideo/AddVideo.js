@@ -10,7 +10,7 @@ function AddVideo() {
         <div className="card-body">
           <form>
             <div className="form-group">
-              <label for="videoTitle">Video Title</label>
+              <label htmlFor="videoTitle">Video Title</label>
               <input
                 type="text"
                 className="form-control"
@@ -20,7 +20,9 @@ function AddVideo() {
             </div>
 
             <div className="form-group">
-              <label for="exampleFormControlTextarea1">Brief Description</label>
+              <label htmlFor="exampleFormControlTextarea1">
+                Brief Description
+              </label>
               <textarea
                 className="form-control"
                 id="videoDescription"
@@ -29,7 +31,7 @@ function AddVideo() {
             </div>
 
             <div className="form-group">
-              <label for="videoUrl">Video Url</label>
+              <label htmlFor="videoUrl">Video Url</label>
               <input
                 type="url"
                 className="form-control"

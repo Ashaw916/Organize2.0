@@ -7,7 +7,8 @@ function LoginUser(props) {
   const [loginPassword, setLoginPassword] = useState("");
   const login = (e) => {
     e.preventDefault();
-    console.log("submit");
+    console.log("login");
+
     Axios({
       method: "POST",
       data: {
@@ -20,7 +21,7 @@ function LoginUser(props) {
       if (response.data === "No User Exists") {
         alert("You are not registered");
       }
-      if (response.data != "No User Exists") {
+      if (response.data !== "No User Exists") {
         localStorage.setItem("token", response.data);
         props.history.push("/profile");
       } else {
@@ -51,11 +52,11 @@ function LoginUser(props) {
               </small>
             </div>
             <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Password</label>
+              <label htmlFor="loginInputPassword">Password</label>
               <input
                 type="password"
                 className="form-control"
-                id="exampleInputPassword1"
+                id="loginInputPassword"
                 placeholder="Password"
                 onChange={(e) => setLoginPassword(e.target.value)}
               />

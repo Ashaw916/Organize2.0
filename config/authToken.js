@@ -4,37 +4,39 @@ const jwt = require("jsonwebtoken");
 
 // auth token
 function authToken(req, res, next) {
-  console.log("auth:", req.headers);
-  const token = req.headers.authorization;
-  // const token = authHeader && authHeader.split(" ")[1];
-  console.log(token);
-  if (token == null) return res.sendStatus(401);
+  // console.log("req.body.token", req.body.token);
 
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) return res.sendStatus(403);
-    req.user = user;
-    console.log(req.user);
-    res.json({
-      message: "auth success",
-      user,
+  const token = req.body.token.replace(/['"]+/g, "");
+  // console.log("token:", token);
+  // console.log(token);
+  if (token == null) {
+    return res.sendStatus(401);
+  } else {
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+      const token = req.body.token.replace(/['"]+/g, "");
+      // console.log("user jwt", token);
+      if (err) {
+        console.log("err", err);
+        return res.sendStatus(403);
+      }
+      console.log("user jwt2", token);
+      req.body = user;
+      console.log({
+        message: "auth success",
+        user,
+        token,
+      });
+      res.json({
+        message: "auth success1",
+        user,
+        token,
+        test: {
+          test: "test",
+        },
+      });
+      next(req, res);
+      // console.log(req);
     });
-    next(req, res);
-  });
+  }
 }
-
-// jwt.verify(req.token, "privatekey", (err, authorizedData) => {
-//   if (err) {
-//     //If error send Forbidden (403)
-//     console.log("ERROR: Could not connect to the protected route");
-//     res.sendStatus(403);
-//   } else {
-//     //If token is successfully verified, we can send the autorized data
-//     res.json({
-//       message: "Successful log in",
-//       authorizedData,
-//     });
-//     console.log("SUCCESS: Connected to protected route");
-//   }
-// });
-
 module.exports = authToken;

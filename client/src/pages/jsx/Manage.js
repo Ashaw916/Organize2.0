@@ -8,7 +8,7 @@ import AddVideo from "../../components/AddVideo/AddVideo";
 import ListVideo from "../../components/ListVideo/ListVideo";
 import API from "../../utils/API";
 
-function Manage() {
+function Manage(props) {
   //states for events, articles, and videos
   const [getEvents, setGetEvents] = useState([]);
   const [getArticles, setGetArticles] = useState([]);

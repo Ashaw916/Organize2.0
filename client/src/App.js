@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+// import ProtectedWrapper from "./components/ProtectedWrapper/ProtectedWrapper";
 import NavTabs from "./components/NavTabs/NavTabs";
 import Landing from "./pages/jsx/Landing";
 import Video from "./pages/jsx/Video";

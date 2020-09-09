@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import Axios from "axios";
 
-function Registration() {
+function Registration(props) {
   const [regEmail, setRegEmail] = useState("");
   const [regPassword, setRegPassword] = useState("");
+  // const [regOrg, setRegOrg] = useState("");
+  // const [regUrl, setRegUrl] = useState("");
+  // const [regFB, setRegFB] = userState("");
+  // const [regTwitter, setRegTwitter] = userState("");
+  // const [regInsta, setRegInsta] = userState("");
   const register = (e) => {
     e.preventDefault();
     console.log("submit");
@@ -15,7 +20,20 @@ function Registration() {
       },
       withCredentials: true,
       url: "/users/register",
-    }).then((res) => console.log(res));
+    }).then((response) => {
+      console.log("res Rreat", response.data);
+      if (response.data === "You haven't been invited") {
+        alert(
+          "You have not been invited. Please contact the site administators if you wish to contribute."
+        );
+      } else if (response.data === "Alredy exists") {
+        alert(
+          "You have not been invited. Please contact the site administators if you wish to contribute."
+        );
+      } else {
+        alert("You are now registered. Welcome!");
+      }
+    });
   };
   return (
     <>

@@ -16,10 +16,13 @@ router.post("/registerProfile", (req, res) => {
         organization: req.body.email,
         role: hashedPassword,
       });
+
       await newUser.save();
       res.send("Success");
     }
   });
+});
+
 //get users
 router.get("/userprofiles", (req, res) => {
   res.send(req.users); // The req.user stores the entire user that has been authenticated inside of it.
