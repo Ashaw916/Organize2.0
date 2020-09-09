@@ -8,6 +8,7 @@ import AddVideo from "../../components/AddVideo/AddVideo";
 
 import ListVideo from "../../components/ListVideo/ListVideo";
 import API from "../../utils/API";
+import useDebounced from "../../utils/useDebounced";
 
 function Manage() {
 
@@ -20,7 +21,7 @@ function Manage() {
   function loadEvents() {
     API.getEvents()
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data);  //for the date, use toISOString for date and then slice it after the T and concatenate the returned 24hr time to it
         setGetEvents(res.data)
       })
       .catch((err) => console.log(err));
@@ -75,7 +76,6 @@ function Manage() {
       .catch(err => console.log(err));
   }
 
-
   //////////////////////// FOR EVENT FORM ///////////////////////// 
 
   //state for values that can go straight into state
@@ -89,22 +89,23 @@ function Manage() {
     end_time: "",
     endAMPM: ""
   });
-  //to hold the converted and concatenated start_date string for the db
-  const [timeStartStr, setStartStr] = useState("");
-  //to hold the converted and concatenated end_date string for the db
-  const [timeEndStr, setEndStr] = useState("");
   //to send a success message to the user after a successful submission
   const [success, setSuccess] = useState("");
-  // //to hold values from the form before being altered
-  // const [endObject, setEndObject] = useState({
-    
-  // });
-  //star_date ==> dateTtime(as 24hrs 00:00:00)
-  //end_date ==> dateTtime(as 24hrs 00:00:00)
-  //check to see how the date comes in as and if the calendar can parse it
-
-  //same handleinputchange for start date, time and am/pm ==> concatenate all three values together and save into state (startDate)
-  //for the date, use toISOString for date and then slice it after the T and concatenate the returned 24hr time to it
+  //object of error messages (booleans to be set as true if triggered) for the different inputs
+  const [errorObject, setErrorObject] = useState({
+    start_date: false,
+    start_time: false,
+    startAMPM: false,
+    end_date: false,
+    end_time: false,
+    endAMPM: false,
+    title: false,
+    organization: false,
+    event_url: false,
+    description: false,
+    location: false
+  });
+  
   function twelveHoursToTwentyFourHours(inputTime, amPm) {////////////////////this needs to be tested
     //concatenate variables to be fed into next set of lines
     var time = `${inputTime} ${amPm}`;
@@ -124,60 +125,86 @@ function Manage() {
   };
 
   function isoDate(eventDate) {///////////////////////this needs to be tested too
-    const date = new Date(eventDate);
-    return date.toISOString();
+    const date = new Date(eventDate);//takes in 10/01/1992
+    const newDate = date.toISOString();//produces 1992-10-01T07:00:00.000Z
+    return newDate.slice(0, 10);
   };
+
+  const validDateRegex = RegExp(/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/);
+  const validTimeRegex = RegExp(/^(0[0-9]|1[0-2]):[0-5][0-9]$/);
 
   //for grabbing the start time and end time values
   const handleDateInputChange = e => {
     const { name, value } = e.target;
-    // const name = e.target.name;
-    // const value = e.target.value;
-    // console.log(name);
-    // console.log(value);
+    
+    switch(name) {
+      case 'start_date':
+        validDateRegex.test(value)
+        ? setErrorObject({ start_date: false }) : setErrorObject({ start_date: true });
+        break;
+      case 'end_date':
+        validDateRegex.test(value)
+        ? setErrorObject({ end_date: false }) : setErrorObject({ end_date: true });
+        break;
+      case 'start_time':
+        validTimeRegex.test(value)
+        ? setErrorObject({ start_time: false }) : setErrorObject({ start_time: true });
+        break;
+      case 'end_time':
+        validTimeRegex.test(value)
+        ? setErrorObject({ end_time: false }) : setErrorObject({ end_time: true });
+        break;
+      case 'startAMPM':
+        value === "am" || value === "pm"
+        ? setErrorObject({ startAMPM: false }) : setErrorObject({ startAMPM: true });
+        break;
+      case 'endAMPM':
+        value === "am" || value === "pm"
+        ? setErrorObject({ endAMPM: false }) : setErrorObject({ endAMPM: true });
+        break;
+      default:
+        break;  
+    }
+
     setDateObject({ ...dateObject, [name]: value });
   };
-  // //grab ampm option value
-  // const handleAMPMInputChange = e => {
-  //   const name = e.target.name;
-  //   const value = e.target.value;
-  //   console.log(value);
-  //   console.log(name);
-  //   // setStartObject({...startObject, name:value});
-  // };
-  //another handleinputchange for end date, end time and am/pm ==> concatenate all three values together and save into state (endDate)
-  // const handleEndInputChange = e => {
-  //   const { name, value } = e.target;
-  //   // const name = e.target.name;
-  //   // const value = e.target.value;
-  //   // console.log(name);
-  //   // console.log(value);
-  //   setEndObject({ ...endObject, [name]: value })
-  // };
   //another handldinputchange for everything else that ...formObject, [name]:value through the rest of them
   const handleInputChange = e => {
     const { name, value } = e.target;
+
+    switch(name) {
+      case 'title':
+        break;
+      case 'organization':
+        break;
+      case 'event_url':
+        break;
+      case 'description':
+        break;
+      case 'location':
+        break;
+      default:
+        break;
+    }
+
     setFormObject({ ...formObject, [name]: value });
   };
 
-  //cocatenate dates and times together with a T together
-  //will need to convert 12hr times to 24 before concatenating
   // add validation here!
-  handleFormSubmit = (e) => {//////////////////////////////////////////////test this as is first and then insert validation, if else the heck out of it and then else= all the function callbacks
+  const handleFormSubmit = (e) => {///////insert validation, if else the heck out of it and then else= all the function callbacks
     e.preventDefault();
-    
+
+    //one last validation here, validating entire form
+    //a simple if (object) true then callbacks and saveevent
+
     const startTime = twelveHoursToTwentyFourHours(dateObject.start_time, dateObject.startAMPM);
     const endTime = twelveHoursToTwentyFourHours(dateObject.end_time, dateObject.endAMPM);
-    console.log(startTime);
-    console.log(endTime);
     const startDate = isoDate(dateObject.start_date);
     const endDate = isoDate(dateObject.end_date);
-    console.log(startDate);
-    console.log(endDate);
     const sDate = `${startDate}T${startTime}`;
     const eDate = `${endDate}T${endTime}`;
-
-    ///////////////////insert above values into the object for api call and 
+    //saveEvent will be part of else condition with callbacks
+    //insert above values into the object for api call and 
     // API.saveEvent({
     //   title: ,
     //   start_date: ,
@@ -207,9 +234,21 @@ function Manage() {
           <div className="col-5 m-1">
             <AddEvent
               handleInputChange={handleInputChange}
-              // handleAMPMInputChange={handleAMPMInputChange}
               handleDateInputChange={handleDateInputChange}
-              // handleEndInputChange={handleEndInputChange}
+              handleFormSubmit={handleFormSubmit}
+              startAMPM={dateObject.startAMPM}
+              endAMPM={dateObject.endAMPM}
+              errorStartDate={errorObject.start_date}
+              errorEndDate={errorObject.end_date}
+              errorTitle={errorObject.title}
+              errorStartTime={errorObject.start_time}
+              errorEndTime={errorObject.end_time}
+              errStartAmPm={errorObject.startAMPM}
+              errEndAmPm={errorObject.endAMPM}
+              errorOrganization={errorObject.organization}
+              errorUrl={errorObject.event_url}
+              errorDescription={errorObject.description}
+              errorLocation={errorObject.location}
             />
           </div>
           <div className="col-6 m-1">
