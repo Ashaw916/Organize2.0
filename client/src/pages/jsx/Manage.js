@@ -132,20 +132,23 @@ function Manage() {
     switch (name) {
       case 'title':
         value.length > 5
-        ? setErrorObject({ title: false }) : setErrorObject({ title: false });
+        ? setErrorObject({ title: false }) : setErrorObject({ title: true });
         break;
       case 'organization':
-
+        value.length > 5
+        ? setErrorObject({ organization: false }) : setErrorObject({ organization: true });
         break;
       case 'event_url':
         validUrl.test(value)
         ? setErrorObject({ event_url: false }) : setErrorObject({ event_url: true })
         break;
       case 'description':
-
+        value.length > 5
+        ? setErrorObject({ description: false }) : setErrorObject({ description: true });
         break;
       case 'location':
-
+        value.length > 5
+        ? setErrorObject({ location: false }) : setErrorObject({ location: true });
         break;
       case 'start_date':
         validDateRegex.test(value)
@@ -178,55 +181,79 @@ function Manage() {
     setFormObject({ ...formObject, [name]: value });
   };
 //it stops at returns, try this - haven't tried it yet
-  function validateFormErrors() {
-    let valid = true;
+  // function validateFormErrors() {
+  //   let valid = true;
 
-    if (errorObject.start_time == true) {
-      valid = false;
-      setErrorObject({ start_time: true });
-    }
+  //   if (errorObject.start_time == true) {
+  //     valid = false;
+  //     setErrorObject({ start_time: true });
+  //   }
 
-    if (errorObject.end_time == false) {
-      valid = false;
-      setErrorObject({ end_time: true });
-    } 
+  //   if (errorObject.end_time == false) {
+  //     valid = false;
+  //     setErrorObject({ end_time: true });
+  //   } 
       
     
 
-    // if (errorObject.end_date === false) {
-    //   return valid;
-    // } else {
-    //   return valid = false;
-    // }
+  //   // if (errorObject.end_date === false) {
+  //   //   return valid;
+  //   // } else {
+  //   //   return valid = false;
+  //   // }
 
-    return valid;
-  };
+  //   return valid;
+  // };
 
 /////////////////////////////////////////does not work
 
 ///not tested after removing returns
-  function validateFormObject() {
+  // function validateFormObject() {
+  //   let valid = true;
+
+  //   if (!formObject.start_time) {
+  //     valid = false;
+  //     setErrorObject({ start_time: true });
+  //   } 
+
+  //   // if (formObject.end_time !== "") {
+  //   //   return valid;
+  //   // } else {
+  //   //   return valid = false;
+  //   //   setErrorObject({ end_time: true });
+  //   // }
+  //   return valid;
+  // };
+
+  const validateFormErrors = (errors) => {
     let valid = true;
-
-    if (!formObject.start_time) {
-      valid = false;
-      setErrorObject({ start_time: true });
-    } 
-
-    // if (formObject.end_time !== "") {
-    //   return valid;
-    // } else {
-    //   return valid = false;
-    //   setErrorObject({ end_time: true });
-    // }
+    Object.values(errors).map((val) => {
+      if (val == true) {
+      console.log("form has errors")
+      return valid = false;
+      }
+    });
     return valid;
   };
+
+  const validateFormObject = (values) => {
+    let valid = true;
+    Object.values(values).map((val) => {
+      if (!val) {
+        console.log("no value")
+        return valid = false;
+      }
+    })
+    return valid;
+  };
+
 
   const handleFormSubmit = (e) => {///////insert validation, if else the heck out of it and then else= all the function callbacks
     e.preventDefault();
 
-  
-    if(validateFormErrors() && validateFormObject()) {
+  // && validateFormObject(formObject)
+
+    if(validateFormErrors(errorObject)) {
       console.log("valid form");
     } else {
       console.log("invalid form");
