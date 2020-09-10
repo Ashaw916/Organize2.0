@@ -87,11 +87,10 @@ function AddEvent(
               <div className="form-group col-md-2">
                 <label htmlFor="am-pm"></label>
                 <select className={`custom-select ${errorStartAMPM ? "inputErr" : ""}`} id="timeSelect" name="startAMPM" onChange={handleInputChange}>
-                  <option value={startAMPM}></option>
-                  {/* <option valud="">Unselect</option> */}
+                  <option value={startAMPM}>Open this to Select AM/PM</option>
                   <option value="am">AM</option>
                   <option value="pm">PM</option>
-                </select>{/*do some error highlithging here*/}
+                </select>
                 <small id="textHelp" className="form-text text-muted">Choose One</small>
               </div>
               <div className="form-group col-md-4">
@@ -110,11 +109,10 @@ function AddEvent(
               <div className="form-group col-md-2">
                 <label htmlFor="am-pm"></label>
                 <select className={`custom-select ${errorEndAMPM ? "inputErr" : ""}`} id="timeSelect" name="endAMPM" onChange={handleInputChange}>
-                  <option value={endAMPM}></option>
-                  {/* <option value="">Unselect</option> */}
+                  <option value={endAMPM}>Open this to Select AM/PM</option>
                   <option value="am">AM</option>
                   <option value="pm">PM</option>
-                </select>{/*do some error highlithging here, do a tertiary conditional in class for select*/}
+                </select>
                 <small id="textHelp" className="form-text text-muted">Choose One</small>
               </div>
             </div>
@@ -176,7 +174,6 @@ function AddEvent(
             <button 
             type="submit" 
             className="btn btn-primary" 
-            onClick={handleFormSubmit}
             >
               Add Event
             </button>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { getUsers } from "../../resources/users";
 // import { Link, Route } from "react-router-dom";
 // import Table from "../../components/Table/Table.js";
-// import Users from "../../resources/users";
+import API from "../../utils/API";
 
 class Contact extends Component {
   state = {
