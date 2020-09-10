@@ -29,15 +29,16 @@ class Calendar extends Component {
                     right: "dayGridMonth,timeGridWeek,timeGridDay"
                 }}
                 events={events}
-                // ref={this.calendarComponentRef}
-                
+            // ref={this.calendarComponentRef}
+
             />
         )
     }
 
-    
+
 
 };
+
 
 export default Calendar;
 
@@ -69,4 +70,10 @@ eventRender: function(info) {
     // }
 
 
-              */
+// (info) => {
+//     new Tooltip(info.el, {
+//         title: info.event.extendedProps.description,
+//         placement: "top",
+//         trigger: "hover",
+//         container: "body"
+//     })
