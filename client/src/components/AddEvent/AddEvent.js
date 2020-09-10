@@ -1,22 +1,13 @@
 import React from "react";
 import "./AddEventStyle.css";
 //add a disabled class for button for extra validation?
-function AddEvent(
-  { handleInputChange, 
-    handleFormSubmit,
-    startAMPM,
-    endAMPM, 
-    errorStartDate,
-    errorEndDate,
-    errorTitle,
-    errorStartTime,
-    errorEndTime,
-    errorOrganization,
-    errorUrl,
-    errorDescription,
-    errorLocation,
-    errorStartAMPM,
-    errorEndAMPM
+function AddEvent({ 
+  handleEventInputChange,
+  handleEventSubmit,
+  eventObject,
+  eventErrors,
+  eventSuccess,
+  notEventSubmitted
   }) {
   return (
     <>
@@ -26,20 +17,22 @@ function AddEvent(
           <h5 className="card-title">Add Event Here</h5>
         </div>
         <div className="card-body">
-          <form>
+          <form onSubmit={handleEventSubmit} noValidate>
             <div className="form-row">
               <div className="form-group col">
                 <label htmlFor="event-title">Event Title</label>
                 <input
                   type="text"
-                  className={`form-control ${errorTitle ? "inputErr" : ""}`}
+                  className={`form-control ${eventErrors.title ? "inputErr" : ""}`}
                   id="event-title"
                   placeholder="Event Title"
                   name="title"
-                  onChange={handleInputChange}
+                  onChange={handleEventInputChange}
+                  value={eventObject.title || ""}
+                  required
                 />
                 <small id="textHelp" className="form-text text-muted">MM/DD/YYYY</small>
-                {errorTitle && <div className="err">More then five characters</div>}
+                {eventErrors.title && (<p className="err">{eventErrors.title}</p>)}
               </div>
             </div>
             <div className="form-row">
@@ -47,27 +40,31 @@ function AddEvent(
                 <label htmlFor="start_date">Start date</label>
                 <input
                   type="text"
-                  className={`form-control ${errorStartDate ? "inputErr" : ""}`}
+                  className={`form-control ${eventErrors.start_date ? "inputErr" : ""}`}
                   id="start_date"
                   placeholder="MM/DD/YYYY"
                   name="start_date"
-                  onChange={handleInputChange}
+                  onChange={handleEventInputChange}
+                  value={eventObject.start_date || ""}
+                  required
                 />
                 <small id="textHelp" className="form-text text-muted">MM/DD/YYYY</small>
-                {errorStartDate && <div className="err">Check Format</div>}
+                {eventErrors.start_date && (<p className="err">{eventErrors.start_date}</p>)}
               </div>
               <div className="form-group col-md-6">
                 <label htmlFor="end_date">End Date</label>
                 <input
                   type="text"
-                  className={`form-control ${errorEndDate ? "inputErr" : ""}`}
+                  className={`form-control ${eventErrors.end_date ? "inputErr" : ""}`}
                   id="end_date"
                   placeholder="MM/DD/YYYY"
                   name="end_date"
-                  onChange={handleInputChange}
+                  onChange={handleEventInputChange}
+                  value={eventObject.end_date || ""}
+                  required
                 />
                 <small id="textHelp" className="form-text text-muted">MM/DD/YYYY</small>
-                {errorEndDate && <div className="err">Check Format</div>}
+                {eventErrors.end_date && (<p className="err">{eventErrors.end_date}</p>)}
               </div>
             </div>
             <div className="form-row">
@@ -75,19 +72,28 @@ function AddEvent(
                 <label htmlFor="start_time">Start time</label>
                 <input
                   type="text"
-                  className={`form-control ${errorStartTime ? "inputErr" : ""}`}
+                  className={`form-control ${eventErrors.start_time ? "inputErr" : ""}`}
                   id="start_time"
                   placeholder="00:00"
                   name="start_time"
-                  onChange={handleInputChange}
+                  onChange={handleEventInputChange}
+                  value={eventObject.start_time || ""}
+                  required
                 />
                 <small id="textHelp" className="form-text text-muted">hh:mm (e.g. 01:00, 11:00)</small>
-                {errorStartTime && <div className="err">Check Format</div>}
+                {eventErrors.start_time && (<p className="err">{eventErrors.start_time}</p>)}
               </div>
               <div className="form-group col-md-2">
                 <label htmlFor="am-pm"></label>
-                <select className={`custom-select ${errorStartAMPM ? "inputErr" : ""}`} id="timeSelect" name="startAMPM" onChange={handleInputChange}>
-                  <option value={startAMPM}>Open this to Select AM/PM</option>
+                <select 
+                className={`custom-select ${eventErrors.startAMPM ? "inputErr" : ""}`} 
+                id="timeSelect" 
+                name="startAMPM" 
+                onChange={handleEventInputChange}
+                value={eventObject.startAMPM || ""}
+                required
+                >
+                  <option value="">Open this to Select AM/PM</option>
                   <option value="am">AM</option>
                   <option value="pm">PM</option>
                 </select>
@@ -97,19 +103,28 @@ function AddEvent(
                 <label htmlFor="end_time">End time</label>
                 <input
                   type="text"
-                  className={`form-control ${errorEndTime ? "inputErr" : ""}`}
+                  className={`form-control ${eventErrors.end_time ? "inputErr" : ""}`}
                   id="end_time"
                   placeholder="00:00"
                   name="end_time"
-                  onChange={handleInputChange}
+                  onChange={handleEventInputChange}
+                  value={eventObject.end_time || ""}
+                  required
                 />
                 <small id="textHelp" className="form-text text-muted">hh:mm (e.g. 09:00, 12:00)</small>
-                {errorEndTime && <div className="err">Check Format</div>}
+                {eventErrors.end_time && (<p className="err">{eventErrors.end_time}</p>)}
               </div>
               <div className="form-group col-md-2">
                 <label htmlFor="am-pm"></label>
-                <select className={`custom-select ${errorEndAMPM ? "inputErr" : ""}`} id="timeSelect" name="endAMPM" onChange={handleInputChange}>
-                  <option value={endAMPM}>Open this to Select AM/PM</option>
+                <select 
+                className={`custom-select ${eventErrors.endAMPM ? "inputErr" : ""}`} 
+                id="timeSelect" 
+                name="endAMPM" 
+                onChange={handleEventInputChange}
+                value={eventObject.endAMPM || ""}
+                required
+                >
+                  <option value="">Open this to Select AM/PM</option>
                   <option value="am">AM</option>
                   <option value="pm">PM</option>
                 </select>
@@ -122,61 +137,69 @@ function AddEvent(
                   <label htmlFor="type">Sponsoring Organization</label>
                   <input
                     type="text"
-                    className={`form-control ${errorOrganization ? "inputErr" : ""}`}
+                    className={`form-control ${eventErrors.organization ? "inputErr" : ""}`}
                     id="organization"
-                    placeholder="Org Name"
+                    placeholder="Organization Name"
                     name="organization"
-                    onChange={handleInputChange}
+                    onChange={handleEventInputChange}
+                    value={eventObject.organization || ""}
+                    required
                   />
                   <small id="textHelp" className="form-text text-muted">Name of your Organization</small>
-                  {errorOrganization && <div className="err">Required</div>}
+                  {eventErrors.organization && (<p className="err">{eventErrors.organization}</p>)}
                 </div>
               </div>
               <div className="form-group col">
                 <label htmlFor="source">Event(url)</label>
                 <input
                   type="url"
-                  className={`form-control ${errorUrl ? "inputErr" : ""}`}
+                  className={`form-control ${eventErrors.event_url ? "inputErr" : ""}`}
                   id="event_url"
-                  placeholder="Website"
+                  placeholder="Url to Event"
                   name="event_url"
-                  onChange={handleInputChange}
+                  onChange={handleEventInputChange}
+                  value={eventObject.event_url || ""}
+                  required
                 />
-                <small id="textHelp" className="form-text text-muted">Url of Event</small>
                 <small id="textHelp" className="form-text text-muted">http(s)://website/page</small>
-                {errorUrl && <div className="err">Required</div>}
+                {eventErrors.event_url && (<p className="err">{eventErrors.event_url}</p>)}
               </div>
             </div>
             <div className="form-group">
               <label htmlFor="description">Description</label>
               <textarea
-                className={`form-control ${errorDescription ? "inputErr" : ""}`}
+                className={`form-control ${eventErrors.description ? "inputErr" : ""}`}
                 id="description"
                 rows="1"
                 name="description"
-                onChange={handleInputChange}
+                onChange={handleEventInputChange}
+                value={eventObject.description || ""}
+                required
               ></textarea>
               <small id="textHelp" className="form-text text-muted">Describe this Event</small>
-              {errorDescription && <div className="err">Required</div>}
+              {eventErrors.description && (<p className="err">{eventErrors.description}</p>)}
             </div>
             <div className="form-group">
               <label htmlFor="location">Location</label>
               <textarea
-                className={`form-control ${errorLocation ? "inputErr" : ""}`}
+                className={`form-control ${eventErrors.location ? "inputErr" : ""}`}
                 id="location"
                 rows="1"
                 name="location"
-                onChange={handleInputChange}
+                onChange={handleEventInputChange}
+                value={eventObject.location || ""}
+                required
               ></textarea>
               <small id="textHelp" className="form-text text-muted">E.g. Sacramento, 2nd Street, etc.</small>
-              {errorLocation && <div className="err">Required</div>}
+              {eventErrors.location && (<p className="err">{eventErrors.location}</p>)}
             </div>
             <button 
             type="submit" 
-            className="btn btn-primary" 
-            >
+            className="btn btn-primary">
               Add Event
             </button>
+            {eventSuccess && <div className="success">Submitted</div>}
+            {notEventSubmitted && <div className="notSubmitted">Not Submitted :(</div>}
           </form>
         </div>
         <div className="card-footer text-muted"></div>

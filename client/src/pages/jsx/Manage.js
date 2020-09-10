@@ -5,6 +5,8 @@ import AddVideo from "../../components/AddVideo/AddVideo";
 import ListVideo from "../../components/ListVideo/ListVideo";
 import API from "../../utils/API";
 import eventValidation from "../../utils/EventValidation";
+import articleValidation from "../../utils/ArticleValidation";
+import videoValidation from "../../utils/VideoValidation";
 
 function Manage() {
 
@@ -78,21 +80,14 @@ function Manage() {
 
   //////////////////////// FOR EVENT FORM ///////////////////////// 
 
-  //state object for form values
-  const [formObject, setFormObject] = useState({});
-  //object of error messages (booleans to be set as true if triggered) for the different inputs
-  const [errorObject, setErrorObject] = useState({})
-  //to send a success message to the user after a successful submission
-  const [success, setSuccess] = useState("");
-
-  const [articleObject, setArticleObject] = useState({});
-  const [articleErrors, setAritcleErrors] = useState({});
+  const [eventObject, setEventObject] = useState({});
+  const [eventErrors, setEventErrors] = useState({});
   //for showing a successful submission
-  const [articleSuccess, setArticleSuccess] = useState(false);
+  const [eventSuccess, setEventSuccess] = useState(false);
   //works with use effect, with checking errors, will start submit, and let user know
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isEventSubmitting, setIsEventSubmitting] = useState(false);
   //if an unsuccesful submission, will show an error to user
-  const [notSubmitted, setNotSubmitted] = useState(false);
+  const [notEventSubmitted, setNotEventSubmitted] = useState(false);
   
 
   // function twelveHoursToTwentyFourHours(inputTime, amPm) {////////////////////this needs to be tested
@@ -119,121 +114,57 @@ function Manage() {
   //   return newDate.slice(0, 10);
   // };
 
-  const validDateRegex = RegExp(/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/);
-  const validTimeRegex = RegExp(/^(0[0-9]|1[0-2]):[0-5][0-9]$/);
-  const validUrl = RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/);
-
-  
-
   useEffect(() => {
-    if (Object.keys(articleErrors).length === 0 && isSubmitting) {
+    if (Object.keys(eventErrors).length === 0 && isEventSubmitting) {
       //function for api call
-      submitArticle();
+      submitEvent();
     }
-  }, [articleErrors]);
+  }, [eventErrors]);
 
-  const handleArticleInputChange = (e) => {
+  const handleEventInputChange = (e) => {
     const { name, value } = e.target;
-    setArticleObject({ ...articleObject, [name]:value });
+    setEventObject({ ...eventObject, [name]:value });
   };
 
-  function submitArticle() {
+  function submitEvent() {
     console.log("submitted successfully!");
     //when successful, setArticleSuccess(true)
     //if unsuccesfful, setNotSubmitted(true)
-    API.saveArticle({
-      title: articleObject.title,
-      author: articleObject.author,
-      body: articleObject.body,
-      description: articleObject.description,
-      source: articleObject.source_url,
-      type: articleObject.type
-    }).then((res) => {
-      loadArticles();
-      setArticleSuccess(true);
-    }).catch((err) => {
-      console.log(err);
-      setNotSubmitted(true);
-    });
-    //restform needed?
-
-    setTimeout(() => {
-      setArticleSuccess(false);
-    }, 1200)
-
-  };
-
-  function validateArticles(values) {
-    let errors = {};
-    if(!values.title) {
-      errors.title = "A title is required";
-    } else if (values.title.length < 5) {
-      errors.title = "Must be 5 or more characters long"
-    }
-    if (!values.author) {
-      errors.author = "An author is required";
-    } else if (values.author.length < 5) {
-      errors.author = "Must be 5 or more characters long"
-    }
-    if (!values.body) {
-      errors.body = "Hint: copy&paste";
-    } else if (values.body.length < 20) {
-      errors.body = "Must be 20 or more characters long"
-    }
-    if (!values.description) {
-      errors.description = "Describe this in 15 characters or less";
-    } else if (values.description.length < 15) {
-      errors.description = "Must be 15 or more characters long"
-    }
-    if (!values.source_url) {
-      errors.source_url = "A source url is required";
-    } else if (!validUrl.test(values.source_url)) {
-      errors.source_url = "Url is invalid"
-    }
-    if (!values.type) {
-      errors.type = "Type of article is required";
-    } else if (values.type.length < 5) {
-      errors.type = "Must be 5 or more characters long"
-    }
-    return errors;
-  };
-
-  const handleArticleSubmit = (e) => {
-    if (e) e.preventDefault();
-    setAritcleErrors(validateArticles(articleObject));
-    setIsSubmitting(true);
-  };
-
-
-
+     // const startTime = twelveHoursToTwentyFourHours(dateObject.start_time, dateObject.startAMPM);
+    // const endTime = twelveHoursToTwentyFourHours(dateObject.end_time, dateObject.endAMPM);
+    // const startDate = isoDate(dateObject.start_date);
+    // const endDate = isoDate(dateObject.end_date);
+    // const sDate = `${startDate}T${startTime}`;
+    // const eDate = `${endDate}T${endTime}`;
     
-    //if (any are empty (using || ) then error will appear, "required or red outline")
+    //insert above values into the object for api call and 
+    // API.saveEvent({
+    //   title: ,
+    //   start_date: ,
+    //   end_date: ,
+    //   description: ,
+    //   location: ,
+    //   organization: ,
+    //   event_url: ,
+    //   date_added: ,
+    // })
+    // .then((res) => {
+    //   //resetform, clear inputs
+    //   //for formObject, do formObject.title = "", if it doesn't work then make an individual state for each
+    // })
+    // .catch((err) => console.log(err));
+  // }
+    // setTimeout(() => {
+    //   setArticleSuccess(false);
+    // }, 1200)
 
-//     ///////for valid form
-//     // const startTime = twelveHoursToTwentyFourHours(dateObject.start_time, dateObject.startAMPM);
-//     // const endTime = twelveHoursToTwentyFourHours(dateObject.end_time, dateObject.endAMPM);
-//     // const startDate = isoDate(dateObject.start_date);
-//     // const endDate = isoDate(dateObject.end_date);
-//     // const sDate = `${startDate}T${startTime}`;
-//     // const eDate = `${endDate}T${endTime}`;
-//     ///////////for valid form
-//     //insert above values into the object for api call and 
-//     // API.saveEvent({
-//     //   title: ,
-//     //   start_date: ,
-//     //   end_date: ,
-//     //   description: ,
-//     //   location: ,
-//     //   organization: ,
-//     //   event_url: ,
-//     //   date_added: ,
-//     // })
-//     // .then((res) => {
-//     //   //resetform, clear inputs
-//     //   //for formObject, do formObject.title = "", if it doesn't work then make an individual state for each
-//     // })
-//     // .catch((err) => console.log(err));
-//   }
+  };
+
+  const handleEventSubmit = (e) => {
+    if (e) e.preventDefault();
+    setEventErrors(eventValidation(eventObject));
+    setIsEventSubmitting(true);
+  };
 
   ////////////////////////////////////// For Articles Form /////////////////////////////////
 
@@ -284,138 +215,62 @@ function Manage() {
 
   };
 
-  function validateArticles(values) {
-    let errors = {};
-    if(!values.title) {
-      errors.title = "A title is required";
-    } else if (values.title.length < 5) {
-      errors.title = "Must be 5 or more characters long"
-    }
-    if (!values.author) {
-      errors.author = "An author is required";
-    } else if (values.author.length < 5) {
-      errors.author = "Must be 5 or more characters long"
-    }
-    if (!values.body) {
-      errors.body = "Hint: copy&paste";
-    } else if (values.body.length < 20) {
-      errors.body = "Must be 20 or more characters long"
-    }
-    if (!values.description) {
-      errors.description = "Describe this in 15 characters or less";
-    } else if (values.description.length < 15) {
-      errors.description = "Must be 15 or more characters long"
-    }
-    if (!values.source_url) {
-      errors.source_url = "A source url is required";
-    } else if (!validUrl.test(values.source_url)) {
-      errors.source_url = "Url is invalid"
-    }
-    if (!values.type) {
-      errors.type = "Type of article is required";
-    } else if (values.type.length < 5) {
-      errors.type = "Must be 5 or more characters long"
-    }
-    return errors;
-  };
 
   const handleArticleSubmit = (e) => {
     if (e) e.preventDefault();
-    setAritcleErrors(validateArticles(articleObject));
+    setAritcleErrors(articleValidation(articleObject));
     setIsSubmitting(true);
   };
 
   //////////////////////////////////// For Videos Form ////////////////////////////////////
 
-  const [articleObject, setArticleObject] = useState({});
-  const [articleErrors, setAritcleErrors] = useState({});
+  const [videoObject, setVideoObject] = useState({});
+  const [videoErrors, setVideoErrors] = useState({});
   //for showing a successful submission
-  const [articleSuccess, setArticleSuccess] = useState(false);
+  const [videoSuccess, setVideoSuccess] = useState(false);
   //works with use effect, with checking errors, will start submit, and let user know
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isVideoSubmitting, setIsVideoSubmitting] = useState(false);
   //if an unsuccesful submission, will show an error to user
-  const [notSubmitted, setNotSubmitted] = useState(false);
+  const [notVideoSubmitted, setNotVideoSubmitted] = useState(false);
 
   useEffect(() => {
-    if (Object.keys(articleErrors).length === 0 && isSubmitting) {
+    if (Object.keys(videoErrors).length === 0 && isVideoSubmitting) {
       //function for api call
-      submitArticle();
+      submitVideo();
     }
-  }, [articleErrors]);
+  }, [videoErrors]);
 
-  const handleArticleInputChange = (e) => {
+  const handleVideoInputChange = (e) => {
     const { name, value } = e.target;
-    setArticleObject({ ...articleObject, [name]:value });
+    setVideoObject({ ...videoObject, [name]:value });
   };
 
-  function submitArticle() {
+  function submitVideo() {
     console.log("submitted successfully!");
     //when successful, setArticleSuccess(true)
     //if unsuccesfful, setNotSubmitted(true)
-    API.saveArticle({
-      title: articleObject.title,
-      author: articleObject.author,
-      body: articleObject.body,
-      description: articleObject.description,
-      source: articleObject.source_url,
-      type: articleObject.type
-    }).then((res) => {
-      loadArticles();
-      setArticleSuccess(true);
-    }).catch((err) => {
-      console.log(err);
-      setNotSubmitted(true);
-    });
-    //restform needed?
+    // API.saveVideo({
+    //   
+    // }).then((res) => {
+    //   loadVideos();
+    //   setVideoSuccess(true);
+    // }).catch((err) => {
+    //   console.log(err);
+    //   setNotVideoSubmitted(true);
+    // });
+    // //restform needed?
 
-    setTimeout(() => {
-      setArticleSuccess(false);
-    }, 1200)
+    // setTimeout(() => {
+    //   setVideoSuccess(false);
+    // }, 1200)
 
   };
 
-  function validateArticles(values) {
-    let errors = {};
-    if(!values.title) {
-      errors.title = "A title is required";
-    } else if (values.title.length < 5) {
-      errors.title = "Must be 5 or more characters long"
-    }
-    if (!values.author) {
-      errors.author = "An author is required";
-    } else if (values.author.length < 5) {
-      errors.author = "Must be 5 or more characters long"
-    }
-    if (!values.body) {
-      errors.body = "Hint: copy&paste";
-    } else if (values.body.length < 20) {
-      errors.body = "Must be 20 or more characters long"
-    }
-    if (!values.description) {
-      errors.description = "Describe this in 15 characters or less";
-    } else if (values.description.length < 15) {
-      errors.description = "Must be 15 or more characters long"
-    }
-    if (!values.source_url) {
-      errors.source_url = "A source url is required";
-    } else if (!validUrl.test(values.source_url)) {
-      errors.source_url = "Url is invalid"
-    }
-    if (!values.type) {
-      errors.type = "Type of article is required";
-    } else if (values.type.length < 5) {
-      errors.type = "Must be 5 or more characters long"
-    }
-    return errors;
-  };
-
-  const handleArticleSubmit = (e) => {
+  const handleVideoSubmit = (e) => {
     if (e) e.preventDefault();
-    setAritcleErrors(validateArticles(articleObject));
-    setIsSubmitting(true);
+    setVideoErrors(videoValidation(videoObject));
+    setIsVideoSubmitting(true);
   };
-
-
 
 
   return (
@@ -425,7 +280,12 @@ function Manage() {
         <div className="row">
           <div className="col-5 m-1">
             <AddEvent
-              
+              handleEventInputChange={handleEventInputChange}
+              handleEventSubmit={handleEventSubmit}
+              eventObject={eventObject}
+              eventErrors={eventErrors}
+              eventSuccess={eventSuccess}
+              notEventSubmitted={notEventSubmitted}
             />
           </div>
           <div className="col-6 m-1">
@@ -488,7 +348,12 @@ function Manage() {
         <div className="row">
           <div className="col-5 m-1">
             <AddVideo
-
+              handleVideoInputChange={handleVideoInputChange}
+              handleVideoSubmit={handleVideoSubmit}
+              videoObject={videoObject}
+              videoErrors={videoErrors}
+              videoSuccess={videoSuccess}
+              notVideoSubmitted={notVideoSubmitted}
             />
           </div>
           <div className="col-6 m-1">
