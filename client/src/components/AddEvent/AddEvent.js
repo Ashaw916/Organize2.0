@@ -38,7 +38,8 @@ function AddEvent(
                   name="title"
                   onChange={handleInputChange}
                 />
-                {errorTitle && <div className="err">Required</div>}
+                <small id="textHelp" className="form-text text-muted">MM/DD/YYYY</small>
+                {errorTitle && <div className="err">More then five characters</div>}
               </div>
             </div>
             <div className="form-row">

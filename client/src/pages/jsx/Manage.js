@@ -189,12 +189,10 @@ function Manage() {
   //     setErrorObject({ start_time: true });
   //   }
 
-  //   if (errorObject.end_time == false) {
+  //   if (errorObject.end_time == true) {
   //     valid = false;
   //     setErrorObject({ end_time: true });
   //   } 
-      
-    
 
   //   // if (errorObject.end_date === false) {
   //   //   return valid;
@@ -208,42 +206,19 @@ function Manage() {
 /////////////////////////////////////////does not work
 
 ///not tested after removing returns
-  // function validateFormObject() {
-  //   let valid = true;
-
-  //   if (!formObject.start_time) {
-  //     valid = false;
-  //     setErrorObject({ start_time: true });
-  //   } 
-
-  //   // if (formObject.end_time !== "") {
-  //   //   return valid;
-  //   // } else {
-  //   //   return valid = false;
-  //   //   setErrorObject({ end_time: true });
-  //   // }
-  //   return valid;
-  // };
-
-  const validateFormErrors = (errors) => {
+  function validateFormObject() {
     let valid = true;
-    Object.values(errors).map((val) => {
-      if (val == true) {
-      console.log("form has errors")
-      return valid = false;
-      }
-    });
-    return valid;
-  };
 
-  const validateFormObject = (values) => {
-    let valid = true;
-    Object.values(values).map((val) => {
-      if (!val) {
-        console.log("no value")
-        return valid = false;
-      }
-    })
+    if (!formObject.start_time) {
+      valid = false;
+      setErrorObject({ start_time: true });
+    } 
+
+    if (!formObject.title) {
+      valid = false;
+      setErrorObject({ title: true });
+    } 
+    
     return valid;
   };
 
@@ -253,12 +228,17 @@ function Manage() {
 
   // && validateFormObject(formObject)
 
-    if(validateFormErrors(errorObject)) {
+    // if(validateFormErrors(errorObject)) {
+    //   console.log("valid form");
+    // } else {
+    //   console.log("invalid form");
+    // }
+
+    if(validateFormObject()) {
       console.log("valid form");
     } else {
       console.log("invalid form");
     }
-
     
 
     //create a seperate error state that will be the same for every input
