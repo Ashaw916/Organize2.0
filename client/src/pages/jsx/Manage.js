@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-// import { getEvents, deleteEvent } from "../../resources/events";
-// import { getArticles } from "../../resources/articles";
-// import { getVideos } from "../../resources/videos";
 import AddResource from "../../components/AddResource/AddResource";
 import AddEvent from "../../components/AddEvent/AddEvent";
 import AddVideo from "../../components/AddVideo/AddVideo";
 import ListVideo from "../../components/ListVideo/ListVideo";
 import API from "../../utils/API";
+import eventValidation from "../../utils/EventValidation";
 
 function Manage() {
 
@@ -80,24 +78,22 @@ function Manage() {
 
   //////////////////////// FOR EVENT FORM ///////////////////////// 
 
-  // //state object for form values
-  // const [formObject, setFormObject] = useState({});
-  // //to send a success message to the user after a successful submission
-  // const [success, setSuccess] = useState("");
-  // //object of error messages (booleans to be set as true if triggered) for the different inputs
-  // const [errorObject, setErrorObject] = useState({
-  //   start_date: false,
-  //   start_time: false,
-  //   startAMPM: false,
-  //   end_date: false,
-  //   end_time: false,
-  //   endAMPM: false,
-  //   title: false,
-  //   organization: false,
-  //   event_url: false,
-  //   description: false,
-  //   location: false
-  // });
+  //state object for form values
+  const [formObject, setFormObject] = useState({});
+  //object of error messages (booleans to be set as true if triggered) for the different inputs
+  const [errorObject, setErrorObject] = useState({})
+  //to send a success message to the user after a successful submission
+  const [success, setSuccess] = useState("");
+
+  const [articleObject, setArticleObject] = useState({});
+  const [articleErrors, setAritcleErrors] = useState({});
+  //for showing a successful submission
+  const [articleSuccess, setArticleSuccess] = useState(false);
+  //works with use effect, with checking errors, will start submit, and let user know
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  //if an unsuccesful submission, will show an error to user
+  const [notSubmitted, setNotSubmitted] = useState(false);
+  
 
   // function twelveHoursToTwentyFourHours(inputTime, amPm) {////////////////////this needs to be tested
   //   //concatenate variables to be fed into next set of lines
@@ -127,184 +123,91 @@ function Manage() {
   const validTimeRegex = RegExp(/^(0[0-9]|1[0-2]):[0-5][0-9]$/);
   const validUrl = RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/);
 
-//   //for grabbing the start time and end time values
-//   const handleInputChange = e => {
-//     const { name, value } = e.target;
-// //this works but when clicking into another input while another is still false, the error disappears
-// //wait i think it re-renders each time i click into it but then why does the error state reset but not the formObject
-// //i think the switch is the culprit
-//     switch (name) {
-//       case 'title':
-//         value.length > 5
-//         ? setErrorObject({ title: false }) : setErrorObject({ title: true });
-//         break;
-//       case 'organization':
-//         value.length > 5
-//         ? setErrorObject({ organization: false }) : setErrorObject({ organization: true });
-//         break;
-//       case 'event_url':
-//         validUrl.test(value)
-//         ? setErrorObject({ event_url: false }) : setErrorObject({ event_url: true })
-//         break;
-//       case 'description':
-//         value.length > 5
-//         ? setErrorObject({ description: false }) : setErrorObject({ description: true });
-//         break;
-//       case 'location':
-//         value.length > 5
-//         ? setErrorObject({ location: false }) : setErrorObject({ location: true });
-//         break;
-//       case 'start_date':
-//         validDateRegex.test(value)
-//           ? setErrorObject({ start_date: false }) : setErrorObject({ start_date: true });
-//         break;
-//       case 'end_date':
-//         validDateRegex.test(value)
-//           ? setErrorObject({ end_date: false }) : setErrorObject({ end_date: true });
-//         break;
-//       case 'start_time':
-//         validTimeRegex.test(value)
-//           ? setErrorObject({ start_time: false }) : setErrorObject({ start_time: true });
-//         break;
-//       case 'end_time':
-//         validTimeRegex.test(value)
-//           ? setErrorObject({ end_time: false }) : setErrorObject({ end_time: true });
-//         break;
-//       case 'startAMPM':
-//         value === "am" || value === "pm"
-//         ? setErrorObject({ startAMPM: false }) : setErrorObject({ startAMPM: true });
-//         break;
-//       case 'endAMPM':
-//         value === "am" || value === "pm"
-//         ? setErrorObject({ endAMPM: false }) : setErrorObject({ endAMPM: true });
-//         break;
-//       default:
-//         break;  
-//     }
+  
 
-//     setFormObject({ ...formObject, [name]: value });
-//   };
-// //it stops at returns, try this - haven't tried it yet
-// //if can get error messages not to disappear, can use this
-//   // function validateFormErrors() {
-//   //   let valid = true;
+  useEffect(() => {
+    if (Object.keys(articleErrors).length === 0 && isSubmitting) {
+      //function for api call
+      submitArticle();
+    }
+  }, [articleErrors]);
 
-//   //   if (errorObject.start_time == true) {
-//   //     valid = false;
-//   //     setErrorObject({ start_time: true });
-//   //   }
+  const handleArticleInputChange = (e) => {
+    const { name, value } = e.target;
+    setArticleObject({ ...articleObject, [name]:value });
+  };
 
-//   //   if (errorObject.end_time == true) {
-//   //     valid = false;
-//   //     setErrorObject({ end_time: true });
-//   //   } 
+  function submitArticle() {
+    console.log("submitted successfully!");
+    //when successful, setArticleSuccess(true)
+    //if unsuccesfful, setNotSubmitted(true)
+    API.saveArticle({
+      title: articleObject.title,
+      author: articleObject.author,
+      body: articleObject.body,
+      description: articleObject.description,
+      source: articleObject.source_url,
+      type: articleObject.type
+    }).then((res) => {
+      loadArticles();
+      setArticleSuccess(true);
+    }).catch((err) => {
+      console.log(err);
+      setNotSubmitted(true);
+    });
+    //restform needed?
 
-//   //   // if (errorObject.end_date === false) {
-//   //   //   return valid;
-//   //   // } else {
-//   //   //   return valid = false;
-//   //   // }
+    setTimeout(() => {
+      setArticleSuccess(false);
+    }, 1200)
 
-//   //   return valid;
-//   // };
+  };
 
-// /////////////////////////////////////////does not work
+  function validateArticles(values) {
+    let errors = {};
+    if(!values.title) {
+      errors.title = "A title is required";
+    } else if (values.title.length < 5) {
+      errors.title = "Must be 5 or more characters long"
+    }
+    if (!values.author) {
+      errors.author = "An author is required";
+    } else if (values.author.length < 5) {
+      errors.author = "Must be 5 or more characters long"
+    }
+    if (!values.body) {
+      errors.body = "Hint: copy&paste";
+    } else if (values.body.length < 20) {
+      errors.body = "Must be 20 or more characters long"
+    }
+    if (!values.description) {
+      errors.description = "Describe this in 15 characters or less";
+    } else if (values.description.length < 15) {
+      errors.description = "Must be 15 or more characters long"
+    }
+    if (!values.source_url) {
+      errors.source_url = "A source url is required";
+    } else if (!validUrl.test(values.source_url)) {
+      errors.source_url = "Url is invalid"
+    }
+    if (!values.type) {
+      errors.type = "Type of article is required";
+    } else if (values.type.length < 5) {
+      errors.type = "Must be 5 or more characters long"
+    }
+    return errors;
+  };
 
-// //all are firing, the console logs prove it but only one error is showing
-// //is the setState async? why is it going back to false after becoming true?
-//   function validateFormObject() {
-//     let valid = true;
+  const handleArticleSubmit = (e) => {
+    if (e) e.preventDefault();
+    setAritcleErrors(validateArticles(articleObject));
+    setIsSubmitting(true);
+  };
 
-//     if (!formObject.start_time) {
-//       valid = false;
-//       console.log("no start time")//console logs are working
-//       setErrorObject({ start_time: true });
-//     } 
 
-//     if (!formObject.title) {
-//       valid = false;
-//       console.log("no title")
-//       setErrorObject({ title: true });
-//     } 
 
-//     if (!formObject.end_time) {
-//       valid = false;
-//       console.log("no end time")
-//       setErrorObject({ end_time: true });
-//     } 
-
-//     if (!formObject.start_date) {
-//       valid = false;
-//       console.log("no start date")
-//       setErrorObject({ start_date: true });
-//     } 
-
-//     if (!formObject.end_date) {
-//       valid = false;
-//       console.log("no end date");
-//       setErrorObject({ end_date: true });
-//     } 
-
-//     if (!formObject.startAMPM) {
-//       valid = false;
-//       console.log("no start ampm")
-//       setErrorObject({ startAMPM: true });
-//     } 
-
-//     if (!formObject.endAMPM) {
-//       valid = false;
-//       console.log("no end ampm")
-//       setErrorObject({ endAMPM: true });
-//     } 
-
-//     if (!formObject.organization) {
-//       valid = false;
-//       console.log("no organization")
-//       setErrorObject({ organization: true });
-//     } 
-
-//     if (!formObject.event_url) {
-//       valid = false;
-//       console.log("no url")
-//       setErrorObject({ event_url: true });
-//     } 
     
-//     if (!formObject.description) {
-//       valid = false;
-//       console.log("no description")
-//       setErrorObject({ description: true });
-//     } 
-
-//     if (!formObject.location) {
-//       valid = false;
-//       console.log("no location")
-//       setErrorObject({ location: true });
-//     } 
-
-//     return valid;
-//   };
-
-
-//   const handleFormSubmit = (e) => {///////insert validation, if else the heck out of it and then else= all the function callbacks
-//     e.preventDefault();
-
-//   // && validateFormObject(formObject)
-
-//     // if(validateFormErrors(errorObject)) {
-//     //   console.log("valid form");
-//     // } else {
-//     //   console.log("invalid form");
-//     // }
-
-//     if(validateFormObject()) {
-//       console.log("valid form");
-//     } else {
-//       console.log("invalid form");
-//     }
-    
-
-//     //create a seperate error state that will be the same for every input
-//     //if (any are empty (using || ) then error will appear, "required or red outline")
+    //if (any are empty (using || ) then error will appear, "required or red outline")
 
 //     ///////for valid form
 //     // const startTime = twelveHoursToTwentyFourHours(dateObject.start_time, dateObject.startAMPM);
@@ -423,6 +326,97 @@ function Manage() {
   };
 
   //////////////////////////////////// For Videos Form ////////////////////////////////////
+
+  const [articleObject, setArticleObject] = useState({});
+  const [articleErrors, setAritcleErrors] = useState({});
+  //for showing a successful submission
+  const [articleSuccess, setArticleSuccess] = useState(false);
+  //works with use effect, with checking errors, will start submit, and let user know
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  //if an unsuccesful submission, will show an error to user
+  const [notSubmitted, setNotSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (Object.keys(articleErrors).length === 0 && isSubmitting) {
+      //function for api call
+      submitArticle();
+    }
+  }, [articleErrors]);
+
+  const handleArticleInputChange = (e) => {
+    const { name, value } = e.target;
+    setArticleObject({ ...articleObject, [name]:value });
+  };
+
+  function submitArticle() {
+    console.log("submitted successfully!");
+    //when successful, setArticleSuccess(true)
+    //if unsuccesfful, setNotSubmitted(true)
+    API.saveArticle({
+      title: articleObject.title,
+      author: articleObject.author,
+      body: articleObject.body,
+      description: articleObject.description,
+      source: articleObject.source_url,
+      type: articleObject.type
+    }).then((res) => {
+      loadArticles();
+      setArticleSuccess(true);
+    }).catch((err) => {
+      console.log(err);
+      setNotSubmitted(true);
+    });
+    //restform needed?
+
+    setTimeout(() => {
+      setArticleSuccess(false);
+    }, 1200)
+
+  };
+
+  function validateArticles(values) {
+    let errors = {};
+    if(!values.title) {
+      errors.title = "A title is required";
+    } else if (values.title.length < 5) {
+      errors.title = "Must be 5 or more characters long"
+    }
+    if (!values.author) {
+      errors.author = "An author is required";
+    } else if (values.author.length < 5) {
+      errors.author = "Must be 5 or more characters long"
+    }
+    if (!values.body) {
+      errors.body = "Hint: copy&paste";
+    } else if (values.body.length < 20) {
+      errors.body = "Must be 20 or more characters long"
+    }
+    if (!values.description) {
+      errors.description = "Describe this in 15 characters or less";
+    } else if (values.description.length < 15) {
+      errors.description = "Must be 15 or more characters long"
+    }
+    if (!values.source_url) {
+      errors.source_url = "A source url is required";
+    } else if (!validUrl.test(values.source_url)) {
+      errors.source_url = "Url is invalid"
+    }
+    if (!values.type) {
+      errors.type = "Type of article is required";
+    } else if (values.type.length < 5) {
+      errors.type = "Must be 5 or more characters long"
+    }
+    return errors;
+  };
+
+  const handleArticleSubmit = (e) => {
+    if (e) e.preventDefault();
+    setAritcleErrors(validateArticles(articleObject));
+    setIsSubmitting(true);
+  };
+
+
+
 
   return (
     <>
