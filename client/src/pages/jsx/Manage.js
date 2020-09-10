@@ -26,6 +26,10 @@ function Manage() {
       })
       .catch((err) => console.log(err));
   };
+//slices incoming iso date, so only get the date part
+  function sliceDate(date) {
+    return date.slice(0, 10);
+  }
 
   function loadArticles() {
     API.getArticles()
@@ -128,7 +132,9 @@ function Manage() {
   //for grabbing the start time and end time values
   const handleInputChange = e => {
     const { name, value } = e.target;
-//after finish switch, test entire switch and then delete the breaks to see if error will persist after touching a different input
+//this works but when clicking into another input while another is still false, the error disappears
+//wait i think it re-renders each time i click into it but then why does the error state reset but not the formObject
+//i think the switch is the culprit
     switch (name) {
       case 'title':
         value.length > 5
@@ -175,12 +181,13 @@ function Manage() {
         ? setErrorObject({ endAMPM: false }) : setErrorObject({ endAMPM: true });
         break;
       default:
-        break;
+        break;  
     }
 
     setFormObject({ ...formObject, [name]: value });
   };
 //it stops at returns, try this - haven't tried it yet
+//if can get error messages not to disappear, can use this
   // function validateFormErrors() {
   //   let valid = true;
 
@@ -205,20 +212,77 @@ function Manage() {
 
 /////////////////////////////////////////does not work
 
-///not tested after removing returns
+//all are firing, the console logs prove it but only one error is showing
+//is the setState async? why is it going back to false after becoming true?
   function validateFormObject() {
     let valid = true;
 
     if (!formObject.start_time) {
       valid = false;
+      console.log("no start time")//console logs are working
       setErrorObject({ start_time: true });
     } 
 
     if (!formObject.title) {
       valid = false;
+      console.log("no title")
       setErrorObject({ title: true });
     } 
+
+    if (!formObject.end_time) {
+      valid = false;
+      console.log("no end time")
+      setErrorObject({ end_time: true });
+    } 
+
+    if (!formObject.start_date) {
+      valid = false;
+      console.log("no start date")
+      setErrorObject({ start_date: true });
+    } 
+
+    if (!formObject.end_date) {
+      valid = false;
+      console.log("no end date");
+      setErrorObject({ end_date: true });
+    } 
+
+    if (!formObject.startAMPM) {
+      valid = false;
+      console.log("no start ampm")
+      setErrorObject({ startAMPM: true });
+    } 
+
+    if (!formObject.endAMPM) {
+      valid = false;
+      console.log("no end ampm")
+      setErrorObject({ endAMPM: true });
+    } 
+
+    if (!formObject.organization) {
+      valid = false;
+      console.log("no organization")
+      setErrorObject({ organization: true });
+    } 
+
+    if (!formObject.event_url) {
+      valid = false;
+      console.log("no url")
+      setErrorObject({ event_url: true });
+    } 
     
+    if (!formObject.description) {
+      valid = false;
+      console.log("no description")
+      setErrorObject({ description: true });
+    } 
+
+    if (!formObject.location) {
+      valid = false;
+      console.log("no location")
+      setErrorObject({ location: true });
+    } 
+
     return valid;
   };
 
@@ -305,7 +369,7 @@ function Manage() {
                 <ul className="list-group list-group-flush">
                   {getEvents.map((event) => (
                     <li className="list-group-item" key={event._id}>
-                      {event.title}: {event.start_date}{" "}
+                      {event.title}: {sliceDate(event.start_date)}{" "}
                       <button
                         type="button"
                         className="btn btn-danger btn-sm"
