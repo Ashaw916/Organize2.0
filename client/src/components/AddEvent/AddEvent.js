@@ -3,7 +3,6 @@ import "./AddEventStyle.css";
 //add a disabled class for button for extra validation?
 function AddEvent(
   { handleInputChange, 
-    handleDateInputChange, 
     handleFormSubmit,
     startAMPM,
     endAMPM, 
@@ -12,12 +11,12 @@ function AddEvent(
     errorTitle,
     errorStartTime,
     errorEndTime,
-    errStartAmPm,
-    errEndAmPm,
     errorOrganization,
     errorUrl,
     errorDescription,
-    errorLocation
+    errorLocation,
+    errorStartAMPM,
+    errorEndAMPM
   }) {
   return (
     <>
@@ -33,7 +32,7 @@ function AddEvent(
                 <label htmlFor="event-title">Event Title</label>
                 <input
                   type="text"
-                  className="form-control"
+                  className={`form-control ${errorTitle ? "inputErr" : ""}`}
                   id="event-title"
                   placeholder="Event Title"
                   name="title"
@@ -47,27 +46,27 @@ function AddEvent(
                 <label htmlFor="start_date">Start date</label>
                 <input
                   type="text"
-                  className="form-control"
+                  className={`form-control ${errorStartDate ? "inputErr" : ""}`}
                   id="start_date"
                   placeholder="MM/DD/YYYY"
                   name="start_date"
-                  onChange={handleDateInputChange}
+                  onChange={handleInputChange}
                 />
                 <small id="textHelp" className="form-text text-muted">MM/DD/YYYY</small>
-                {errorStartDate && <div className="err">Required</div>}
+                {errorStartDate && <div className="err">Check Format</div>}
               </div>
               <div className="form-group col-md-6">
                 <label htmlFor="end_date">End Date</label>
                 <input
                   type="text"
-                  className="form-control"
+                  className={`form-control ${errorEndDate ? "inputErr" : ""}`}
                   id="end_date"
                   placeholder="MM/DD/YYYY"
                   name="end_date"
-                  onChange={handleDateInputChange}
+                  onChange={handleInputChange}
                 />
                 <small id="textHelp" className="form-text text-muted">MM/DD/YYYY</small>
-                {errorEndDate && <div className="err">Required</div>}
+                {errorEndDate && <div className="err">Check Format</div>}
               </div>
             </div>
             <div className="form-row">
@@ -75,19 +74,20 @@ function AddEvent(
                 <label htmlFor="start_time">Start time</label>
                 <input
                   type="text"
-                  className="form-control"
+                  className={`form-control ${errorStartTime ? "inputErr" : ""}`}
                   id="start_time"
                   placeholder="00:00"
                   name="start_time"
-                  onChange={handleDateInputChange}
+                  onChange={handleInputChange}
                 />
                 <small id="textHelp" className="form-text text-muted">hh:mm (e.g. 01:00, 11:00)</small>
-                {errorStartTime && <div className="err">Required</div>}
+                {errorStartTime && <div className="err">Check Format</div>}
               </div>
               <div className="form-group col-md-2">
                 <label htmlFor="am-pm"></label>
-                <select className={`custom-select ${errStartAmPm ? "errBorder" : ""}`} id="timeSelect" name="startAMPM" onChange={handleDateInputChange}>
+                <select className={`custom-select ${errorStartAMPM ? "inputErr" : ""}`} id="timeSelect" name="startAMPM" onChange={handleInputChange}>
                   <option value={startAMPM}></option>
+                  {/* <option valud="">Unselect</option> */}
                   <option value="am">AM</option>
                   <option value="pm">PM</option>
                 </select>{/*do some error highlithging here*/}
@@ -97,19 +97,20 @@ function AddEvent(
                 <label htmlFor="end_time">End time</label>
                 <input
                   type="text"
-                  className="form-control"
+                  className={`form-control ${errorEndTime ? "inputErr" : ""}`}
                   id="end_time"
                   placeholder="00:00"
                   name="end_time"
-                  onChange={handleDateInputChange}
+                  onChange={handleInputChange}
                 />
                 <small id="textHelp" className="form-text text-muted">hh:mm (e.g. 09:00, 12:00)</small>
-                {errorEndTime && <div className="err">Required</div>}
+                {errorEndTime && <div className="err">Check Format</div>}
               </div>
               <div className="form-group col-md-2">
                 <label htmlFor="am-pm"></label>
-                <select className={`custom-select ${errEndAmPm ? "errBorder" : ""}`} id="timeSelect" name="endAMPM" onChange={handleDateInputChange}>
+                <select className={`custom-select ${errorEndAMPM ? "inputErr" : ""}`} id="timeSelect" name="endAMPM" onChange={handleInputChange}>
                   <option value={endAMPM}></option>
+                  {/* <option value="">Unselect</option> */}
                   <option value="am">AM</option>
                   <option value="pm">PM</option>
                 </select>{/*do some error highlithging here, do a tertiary conditional in class for select*/}
@@ -122,7 +123,7 @@ function AddEvent(
                   <label htmlFor="type">Sponsoring Organization</label>
                   <input
                     type="text"
-                    className="form-control"
+                    className={`form-control ${errorOrganization ? "inputErr" : ""}`}
                     id="organization"
                     placeholder="Org Name"
                     name="organization"
@@ -136,20 +137,21 @@ function AddEvent(
                 <label htmlFor="source">Event(url)</label>
                 <input
                   type="url"
-                  className="form-control"
+                  className={`form-control ${errorUrl ? "inputErr" : ""}`}
                   id="event_url"
                   placeholder="Website"
                   name="event_url"
                   onChange={handleInputChange}
                 />
-                <small id="textHelp" className="form-text text-muted">Url of your organization</small>
+                <small id="textHelp" className="form-text text-muted">Url of Event</small>
+                <small id="textHelp" className="form-text text-muted">http(s)://website/page</small>
                 {errorUrl && <div className="err">Required</div>}
               </div>
             </div>
             <div className="form-group">
               <label htmlFor="description">Description</label>
               <textarea
-                className="form-control"
+                className={`form-control ${errorDescription ? "inputErr" : ""}`}
                 id="description"
                 rows="1"
                 name="description"
@@ -161,7 +163,7 @@ function AddEvent(
             <div className="form-group">
               <label htmlFor="location">Location</label>
               <textarea
-                className="form-control"
+                className={`form-control ${errorLocation ? "inputErr" : ""}`}
                 id="location"
                 rows="1"
                 name="location"
@@ -170,12 +172,10 @@ function AddEvent(
               <small id="textHelp" className="form-text text-muted">E.g. Sacramento, 2nd Street, etc.</small>
               {errorLocation && <div className="err">Required</div>}
             </div>
-            {/*add a disabled class for button? for extra validation?*/}
             <button 
             type="submit" 
             className="btn btn-primary" 
             onClick={handleFormSubmit}
-            // disabled={disabled}
             >
               Add Event
             </button>

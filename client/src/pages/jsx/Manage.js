@@ -78,17 +78,8 @@ function Manage() {
 
   //////////////////////// FOR EVENT FORM ///////////////////////// 
 
-  //state for values that can go straight into state
+  //state object for form values
   const [formObject, setFormObject] = useState({});
-  //to hold values from the form before being altered
-  const [dateObject, setDateObject] = useState({
-    start_date: "",
-    start_time: "",
-    startAMPM: "",
-    end_date: "",
-    end_time: "",
-    endAMPM: ""
-  });
   //to send a success message to the user after a successful submission
   const [success, setSuccess] = useState("");
   //object of error messages (booleans to be set as true if triggered) for the different inputs
@@ -105,7 +96,7 @@ function Manage() {
     description: false,
     location: false
   });
-  
+
   function twelveHoursToTwentyFourHours(inputTime, amPm) {////////////////////this needs to be tested
     //concatenate variables to be fed into next set of lines
     var time = `${inputTime} ${amPm}`;
@@ -132,27 +123,45 @@ function Manage() {
 
   const validDateRegex = RegExp(/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/);
   const validTimeRegex = RegExp(/^(0[0-9]|1[0-2]):[0-5][0-9]$/);
+  const validUrl = RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/);
 
   //for grabbing the start time and end time values
-  const handleDateInputChange = e => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
-    
-    switch(name) {
+//after finish switch, test entire switch and then delete the breaks to see if error will persist after touching a different input
+    switch (name) {
+      case 'title':
+        value.length > 5
+        ? setErrorObject({ title: false }) : setErrorObject({ title: false });
+        break;
+      case 'organization':
+
+        break;
+      case 'event_url':
+        validUrl.test(value)
+        ? setErrorObject({ event_url: false }) : setErrorObject({ event_url: true })
+        break;
+      case 'description':
+
+        break;
+      case 'location':
+
+        break;
       case 'start_date':
         validDateRegex.test(value)
-        ? setErrorObject({ start_date: false }) : setErrorObject({ start_date: true });
+          ? setErrorObject({ start_date: false }) : setErrorObject({ start_date: true });
         break;
       case 'end_date':
         validDateRegex.test(value)
-        ? setErrorObject({ end_date: false }) : setErrorObject({ end_date: true });
+          ? setErrorObject({ end_date: false }) : setErrorObject({ end_date: true });
         break;
       case 'start_time':
         validTimeRegex.test(value)
-        ? setErrorObject({ start_time: false }) : setErrorObject({ start_time: true });
+          ? setErrorObject({ start_time: false }) : setErrorObject({ start_time: true });
         break;
       case 'end_time':
         validTimeRegex.test(value)
-        ? setErrorObject({ end_time: false }) : setErrorObject({ end_time: true });
+          ? setErrorObject({ end_time: false }) : setErrorObject({ end_time: true });
         break;
       case 'startAMPM':
         value === "am" || value === "pm"
@@ -163,47 +172,79 @@ function Manage() {
         ? setErrorObject({ endAMPM: false }) : setErrorObject({ endAMPM: true });
         break;
       default:
-        break;  
-    }
-
-    setDateObject({ ...dateObject, [name]: value });
-  };
-  //another handldinputchange for everything else that ...formObject, [name]:value through the rest of them
-  const handleInputChange = e => {
-    const { name, value } = e.target;
-
-    switch(name) {
-      case 'title':
-        break;
-      case 'organization':
-        break;
-      case 'event_url':
-        break;
-      case 'description':
-        break;
-      case 'location':
-        break;
-      default:
         break;
     }
 
     setFormObject({ ...formObject, [name]: value });
   };
+//it stops at returns, try this - haven't tried it yet
+  function validateFormErrors() {
+    let valid = true;
 
-  // add validation here!
+    if (errorObject.start_time == true) {
+      valid = false;
+      setErrorObject({ start_time: true });
+    }
+
+    if (errorObject.end_time == false) {
+      valid = false;
+      setErrorObject({ end_time: true });
+    } 
+      
+    
+
+    // if (errorObject.end_date === false) {
+    //   return valid;
+    // } else {
+    //   return valid = false;
+    // }
+
+    return valid;
+  };
+
+/////////////////////////////////////////does not work
+
+///not tested after removing returns
+  function validateFormObject() {
+    let valid = true;
+
+    if (!formObject.start_time) {
+      valid = false;
+      setErrorObject({ start_time: true });
+    } 
+
+    // if (formObject.end_time !== "") {
+    //   return valid;
+    // } else {
+    //   return valid = false;
+    //   setErrorObject({ end_time: true });
+    // }
+    return valid;
+  };
+
   const handleFormSubmit = (e) => {///////insert validation, if else the heck out of it and then else= all the function callbacks
     e.preventDefault();
 
-    //one last validation here, validating entire form
-    //a simple if (object) true then callbacks and saveevent
+  
+    if(validateFormErrors() && validateFormObject()) {
+      console.log("valid form");
+    } else {
+      console.log("invalid form");
+    }
 
-    const startTime = twelveHoursToTwentyFourHours(dateObject.start_time, dateObject.startAMPM);
-    const endTime = twelveHoursToTwentyFourHours(dateObject.end_time, dateObject.endAMPM);
-    const startDate = isoDate(dateObject.start_date);
-    const endDate = isoDate(dateObject.end_date);
-    const sDate = `${startDate}T${startTime}`;
-    const eDate = `${endDate}T${endTime}`;
-    //saveEvent will be part of else condition with callbacks
+    
+
+    //create a seperate error state that will be the same for every input
+    //if (any are empty (using || ) then error will appear, "required or red outline")
+
+    ///////for valid form
+    // const startTime = twelveHoursToTwentyFourHours(dateObject.start_time, dateObject.startAMPM);
+    // const endTime = twelveHoursToTwentyFourHours(dateObject.end_time, dateObject.endAMPM);
+    // const startDate = isoDate(dateObject.start_date);
+    // const endDate = isoDate(dateObject.end_date);
+    // const sDate = `${startDate}T${startTime}`;
+    // const eDate = `${endDate}T${endTime}`;
+    ///////////for valid form
     //insert above values into the object for api call and 
     // API.saveEvent({
     //   title: ,
@@ -222,9 +263,9 @@ function Manage() {
     // .catch((err) => console.log(err));
   }
 
-////////////////////////////////////// For Articles Form /////////////////////////////////
+  ////////////////////////////////////// For Articles Form /////////////////////////////////
 
-//////////////////////////////////// For Videos Form ////////////////////////////////////
+  //////////////////////////////////// For Videos Form ////////////////////////////////////
 
   return (
     <>
@@ -234,17 +275,16 @@ function Manage() {
           <div className="col-5 m-1">
             <AddEvent
               handleInputChange={handleInputChange}
-              handleDateInputChange={handleDateInputChange}
               handleFormSubmit={handleFormSubmit}
-              startAMPM={dateObject.startAMPM}
-              endAMPM={dateObject.endAMPM}
+              startAMPM={formObject.startAMPM}
+              endAMPM={formObject.endAMPM}
               errorStartDate={errorObject.start_date}
               errorEndDate={errorObject.end_date}
               errorTitle={errorObject.title}
               errorStartTime={errorObject.start_time}
               errorEndTime={errorObject.end_time}
-              errStartAmPm={errorObject.startAMPM}
-              errEndAmPm={errorObject.endAMPM}
+              errorStartAMPM={errorObject.startAMPM}
+              errorEndAMPM={errorObject.endAMPM}
               errorOrganization={errorObject.organization}
               errorUrl={errorObject.event_url}
               errorDescription={errorObject.description}
@@ -276,8 +316,8 @@ function Manage() {
 
         <div className="row">
           <div className="col-5 m-1">
-            <AddResource 
-            
+            <AddResource
+
             />
           </div>
           <div className="col-6 m-1">
@@ -305,8 +345,8 @@ function Manage() {
 
         <div className="row">
           <div className="col-5 m-1">
-            <AddVideo 
-            
+            <AddVideo
+
             />
           </div>
           <div className="col-6 m-1">
