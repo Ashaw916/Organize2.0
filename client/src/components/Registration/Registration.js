@@ -4,6 +4,12 @@ import Axios from "axios";
 function Registration() {
   const [regEmail, setRegEmail] = useState("");
   const [regPassword, setRegPassword] = useState("");
+  const [regOrg, setRegOrg] = useState("");
+  const [regSite, setRegSite] = useState("");
+  const [regFbook, setRegFbook] = useState("");
+  const [regInsta, setRegInsta] = useState("");
+  const [regTwitter, setRegTwitter] = useState("");
+
   const register = (e) => {
     e.preventDefault();
     console.log("submit");
@@ -11,12 +17,27 @@ function Registration() {
       method: "POST",
       data: {
         email: regEmail,
-        password: regPassword,
+        password: regPassword
       },
       withCredentials: true,
-      url: "/users/register",
+      url: "/users/register"
+    }).then((res) => console.log(res));
+
+    Axios({
+      method: "POST",
+      data: {
+        email: regEmail,
+        organization: regOrg,
+        website: regSite,
+        facebook: regFbook,
+        instagram: regInsta,
+        twitter: regTwitter
+      },
+      withCredentials: true,
+      url: "/userProfiles/register"
     }).then((res) => console.log(res));
   };
+  
   return (
     <>
       <div className="card">
@@ -64,6 +85,7 @@ function Registration() {
                 className="form-control"
                 id="organization"
                 placeholder="Enter your Organization's name"
+                onChange={(e) => setRegOrg(e.target.value)}
               />
             </div>
 
@@ -75,6 +97,7 @@ function Registration() {
                   className="form-control"
                   id="website"
                   placeholder="Website url"
+                  onChange={(e) => setRegSite(e.target.value)}
                 />
               </div>
 
@@ -85,6 +108,7 @@ function Registration() {
                   className="form-control"
                   id="facebook"
                   placeholder="FB url"
+                  onChange={(e) => setRegFbook(e.target.value)}
                 />
               </div>
             </div>
@@ -97,6 +121,7 @@ function Registration() {
                   className="form-control"
                   id="instagram"
                   placeholder="Insta handle @"
+                  onChange={(e) => setRegInsta(e.target.value)}
                 />
               </div>
               <div className="form-group col-md-6">
@@ -106,6 +131,7 @@ function Registration() {
                   className="form-control"
                   id="twitter"
                   placeholder="Twitter handle @"
+                  onChange={(e) => setRegTwitter(e.target.value)}
                 />
               </div>
             </div>
