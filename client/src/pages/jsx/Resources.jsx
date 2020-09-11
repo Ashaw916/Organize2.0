@@ -13,6 +13,8 @@ class Resources extends Component {
     articles: [],
     pageSize: 3,
     currentPage: 1,
+    searchTerm: "",
+    searchResults: [],
   };
 
   componentDidMount() {
@@ -67,7 +69,7 @@ class Resources extends Component {
             </div>
 
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <SearchForm />
+              {/* <SearchForm searchTerm={null} handleSearch={null} /> */}
             </div>
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
               <Pagination
