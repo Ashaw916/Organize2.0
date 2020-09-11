@@ -8,6 +8,9 @@
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
 }
+#landing-jumbo-height {
+  min-height: 150px;
+}
 
 #landing-r1 {
   margin: 0px;
@@ -15,6 +18,9 @@
   width: 100%;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
+  -webkit-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
 }
 #landing-r2 {
   margin: 0px;
@@ -23,6 +29,9 @@
   color: #ebf0fffb;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
+  -webkit-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
 }
 #landing-header {
   /* margin-left: 15px;

@@ -44,7 +44,7 @@ function Landing() {
       <div className="container">
         <div className="row" id="landing-r1">
           <div className="jumbotron jumbotron-fluid col" id="landing-jumbo">
-            <div className="container">
+            <div className="container" id="landing-jumbo-height">
               <h1 className="display-4" id="landing-header">
                 Organize 2.0
               </h1>

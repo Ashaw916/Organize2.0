@@ -58,17 +58,50 @@ function Resources() {
           <div className="col-9" id="resource-wrapper">
             {articles.map((article) => (
               <div className="col-12" key={article._id}>
-                <div className="card mb-5">
+                <div className="card mb-5" id="resource-card">
                   <div className="card-header">
-                    <h4>Title: {article.title}</h4>
+                    <h4>{article.title}</h4>
                   </div>
-                  <div className="card-body">
-                    <h5 className="card-title">Author: {article.author}</h5>
-                    <p>Brief Description: {article.description}</p>
-                    <p className="card-text">{article.body}</p>
-                    <a href={article.source} className="btn btn-primary">
-                      source: {article.source}
-                    </a>
+                  <div className="card-body" id="resources-card-body">
+                    <h5 className="card-title" id="resource-author">
+                      Author/Contributing Organization: {article.author}
+                    </h5>
+                    <p id="resource-description">
+                      Description: {article.description}
+                    </p>
+                    <p>
+                      <a
+                        href={article.source}
+                        className="btn btn"
+                        target="_blank"
+                        id="resource-link"
+                      >
+                        Source: {article.source}
+                      </a>
+                    </p>
+                    <hr />
+
+                    <div id="accordion">
+                      <div className="card-title" id={article.id}>
+                        <button
+                          className="btn btn-link collapsed"
+                          data-toggle="collapse"
+                          data-target="#collapseOne"
+                          aria-expanded="false"
+                          aria-controls="collapseOne"
+                        >
+                          Expand for article content
+                        </button>
+                      </div>
+                      <div
+                        id="collapseOne"
+                        className="collapse"
+                        aria-labelledby={article.id}
+                        data-parent="#accordion"
+                      >
+                        <div className="card-body">{article.body}</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

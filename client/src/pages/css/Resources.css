@@ -1,6 +1,10 @@
 #resource-jumbo {
   background-image: url("../../images/news_banner.png");
   background-size: cover;
+  border-radius: 5px;
+  -webkit-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
 }
 #jumbo-height {
   min-height: 150px;
@@ -20,6 +24,30 @@
 }
 .news-pic {
   max-width: 100%;
+  margin-bottom: 25px;
+  border-radius: 5px;
+}
+
+.card-header {
+  background-color: darkred;
+}
+
+#resource-author {
+  padding-left: 12px;
+}
+.btn-link {
+  color: #e25b4b !important;
+  font-weight: bold;
+}
+#resource-description,
+#resource-link {
+  font-size: 14px;
+  font-weight: bold;
+  color: #64778d;
+  padding-left: 12px;
+  margin: 0px;
+  text-align: left !important;
+  width: 100%;
 }
 
 @media screen and (max-width: 991px) {
