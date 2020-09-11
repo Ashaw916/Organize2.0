@@ -7,7 +7,7 @@ import API from "../../utils/API";
 class Resources extends Component {
   state = {
     articles: [],
-    pageSize: 3,
+    pageSize: 5,
     currentPage: 1,
   };
 
@@ -20,6 +20,26 @@ class Resources extends Component {
 
   handlePageChange = (page) => {
     this.setState({ currentPage: page });
+  };
+
+  handlePreviousPageChange = () => {
+    this.setState((state) => {
+      if (state.currentPage <= 1) {
+        return { currentPage: 1 };
+      }
+      return { currentPage: state.currentPage - 1 };
+    });
+  };
+
+  handleNextPageChange = () => {
+    this.setState((state) => {
+      const totalPages = Math.ceil(state.articles.length / state.pageSize);
+      console.log(totalPages);
+      if (state.currentPage >= totalPages) {
+        return { currentPage: totalPages };
+      }
+      return { currentPage: state.currentPage + 1 };
+    });
   };
 
   render() {
@@ -44,6 +64,8 @@ class Resources extends Component {
                 pageSize={pageSize}
                 currentPage={currentPage}
                 onPageChange={this.handlePageChange}
+                onNextPageChange={this.handleNextPageChange}
+                onPreviousPageChange={this.handlePreviousPageChange}
               />
             </div>
           </div>
@@ -76,6 +98,14 @@ class Resources extends Component {
               </div>
             ))}
           </div>
+          <Pagination
+            itemsCount={count}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            onPageChange={this.handlePageChange}
+            onNextPageChange={this.handleNextPageChange}
+            onPreviousPageChange={this.handlePreviousPageChange}
+          />
         </div>
       </>
     );

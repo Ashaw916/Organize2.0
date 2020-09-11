@@ -7,9 +7,39 @@ import { getUsers } from "../../resources/users";
 class Contact extends Component {
   state = {
     users: getUsers(),
+    sortColumn: { path: "title", order: "asc" },
+  };
+
+  // componentDidMount() {
+  //   const user = {
+  //     email: "test@test.com",
+  //   };
+  //   this.setState((state) => {
+  //     {
+  //       state.users = { user };
+  //     }
+  //   });
+  //   console.log(this.state);
+  // }
+
+  raiseSort = (path) => {
+    const sortColumn = { ...this.props.sortColumn };
+    if (sortColumn.path === path) {
+      sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
+    } else {
+      sortColumn.path = path;
+      sortColumn.order = "asc";
+    }
+    this.props.onSort(sortColumn);
+  };
+
+  handleSort = (sortColumn) => {
+    this.setState({ sortColumn });
   };
 
   render() {
+    const { users } = this.state;
+
     return (
       <div className="container">
         <div className="row">
@@ -28,16 +58,28 @@ class Contact extends Component {
               <table className="table table-striped table-sm">
                 <thead>
                   <tr className="text-center">
-                    <th scope="col">Organization</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Website</th>
-                    <th scope="col">FB</th>
-                    <th scope="col">Instagram</th>
-                    <th scope="col">Twitter</th>
+                    <th scope="col" onClick={() => this.raiseSort()}>
+                      Organization
+                    </th>
+                    <th scope="col" onClick={() => this.raiseSort()}>
+                      Email
+                    </th>
+                    <th scope="col" onClick={() => this.raiseSort()}>
+                      Website
+                    </th>
+                    <th scope="col" onClick={() => this.raiseSort()}>
+                      FB
+                    </th>
+                    <th scope="col" onClick={() => this.raiseSort()}>
+                      Instagram
+                    </th>
+                    <th scope="col" onClick={() => this.raiseSort()}>
+                      Twitter
+                    </th>
                   </tr>
                 </thead>
                 <tbody style={{ fontSize: "10px" }}>
-                  {this.state.users.map((user) => (
+                  {users.map((user) => (
                     <tr>
                       <td>{user.organization}</td>
                       <td>{user.email}</td>
