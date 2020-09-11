@@ -91,29 +91,29 @@ function Manage() {
   const [notEventSubmitted, setNotEventSubmitted] = useState(false);
   
 
-  // function twelveHoursToTwentyFourHours(inputTime, amPm) {
-  //   //concatenate variables to be fed into next set of lines
-  //   var time = `${inputTime} ${amPm}`;
+  function twelveHoursToTwentyFourHours(inputTime, amPm) {
+    //concatenate variables to be fed into next set of lines
+    var time = `${inputTime} ${amPm}`;
 
-  //   var hours = Number(time.match(/^(\d+)/)[1]);
-  //   var minutes = Number(time.match(/:(\d+)/)[1]);
-  //   var AMPM = time.match(/\s(.*)$/)[1];
+    var hours = Number(time.match(/^(\d+)/)[1]);
+    var minutes = Number(time.match(/:(\d+)/)[1]);
+    var AMPM = time.match(/\s(.*)$/)[1];
 
-  //   if (AMPM == "pm" && hours < 12) hours = hours + 12;
-  //   if (AMPM == "am" && hours == 12) hours = hours - 12;
-  //   var sHours = hours.toString();
-  //   var sMinutes = minutes.toString();
-  //   if (hours < 10) sHours = "0" + sHours;
-  //   if (minutes < 10) sMinutes = "0" + sMinutes;
+    if (AMPM == "pm" && hours < 12) hours = hours + 12;
+    if (AMPM == "am" && hours == 12) hours = hours - 12;
+    var sHours = hours.toString();
+    var sMinutes = minutes.toString();
+    if (hours < 10) sHours = "0" + sHours;
+    if (minutes < 10) sMinutes = "0" + sMinutes;
 
-  //   return sHours + ':' + sMinutes;
-  // };
+    return sHours + ':' + sMinutes;
+  };
 
-  // function isoDate(eventDate) {
-  //   const date = new Date(eventDate);
-  //   const newDate = date.toISOString();
-  //   return newDate.slice(0, 10);
-  // };
+  function isoDate(eventDate) {
+    const date = new Date(eventDate);
+    const newDate = date.toISOString();
+    return newDate.slice(0, 10);
+  };
 
   useEffect(() => {
     if (Object.keys(eventErrors).length === 0 && isEventSubmitting) {
@@ -129,35 +129,39 @@ function Manage() {
 
   function submitEvent() {
     console.log("submitted successfully!");
-    //when successful, setArticleSuccess(true)
-    //if unsuccesfful, setNotSubmitted(true)
-     // const startTime = twelveHoursToTwentyFourHours(dateObject.start_time, dateObject.startAMPM);
-    // const endTime = twelveHoursToTwentyFourHours(dateObject.end_time, dateObject.endAMPM);
-    // const startDate = isoDate(dateObject.start_date);
-    // const endDate = isoDate(dateObject.end_date);
-    // const sDate = `${startDate}T${startTime}`;
-    // const eDate = `${endDate}T${endTime}`;
+
+    const startTime = twelveHoursToTwentyFourHours(eventObject.start_time, eventObject.startAMPM);
+    const endTime = twelveHoursToTwentyFourHours(eventObject.end_time, eventObject.endAMPM);
+    const startDate = isoDate(eventObject.start_date);
+    const endDate = isoDate(eventObject.end_date);
+    const sDate = `${startDate}T${startTime}`;
+    const eDate = `${endDate}T${endTime}`;
     
-    //insert above values into the object for api call and 
-    // API.saveEvent({
-    //   title: ,
-    //   start_date: ,
-    //   end_date: ,
-    //   description: ,
-    //   location: ,
-    //   organization: ,
-    //   event_url: ,
-    //   date_added: ,
-    // })
-    // .then((res) => {
-    //   //resetform, clear inputs
-    //   //for formObject, do formObject.title = "", if it doesn't work then make an individual state for each
-    // })
-    // .catch((err) => console.log(err));
-  // }
-    // setTimeout(() => {
-    //   setArticleSuccess(false);
-    // }, 1200)
+    //insert above values into the object for api call 
+    ////////////////////////the path for url might work, test it out ---via atlas once
+    API.saveEvent({
+      title: eventObject.title,
+      start_date: sDate,
+      end_date: eDate,
+      description: eventObject.description,
+      location: eventObject.location,
+      organization: eventObject.organization,
+      event_url: "/events",
+    })
+    .then((res) => {
+      loadEvents();
+      setEventSuccess();
+      //resetform, clear inputs
+      //for formObject, do formObject.title = "", if it doesn't work then make an individual state for each
+    })
+    .catch((err) => {
+      console.log(err);
+      setNotEventSubmitted();
+    });
+
+    setTimeout(() => {
+      setEventSuccess(false);
+    }, 1200)
 
   };
 
@@ -208,7 +212,15 @@ function Manage() {
       console.log(err);
       setNotSubmitted(true);
     });
-    //restform needed?
+    //resets form
+    setArticleObject({
+      title: "",
+      author: "",
+      body: "",
+      description: "",
+      source: "",
+      type: ""
+    });
 
     setTimeout(() => {
       setArticleSuccess(false);

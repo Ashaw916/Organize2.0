@@ -46,7 +46,7 @@ class Contact extends Component {
                     <tr>
                       <td>{user.organization}</td>
                       <td>{user.email}</td>
-                      <a href={user.website} target="_blank">
+                      <a href={user.website} target="_blank" rel="noopener noreferrer">
                         <td>{user.website}</td>
                       </a>
                       <td>{user.facebook}</td>

@@ -31,19 +31,6 @@ class Calendar extends Component {
                     right: ""
                 }}
                 events={events}
-                // eventRender={(info) => {
-                //     const title = info.event.title;
-                //     console.log(title);
-                //     console.log(description);
-                //     const description = info.event.description;
-                //     $(info.el).popover({
-                //         title: title,
-                //         content: description,
-                //         trigger: 'click',
-                //         placement: 'top',
-                //         container: 'body'
-                //     }).popover("show");
-                // }}
 
             />
         )
@@ -55,44 +42,3 @@ class Calendar extends Component {
 
 
 export default Calendar;
-
-/*
-//maybe i don't have the right plugins /imported??
-eventRender: function(info) {
-    var tooltip = new Tooltip(info.el, {
-        title: info.event.extendedProps.description,
-        placement: "top",
-        trigger: "hover",
-        container: "body"
-    })
-}
-
-///////////////////////////////////wishlist////////////////////////
-
-/////////////////////////on viewport change, the view changes to dayGridDay///////////////////
-// windowResize={this.handleWindowResize}
-
-// handleWindowResize = () => {
-    //     if (window.screen.width < 320) {
-    //         this.calendarComponentRef.current
-    //             .getApi()
-    //             .changeView("dayGridDay")
-    //     }
-    //     else {
-    //         this.calendarComponentRef.current.getApi("dayGridMonth");
-    //     }
-    // }
-
-
-// (info) => {
-//     new Tooltip(info.el, {
-//         title: info.event.extendedProps.description,
-//         placement: "top",
-//         trigger: "hover",
-//         container: "body"
-//     })
-
-            // ref={this.calendarComponentRef}
-
-
-*/
