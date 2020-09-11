@@ -19,9 +19,9 @@ function Registration() {
   };
   return (
     <>
-      <div className="card">
+      <div className="card" id="registration-card">
         <div className="card-header">
-          Registration<h4>I am a Registration component</h4>
+          <h4 id="registration-title">Register</h4>
         </div>
         <div className="card-body">
           <form id="registration">
@@ -110,11 +110,7 @@ function Registration() {
               </div>
             </div>
 
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={register}
-            >
+            <button type="submit" className="btn btn-admin" onClick={register}>
               Register
             </button>
           </form>

@@ -31,7 +31,9 @@
 .card-header {
   background-color: darkred;
 }
-
+#resource-title {
+  color: #ebf0fffb;
+}
 #resource-author {
   padding-left: 12px;
 }
