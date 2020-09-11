@@ -5,13 +5,15 @@ const eventRoutes = require("./events");
 const articleRoutes = require("./articles");
 const linkRoutes = require("./links");
 const videoRoutes = require("./video");
+const userProfiles = require("./userProfiles");
+const user = require("./users");
 
 // Post routes
 router.use("/events", eventRoutes);
 router.use("/articles", articleRoutes);
 router.use("/links", linkRoutes);
 router.use("/videos", videoRoutes);
-// router.use("/invite", inviteRoutes);
-router.use("/users", userRoutes);
+router.use("/userProfiles", userProfiles);
+router.use("/users", user);
 
 module.exports = router;

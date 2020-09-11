@@ -4,11 +4,12 @@ import Axios from "axios";
 function Registration(props) {
   const [regEmail, setRegEmail] = useState("");
   const [regPassword, setRegPassword] = useState("");
-  // const [regOrg, setRegOrg] = useState("");
-  // const [regUrl, setRegUrl] = useState("");
-  // const [regFB, setRegFB] = userState("");
-  // const [regTwitter, setRegTwitter] = userState("");
-  // const [regInsta, setRegInsta] = userState("");
+  const [regOrg, setRegOrg] = useState("");
+  const [regSite, setRegSite] = useState("");
+  const [regFbook, setRegFbook] = useState("");
+  const [regInsta, setRegInsta] = useState("");
+  const [regTwitter, setRegTwitter] = useState("");
+
   const register = (e) => {
     e.preventDefault();
     console.log("submit");
@@ -20,26 +21,28 @@ function Registration(props) {
       },
       withCredentials: true,
       url: "/users/register",
-    }).then((response) => {
-      console.log("res Rreat", response.data);
-      if (response.data === "You haven't been invited") {
-        alert(
-          "You have not been invited. Please contact the site administators if you wish to contribute."
-        );
-      } else if (response.data === "Alredy exists") {
-        alert(
-          "You have not been invited. Please contact the site administators if you wish to contribute."
-        );
-      } else {
-        alert("You are now registered. Welcome!");
-      }
-    });
+    }).then((res) => console.log(res));
+
+    Axios({
+      method: "POST",
+      data: {
+        email: regEmail,
+        organization: regOrg,
+        website: regSite,
+        facebook: regFbook,
+        instagram: regInsta,
+        twitter: regTwitter,
+      },
+      withCredentials: true,
+      url: "/userProfiles/register",
+    }).then((res) => console.log(res));
   };
+
   return (
     <>
-      <div className="card">
+      <div className="card" id="registration-card">
         <div className="card-header">
-          Registration<h4>I am a Registration component</h4>
+          <h4 id="registration-title">Register</h4>
         </div>
         <div className="card-body">
           <form id="registration">
@@ -82,6 +85,7 @@ function Registration(props) {
                 className="form-control"
                 id="organization"
                 placeholder="Enter your Organization's name"
+                onChange={(e) => setRegOrg(e.target.value)}
               />
             </div>
 
@@ -93,6 +97,7 @@ function Registration(props) {
                   className="form-control"
                   id="website"
                   placeholder="Website url"
+                  onChange={(e) => setRegSite(e.target.value)}
                 />
               </div>
 
@@ -103,6 +108,7 @@ function Registration(props) {
                   className="form-control"
                   id="facebook"
                   placeholder="FB url"
+                  onChange={(e) => setRegFbook(e.target.value)}
                 />
               </div>
             </div>
@@ -115,6 +121,7 @@ function Registration(props) {
                   className="form-control"
                   id="instagram"
                   placeholder="Insta handle @"
+                  onChange={(e) => setRegInsta(e.target.value)}
                 />
               </div>
               <div className="form-group col-md-6">
@@ -124,15 +131,12 @@ function Registration(props) {
                   className="form-control"
                   id="twitter"
                   placeholder="Twitter handle @"
+                  onChange={(e) => setRegTwitter(e.target.value)}
                 />
               </div>
             </div>
 
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={register}
-            >
+            <button type="submit" className="btn btn-admin" onClick={register}>
               Register
             </button>
           </form>

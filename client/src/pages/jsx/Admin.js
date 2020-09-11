@@ -10,12 +10,11 @@ function Admin(props) {
   return (
     <div className="container">
       <div className="row">
-        <div className="col">
-          <h1>Admin Page</h1>
-          <p>
-            Administrators are by invitation only. If you have received an
-            invitation please register to set up your account.
-          </p>
+        <div className="col-12" id="admin-info">
+          <h6>
+            Administrators are by invitation only. If you received an invitation
+            please register to set up your account.
+          </h6>
         </div>
       </div>
       <div className="row">

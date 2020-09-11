@@ -4,10 +4,9 @@ function AddResource(props) {
   console.log(props);
   return (
     <>
-      <div className="card ">
+      <div className="card " id="manage-add-resource">
         <div className="card-header text-center">
-          I am an "AddResource" Component
-          <h5 className="card-title">Add Article or Resource Title Here</h5>
+          <h4 id="add-resource-title">Add Article or Resource</h4>
         </div>
         <div className="card-body">
           <form>
@@ -59,12 +58,11 @@ function AddResource(props) {
                 </div>
               </div>
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-add">
               Add Resource
             </button>
           </form>
         </div>
-        <div className="card-footer text-muted"></div>
       </div>
     </>
   );

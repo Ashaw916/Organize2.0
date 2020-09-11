@@ -1,0 +1,46 @@
+#manage-jumbo-container {
+  background: darkred;
+  margin: auto;
+}
+#jumbo-img-container {
+  background-image: url("../../images/managejumbo.png");
+  background-size: cover;
+  padding: 50px;
+  border-radius: 5px;
+}
+
+#add-event-title,
+#manage-events-title,
+#manage-articles,
+#add-resource-title,
+#add-video-title,
+#manage-video-posts {
+  color: #ebf0fffb !important;
+  padding-top: 10px;
+}
+
+#manage-events,
+#manage-add-event,
+#manage-add-resource,
+#manage-articles-post,
+#manage-add-video,
+#manage-videos-post {
+  -webkit-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+}
+
+.btn-add {
+  background-color: #bfd1d3;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  color: #e25b4b;
+}
+#row-events,
+#row-articles,
+#row-videos {
+  margin: auto;
+  padding: 50px 50px 50px 50px;
+}
+#row-events {
+  background-color: #bfd1d3;
+}

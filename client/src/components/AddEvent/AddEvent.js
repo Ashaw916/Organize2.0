@@ -1,15 +1,13 @@
 import React from "react";
 //add a disabled class for button for extra validation?
-// localStorage.setItem("token", response.data);
-function AddEvent(props) {
-  console.log("event props", props);
-  function checkUser() {}
+function AddEvent({}) {
   return (
     <>
-      <div className="card">
-        <div className="card-header text-center">
-          I am an "AddEvent" Component
-          <h5 className="card-title">Add Event Here</h5>
+      <div className="card" id="manage-add-event">
+        <div className="card-header">
+          <h4 className="card-title" id="add-event-title">
+            Add Event
+          </h4>
         </div>
         <div className="card-body">
           <form>
@@ -113,13 +111,11 @@ function AddEvent(props) {
                 name="location"
               ></textarea>
             </div>
-            {/*add a disabled class for button? for extra validation?*/}
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-add">
               Add Event
             </button>
           </form>
         </div>
-        <div className="card-footer text-muted"></div>
       </div>
     </>
   );
