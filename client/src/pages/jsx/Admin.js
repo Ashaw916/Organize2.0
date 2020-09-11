@@ -6,6 +6,7 @@ import Registration from "../../components/Registration/Registration.js";
 import Login from "../../components/Login/Login.js";
 
 function Admin(props) {
+  console.log(props);
   return (
     <div className="container">
       <div className="row">
@@ -19,7 +20,7 @@ function Admin(props) {
       </div>
       <div className="row">
         <div className="col">
-          <Login />
+          <Login {...props} />
         </div>
 
         <div className="col">

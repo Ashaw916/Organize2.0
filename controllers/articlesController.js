@@ -1,7 +1,7 @@
 require("dotenv").config();
 const db = require("../models");
 const authToken = require("../config/authToken");
-const jwt = require("jsonwebtoken");
+8;
 
 // Defining methods for the articlesController
 module.exports = {
@@ -22,6 +22,7 @@ module.exports = {
     console.log("CREATE:", req.body);
     authToken(req, res, function (req, res) {
       console.log("controller ", req);
+      console.log("body ", req.body);
       db.Articles.create(req.body)
         .then((dbModel) => res.json(dbModel))
         .catch((err) => res.status(422).json(err));
@@ -33,9 +34,13 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   remove: function (req, res) {
-    db.Articles.findById({ _id: req.params.id })
-      .then((dbModel) => dbModel.remove())
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+    console.log(" delete");
+    authToken(req, res, function (req, res) {
+      console.log("auth delete");
+      db.Articles.findById({ _id: req.params.id })
+        .then((dbModel) => dbModel.remove())
+        .then((dbModel) => res.json(dbModel))
+        .catch((err) => res.status(422).json(err));
+    });
   },
 };
