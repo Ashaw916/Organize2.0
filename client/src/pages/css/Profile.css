@@ -1,4 +1,16 @@
-#profile-container {
-  height: auto;
-  margin-bottom: 50px;
+#profile-card-top,
+#jumbo-card-top {
+  background-color: darkred;
+  color: #ebf0fffb;
+}
+
+#profile-card-top {
+  padding-left: 50px;
+}
+#invite-wrapper {
+  margin-top: 50px;
+}
+
+#profile-invite-title {
+  color: #ebf0fffb;
 }
