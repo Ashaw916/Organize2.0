@@ -59,7 +59,7 @@ function AddVideo({
                 required
               />
               <small id="textHelp" className="form-text text-muted">Embedded Link Only</small>
-              <small id="textHelp" className="form-text text-muted">src="https://www.dailymotion.com/embed/video"</small>
+              <small id="textHelp" className="form-text text-muted">src="http(s)://www.dailymotion.com/embed/video"</small>
               {videoErrors.videoUrl && (<p className="err">{videoErrors.videoUrl}</p>)}
             </div>
           </form>

@@ -145,11 +145,11 @@ function AddEvent({
                     value={eventObject.organization || ""}
                     required
                   />
-                  <small id="textHelp" className="form-text text-muted">Name of your Organization</small>
+                  <small id="textHelp" className="form-text text-muted">Name of Organization Hosting Event</small>
                   {eventErrors.organization && (<p className="err">{eventErrors.organization}</p>)}
                 </div>
               </div>
-              <div className="form-group col">
+              {/* <div className="form-group col">
                 <label htmlFor="source">Event(url)</label>
                 <input
                   type="url"
@@ -163,7 +163,7 @@ function AddEvent({
                 />
                 <small id="textHelp" className="form-text text-muted">http(s)://website/page</small>
                 {eventErrors.event_url && (<p className="err">{eventErrors.event_url}</p>)}
-              </div>
+              </div> */}
             </div>
             <div className="form-group">
               <label htmlFor="description">Description</label>

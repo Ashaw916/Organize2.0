@@ -7,7 +7,7 @@ import API from "../../utils/API";
 import eventValidation from "../../utils/EventValidation";
 import articleValidation from "../../utils/ArticleValidation";
 import videoValidation from "../../utils/VideoValidation";
-import linkValidation from "../../utils/LinkValidation";
+// import linkValidation from "../../utils/LinkValidation";
 
 function Manage() {
 
@@ -91,7 +91,7 @@ function Manage() {
   const [notEventSubmitted, setNotEventSubmitted] = useState(false);
   
 
-  // function twelveHoursToTwentyFourHours(inputTime, amPm) {////////////////////this needs to be tested
+  // function twelveHoursToTwentyFourHours(inputTime, amPm) {
   //   //concatenate variables to be fed into next set of lines
   //   var time = `${inputTime} ${amPm}`;
 
@@ -109,9 +109,9 @@ function Manage() {
   //   return sHours + ':' + sMinutes;
   // };
 
-  // function isoDate(eventDate) {///////////////////////this needs to be tested too
-  //   const date = new Date(eventDate);//takes in 10/01/1992
-  //   const newDate = date.toISOString();//produces 1992-10-01T07:00:00.000Z
+  // function isoDate(eventDate) {
+  //   const date = new Date(eventDate);
+  //   const newDate = date.toISOString();
   //   return newDate.slice(0, 10);
   // };
 
@@ -275,53 +275,53 @@ function Manage() {
 
 /////////////////////////////// Links Form //////////////////////////
 
-const [videoObject, setVideoObject] = useState({});
-  const [videoErrors, setVideoErrors] = useState({});
-  //for showing a successful submission
-  const [videoSuccess, setVideoSuccess] = useState(false);
-  //works with use effect, with checking errors, will start submit, and let user know
-  const [isVideoSubmitting, setIsVideoSubmitting] = useState(false);
-  //if an unsuccesful submission, will show an error to user
-  const [notVideoSubmitted, setNotVideoSubmitted] = useState(false);
+// const [videoObject, setVideoObject] = useState({});
+//   const [videoErrors, setVideoErrors] = useState({});
+//   //for showing a successful submission
+//   const [videoSuccess, setVideoSuccess] = useState(false);
+//   //works with use effect, with checking errors, will start submit, and let user know
+//   const [isVideoSubmitting, setIsVideoSubmitting] = useState(false);
+//   //if an unsuccesful submission, will show an error to user
+//   const [notVideoSubmitted, setNotVideoSubmitted] = useState(false);
 
-  useEffect(() => {
-    if (Object.keys(videoErrors).length === 0 && isVideoSubmitting) {
-      //function for api call
-      submitVideo();
-    }
-  }, [videoErrors]);
+//   useEffect(() => {
+//     if (Object.keys(videoErrors).length === 0 && isVideoSubmitting) {
+//       //function for api call
+//       submitVideo();
+//     }
+//   }, [videoErrors]);
 
-  const handleVideoInputChange = (e) => {
-    const { name, value } = e.target;
-    setVideoObject({ ...videoObject, [name]:value });
-  };
+//   const handleVideoInputChange = (e) => {
+//     const { name, value } = e.target;
+//     setVideoObject({ ...videoObject, [name]:value });
+//   };
 
-  function submitVideo() {
-    console.log("submitted successfully!");
-    //when successful, setArticleSuccess(true)
-    //if unsuccesfful, setNotSubmitted(true)
-    // API.saveVideo({
-    //   
-    // }).then((res) => {
-    //   loadVideos();
-    //   setVideoSuccess(true);
-    // }).catch((err) => {
-    //   console.log(err);
-    //   setNotVideoSubmitted(true);
-    // });
-    // //restform needed?
+//   function submitVideo() {
+//     console.log("submitted successfully!");
+//     //when successful, setArticleSuccess(true)
+//     //if unsuccesfful, setNotSubmitted(true)
+//     // API.saveVideo({
+//     //   
+//     // }).then((res) => {
+//     //   loadVideos();
+//     //   setVideoSuccess(true);
+//     // }).catch((err) => {
+//     //   console.log(err);
+//     //   setNotVideoSubmitted(true);
+//     // });
+//     // //restform needed?
 
-    // setTimeout(() => {
-    //   setVideoSuccess(false);
-    // }, 1200)
+//     // setTimeout(() => {
+//     //   setVideoSuccess(false);
+//     // }, 1200)
 
-  };
+//   };
 
-  const handleVideoSubmit = (e) => {
-    if (e) e.preventDefault();
-    setVideoErrors(videoValidation(videoObject));
-    setIsVideoSubmitting(true);
-  };
+//   const handleVideoSubmit = (e) => {
+//     if (e) e.preventDefault();
+//     setVideoErrors(videoValidation(videoObject));
+//     setIsVideoSubmitting(true);
+//   };
 
   return (
     <>
