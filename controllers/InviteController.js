@@ -9,9 +9,12 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   findOne: function (req, res) {
-    console.log("controller", req.email);
-    db.Invite.findOne(req.email)
-      .then((dbModel) => res.json(dbModel))
+    console.log("controller", res);
+    db.Invite.findOne(req)
+      .then((dbModel) => {
+        console.log("dbmodel", dbModel);
+        res.json(dbModel);
+      })
       .catch((err) => {
         console.log(err);
         res.status(422).json(err);

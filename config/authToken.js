@@ -29,9 +29,6 @@ function authToken(req, res, next) {
         message: "auth success1",
         user,
         token,
-        test: {
-          test: "test",
-        },
       });
       next(req, res);
       // console.log(req);

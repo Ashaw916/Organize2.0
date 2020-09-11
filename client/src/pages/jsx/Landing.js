@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 function Landing(props) {
   const [event, setEvent] = useState([]);
-  console.log(props);
+  // console.log(props);
 
   //call api route to get all events
   function loadEvents() {
