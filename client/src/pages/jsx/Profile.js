@@ -13,21 +13,16 @@ class Profile extends Component {
     return (
       <>
         <div className="container">
-          <h1>Profile Page</h1>
           <div className="profile-wrapper">
             <div className="card" id="profile-container">
-              <div className="jumbotron jumbotron-fluid">
-                <div className="container">
+              <div className="jumbotron jumbotron-fluid" id="jumbo-card-top">
+                <div className="container" id="profile-card-top">
                   <h1 className="display-4">
                     {this.state.users[0].organization}
                   </h1>
                   <p className="lead">PROFILE PAGE</p>
                 </div>
               </div>
-
-              {/* {this.state.users.map((user) => (
-                <div>{user.organization}</div>
-              ))} */}
 
               <div className="card-body">
                 <h4>View and update your Organization's profile information</h4>
@@ -43,7 +38,7 @@ class Profile extends Component {
                             type="url"
                             className="form-control col-6"
                             id="website"
-                            aria-describedby="website"
+                            aria-describedBy="website"
                             placeholder="enter new url"
                           />
                         </span>
@@ -67,7 +62,7 @@ class Profile extends Component {
                             type="url"
                             className="form-control col-6"
                             id="facebook"
-                            aria-describedby="facebook"
+                            aria-describedBy="facebook"
                             placeholder="enter new url"
                           />
                         </span>
@@ -87,7 +82,7 @@ class Profile extends Component {
                             type="text"
                             className="form-control col-6"
                             id="instagram"
-                            aria-describedby="instagram"
+                            aria-describedBy="instagram"
                             placeholder="enter new @"
                           />
                         </span>
@@ -107,7 +102,7 @@ class Profile extends Component {
                             type="text"
                             className="form-control col-6"
                             id="twitter"
-                            aria-describedby="twitter"
+                            aria-describedBy="twitter"
                             placeholder="enter new @"
                           />
                         </span>
@@ -123,7 +118,7 @@ class Profile extends Component {
               </div>
             </div>
           </div>
-          <h1>Invite Another Organization</h1>
+
           <div className="card" id="invite-wrapper">
             <Invite />
           </div>

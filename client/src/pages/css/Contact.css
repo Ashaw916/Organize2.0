@@ -1,0 +1,25 @@
+#contact-card {
+  padding: 0px;
+  -webkit-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+}
+#contact-title {
+  background-color: darkred;
+  padding: 15px;
+  color: #ebf0fffb;
+  margin-bottom: 0px;
+  padding-left: 25px;
+}
+#contact-body {
+  display: flex;
+  padding: 0px 20px 0px 20px;
+}
+
+td {
+  width: 100%;
+}
+.contact-org {
+  font-size: 12px;
+  font-weight: bold;
+}

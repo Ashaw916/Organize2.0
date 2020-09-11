@@ -23,7 +23,7 @@ function Invite() {
     <>
       <div className="card">
         <div className="card-header">
-          I am the Invite Component<h4>Invite Another User</h4>
+          <h4 id="profile-invite-title">Invite Another Organization</h4>
         </div>
         <div className="card-body">
           <p>Please enter information for the user you would like to invite</p>
@@ -58,7 +58,7 @@ function Invite() {
                 onChange={(e) => setHost(e.target.value)}
               />
             </div>
-            <button type="submit" className="btn btn-primary" onClick={invite}>
+            <button type="submit" className="btn btn-add" onClick={invite}>
               Invite
             </button>
           </form>
