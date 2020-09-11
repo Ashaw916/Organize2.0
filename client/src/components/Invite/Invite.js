@@ -8,7 +8,7 @@ function Invite(props) {
 
   const invite = (e) => {
     e.preventDefault();
-    var accessTokenObj = JSON.stringify(localStorage.getItem("token"));
+    const accessTokenObj = JSON.stringify(localStorage.getItem("token"));
     console.log("token 1", accessTokenObj);
     console.log("invite");
     // console.log(props);
@@ -24,9 +24,7 @@ function Invite(props) {
     }).then((response) => {
       console.log("res react", response.data);
       if (response.data === "Already invited") {
-        alert(
-          "You have not been invited. Please contact the site administators if you wish to contribute."
-        );
+        alert("Already invited");
       } else {
         alert("Invite successful");
       }

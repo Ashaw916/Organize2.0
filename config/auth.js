@@ -21,10 +21,10 @@ module.exports = function (passport) {
   );
 
   passport.serializeUser((user, cb) => {
-    cb(null, user.id);
+    cb(null, user.email);
   });
-  passport.deserializeUser((id, cb) => {
-    User.findOne({ _id: id }, (err, user) => {
+  passport.deserializeUser((email, cb) => {
+    User.findOne({ email: email }, (err, user) => {
       const userInformation = {
         email: user.email,
       };

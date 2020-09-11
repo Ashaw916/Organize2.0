@@ -9,12 +9,25 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   findOne: function (req, res) {
-    console.log("controller", req.email);
-    db.Invite.findOne(req.email)
-      .then((dbModel) => res.json(dbModel))
+    console.log("controller", req.body);
+    db.Invite.findOne({ email: req.body.email })
+      .then((dbModel) => {
+        if (dbModel) res.send("Already invited");
+        if (!dbModel) {
+          console.log("Success");
+          console.log("2", req.body);
+          const newInvite = new db.Invite({
+            email: req.body.email,
+            organization: req.body.organization,
+            host: req.body.host,
+          });
+          newInvite.save().then((dbModel) => {
+            res.send("Success");
+          });
+        }
+      })
       .catch((err) => {
-        console.log(err);
-        res.status(422).json(err);
+        throw err;
       });
   },
   create: function (req, res) {
