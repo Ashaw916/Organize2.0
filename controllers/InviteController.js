@@ -8,18 +8,27 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-  findOne: function (query) {
-    console.log("controller", query);
-    return db.Invite.findOne(query);
-    // db.Invite.findOne(query)
-    //   .then((dbModel) => {
-    //     console.log("dbmodel", dbModel);
-    //     // res.json(dbModel);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     // res.status(422).json(err);
-    //   });
+  findOne: function (req, res) {
+    console.log("controller", req.body);
+    db.Invite.findOne({ email: req.body.email })
+      .then((dbModel) => {
+        if (dbModel) res.send("Already invited");
+        if (!dbModel) {
+          console.log("Success");
+          console.log("2", req.body);
+          const newInvite = new db.Invite({
+            email: req.body.email,
+            organization: req.body.organization,
+            host: req.body.host,
+          });
+          newInvite.save().then((dbModel) => {
+            res.send("Success");
+          });
+        }
+      })
+      .catch((err) => {
+        throw err;
+      });
   },
   create: function (req, res) {
     db.Invite.create(req.body)

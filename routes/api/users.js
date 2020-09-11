@@ -98,29 +98,31 @@ router.post("/profile", (req, res) => {
 
 // Invite
 router.post("/invites", authToken, (req, res) => {
-  console.log("hit user invite");
-  console.log({ email: req.body.email });
+  inviteController.findOne(req, res);
+
+  // console.log("hit user invite");
+  // console.log({ email: req.body.email });
   //look for user in collection
-  inviteController
-    .findOne({ email: req.body.email })
-    .then((dbModel) => {
-      if (dbModel) res.send("Already invited");
-      if (!dbModel) {
-        console.log("Success");
-        console.log("2", req.body);
-        const newInvite = new Invite({
-          email: req.body.email,
-          organization: req.body.organization,
-          host: req.body.host,
-        });
-        newInvite.save().then((dbModel) => {
-          res.send("Success");
-        });
-      }
-    })
-    .catch((err) => {
-      throw err;
-    });
+  // inviteController
+  //   .findOne({ email: req.body.email })
+  //   .then((dbModel) => {
+  //     if (dbModel) res.send("Already invited");
+  //     if (!dbModel) {
+  //       console.log("Success");
+  //       console.log("2", req.body);
+  //       const newInvite = new Invite({
+  //         email: req.body.email,
+  //         organization: req.body.organization,
+  //         host: req.body.host,
+  //       });
+  //       newInvite.save().then((dbModel) => {
+  //         res.send("Success");
+  //       });
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     throw err;
+  //   });
   //   async (err, doc) => {
   //     console.log(doc);
   // if (err) throw err;

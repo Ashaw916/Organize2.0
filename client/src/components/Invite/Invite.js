@@ -8,7 +8,7 @@ function Invite(props) {
 
   const invite = (e) => {
     e.preventDefault();
-    var accessTokenObj = JSON.stringify(localStorage.getItem("token"));
+    const accessTokenObj = JSON.stringify(localStorage.getItem("token"));
     console.log("token 1", accessTokenObj);
     console.log("invite");
     // console.log(props);

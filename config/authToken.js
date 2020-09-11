@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 // auth token
 function authToken(req, res, next) {
-  // console.log("req.body.token", req.body.token);
+  console.log("req.body.token", req.body);
   const token = req.body.token.replace(/['"]+/g, "");
   // console.log("token:", token);
   // console.log(token);
@@ -19,19 +19,7 @@ function authToken(req, res, next) {
         return res.sendStatus(403);
       }
       console.log("user jwt2", token);
-      req.body = user;
-      // console.log({
-      //   message: "auth success",
-      //   user,
-      //   token,
-      // });
-      res.json({
-        message: "auth success1",
-        user,
-        token,
-      });
-      next(req, res);
-      // console.log(req);
+      next();
     });
   }
 }
