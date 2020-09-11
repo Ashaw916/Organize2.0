@@ -24,7 +24,7 @@ function Landing(props) {
             start: events[i].start_date,
             end: events[i].end_date,
             title: events[i].title,
-            url: events[i].eventurl,
+            // url: events[i].eventurl,
             description: events[i].description,
             extendedProps: {
               location: events[i].location,

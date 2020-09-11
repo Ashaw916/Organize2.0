@@ -84,4 +84,10 @@ export default {
   updateVideo: function (id, linkData) {
     return axios.put("/api/videos/" + id, linkData);
   },
+
+  //get all userProfiles
+  getUserProfiles: function () {
+    return axios.get("/api/userprofiles");
+  }
 };
+

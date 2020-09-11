@@ -1,6 +1,8 @@
 export default function videoValidation(values) {
+//add regex for youtube embed link, facebook embed link, dailymotion, twitter, instagram, tiktok
 
-    // const validUrl = RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/);
+//looks for all youtube video links, not just embedded video links
+const validYoutube = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/
 
     // if(!values.title) {
     //     errors.title = "A title is required";

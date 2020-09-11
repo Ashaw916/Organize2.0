@@ -7,6 +7,7 @@ import API from "../../utils/API";
 import eventValidation from "../../utils/EventValidation";
 import articleValidation from "../../utils/ArticleValidation";
 import videoValidation from "../../utils/VideoValidation";
+import linkValidation from "../../utils/LinkValidation";
 
 function Manage() {
 
@@ -272,6 +273,55 @@ function Manage() {
     setIsVideoSubmitting(true);
   };
 
+/////////////////////////////// Links Form //////////////////////////
+
+const [videoObject, setVideoObject] = useState({});
+  const [videoErrors, setVideoErrors] = useState({});
+  //for showing a successful submission
+  const [videoSuccess, setVideoSuccess] = useState(false);
+  //works with use effect, with checking errors, will start submit, and let user know
+  const [isVideoSubmitting, setIsVideoSubmitting] = useState(false);
+  //if an unsuccesful submission, will show an error to user
+  const [notVideoSubmitted, setNotVideoSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (Object.keys(videoErrors).length === 0 && isVideoSubmitting) {
+      //function for api call
+      submitVideo();
+    }
+  }, [videoErrors]);
+
+  const handleVideoInputChange = (e) => {
+    const { name, value } = e.target;
+    setVideoObject({ ...videoObject, [name]:value });
+  };
+
+  function submitVideo() {
+    console.log("submitted successfully!");
+    //when successful, setArticleSuccess(true)
+    //if unsuccesfful, setNotSubmitted(true)
+    // API.saveVideo({
+    //   
+    // }).then((res) => {
+    //   loadVideos();
+    //   setVideoSuccess(true);
+    // }).catch((err) => {
+    //   console.log(err);
+    //   setNotVideoSubmitted(true);
+    // });
+    // //restform needed?
+
+    // setTimeout(() => {
+    //   setVideoSuccess(false);
+    // }, 1200)
+
+  };
+
+  const handleVideoSubmit = (e) => {
+    if (e) e.preventDefault();
+    setVideoErrors(videoValidation(videoObject));
+    setIsVideoSubmitting(true);
+  };
 
   return (
     <>

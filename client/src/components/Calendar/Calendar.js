@@ -1,6 +1,8 @@
 import React from "react";
 import FullCalendar, { isPropsEqual, Component } from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid"
+import dayGridPlugin from "@fullcalendar/daygrid";
+import bootstrapPlugin from "@fullcalendar/bootstrap";
+import interactionPlugin from "@fullcalendar/interaction"
 import { render } from "ejs";
 import $ from "jquery";
 
@@ -11,7 +13,8 @@ class Calendar extends Component {
         const { events } = this.props;
         return (
             <FullCalendar
-                plugins={[dayGridPlugin]}
+                plugins={[ dayGridPlugin, "bootstrapPlugin", interactionPlugin ]}
+                themeSystem={"bootstrap"}
                 views={{
                     month: {
                         type: "dayGridMonth",
@@ -26,10 +29,22 @@ class Calendar extends Component {
                 headerToolbar={{
                     left: "prev,next today",
                     center: "title",
-                    right: "dayGridMonth,timeGridWeek,timeGridDay"
+                    right: ""
                 }}
                 events={events}
-            // ref={this.calendarComponentRef}
+                eventRender={(info) => {
+                    const title = info.event.title;
+                    console.log(title);
+                    console.log(description);
+                    const description = info.event.description;
+                    $(info.el).popover({
+                        title: title,
+                        content: description,
+                        trigger: 'click',
+                        placement: 'top',
+                        container: 'body'
+                    }).popover("show");
+                }}
 
             />
         )
@@ -77,4 +92,8 @@ eventRender: function(info) {
 //         trigger: "hover",
 //         container: "body"
 //     })
+
+            // ref={this.calendarComponentRef}
+
+
 */

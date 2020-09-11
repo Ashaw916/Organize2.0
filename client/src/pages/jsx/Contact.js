@@ -1,12 +1,17 @@
 import React, { Component } from "react";
-import { getUsers } from "../../resources/users";
 // import { Link, Route } from "react-router-dom";
 // import Table from "../../components/Table/Table.js";
 import API from "../../utils/API";
 
 class Contact extends Component {
   state = {
-    users: getUsers(),//link up with atlas instead
+    users: []
+  };
+
+  componentDidMount() {
+    API.getUserProfiles()
+      .then((res) => this.setState({ users: res.data }))
+      .catch((err) => console.log(err));
   };
 
   render() {
