@@ -8,17 +8,18 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-  findOne: function (req, res) {
-    console.log("controller", res);
-    db.Invite.findOne(req)
-      .then((dbModel) => {
-        console.log("dbmodel", dbModel);
-        res.json(dbModel);
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(422).json(err);
-      });
+  findOne: function (query) {
+    console.log("controller", query);
+    return db.Invite.findOne(query);
+    // db.Invite.findOne(query)
+    //   .then((dbModel) => {
+    //     console.log("dbmodel", dbModel);
+    //     // res.json(dbModel);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     // res.status(422).json(err);
+    //   });
   },
   create: function (req, res) {
     db.Invite.create(req.body)

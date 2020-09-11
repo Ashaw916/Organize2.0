@@ -24,9 +24,7 @@ function Invite(props) {
     }).then((response) => {
       console.log("res react", response.data);
       if (response.data === "Already invited") {
-        alert(
-          "You have not been invited. Please contact the site administators if you wish to contribute."
-        );
+        alert("Already invited");
       } else {
         alert("Invite successful");
       }

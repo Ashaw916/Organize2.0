@@ -20,11 +20,11 @@ function authToken(req, res, next) {
       }
       console.log("user jwt2", token);
       req.body = user;
-      console.log({
-        message: "auth success",
-        user,
-        token,
-      });
+      // console.log({
+      //   message: "auth success",
+      //   user,
+      //   token,
+      // });
       res.json({
         message: "auth success1",
         user,
