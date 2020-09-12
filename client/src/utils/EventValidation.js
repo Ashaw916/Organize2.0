@@ -1,7 +1,7 @@
 export default function eventValidation(values) {
 
-    const validDateRegex = RegExp(/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/);
-    const validTimeRegex = RegExp(/^(0[0-9]|1[0-2]):[0-5][0-9]$/);
+    const validDateRegex = RegExp(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/);
+    const validTimeRegex = RegExp(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/);
     // const validUrl = RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/);
 
     let errors = {};
@@ -14,32 +14,22 @@ export default function eventValidation(values) {
     if (!values.start_date) {
         errors.start_date = "Start date is required";
     } else if (!validDateRegex.test(values.start_date)) {
-        errors.start_date = "Invalid Date, must be MM/DD/YYYY"
+        errors.start_date = "Invalid Date"
     }
     if (!values.end_date) {
         errors.end_date = "End date is required";
     } else if (!validDateRegex.test(values.end_date)) {
-        errors.end_date = "Invalid Date, must be MM/DD/YYYY"
+        errors.end_date = "Invalid Date"
     }
     if (!values.start_time) {
         errors.start_time = "Time the event ends is required";
     } else if (!validTimeRegex.test(values.start_time)) {
-        errors.start_time = "Invalid Time, must be 00:00"
-    }
-    if (!values.startAMPM) {
-        errors.startAMPM = "Choose One";
-    } else if (!values.startAMPM === "am" || !values.startAMPM === "pm") {
-        errors.startAMPM = "Choose One"
+        errors.start_time = "Invalid Time"
     }
     if (!values.end_time) {
         errors.end_time = "Time the event ends is required ";
     } else if (!validTimeRegex.test(values.end_time)) {
-        errors.end_time = "Invalid Time, must be 00:00"
-    }
-    if (!values.endAMPM) {
-        errors.endAMPM = "Choose One";
-    } else if (!values.endAMPM === "am" || !values.endAMPM === "pm") {
-        errors.endAMPM = "Choose One"
+        errors.end_time = "Invalid Time"
     }
     if (!values.organization) {
         errors.organization = "Organization name is required";

@@ -26,9 +26,9 @@ class Calendar extends Component {
                     }
                 }}
                 headerToolbar={{
-                    left: "prev,next today",
+                    left: "prev,next",
                     center: "title",
-                    right: ""
+                    right: "today"
                 }}
                 events={events}
 

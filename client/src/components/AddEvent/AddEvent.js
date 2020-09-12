@@ -1,6 +1,6 @@
 import React from "react";
 import "./AddEventStyle.css";
-//add a disabled class for button for extra validation?
+
 function AddEvent({ 
   handleEventInputChange,
   handleEventSubmit,
@@ -40,10 +40,9 @@ function AddEvent({
               <div className="form-group col-md-6">
                 <label htmlFor="start_date">Start date</label>
                 <input
-                  type="text"
+                  type="date"
                   className={`form-control ${eventErrors.start_date ? "inputErr" : ""}`}
                   id="start_date"
-                  placeholder="MM/DD/YYYY"
                   name="start_date"
                   onChange={handleEventInputChange}
                   value={eventObject.start_date || ""}
@@ -55,10 +54,9 @@ function AddEvent({
               <div className="form-group col-md-6">
                 <label htmlFor="end_date">End Date</label>
                 <input
-                  type="text"
+                  type="date"
                   className={`form-control ${eventErrors.end_date ? "inputErr" : ""}`}
                   id="end_date"
-                  placeholder="MM/DD/YYYY"
                   name="end_date"
                   onChange={handleEventInputChange}
                   value={eventObject.end_date || ""}
@@ -72,10 +70,9 @@ function AddEvent({
               <div className="form-group col-md-4">
                 <label htmlFor="start_time">Start time</label>
                 <input
-                  type="text"
+                  type="time"
                   className={`form-control ${eventErrors.start_time ? "inputErr" : ""}`}
                   id="start_time"
-                  placeholder="00:00"
                   name="start_time"
                   onChange={handleEventInputChange}
                   value={eventObject.start_time || ""}
@@ -84,29 +81,12 @@ function AddEvent({
                 <small id="textHelp" className="form-text text-muted">hh:mm (e.g. 01:00, 11:00)</small>
                 {eventErrors.start_time && (<p className="err">{eventErrors.start_time}</p>)}
               </div>
-              <div className="form-group col-md-2">
-                <label htmlFor="am-pm"></label>
-                <select 
-                className={`custom-select ${eventErrors.startAMPM ? "inputErr" : ""}`} 
-                id="timeSelect" 
-                name="startAMPM" 
-                onChange={handleEventInputChange}
-                value={eventObject.startAMPM || ""}
-                required
-                >
-                  <option value="">Open this to Select AM/PM</option>
-                  <option value="am">AM</option>
-                  <option value="pm">PM</option>
-                </select>
-                <small id="textHelp" className="form-text text-muted">Choose One</small>
-              </div>
               <div className="form-group col-md-4">
                 <label htmlFor="end_time">End time</label>
                 <input
-                  type="text"
+                  type="time"
                   className={`form-control ${eventErrors.end_time ? "inputErr" : ""}`}
                   id="end_time"
-                  placeholder="00:00"
                   name="end_time"
                   onChange={handleEventInputChange}
                   value={eventObject.end_time || ""}
@@ -114,22 +94,6 @@ function AddEvent({
                 />
                 <small id="textHelp" className="form-text text-muted">hh:mm (e.g. 09:00, 12:00)</small>
                 {eventErrors.end_time && (<p className="err">{eventErrors.end_time}</p>)}
-              </div>
-              <div className="form-group col-md-2">
-                <label htmlFor="am-pm"></label>
-                <select 
-                className={`custom-select ${eventErrors.endAMPM ? "inputErr" : ""}`} 
-                id="timeSelect" 
-                name="endAMPM" 
-                onChange={handleEventInputChange}
-                value={eventObject.endAMPM || ""}
-                required
-                >
-                  <option value="">Open this to Select AM/PM</option>
-                  <option value="am">AM</option>
-                  <option value="pm">PM</option>
-                </select>
-                <small id="textHelp" className="form-text text-muted">Choose One</small>
               </div>
             </div>
             <div className="form-row">

@@ -90,31 +90,6 @@ function Manage() {
   const [isEventSubmitting, setIsEventSubmitting] = useState(false);
   //if an unsuccesful submission, will show an error to user
   const [notEventSubmitted, setNotEventSubmitted] = useState(false);
-  
-
-  function twelveHoursToTwentyFourHours(inputTime, amPm) {
-    //concatenate variables to be fed into next set of lines
-    var time = `${inputTime} ${amPm}`;
-
-    var hours = Number(time.match(/^(\d+)/)[1]);
-    var minutes = Number(time.match(/:(\d+)/)[1]);
-    var AMPM = time.match(/\s(.*)$/)[1];
-
-    if (AMPM == "pm" && hours < 12) hours = hours + 12;
-    if (AMPM == "am" && hours == 12) hours = hours - 12;
-    var sHours = hours.toString();
-    var sMinutes = minutes.toString();
-    if (hours < 10) sHours = "0" + sHours;
-    if (minutes < 10) sMinutes = "0" + sMinutes;
-
-    return sHours + ':' + sMinutes;
-  };
-
-  function isoDate(eventDate) {
-    const date = new Date(eventDate);
-    const newDate = date.toISOString();
-    return newDate.slice(0, 10);
-  };
 
   useEffect(() => {
     if (Object.keys(eventErrors).length === 0 && isEventSubmitting) {
@@ -131,14 +106,12 @@ function Manage() {
   function submitEvent() {
     console.log("submitted successfully!");
 
-    const startTime = twelveHoursToTwentyFourHours(eventObject.start_time, eventObject.startAMPM);
-    const endTime = twelveHoursToTwentyFourHours(eventObject.end_time, eventObject.endAMPM);
-    const startDate = isoDate(eventObject.start_date);
-    const endDate = isoDate(eventObject.end_date);
-    const sDate = `${startDate}T${startTime}`;
-    const eDate = `${endDate}T${endTime}`;
+    const sDate = `${eventObject.start_date}T${eventObject.start_time}`;
+    const eDate = `${eventObject.end_date}T${eventObject.end_time}`;
+
+    console.log(sDate);
+    console.log(eDate);
     
-    //insert above values into the object for api call 
     ////////////////////////the path for url might work, test it out ---via atlas once
     API.saveEvent({
       title: eventObject.title,
@@ -147,17 +120,26 @@ function Manage() {
       description: eventObject.description,
       location: eventObject.location,
       organization: eventObject.organization,
-      event_url: "/events",
+      event_url: "/events",//this might need to be a https url of the heroku address/events or this will need to be a click event in the calendar component
     })
     .then((res) => {
       loadEvents();
       setEventSuccess();
-      //resetform, clear inputs
-      //for formObject, do formObject.title = "", if it doesn't work then make an individual state for each
     })
     .catch((err) => {
       console.log(err);
       setNotEventSubmitted();
+    });
+     // RESET FORM HERE
+     setEventObject({//add event_url if want it back, and uncomment out in validation and in addevent
+      title: "",
+      start_date: "",
+      end_date: "",
+      start_time: "",
+      end_time: "",
+      organization: "",
+      description: "",
+      location: "",
     });
 
     setTimeout(() => {
@@ -197,8 +179,7 @@ function Manage() {
 
   function submitArticle() {
     console.log("submitted successfully!");
-    //when successful, setArticleSuccess(true)
-    //if unsuccesfful, setNotSubmitted(true)
+  
     API.saveArticle({
       title: articleObject.title,
       author: articleObject.author,

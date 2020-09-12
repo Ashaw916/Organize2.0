@@ -31,7 +31,7 @@ function App() {
       }
     />
   );
-
+//delete the private out of PrivateRoute & and add back Private in front of Route for manage and profile
   return (
     <Router>
       <div>
@@ -42,8 +42,8 @@ function App() {
         <Route exact path="/donate" component={Donate} />
         <Route path="/contact" component={Contact} />
         <Route exact path="/Admin" component={Admin} />
-        <PrivateRoute exact path="/Manage" component={Manage} />
-        <PrivateRoute exact path="/Profile" component={Profile} />
+        <Route exact path="/Manage" component={Manage} />
+        <Route exact path="/Profile" component={Profile} />
       </div>
       <Footer />
     </Router>
