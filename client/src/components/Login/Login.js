@@ -26,9 +26,9 @@ function LoginUser(props) {
   };
   return (
     <>
-      <div className="card">
+      <div className="card" id="login-card">
         <div className="card-header">
-          Login<h4>I am a Login component</h4>
+          <h4 id="login-title">Login</h4>
         </div>
         <div className="card-body">
           <form id="login">
@@ -56,7 +56,7 @@ function LoginUser(props) {
                 onChange={(e) => setLoginPassword(e.target.value)}
               />
             </div>
-            <button type="submit" className="btn btn-primary" onClick={login}>
+            <button type="submit" className="btn btn-admin" onClick={login}>
               Login
             </button>
           </form>

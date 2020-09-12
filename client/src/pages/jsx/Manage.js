@@ -8,6 +8,7 @@ import eventValidation from "../../utils/EventValidation";
 import articleValidation from "../../utils/ArticleValidation";
 import videoValidation from "../../utils/VideoValidation";
 // import linkValidation from "../../utils/LinkValidation";
+import "../css/Manage.css";
 
 function Manage() {
 
@@ -34,10 +35,10 @@ function Manage() {
     API.getArticles()
       .then((res) => {
         console.log(res.data);
-        setGetArticles(res.data)
+        setGetArticles(res.data);
       })
       .catch((err) => console.log(err));
-  };
+  }
 
   function loadVideos() {
     API.getVideos()
@@ -46,7 +47,7 @@ function Manage() {
         setGetVideos(res.data);
       })
       .catch((err) => console.log(err));
-  };
+  }
   // three indiviual use effects to load events, articles and videos
   useEffect(() => {
     loadEvents();
@@ -63,20 +64,20 @@ function Manage() {
   //all three functions delete an event, article or video using the id for the document
   function deleteEvent(id) {
     API.deleteEvent(id)
-      .then(res => loadEvents())
-      .catch(err => console.log(err));
+      .then((res) => loadEvents())
+      .catch((err) => console.log(err));
   }
 
   function deleteArticle(id) {
     API.deleteArticle(id)
-      .then(res => loadArticles())
-      .catch(err => console.log(err));
+      .then((res) => loadArticles())
+      .catch((err) => console.log(err));
   }
 
   function deleteVideo(id) {
     API.deleteVideo(id)
-      .then(res => loadVideos())
-      .catch(err => console.log(err));
+      .then((res) => loadVideos())
+      .catch((err) => console.log(err));
   }
 
   //////////////////////// FOR EVENT FORM ///////////////////////// 
@@ -335,108 +336,127 @@ function Manage() {
 //     setIsVideoSubmitting(true);
 //   };
 
+  
   return (
     <>
-      <div className="container">
-        <h1>Administration Management Page</h1>
-        <div className="row">
-          <div className="col-5 m-1">
-            <AddEvent
-              handleEventInputChange={handleEventInputChange}
-              handleEventSubmit={handleEventSubmit}
-              eventObject={eventObject}
-              eventErrors={eventErrors}
-              eventSuccess={eventSuccess}
-              notEventSubmitted={notEventSubmitted}
-            />
-          </div>
-          <div className="col-6 m-1">
-            <div className="card">
-              <div className="card-header">Your posted events</div>
-              <div className="card-body">
-                <ul className="list-group list-group-flush">
-                  {getEvents.map((event) => (
-                    <li className="list-group-item" key={event._id}>
-                      {event.title}: {sliceDate(event.start_date)}{" "}
-                      <button
-                        type="button"
-                        className="btn btn-danger btn-sm"
-                        onClick={() => deleteEvent(event._id)}
-                      >
-                        Delete
-                        </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+      <div className="jumbotron jumbotron-fluid" id="manage-jumbo-container">
+        <div className="container" id="jumbo-img-container">
+          <h1 className="display-4">Manage</h1>
+          <p className="lead" id="lead-text">
+            Add and manage your Organization's posts
+          </p>
+        </div>
+      </div>
+
+      <div className="row" id="row-articles">
+        <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+          <AddResource 
+          handleArticleInputChange={handleArticleInputChange}
+          handleArticleSubmit={handleArticleSubmit}
+          articleObject={articleObject}
+          articleErrors={articleErrors}
+          articleSuccess={articleSuccess}
+          notSubmitted={notSubmitted}
+          />
+        </div>
+        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <div className="card" id="manage-articles-post">
+            <div className="card-header">
+              <h4 id="manage-articles">Your Posted Articles and Resources</h4>
+            </div>
+            <div className="card-body">
+              <ul className="list-group list-group-flush">
+                {getArticles.map((article) => (
+                  <li className="list-group-item" key={article._id}>
+                    {article.title}
+                    <button
+                      type="button"
+                      className="btn btn btn-sm"
+                      onClick={() => deleteArticle(article._id)}
+                    >
+                      Delete
+                    </button>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="row">
-          <div className="col-5 m-1">
-            <AddResource
-              handleArticleInputChange={handleArticleInputChange}
-              handleArticleSubmit={handleArticleSubmit}
-              articleObject={articleObject}
-              articleErrors={articleErrors}
-              articleSuccess={articleSuccess}
-              notSubmitted={notSubmitted}
-            />
-          </div>
-          <div className="col-6 m-1">
-            <div className="card">
-              <div className="card-header">Your posted articles</div>
-              <div className="card-body">
-                <ul className="list-group list-group-flush">
-                  {getArticles.map((article) => (
-                    <li className="list-group-item" key={article._id}>
-                      {article.title}
-                      <button
-                        type="button"
-                        className="btn btn-danger btn-sm"
-                        onClick={() => deleteArticle(article._id)}
-                      >
-                        Delete
-                        </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+      <div className="row" id="row-events">
+        <div
+          className="col-xs-12 col-sm-12 col-md-5 col-lg-5"
+          id="add-events-wrapper"
+        >
+          <AddEvent 
+          handleEventInputChange={handleEventInputChange}
+          handleEventSubmit={handleEventSubmit}
+          eventObject={eventObject}
+          eventErrors={eventErrors}
+          eventSuccess={eventSuccess}
+          notEventSubmitted={notEventSubmitted}
+          />
+        </div>
+        <div
+          className="col-xs-12 col-sm-12 col-md-6 col-lg-6"
+          id="post-events-wrapper"
+        >
+          <div className="card" id="manage-events">
+            <div className="card-header">
+              <h4 id="manage-events-title">Your Posted Events</h4>
+            </div>
+            <div className="card-body">
+              <ul className="list-group list-group-flush">
+                {getEvents.map((event) => (
+                  <li className="list-group-item" key={event._id}>
+                    {event.title}: {sliceDate(event.start_date)}{" "}
+                    <button
+                      type="button"
+                      className="btn btn-danger btn-sm"
+                      onClick={() => deleteEvent(event._id)}
+                    >
+                      Delete
+                    </button>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="row">
-          <div className="col-5 m-1">
-            <AddVideo
-              handleVideoInputChange={handleVideoInputChange}
-              handleVideoSubmit={handleVideoSubmit}
-              videoObject={videoObject}
-              videoErrors={videoErrors}
-              videoSuccess={videoSuccess}
-              notVideoSubmitted={notVideoSubmitted}
-            />
-          </div>
-          <div className="col-6 m-1">
-            <div className="card">
-              <div className="card-header">Your posted videos</div>
-              <div className="card-body">
-                <ul className="list-group list-group-flush">
-                  {getVideos.map((video) => (
-                    <li className="list-group-item" key={video._id}>
-                      {video.title}
-                      <button
-                        type="button"
-                        className="btn btn-danger btn-sm"
-                        onClick={() => deleteVideo(video._id)}
-                      >
-                        Delete
-                        </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+      <div className="row" id="row-videos">
+        <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+          <AddVideo 
+          handleVideoInputChange={handleVideoInputChange}
+          handleVideoSubmit={handleVideoSubmit}
+          videoObject={videoObject}
+          videoErrors={videoErrors}
+          videoSuccess={videoSuccess}
+          notVideoSubmitted={notVideoSubmitted}
+          />
+        </div>
+        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <div className="card" id="manage-videos-post">
+            <div className="card-header">
+              <h4 id="manage-video-posts">Your Posted Videos</h4>
+            </div>
+            <div className="card-body">
+              <ul className="list-group list-group-flush">
+                {getVideos.map((video) => (
+                  <li className="list-group-item" key={video._id}>
+                    {video.title}
+                    <button
+                      type="button"
+                      className="btn btn-danger btn-sm"
+                      onClick={() => deleteVideo(video._id)}
+                    >
+                      Delete
+                    </button>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>

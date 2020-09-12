@@ -11,9 +11,9 @@ function AddVideo({
 }) {
   return (
     <>
-      <div className="card">
+      <div className="card" id="manage-add-video">
         <div className="card-header">
-          I am an "AddVideo" Component<h5>Add Video Information Here</h5>
+          <h4 id="add-video-title">Add Video</h4>
         </div>
         <div className="card-body">
           <form onSubmit={handleVideoSubmit} noValidate>
@@ -63,13 +63,12 @@ function AddVideo({
               {videoErrors.videoUrl && (<p className="err">{videoErrors.videoUrl}</p>)}
             </div>
           </form>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-add">
             Add Video
           </button>
           {videoSuccess && <div className="success">Submitted</div>}
           {notVideoSubmitted && <div className="notSubmitted">Not Submitted :(</div>}
         </div>
-        <div className="card-footer text-muted"></div>
       </div>
     </>
   );

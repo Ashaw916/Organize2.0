@@ -16,66 +16,47 @@ function Video() {
       .catch((err) => console.log(err));
   }
 
+  function splitDate(str) {
+    return str.slice(0, 10);
+  }
+
   return (
     <>
       <div className="container">
-        <div className="row">
-          <h1>Video Page</h1>
-        </div>
-        <div className="row">
-          <div
-            className="col-xs-12 col-sm-12 col-md col-lg"
-            id="livestream-wrapper"
-          >
-            <VideoLiveStream />
-          </div>
+        <VideoLiveStream />
+      </div>
 
-          <div
-            className="col-xs-12 col-sm-12 col-md col-lg"
-            id="videoMain-wrapper"
-          >
-            <div className="card" id="video-main">
-              <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" className="card-link">
-                  Card link
-                </a>
-                <a href="#" className="card-link">
-                  Another link
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="row">
-          <h2>Video Links Archive</h2>
-        </div>
-        <div className="row">
-          <div className="col-12">
-            <div className="list-group">
-              {videos.map((video) => (
-                <div
-                  key={video._id}
-                  className="list-group-item list-group-item-action"
-                >
+      <div className="album py-5 bg-light" id="videoMain-wrapper">
+        <div className="container">
+          <div className="row">
+            {videos.map((video) => (
+              <div className="col-md-4">
+                <div className="card mb-4 box-shadow" key={video._id}>
                   <iframe
+                    className="card-img-top"
                     style={{ height: "300px", width: "auto" }}
                     src={video.src}
                     allowFullScreen
                   ></iframe>
-
-                  <h5> Title: {video.title} </h5>
-                  <p>Description: {video.description}</p>
-                  <a href={video.src}>Source: {video.src}</a>
+                  <div className="card-body">
+                    <h5>Videos Archive</h5>
+                    <p className="card-text">{video.title}</p>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div className="btn-group">
+                        <a href={video.src} target="_blank">
+                          <button type="button" className="btn btn-sm">
+                            Source
+                          </button>
+                        </a>
+                      </div>
+                      <small className="text-muted">
+                        {splitDate(video.date_added)}
+                      </small>
+                    </div>
+                  </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

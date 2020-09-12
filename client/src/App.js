@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import NavTabs from "./components/NavTabs/NavTabs";
 import Landing from "./pages/jsx/Landing";
 import Video from "./pages/jsx/Video";
@@ -12,6 +12,26 @@ import Profile from "./pages/jsx/Profile";
 import Donate from "./pages/jsx/Donate";
 
 function App() {
+
+  const accessTokenObj = JSON.stringify(localStorage.getItem("token"));
+
+  const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={props =>
+        accessTokenObj === "auth success" ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/Admin"
+            }}
+          />
+        )
+      }
+    />
+  );
+
   return (
     <Router>
       <div>
@@ -22,8 +42,8 @@ function App() {
         <Route exact path="/donate" component={Donate} />
         <Route path="/contact" component={Contact} />
         <Route exact path="/Admin" component={Admin} />
-        <Route exact path="/Manage" component={Manage} />
-        <Route exact path="/Profile" component={Profile} />
+        <PrivateRoute exact path="/Manage" component={Manage} />
+        <PrivateRoute exact path="/Profile" component={Profile} />
       </div>
       <Footer />
     </Router>
