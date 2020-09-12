@@ -12,7 +12,7 @@ function AddResource(props) {
           <form>
             <div className="form-row">
               <div className="form-group col-md-6">
-                <label for="title">Title</label>
+                <label htmlFor="title">Title</label>
                 <input
                   type="text"
                   className="form-control"
@@ -21,7 +21,7 @@ function AddResource(props) {
                 />
               </div>
               <div className="form-group col-md-6">
-                <label for="author">Author</label>
+                <label htmlFor="author">Author</label>
                 <input
                   type="text"
                   className="form-control"
@@ -31,7 +31,7 @@ function AddResource(props) {
               </div>
             </div>
             <div className="form-group">
-              <label for="resource-body">Body</label>
+              <label htmlFor="resource-body">Body</label>
               <textarea
                 className="form-control"
                 id="exampleFormControlTextarea1"
@@ -39,7 +39,7 @@ function AddResource(props) {
               ></textarea>
             </div>
             <div className="form-group">
-              <label for="resource-description">Brief Description</label>
+              <label htmlFor="resource-description">Brief Description</label>
               <textarea
                 className="form-control"
                 id="description"
@@ -48,12 +48,12 @@ function AddResource(props) {
             </div>
             <div className="form-row">
               <div className="form-group col">
-                <label for="source">Source(url)</label>
+                <label htmlFor="source">Source(url)</label>
                 <input type="text" className="form-control" id="source" />
               </div>
               <div className="form-row">
                 <div className="form-group col">
-                  <label for="type">Type/keyword(s)</label>
+                  <label htmlFor="type">Type/keyword(s)</label>
                   <input type="text" className="form-control" id="type" />
                 </div>
               </div>

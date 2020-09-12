@@ -92,7 +92,7 @@ router.post("/register", (req, res) => {
         website: req.body.website,
         facebook: req.body.facebook,
         instagram: req.body.instagram,
-        twitter: req.body.twitter
+        twitter: req.body.twitter,
       });
       await newUserProfile.save();
       res.send("Success");
