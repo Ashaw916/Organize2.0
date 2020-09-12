@@ -8,8 +8,33 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-  findById: function (req, res) {
-    db.UserProfile.findById(req.params.id)
+  findOne: function (req, res) {
+    db.UserProfile.findOne({ email: req.body.email }, async (err, doc) => {
+      console.log(doc);
+      if (err) throw err;
+      if (doc) res.send("Error: Duplicate entry");
+      if (!doc) {
+        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        console.log("profile controller");
+        console.log({
+          organization: req.body.organization,
+          website: req.body.website,
+          facebook: req.body.facebook,
+          instagram: req.body.instagram,
+          twitter: req.body.twitter,
+        });
+        const newUserProfile = new db.UserProfile({
+          email: req.body.email,
+          organization: req.body.organization,
+          website: req.body.website,
+          facebook: req.body.facebook,
+          instagram: req.body.instagram,
+          twitter: req.body.twitter,
+        });
+        await newUserProfile.save();
+        // res.send("profile Success");
+      }
+    })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },

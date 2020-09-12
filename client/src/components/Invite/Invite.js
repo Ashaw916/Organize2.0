@@ -23,7 +23,7 @@ function Invite(props) {
       url: "/users/invites",
     }).then((response) => {
       console.log("res react", response.data);
-      if (response.data === "Already invited") {
+      if (response.data === "exists") {
         alert("Already invited");
       } else {
         alert("Invite successful");

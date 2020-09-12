@@ -5,4 +5,5 @@ module.exports = {
   Videos: require("./video"),
   User: require("./User"),
   Invite: require("./invite"),
+  UserProfile: require("./UserProfile"),
 };

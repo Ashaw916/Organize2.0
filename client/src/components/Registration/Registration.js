@@ -21,21 +21,35 @@ function Registration(props) {
       },
       withCredentials: true,
       url: "/users/register",
-    }).then((res) => console.log(res));
-
-    Axios({
-      method: "POST",
-      data: {
-        email: regEmail,
-        organization: regOrg,
-        website: regSite,
-        facebook: regFbook,
-        instagram: regInsta,
-        twitter: regTwitter,
-      },
-      withCredentials: true,
-      url: "/userProfiles/register",
-    }).then((res) => console.log(res));
+    })
+      .then((response) => {
+        console.log("react", response.data);
+        if (response.data === "You haven't been invited") {
+          alert(
+            "You have not been invited. Please contact the site administators if you wish to contribute."
+          );
+        } else if (response.data === "Alredy exists") {
+          alert(
+            "There is already an account associated with this email. Please contact the site administators."
+          );
+        } else {
+          alert("You are now registered. Welcome!");
+        }
+      })
+      .then(
+        Axios({
+          method: "POST",
+          data: {
+            email: regEmail,
+            organization: regOrg,
+            website: regSite,
+            facebook: regFbook,
+            instagram: regInsta,
+            twitter: regTwitter,
+          },
+          url: "/users/profile",
+        })
+      );
   };
 
   return (
