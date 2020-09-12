@@ -1,22 +1,33 @@
 import React, { useState } from "react";
 import Axios from "axios";
 
-function Invite() {
+function Invite(props) {
   const [inviteEmail, setInviteEmail] = useState("");
   const [inviteOrg, setInviteOrg] = useState("");
   const [host, setHost] = useState("");
+
   const invite = (e) => {
     e.preventDefault();
+    const accessTokenObj = JSON.stringify(localStorage.getItem("token"));
+    console.log("token 1", accessTokenObj);
     console.log("invite");
+    // console.log(props);
     Axios({
       method: "POST",
       data: {
         email: inviteEmail,
         organization: inviteOrg,
         host: host,
+        token: accessTokenObj,
       },
-      withCredentials: true,
       url: "/users/invites",
+    }).then((response) => {
+      console.log("res react", response.data);
+      if (response.data === "exists") {
+        alert("Already invited");
+      } else {
+        alert("Invite successful");
+      }
     });
   };
   return (

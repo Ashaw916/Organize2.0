@@ -10,9 +10,11 @@ import videoValidation from "../../utils/VideoValidation";
 // import linkValidation from "../../utils/LinkValidation";
 import "../css/Manage.css";
 
+////////////////////////////////// For Loading Events, Articles, Videos ///////////////////////////
+
 function Manage() {
 
-  ////////////////////////////////// For Loading Events, Articles, Videos ///////////////////////////
+// function Manage(props) {
   //states for events, articles, and videos
   const [getEvents, setGetEvents] = useState([]);
   const [getArticles, setGetArticles] = useState([]);

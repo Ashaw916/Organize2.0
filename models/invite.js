@@ -9,7 +9,11 @@ const invite = new mongoose.Schema({
     type: String,
     required: true,
   },
-  date_added: {
+  host: {
+    type: String,
+    required: true,
+  },
+  date: {
     type: Date,
     default: Date.now,
   },

@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const usersController = require("../../controllers/usersController");
+const inviteController = require("../../controllers/InviteController");
+const userProfilesController = require("../../controllers/userProfilesController");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const cors = require("cors");
@@ -35,8 +37,8 @@ router.post("/login", (req, res, next) => {
         const payload = { user: { id: user.id } };
         // console.log({ user });
         jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
-          console.log(payload);
-          console.log(token);
+          console.log("payload", payload);
+          console.log("token login", token);
           if (err) {
             console.log(err);
           }
@@ -51,44 +53,100 @@ router.post("/login", (req, res, next) => {
 // Register
 router.post("/register", (req, res) => {
   console.log("hit reg");
-  User.findOne({ email: req.body.email }, async (err, doc) => {
-    if (err) throw err;
-    if (doc) res.send("User Exists");
-    if (!doc) {
-      const hashedPassword = await bcrypt.hash(req.body.password, 10);
-      console.log("Success");
-      console.log(req.body.email);
-      const newUser = new User({
-        email: req.body.email,
-        password: hashedPassword,
-      });
-      await newUser.save();
-      res.send("Success");
-    }
-  });
-});
-
-// Invite
-router.post("/invites", (req, res) => {
-  console.log(req.body);
-  console.log("hit invite");
   Invite.findOne({ email: req.body.email }, async (err, doc) => {
     if (err) throw err;
-    if (doc) res.send("Already invited");
-    if (!doc) {
-      console.log("Success");
-      console.log(req.body.email);
-      const newInvite = new Invite({
-        email: req.body.email,
-        organization: req.body.organization,
-        host: req.body.host,
+    if (!doc) res.send("You haven't been invited");
+    if (doc) {
+      User.findOne({ email: req.body.email }, async (err, doc) => {
+        if (err) throw err;
+        if (doc) res.send("Alredy exists");
+        if (!doc) {
+          const hashedPassword = await bcrypt.hash(req.body.password, 10);
+          console.log("Success");
+          console.log(req.body.email);
+          const newUser = new User({
+            email: req.body.email,
+            password: hashedPassword,
+          });
+          await newUser.save();
+          res.send("Success");
+        }
       });
-      await newInvite.save();
-      res.send("Success");
     }
   });
 });
 
+// // Profile
+// router.post("/profile", (req, res) => {
+//   console.log("profile");
+//   //look for user in collection
+//   User.findOne({ email: req.body.email }, async (err, doc) => {
+//     if (err) throw err;
+//     if (doc) res.send("Alredy exists");
+//     if (!doc) {
+//       const hashedPassword = await bcrypt.hash(req.body.password, 10);
+//       console.log("Success");
+//       console.log(req.body.email);
+//       const newUser = new User({
+//         email: req.body.email,
+//         password: hashedPassword,
+//       });
+//       await newUser.save();
+//       res.send("Success");
+//     }
+//   });
+// });
+
+// Invite
+router.post("/invites", authToken, (req, res) => {
+  inviteController.findOne(req, res);
+
+  // console.log("hit user invite");
+  // console.log({ email: req.body.email });
+  //look for user in collection
+  // inviteController
+  //   .findOne({ email: req.body.email })
+  //   .then((dbModel) => {
+  //     if (dbModel) res.send("Already invited");
+  //     if (!dbModel) {
+  //       console.log("Success");
+  //       console.log("2", req.body);
+  //       const newInvite = new Invite({
+  //         email: req.body.email,
+  //         organization: req.body.organization,
+  //         host: req.body.host,
+  //       });
+  //       newInvite.save().then((dbModel) => {
+  //         res.send("Success");
+  //       });
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     throw err;
+  //   });
+  //   async (err, doc) => {
+  //     console.log(doc);
+  // if (err) throw err;
+  // if (doc) res.send("Already invited");
+  // if (!doc) {
+  //   console.log("Success");
+  //   console.log("2", req.body);
+  //   const newInvite = new Invite({
+  //     email: req.body.email,
+  //     organization: req.body.organization,
+  //     host: req.body.host,
+  //   });
+  //   await newInvite.save();
+  //   res.send("Success");
+  // }
+  //   }
+  // );
+});
+
+router.post("/profile", (req, res) => {
+  console.log("profile users");
+  userProfilesController.findOne(req, res);
+});
 //get users
 // router.get("/users", authToken, (req, res) => {
 //   res.send(req.users);

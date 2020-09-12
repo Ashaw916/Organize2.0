@@ -19,7 +19,7 @@ function AddResource({
           <form onSubmit={handleArticleSubmit} noValidate>
             <div className="form-row">
               <div className="form-group col-md-6">
-                <label for="title">Title</label>
+                <label htmlFor="title">Title</label>
                 <input
                   type="text"
                   className={`form-control ${articleErrors.title ? "inputErr" : ""}`}
@@ -33,7 +33,7 @@ function AddResource({
                 {articleErrors.title && (<p className="err">{articleErrors.title}</p>)}
               </div>
               <div className="form-group col-md-6">
-                <label for="author">Author</label>
+                <label htmlFor="author">Author</label>
                 <input
                   type="text"
                   className={`form-control ${articleErrors.author ? "inputErr" : ""}`}
@@ -48,7 +48,7 @@ function AddResource({
               </div>
             </div>
             <div className="form-group">
-              <label for="resource-body">Body</label>
+              <label htmlFor="resource-body">Body</label>
               <textarea
                 className={`form-control ${articleErrors.body ? "inputErr" : ""}`}
                 id="exampleFormControlTextarea1"
@@ -61,7 +61,7 @@ function AddResource({
               {articleErrors.body && (<p className="err">{articleErrors.body}</p>)}
             </div>
             <div className="form-group">
-              <label for="resource-description">Brief Description</label>
+              <label htmlFor="resource-description">Brief Description</label>
               <textarea
                 className={`form-control ${articleErrors.description ? "inputErr" : ""}`}
                 id="description"

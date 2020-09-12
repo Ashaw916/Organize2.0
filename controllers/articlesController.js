@@ -1,7 +1,6 @@
 require("dotenv").config();
 const db = require("../models");
 const authToken = require("../config/authToken");
-8;
 
 // Defining methods for the articlesController
 module.exports = {
@@ -23,9 +22,9 @@ module.exports = {
     // authToken(req, res, function (req, res) {
     //   console.log("controller ", req);
     //   console.log("body ", req.body);
-      db.Articles.create(req.body)
-        .then((dbModel) => res.json(dbModel))
-        .catch((err) => res.status(422).json(err));
+    db.Articles.create(req.body)
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
     // });
   },
   update: function (req, res) {
