@@ -10,10 +10,27 @@ import Footer from "./components/Footer";
 import Manage from "./pages/jsx/Manage";
 import Profile from "./pages/jsx/Profile";
 import Donate from "./pages/jsx/Donate";
+import Axios from "axios";
+import API from "./utils/API";
 
 function App() {
   const accessTokenObj = JSON.stringify(localStorage.getItem("token"));
-  console.log(accessTokenObj);
+  console.log("accessTokenObj", accessTokenObj);
+  API.auth(accessTokenObj);
+  Axios({
+    method: "POST",
+    data: {
+      token: accessTokenObj,
+    },
+    url: "/api/auth",
+  }).then((response) => {
+    console.log("res react", response.data);
+    //   // if (response.data === "Already invited") {
+    //   //   alert("Already invited");
+    //   // } else {
+    //   //   alert("Invite successful");
+    //   // }
+  });
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
       {...rest}

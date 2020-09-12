@@ -18,7 +18,7 @@ function authToken(req, res, next) {
         console.log("err", err);
         return res.sendStatus(403);
       }
-      console.log("user jwt2", token);
+      // res.send("auth");
       next();
     });
   }

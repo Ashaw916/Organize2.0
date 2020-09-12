@@ -12,10 +12,11 @@ module.exports = {
     console.log("controller", req.body);
     db.Invite.findOne({ email: req.body.email })
       .then((dbModel) => {
-        if (dbModel) res.send("Already invited");
+        if (dbModel) res.send("exists");
         if (!dbModel) {
-          console.log("Success");
-          console.log("2", req.body);
+          res.send("does not exist");
+          // console.log("Success");
+          // console.log("2", req.body);
           const newInvite = new db.Invite({
             email: req.body.email,
             organization: req.body.organization,

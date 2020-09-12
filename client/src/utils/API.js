@@ -84,4 +84,9 @@ export default {
   updateVideo: function (id, linkData) {
     return axios.put("/api/videos/" + id, linkData);
   },
+  auth: function (token) {
+    return axios.post("/api/auth", (token) => {
+      console.log(token);
+    });
+  },
 };
