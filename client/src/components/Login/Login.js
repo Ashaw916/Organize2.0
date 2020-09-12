@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import Axios from "axios";
 
 function LoginUser(props) {
-  console.log(props);
+  // console.log(props);
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const login = (e) => {
     e.preventDefault();
-    console.log("submit");
+    console.log("login");
+
     Axios({
       method: "POST",
       data: {
@@ -17,18 +18,22 @@ function LoginUser(props) {
       withCredentials: true,
       url: "/users/login",
     }).then((response) => {
-      console.log("token", response.data);
-      localStorage.setItem("token", response.data);
-      // const token = localStorage.getItem("token", response.data);
-
-      props.history.push("/profile");
+      if (response.data === "No User Exists") {
+        alert("You are not registered");
+      }
+      if (response.data !== "No User Exists") {
+        localStorage.setItem("token", response.data);
+        props.history.push("/profile");
+      } else {
+        props.history.push("/");
+      }
     });
   };
   return (
     <>
-      <div className="card">
+      <div className="card" id="login-card">
         <div className="card-header">
-          Login<h4>I am a Login component</h4>
+          <h4 id="login-title">Login</h4>
         </div>
         <div className="card-body">
           <form id="login">
@@ -47,16 +52,16 @@ function LoginUser(props) {
               </small>
             </div>
             <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Password</label>
+              <label htmlFor="loginInputPassword">Password</label>
               <input
                 type="password"
                 className="form-control"
-                id="exampleInputPassword1"
+                id="loginInputPassword"
                 placeholder="Password"
                 onChange={(e) => setLoginPassword(e.target.value)}
               />
             </div>
-            <button type="submit" className="btn btn-primary" onClick={login}>
+            <button type="submit" className="btn btn-admin" onClick={login}>
               Login
             </button>
           </form>

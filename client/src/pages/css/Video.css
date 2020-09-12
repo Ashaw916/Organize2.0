@@ -2,6 +2,9 @@
   height: 300px;
   width: auto;
 }
+#video-header {
+  color: #ebf0fffb !important;
+}
 .video-wrapper {
   width: 304px;
   height: 300px;
@@ -21,7 +24,7 @@
 }
 #videoMain-wrapper {
   padding-top: 5px;
-  background-color: #64778d !important;
+  background-color: #bfd1d3 !important;
 }
 #video-card-body {
   height: 100%;

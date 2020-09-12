@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { getUsers } from "../../resources/users";
-// import { Link, Route } from "react-router-dom";
-// import Table from "../../components/Table/Table.js";
-// import Users from "../../resources/users";
+import "../css/Contact.css";
+import Contactimg from "../../images/contactimg.png";
 
 class Contact extends Component {
   state = {
@@ -41,63 +40,66 @@ class Contact extends Component {
     const { users } = this.state;
 
     return (
-      <div className="container">
-        <div className="row">
-          <h1>Organization Contact Page</h1>
-        </div>
-        <div className="row">
-          <p>
-            The table below renders dynamically from the
-            client/resources/users.js seed file
-          </p>
-        </div>
-        <div className="row">
-          <div className="card col-12">
-            <div className="card-body">
-              <h4 className="card-title">Participating Organizations</h4>
-              <table className="table table-striped table-sm">
-                <thead>
-                  <tr className="text-center">
-                    <th scope="col" onClick={() => this.raiseSort()}>
-                      Organization
-                    </th>
-                    <th scope="col" onClick={() => this.raiseSort()}>
-                      Email
-                    </th>
-                    <th scope="col" onClick={() => this.raiseSort()}>
-                      Website
-                    </th>
-                    <th scope="col" onClick={() => this.raiseSort()}>
-                      FB
-                    </th>
-                    <th scope="col" onClick={() => this.raiseSort()}>
-                      Instagram
-                    </th>
-                    <th scope="col" onClick={() => this.raiseSort()}>
-                      Twitter
-                    </th>
-                  </tr>
-                </thead>
-                <tbody style={{ fontSize: "10px" }}>
-                  {users.map((user) => (
-                    <tr>
-                      <td>{user.organization}</td>
-                      <td>{user.email}</td>
-                      <a href={user.website} target="_blank">
-                        <td>{user.website}</td>
-                      </a>
-                      <td>{user.facebook}</td>
-
-                      <td>{user.instagram}</td>
-                      <td>{user.twitter}</td>
+      <>
+        <div className="container">
+          <div className="row">
+            <div className="card col-12" id="contact-card">
+              <div className="card-img-top">
+                <img
+                  class="card-img-top"
+                  src={Contactimg}
+                  alt="contact-img"
+                  id="contact-img"
+                />
+                <h2 className="card-title" id="contact-title">
+                  Participating Organizations
+                </h2>
+              </div>
+              <div className="card-body" id="contact-body">
+                <table className="table table-striped table-sm table-responsive">
+                  <thead>
+                    <tr className="text-center">
+                      <th scope="col" onClick={() => this.raiseSort()}>
+                        Organization
+                      </th>
+                      <th scope="col" onClick={() => this.raiseSort()}>
+                        Email
+                      </th>
+                      <th scope="col" onClick={() => this.raiseSort()}>
+                        Web
+                      </th>
+                      <th scope="col" onClick={() => this.raiseSort()}>
+                        FB
+                      </th>
+                      <th scope="col" onClick={() => this.raiseSort()}>
+                        Insta
+                      </th>
+                      <th scope="col" onClick={() => this.raiseSort()}>
+                        Twitter
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody style={{ fontSize: "10px" }}>
+                    {users.map((user) => (
+                      <tr>
+                        <td className="contact-org">{user.organization}</td>
+                        <td>{user.email}</td>
+                        <a href={user.website} target="_blank">
+                          <td>{user.website}</td>
+                        </a>
+                        <td>{user.facebook}</td>
+
+                        <td>{user.instagram}</td>
+                        <td>{user.twitter}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

@@ -9,10 +9,6 @@ const userProfile = new mongoose.Schema({
     type: String,
     required: true,
   },
-  role: {
-    type: "admin",
-    required: true,
-  },
   website: {
     type: String,
     required: false,

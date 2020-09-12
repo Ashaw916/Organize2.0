@@ -1,18 +1,19 @@
 import React from "react";
 //add a disabled class for button for extra validation?
-function AddEvent({  }) {
+function AddEvent({}) {
   return (
     <>
-      <div className="card">
-        <div className="card-header text-center">
-          I am an "AddEvent" Component
-          <h5 className="card-title">Add Event Here</h5>
+      <div className="card" id="manage-add-event">
+        <div className="card-header">
+          <h4 className="card-title" id="add-event-title">
+            Add Event
+          </h4>
         </div>
         <div className="card-body">
           <form>
             <div className="form-row">
               <div className="form-group col">
-                <label for="event-title">Event Title</label>
+                <label htmlFor="event-title">Event Title</label>
                 <input
                   type="text"
                   className="form-control"
@@ -24,55 +25,45 @@ function AddEvent({  }) {
             </div>
             <div className="form-row">
               <div className="form-group col-md-6">
-                <label for="start_date">Start date</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="start_date"
-                  placeholder="MM/DD/YYYY"
-                />
+                <label htmlFor="start_date">Start date</label>
+                <input type="date" className="form-control" id="start_date" />
               </div>
               <div className="form-group col-md-6">
-                <label for="end_date">End Date</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="end_date"
-                  placeholder="MM/DD/YYYY"
-                />
+                <label htmlFor="end_date">End Date</label>
+                <input type="date" className="form-control" id="end_date" />
               </div>
             </div>
             <div className="form-row">
               <div className="form-group col-md-4">
-                <label for="start_time">Start time</label>
+                <label htmlFor="start_time">Start time</label>
                 <input
-                  type="text"
+                  type="time"
                   className="form-control"
                   id="start_time"
                   placeholder="00:00"
                 />
               </div>
               <div className="form-group col-md-2">
-                <label for="am-pm"></label>
+                <label htmlFor="am-pm"></label>
                 <select className="custom-select " id="timeSelect">
-                  <option selected></option>
+                  <option defaultValue></option>
                   <option value="am">AM</option>
                   <option value="pm">PM</option>
                 </select>
               </div>
               <div className="form-group col-md-4">
-                <label for="end_time">End time</label>
+                <label htmlFor="end_time">End time</label>
                 <input
-                  type="text"
+                  type="time"
                   className="form-control"
                   id="end_time"
                   placeholder="00:00"
                 />
               </div>
               <div className="form-group col-md-2">
-                <label for="am-pm"></label>
+                <label htmlFor="am-pm"></label>
                 <select className="custom-select" id="timeSelect">
-                  <option selected></option>
+                  <option defaultValue></option>
                   <option value="am">AM</option>
                   <option value="pm">PM</option>
                 </select>
@@ -81,7 +72,7 @@ function AddEvent({  }) {
             <div className="form-row">
               <div className="form-row">
                 <div className="form-group col">
-                  <label for="type">Sponsoring Organization</label>
+                  <label htmlFor="type">Sponsoring Organization</label>
                   <input
                     type="text"
                     className="form-control"
@@ -92,7 +83,7 @@ function AddEvent({  }) {
                 </div>
               </div>
               <div className="form-group col">
-                <label for="source">Event(url)</label>
+                <label htmlFor="source">Event(url)</label>
                 <input
                   type="url"
                   className="form-control"
@@ -103,7 +94,7 @@ function AddEvent({  }) {
               </div>
             </div>
             <div className="form-group">
-              <label for="description">Description</label>
+              <label htmlFor="description">Description</label>
               <textarea
                 className="form-control"
                 id="description"
@@ -112,7 +103,7 @@ function AddEvent({  }) {
               ></textarea>
             </div>
             <div className="form-group">
-              <label for="location">Location</label>
+              <label htmlFor="location">Location</label>
               <textarea
                 className="form-control"
                 id="location"
@@ -120,13 +111,11 @@ function AddEvent({  }) {
                 name="location"
               ></textarea>
             </div>
-            {/*add a disabled class for button? for extra validation?*/}
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-add">
               Add Event
             </button>
           </form>
         </div>
-        <div className="card-footer text-muted"></div>
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Axios from "axios";
 
-function Registration() {
+function Registration(props) {
   const [regEmail, setRegEmail] = useState("");
   const [regPassword, setRegPassword] = useState("");
   const [regOrg, setRegOrg] = useState("");
@@ -17,10 +17,10 @@ function Registration() {
       method: "POST",
       data: {
         email: regEmail,
-        password: regPassword
+        password: regPassword,
       },
       withCredentials: true,
-      url: "/users/register"
+      url: "/users/register",
     }).then((res) => console.log(res));
 
     Axios({
@@ -31,18 +31,18 @@ function Registration() {
         website: regSite,
         facebook: regFbook,
         instagram: regInsta,
-        twitter: regTwitter
+        twitter: regTwitter,
       },
       withCredentials: true,
-      url: "/userProfiles/register"
+      url: "/userProfiles/register",
     }).then((res) => console.log(res));
   };
-  
+
   return (
     <>
-      <div className="card">
+      <div className="card" id="registration-card">
         <div className="card-header">
-          Registration<h4>I am a Registration component</h4>
+          <h4 id="registration-title">Register</h4>
         </div>
         <div className="card-body">
           <form id="registration">
@@ -136,11 +136,7 @@ function Registration() {
               </div>
             </div>
 
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={register}
-            >
+            <button type="submit" className="btn btn-admin" onClick={register}>
               Register
             </button>
           </form>

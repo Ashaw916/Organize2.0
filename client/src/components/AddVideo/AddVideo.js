@@ -3,14 +3,14 @@ import React from "react";
 function AddVideo() {
   return (
     <>
-      <div className="card">
+      <div className="card" id="manage-add-video">
         <div className="card-header">
-          I am an "AddVideo" Component<h5>Add Video Information Here</h5>
+          <h4 id="add-video-title">Add Video</h4>
         </div>
         <div className="card-body">
           <form>
             <div className="form-group">
-              <label for="videoTitle">Video Title</label>
+              <label htmlFor="videoTitle">Video Title</label>
               <input
                 type="text"
                 className="form-control"
@@ -20,7 +20,9 @@ function AddVideo() {
             </div>
 
             <div className="form-group">
-              <label for="exampleFormControlTextarea1">Brief Description</label>
+              <label htmlFor="exampleFormControlTextarea1">
+                Brief Description
+              </label>
               <textarea
                 className="form-control"
                 id="videoDescription"
@@ -29,7 +31,7 @@ function AddVideo() {
             </div>
 
             <div className="form-group">
-              <label for="videoUrl">Video Url</label>
+              <label htmlFor="videoUrl">Video Url</label>
               <input
                 type="url"
                 className="form-control"
@@ -38,11 +40,10 @@ function AddVideo() {
               />
             </div>
           </form>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-add">
             Add Video
           </button>
         </div>
-        <div className="card-footer text-muted"></div>
       </div>
     </>
   );

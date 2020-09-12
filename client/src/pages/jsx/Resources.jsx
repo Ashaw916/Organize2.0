@@ -101,8 +101,8 @@ class Resources extends Component {
               {articles.map((article) => (
                 <div className="col-12" key={article._id}>
                   <div className="card mb-5" id="resource-card">
-                    <div className="card-header">
-                      <h4>{article.title}</h4>
+                    <div className="card-header" id="resource-header">
+                      <h4 id="resource-title">{article.title}</h4>
                     </div>
                     <div className="card-body" id="resources-card-body">
                       <h5 className="card-title" id="resource-author">
