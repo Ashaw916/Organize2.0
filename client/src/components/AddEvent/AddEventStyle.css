@@ -1,0 +1,11 @@
+select.inputErr {
+    border-color: red;
+}
+
+input.inputErr {
+    border-color: red;
+}
+
+textarea.inputErr {
+    border-color: red;
+}

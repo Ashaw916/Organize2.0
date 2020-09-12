@@ -49,7 +49,7 @@ function App() {
       }
     />
   );
-
+//delete the private out of PrivateRoute & and add back Private in front of Route for manage and profile
   return (
     <Router>
       <div>
