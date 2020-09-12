@@ -3,9 +3,9 @@ import React from "react";
 function AddEvent({}) {
   return (
     <>
-      <div className="card" id="manage-add-event">
+      <div className="card" id="add-event-card">
         <div className="card-header">
-          <h4 className="card-title" id="add-event-title">
+          <h4 className="card-title" id="add-event-header">
             Add Event
           </h4>
         </div>
@@ -23,6 +23,7 @@ function AddEvent({}) {
                 />
               </div>
             </div>
+
             <div className="form-row">
               <div className="form-group col-md-6">
                 <label htmlFor="start_date">Start date</label>
@@ -33,8 +34,9 @@ function AddEvent({}) {
                 <input type="date" className="form-control" id="end_date" />
               </div>
             </div>
+
             <div className="form-row">
-              <div className="form-group col-md-4">
+              <div className="form-group col">
                 <label htmlFor="start_time">Start time</label>
                 <input
                   type="time"
@@ -43,15 +45,8 @@ function AddEvent({}) {
                   placeholder="00:00"
                 />
               </div>
-              <div className="form-group col-md-2">
-                <label htmlFor="am-pm"></label>
-                <select className="custom-select " id="timeSelect">
-                  <option defaultValue></option>
-                  <option value="am">AM</option>
-                  <option value="pm">PM</option>
-                </select>
-              </div>
-              <div className="form-group col-md-4">
+
+              <div className="form-group col">
                 <label htmlFor="end_time">End time</label>
                 <input
                   type="time"
@@ -60,28 +55,20 @@ function AddEvent({}) {
                   placeholder="00:00"
                 />
               </div>
-              <div className="form-group col-md-2">
-                <label htmlFor="am-pm"></label>
-                <select className="custom-select" id="timeSelect">
-                  <option defaultValue></option>
-                  <option value="am">AM</option>
-                  <option value="pm">PM</option>
-                </select>
-              </div>
             </div>
+
             <div className="form-row">
-              <div className="form-row">
-                <div className="form-group col">
-                  <label htmlFor="type">Sponsoring Organization</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="organization"
-                    placeholder="Org Name"
-                    name="organization"
-                  />
-                </div>
+              <div className="form-group col">
+                <label htmlFor="type">Sponsoring Organization</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="organization"
+                  placeholder="Org Name"
+                  name="organization"
+                />
               </div>
+
               <div className="form-group col">
                 <label htmlFor="source">Event(url)</label>
                 <input
@@ -93,6 +80,7 @@ function AddEvent({}) {
                 />
               </div>
             </div>
+
             <div className="form-group">
               <label htmlFor="description">Description</label>
               <textarea
@@ -102,6 +90,7 @@ function AddEvent({}) {
                 name="description"
               ></textarea>
             </div>
+
             <div className="form-group">
               <label htmlFor="location">Location</label>
               <textarea

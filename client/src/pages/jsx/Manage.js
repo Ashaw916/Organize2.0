@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-// import { getEvents, deleteEvent } from "../../resources/events";
-// import { getArticles } from "../../resources/articles";
-// import { getVideos } from "../../resources/videos";
-import AddResource from "../../components/AddResource/AddResource";
 import AddEvent from "../../components/AddEvent/AddEvent";
+import AddResource from "../../components/AddResource/AddResource";
+import AddDonation from "../../components/AddDonation/AddDonation";
 import AddVideo from "../../components/AddVideo/AddVideo";
-import ListVideo from "../../components/ListVideo/ListVideo";
 import API from "../../utils/API";
 import "../css/Manage.css";
 
@@ -14,6 +11,8 @@ function Manage(props) {
   const [getEvents, setGetEvents] = useState([]);
   const [getArticles, setGetArticles] = useState([]);
   const [getVideos, setGetVideos] = useState([]);
+  const [getLinks, setGetLinks] = useState([]);
+
   //functions to load arrays of objects for the page
   function loadEvents() {
     API.getEvents()
@@ -29,6 +28,15 @@ function Manage(props) {
       .then((res) => {
         console.log(res.data);
         setGetArticles(res.data);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function loadLinks() {
+    API.getLinks()
+      .then((res) => {
+        console.log(res.data);
+        setGetLinks(res.data);
       })
       .catch((err) => console.log(err));
   }
@@ -51,6 +59,10 @@ function Manage(props) {
   }, []);
 
   useEffect(() => {
+    loadLinks();
+  }, []);
+
+  useEffect(() => {
     loadVideos();
   }, []);
 
@@ -67,6 +79,12 @@ function Manage(props) {
       .catch((err) => console.log(err));
   }
 
+  function deleteLink(id) {
+    API.deleteLink(id)
+      .then((res) => loadLinks())
+      .catch((err) => console.log(err));
+  }
+
   function deleteVideo(id) {
     API.deleteVideo(id)
       .then((res) => loadVideos())
@@ -79,7 +97,7 @@ function Manage(props) {
   // //all other states for values that must be modified before pushing to backend
   // const [start, ]
 
-  //cocatenate dates and times together with a T together
+  //concatenate dates and times together with a T together
   //will need to convert 12hr times to 24 before concatenating
 
   return (
@@ -93,14 +111,45 @@ function Manage(props) {
         </div>
       </div>
 
+      <div className="row" id="row-events">
+        <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+          <AddEvent />
+        </div>
+        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <div className="card" id="post-events-card">
+            <div className="card-header">
+              <h4 id="post-events-header">Your Posted Events</h4>
+            </div>
+            <div className="card-body">
+              <ul className="list-group list-group-flush">
+                {getEvents.map((event) => (
+                  <li className="list-group-item" key={event._id}>
+                    {event.title}: {event.start_date}{" "}
+                    <button
+                      type="button"
+                      className="btn btn btn-sm"
+                      onClick={() => deleteEvent(event._id)}
+                    >
+                      Delete
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="row" id="row-articles">
         <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5">
           <AddResource />
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-          <div className="card" id="manage-articles-post">
+          <div className="card" id="post-articles-card">
             <div className="card-header">
-              <h4 id="manage-articles">Your Posted Articles and Resources</h4>
+              <h4 id="post-articles-header">
+                Your Posted Articles and Resources
+              </h4>
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
@@ -122,30 +171,24 @@ function Manage(props) {
         </div>
       </div>
 
-      <div className="row" id="row-events">
-        <div
-          className="col-xs-12 col-sm-12 col-md-5 col-lg-5"
-          id="add-events-wrapper"
-        >
-          <AddEvent />
+      <div className="row" id="row-donations">
+        <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+          <AddDonation />
         </div>
-        <div
-          className="col-xs-12 col-sm-12 col-md-6 col-lg-6"
-          id="post-events-wrapper"
-        >
-          <div className="card" id="manage-events">
+        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <div className="card" id="post-donations-card">
             <div className="card-header">
-              <h4 id="manage-events-title">Your Posted Events</h4>
+              <h4 id="post-donations-header">Your Posted Donation Resources</h4>
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getEvents.map((event) => (
-                  <li className="list-group-item" key={event._id}>
-                    {event.title}: {event.start_date}{" "}
+                {getLinks.map((link) => (
+                  <li className="list-group-item" key={link._id}>
+                    {link.title}
                     <button
                       type="button"
-                      className="btn btn-danger btn-sm"
-                      onClick={() => deleteEvent(event._id)}
+                      className="btn btn btn-sm"
+                      onClick={() => deleteLink(link._id)}
                     >
                       Delete
                     </button>
@@ -162,9 +205,9 @@ function Manage(props) {
           <AddVideo />
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-          <div className="card" id="manage-videos-post">
+          <div className="card" id="post-videos-card">
             <div className="card-header">
-              <h4 id="manage-video-posts">Your Posted Videos</h4>
+              <h4 id="post-videos-header">Your Posted Videos</h4>
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">

@@ -1,47 +1,45 @@
 import React from "react";
 
-function AddVideo() {
+function AddDonation() {
   return (
     <>
-      <div className="card" id="add-video-card">
+      <div className="card" id="add-donation-card">
         <div className="card-header">
-          <h4 id="add-video-header">Add Video</h4>
+          <h4 id="add-donation-header">Add Donation Recommendation</h4>
         </div>
         <div className="card-body">
           <form>
             <div className="form-group">
-              <label htmlFor="videoTitle">Video Title</label>
+              <label htmlFor="donationTitle">Donation Resource</label>
               <input
                 type="text"
                 className="form-control"
-                id="videoTitle"
-                placeholder="Enter Title for video"
+                id="donationTitle"
+                placeholder="Enter Resource for Recommended Donation"
               />
             </div>
 
             <div className="form-group">
-              <label htmlFor="exampleFormControlTextarea1">
-                Brief Description
-              </label>
+              <label htmlFor="donationDescription">Brief Description</label>
               <textarea
                 className="form-control"
-                id="videoDescription"
-                rows="2"
+                id="donationDescription"
+                rows="1"
               ></textarea>
             </div>
 
             <div className="form-group">
-              <label htmlFor="videoUrl">Video Url</label>
+              <label htmlFor="donationUrl">Donation url</label>
               <input
                 type="url"
                 className="form-control"
-                id="videoUrl"
-                placeholder="Video url"
+                id="donationUrl"
+                placeholder="Donation url"
               />
             </div>
           </form>
           <button type="submit" className="btn btn-add">
-            Add Video
+            Add
           </button>
         </div>
       </div>
@@ -49,4 +47,4 @@ function AddVideo() {
   );
 }
 
-export default AddVideo;
+export default AddDonation;
