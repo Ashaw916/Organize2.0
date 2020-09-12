@@ -106,7 +106,7 @@ class Resources extends Component {
             </div>
           </div>
 
-          <div className="row">
+          <div className="row mt-2">
             <div className="col-3 img-responsive" id="image-wrapper">
               <div className="news-pic-wrapper">
                 <img className="news-pic" src={Newsgroup} />
