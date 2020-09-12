@@ -16,7 +16,7 @@ function AddVideo({
           <h4 id="add-video-title">Add Video</h4>
         </div>
         <div className="card-body">
-          <form onSubmit={handleVideoSubmit} noValidate>
+          <form noValidate>
             <div className="form-group">
               <label htmlFor="videoTitle">Video Title</label>
               <input
@@ -51,7 +51,7 @@ function AddVideo({
             <div className="form-group">
               <label htmlFor="videoUrl">Video Url</label>
               <input
-                type="url"
+                type="text"
                 className={`form-control ${videoErrors.videoUrl ? "inputErr" : ""}`}
                 id="videoUrl"
                 placeholder="Video url"
@@ -64,8 +64,24 @@ function AddVideo({
               <small id="textHelp" className="form-text text-muted">src="http(s)://www.dailymotion.com/embed/video"</small>
               {videoErrors.videoUrl && (<p className="err">{videoErrors.videoUrl}</p>)}
             </div>
+
+            <div className="form-group">
+              <label htmlFor="videoUrl">Video Type</label>
+              <input
+                type="text"
+                className={`form-control ${videoErrors.videoType ? "inputErr" : ""}`}
+                id="videoType"
+                placeholder="Type of Video"
+                name="videoType"
+                onChange={handleVideoInputChange}
+                value={videoObject.videoType || ""}
+                required
+              />
+              <small id="textHelp" className="form-text text-muted">Type of video (e.g. protest, tribute)</small>
+              {videoErrors.videoType && (<p className="err">{videoErrors.videoType}</p>)}
+            </div>
           </form>
-          <button type="submit" className="btn btn-add">
+          <button type="submit" className="btn btn-add" onClick={handleVideoSubmit} >
             Add Video
           </button>
           {videoSuccess && <div className="success">Submitted</div>}

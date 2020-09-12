@@ -18,7 +18,7 @@ function AddEvent({
           </h4>
         </div>
         <div className="card-body">
-          <form onSubmit={handleEventSubmit} noValidate>
+          <form noValidate>
             <div className="form-row">
               <div className="form-group col">
                 <label htmlFor="event-title">Event Title</label>
@@ -158,7 +158,7 @@ function AddEvent({
               <small id="textHelp" className="form-text text-muted">E.g. Sacramento, 2nd Street, etc.</small>
               {eventErrors.location && (<p className="err">{eventErrors.location}</p>)}
             </div>
-            <button type="submit" className="btn btn-add">
+            <button type="submit" className="btn btn-add" onClick={handleEventSubmit}>
               Add Event
             </button>
             {eventSuccess && <div className="success">Submitted</div>}

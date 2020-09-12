@@ -17,7 +17,12 @@ export default function videoValidation(values) {
     if (!values.videoUrl) {
         errors.videoUrl = "Source url is required";
     } else if (!validYoutube.test(values.videoUrl)) {
-        errors.Url = "Invalid youtube link"
+        errors.videoUrl = "Invalid youtube link"
+    }
+    if (!values.videoType) {
+        errors.videoType = "Video type is required";
+    } else if (values.videoType.length < 5) {
+        errors.videoType = "Must be 5 or more characters long"
     }
     return errors;
 

@@ -68,21 +68,21 @@ export default {
   getVideos: function () {
     return axios.get("/api/videos");
   },
-  // Gets the link with the given id
+  // Gets the video with the given id
   getVideo: function (id) {
     return axios.get("/api/videos/" + id);
   },
-  // Deletes the link with the given id
+  // Deletes the video with the given id
   deleteVideo: function (id) {
     return axios.delete("/api/videos/" + id);
   },
-  // Saves a link to the database
-  saveVideo: function (linkData) {
-    return axios.post("/api/videos", linkData);
+  // Saves a video to the database
+  saveVideo: function (videoData) {
+    return axios.post("/api/videos", videoData);
   },
-  // Updates a link
-  updateVideo: function (id, linkData) {
-    return axios.put("/api/videos/" + id, linkData);
+  // Updates a video
+  updateVideo: function (id, videoData) {
+    return axios.put("/api/videos/" + id, videoData);
   },
 
   // //get all userProfiles
@@ -94,5 +94,6 @@ export default {
       console.log(token);
     });
   },
+
 };
 

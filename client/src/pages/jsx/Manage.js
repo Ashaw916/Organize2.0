@@ -23,7 +23,6 @@ function Manage() {
   function loadEvents() {
     API.getEvents()
       .then((res) => {
-        console.log(res.data);  //for the date, use toISOString for date and then slice it after the T and concatenate the returned 24hr time to it
         setGetEvents(res.data)
       })
       .catch((err) => console.log(err));
@@ -36,7 +35,6 @@ function Manage() {
   function loadArticles() {
     API.getArticles()
       .then((res) => {
-        console.log(res.data);
         setGetArticles(res.data);
       })
       .catch((err) => console.log(err));
@@ -45,7 +43,6 @@ function Manage() {
   function loadVideos() {
     API.getVideos()
       .then((res) => {
-        console.log(res.data);
         setGetVideos(res.data);
       })
       .catch((err) => console.log(err));
@@ -126,11 +123,11 @@ function Manage() {
     })
     .then((res) => {
       loadEvents();
-      setEventSuccess();
+      setEventSuccess(true);
     })
     .catch((err) => {
       console.log(err);
-      setNotEventSubmitted();
+      setNotEventSubmitted(true);
     });
      // RESET FORM HERE
      setEventObject({//add event_url if want it back, and uncomment out in validation and in addevent
@@ -146,12 +143,13 @@ function Manage() {
 
     setTimeout(() => {
       setEventSuccess(false);
-    }, 1200)
+    }, 1500)
 
   };
 
   const handleEventSubmit = (e) => {
     if (e) e.preventDefault();
+    console.log("eventsubmit");
     setEventErrors(eventValidation(eventObject));
     setIsEventSubmitting(true);
   };
@@ -208,13 +206,14 @@ function Manage() {
 
     setTimeout(() => {
       setArticleSuccess(false);
-    }, 1200)
+    }, 1500)
 
   };
 
 
   const handleArticleSubmit = (e) => {
     if (e) e.preventDefault();
+    console.log("articlesubmit");
     setAritcleErrors(articleValidation(articleObject));
     setIsSubmitting(true);
   };
@@ -244,22 +243,30 @@ function Manage() {
 
   function submitVideo() {
     console.log("submitted successfully!");
-    //when successful, setArticleSuccess(true)
-    //if unsuccesfful, setNotSubmitted(true)
-    // API.saveVideo({
-    //   
-    // }).then((res) => {
-    //   loadVideos();
-    //   setVideoSuccess(true);
-    // }).catch((err) => {
-    //   console.log(err);
-    //   setNotVideoSubmitted(true);
-    // });
-    // //restform needed?
 
-    // setTimeout(() => {
-    //   setVideoSuccess(false);
-    // }, 1200)
+    API.saveVideo({
+      title: videoObject.videoTitle,
+      description: videoObject.videoDescription,
+      src: videoObject.videoUrl,
+      type: videoObject.videoType
+    }).then((res) => {
+      loadVideos();
+      setVideoSuccess(true);
+    }).catch((err) => {
+      console.log(err);
+      setNotVideoSubmitted(true);
+    });
+    //resetsform
+    setVideoObject({
+      videoTitle: "",
+      videoDescription: "",
+      videoUrl: "",
+      videoType: "",
+    });
+
+    setTimeout(() => {
+      setVideoSuccess(false);
+    }, 1500)
 
   };
 
