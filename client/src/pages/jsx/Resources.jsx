@@ -48,8 +48,7 @@ class Resources extends Component {
     });
   };
 
-  updateSearch(event) {
-    event.preventDefault();
+  handleSearchEvent(event) {
     this.setState({ searchTerm: event.target.value, currentPage: 1 });
   }
 
@@ -91,7 +90,7 @@ class Resources extends Component {
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
               <SearchForm
                 search={this.state.searchTerm}
-                update={this.updateSearch.bind(this)}
+                update={this.handleSearchEvent.bind(this)}
               />
             </div>
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -171,6 +170,20 @@ class Resources extends Component {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+              <Pagination
+                itemsCount={filtered.length}
+                pageSize={pageSize}
+                currentPage={currentPage}
+                onPageChange={this.handlePageChange}
+                onNextPageChange={this.handleNextPageChange}
+                onPreviousPageChange={this.handlePreviousPageChange}
+              />
             </div>
           </div>
         </div>
