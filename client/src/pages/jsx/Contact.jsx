@@ -7,16 +7,40 @@ import Contactimg from "../../images/contactimg.png";
 
 class Contact extends Component {
   state = {
-    users: []
+    users: getUsers(),
+    sortColumn: { path: "title", order: "asc" },
   };
 
-  componentDidMount() {
-    API.getUserProfiles()
-      .then((res) => this.setState({ users: res.data }))
-      .catch((err) => console.log(err));
+  // componentDidMount() {
+  //   const user = {
+  //     email: "test@test.com",
+  //   };
+  //   this.setState((state) => {
+  //     {
+  //       state.users = { user };
+  //     }
+  //   });
+  //   console.log(this.state);
+  // }
+
+  raiseSort = (path) => {
+    const sortColumn = { ...this.props.sortColumn };
+    if (sortColumn.path === path) {
+      sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
+    } else {
+      sortColumn.path = path;
+      sortColumn.order = "asc";
+    }
+    this.props.onSort(sortColumn);
+  };
+
+  handleSort = (sortColumn) => {
+    this.setState({ sortColumn });
   };
 
   render() {
+    const { users } = this.state;
+
     return (
       <>
         <div className="container">
@@ -33,21 +57,32 @@ class Contact extends Component {
                   Participating Organizations
                 </h2>
               </div>
-
               <div className="card-body" id="contact-body">
                 <table className="table table-striped table-sm table-responsive">
                   <thead>
                     <tr className="text-center">
-                      <th scope="col">Organization</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Web</th>
-                      <th scope="col">FB</th>
-                      <th scope="col">Insta</th>
-                      <th scope="col">Twitter</th>
+                      <th scope="col" onClick={() => this.raiseSort()}>
+                        Organization
+                      </th>
+                      <th scope="col" onClick={() => this.raiseSort()}>
+                        Email
+                      </th>
+                      <th scope="col" onClick={() => this.raiseSort()}>
+                        Web
+                      </th>
+                      <th scope="col" onClick={() => this.raiseSort()}>
+                        FB
+                      </th>
+                      <th scope="col" onClick={() => this.raiseSort()}>
+                        Insta
+                      </th>
+                      <th scope="col" onClick={() => this.raiseSort()}>
+                        Twitter
+                      </th>
                     </tr>
                   </thead>
                   <tbody style={{ fontSize: "10px" }}>
-                    {this.state.users.map((user) => (
+                    {users.map((user) => (
                       <tr>
                         <td className="contact-org">{user.organization}</td>
                         <td>{user.email}</td>
