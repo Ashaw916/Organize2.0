@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import NavTabs from "./components/NavTabs/NavTabs";
 import Landing from "./pages/jsx/Landing";
 import Video from "./pages/jsx/Video";
-import Resources from "./pages/jsx/Resources";
+
+import Events from "./pages/jsx/Events.js";
+import Resources from "./pages/jsx/Resources.jsx";
 import Contact from "./pages/jsx/Contact";
 import Admin from "./pages/jsx/Admin";
 import Footer from "./components/Footer";
@@ -53,6 +55,7 @@ function App() {
       <div>
         <NavTabs />
         <Route exact path="/" component={Landing} />
+        <Route exact path="/events" component={Events} />
         <Route exact path="/resources" component={Resources} />
         <Route exact path="/video" component={Video} />
         <Route exact path="/donate" component={Donate} />
