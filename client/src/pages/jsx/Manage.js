@@ -13,8 +13,8 @@ import "../css/Manage.css";
 ////////////////////////////////// For Loading Events, Articles, Videos ///////////////////////////
 
 function Manage() {
-
 // function Manage(props) {
+
   //states for events, articles, and videos
   const [getEvents, setGetEvents] = useState([]);
   const [getArticles, setGetArticles] = useState([]);
