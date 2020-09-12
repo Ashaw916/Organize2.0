@@ -13,7 +13,7 @@ import Donate from "./pages/jsx/Donate";
 
 function App() {
   const accessTokenObj = JSON.stringify(localStorage.getItem("token"));
-
+  console.log(accessTokenObj);
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
       {...rest}
@@ -41,8 +41,8 @@ function App() {
         <Route exact path="/donate" component={Donate} />
         <Route path="/contact" component={Contact} />
         <Route exact path="/Admin" component={Admin} />
-        <PrivateRoute exact path="/Manage" component={Manage} />
-        <PrivateRoute exact path="/Profile" component={Profile} />
+        <Route exact path="/Manage" component={Manage} />
+        <Route exact path="/Profile" component={Profile} />
       </div>
       <Footer />
     </Router>
