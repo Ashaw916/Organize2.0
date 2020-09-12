@@ -48,11 +48,31 @@ class Resources extends Component {
     });
   };
 
-  render() {
-    const { length: count } = this.state.articles;
-    const { articles: allArticles, currentPage, pageSize } = this.state;
+  updateSearch(event) {
+    event.preventDefault();
+    this.setState({ searchTerm: event.target.value, currentPage: 1 });
+  }
 
-    const articles = paginate(allArticles, currentPage, pageSize);
+  render() {
+    const {
+      articles: allArticles,
+      currentPage,
+      pageSize,
+      searchTerm,
+    } = this.state;
+
+    const filtered =
+      searchTerm !== ""
+        ? allArticles.filter(
+            (article) =>
+              article.title.includes(searchTerm) ||
+              article.body.includes(searchTerm) ||
+              article.title.toLowerCase().includes(searchTerm) ||
+              article.body.toLowerCase().includes(searchTerm)
+          )
+        : allArticles;
+
+    const articles = paginate(filtered, currentPage, pageSize);
 
     return (
       <>
@@ -69,11 +89,14 @@ class Resources extends Component {
             </div>
 
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              {/* <SearchForm searchTerm={null} handleSearch={null} /> */}
+              <SearchForm
+                search={this.state.searchTerm}
+                update={this.updateSearch.bind(this)}
+              />
             </div>
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
               <Pagination
-                itemsCount={count}
+                itemsCount={filtered.length}
                 pageSize={pageSize}
                 currentPage={currentPage}
                 onPageChange={this.handlePageChange}

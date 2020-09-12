@@ -9,15 +9,15 @@ function SearchForm(props) {
           <input
             type="text"
             className="form-control"
-            value={props.searchTerm}
             id="searchTerm"
             placeholder="Type to search by term"
-            onChange={props.handleSearch()}
+            value={props.search}
+            onChange={props.update}
           />
         </div>
-        <button type="submit" className="btn btn-primary" id="search-btn">
+        {/* <button type="submit" className="btn btn-primary" id="search-btn">
           Search
-        </button>
+        </button> */}
       </form>
     </>
   );
