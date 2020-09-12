@@ -9,22 +9,26 @@
   border-radius: 5px;
 }
 
-#add-event-title,
-#manage-events-title,
-#manage-articles,
-#add-resource-title,
-#add-video-title,
-#manage-video-posts {
+#add-event-header,
+#add-resource-header,
+#add-donation-header,
+#add-video-header,
+#post-events-header,
+#post-articles-header,
+#post-donations-header,
+#post-videos-header {
   color: #ebf0fffb !important;
   padding-top: 10px;
 }
 
-#manage-events,
-#manage-add-event,
-#manage-add-resource,
-#manage-articles-post,
-#manage-add-video,
-#manage-videos-post {
+#post-events-card,
+#post-articles-card,
+#post-donations-card,
+#post-videos-card,
+#add-event-card,
+#add-resource-card,
+#add-donation-card,
+#add-video-card {
   -webkit-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
   box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
@@ -35,12 +39,15 @@
   border: 1px solid rgba(0, 0, 0, 0.125);
   color: #e25b4b;
 }
+/*position each row of add and post cards*/
 #row-events,
 #row-articles,
+#row-donations,
 #row-videos {
   margin: auto;
   padding: 50px 50px 50px 50px;
 }
-#row-events {
+#row-events,
+#row-donations {
   background-color: #bfd1d3;
 }
