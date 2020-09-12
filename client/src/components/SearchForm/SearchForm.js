@@ -5,6 +5,7 @@ function SearchForm(props) {
     <>
       <form className="form-inline" id="resource-searchForm">
         <div className="form-group">
+          <h4 className="mx-2">Search</h4>
           <label className="sr-only">Type to search by term</label>
           <input
             type="text"
