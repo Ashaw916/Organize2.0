@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import NavTabs from "./components/NavTabs/NavTabs";
 import Landing from "./pages/jsx/Landing";
 import Video from "./pages/jsx/Video";
+
 import Events from "./pages/jsx/Events.js";
 import Resources from "./pages/jsx/Resources.jsx";
 import Contact from "./pages/jsx/Contact";
