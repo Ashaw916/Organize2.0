@@ -4,9 +4,17 @@ import AddResource from "../../components/AddResource/AddResource";
 import AddDonation from "../../components/AddDonation/AddDonation";
 import AddVideo from "../../components/AddVideo/AddVideo";
 import API from "../../utils/API";
+import eventValidation from "../../utils/EventValidation";
+import articleValidation from "../../utils/ArticleValidation";
+import videoValidation from "../../utils/VideoValidation";
+// import linkValidation from "../../utils/LinkValidation";
 import "../css/Manage.css";
 
-function Manage(props) {
+////////////////////////////////// For Loading Events, Articles, Videos ///////////////////////////
+
+function Manage() {
+  // function Manage(props) {
+
   //states for events, articles, and videos
   const [getEvents, setGetEvents] = useState([]);
   const [getArticles, setGetArticles] = useState([]);
@@ -17,16 +25,18 @@ function Manage(props) {
   function loadEvents() {
     API.getEvents()
       .then((res) => {
-        console.log(res.data);
         setGetEvents(res.data);
       })
       .catch((err) => console.log(err));
+  }
+  //slices incoming iso date, so only get the date part
+  function sliceDate(date) {
+    return date.slice(0, 10);
   }
 
   function loadArticles() {
     API.getArticles()
       .then((res) => {
-        console.log(res.data);
         setGetArticles(res.data);
       })
       .catch((err) => console.log(err));
@@ -44,7 +54,6 @@ function Manage(props) {
   function loadVideos() {
     API.getVideos()
       .then((res) => {
-        console.log(res.data);
         setGetVideos(res.data);
       })
       .catch((err) => console.log(err));
@@ -92,13 +101,252 @@ function Manage(props) {
   }
 
   //////////////////////// FOR EVENT FORM /////////////////////////
-  //state for values that can go straight into state
-  // const [formObject, setFormObject] = useState({});
-  // //all other states for values that must be modified before pushing to backend
-  // const [start, ]
 
-  //concatenate dates and times together with a T together
-  //will need to convert 12hr times to 24 before concatenating
+  const [eventObject, setEventObject] = useState({});
+  const [eventErrors, setEventErrors] = useState({});
+  //for showing a successful submission
+  const [eventSuccess, setEventSuccess] = useState(false);
+  //works with use effect, with checking errors, will start submit, and let user know
+  const [isEventSubmitting, setIsEventSubmitting] = useState(false);
+  //if an unsuccesful submission, will show an error to user
+  const [notEventSubmitted, setNotEventSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (Object.keys(eventErrors).length === 0 && isEventSubmitting) {
+      //function for api call
+      submitEvent();
+    }
+  }, [eventErrors]);
+
+  const handleEventInputChange = (e) => {
+    const { name, value } = e.target;
+    setEventObject({ ...eventObject, [name]: value });
+  };
+
+  function submitEvent() {
+    console.log("submitted successfully!");
+
+    const sDate = `${eventObject.start_date}T${eventObject.start_time}`;
+    const eDate = `${eventObject.end_date}T${eventObject.end_time}`;
+
+    console.log(sDate);
+    console.log(eDate);
+
+    ////////////////////////the path for url might work, test it out ---via atlas once
+    API.saveEvent({
+      title: eventObject.title,
+      start_date: sDate,
+      end_date: eDate,
+      description: eventObject.description,
+      location: eventObject.location,
+      organization: eventObject.organization,
+      event_url: "/events", //this might need to be a https url of the heroku address/events or this will need to be a click event in the calendar component
+    })
+      .then((res) => {
+        loadEvents();
+        setEventSuccess(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        setNotEventSubmitted(true);
+      });
+    // RESET FORM HERE
+    setEventObject({
+      //add event_url if want it back, and uncomment out in validation and in addevent
+      title: "",
+      start_date: "",
+      end_date: "",
+      start_time: "",
+      end_time: "",
+      organization: "",
+      description: "",
+      location: "",
+    });
+
+    setTimeout(() => {
+      setEventSuccess(false);
+    }, 1500);
+  }
+
+  const handleEventSubmit = (e) => {
+    if (e) e.preventDefault();
+    console.log("eventsubmit");
+    setEventErrors(eventValidation(eventObject));
+    setIsEventSubmitting(true);
+  };
+
+  ////////////////////////////////////// For Articles Form /////////////////////////////////
+
+  const [articleObject, setArticleObject] = useState({});
+  const [articleErrors, setAritcleErrors] = useState({});
+  //for showing a successful submission
+  const [articleSuccess, setArticleSuccess] = useState(false);
+  //works with use effect, with checking errors, will start submit, and let user know
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  //if an unsuccesful submission, will show an error to user
+  const [notSubmitted, setNotSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (Object.keys(articleErrors).length === 0 && isSubmitting) {
+      //function for api call
+      submitArticle();
+    }
+  }, [articleErrors]);
+
+  const handleArticleInputChange = (e) => {
+    const { name, value } = e.target;
+    setArticleObject({ ...articleObject, [name]: value });
+  };
+
+  function submitArticle() {
+    console.log("submitted successfully!");
+
+    API.saveArticle({
+      title: articleObject.title,
+      author: articleObject.author,
+      body: articleObject.body,
+      description: articleObject.description,
+      source: articleObject.source_url,
+      type: articleObject.type,
+    })
+      .then((res) => {
+        loadArticles();
+        setArticleSuccess(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        setNotSubmitted(true);
+      });
+    //resets form
+    setArticleObject({
+      title: "",
+      author: "",
+      body: "",
+      description: "",
+      source: "",
+      type: "",
+    });
+
+    setTimeout(() => {
+      setArticleSuccess(false);
+    }, 1500);
+  }
+
+  const handleArticleSubmit = (e) => {
+    if (e) e.preventDefault();
+    console.log("articlesubmit");
+    setAritcleErrors(articleValidation(articleObject));
+    setIsSubmitting(true);
+  };
+
+  //////////////////////////////////// For Videos Form ////////////////////////////////////
+
+  const [videoObject, setVideoObject] = useState({});
+  const [videoErrors, setVideoErrors] = useState({});
+  //for showing a successful submission
+  const [videoSuccess, setVideoSuccess] = useState(false);
+  //works with use effect, with checking errors, will start submit, and let user know
+  const [isVideoSubmitting, setIsVideoSubmitting] = useState(false);
+  //if an unsuccesful submission, will show an error to user
+  const [notVideoSubmitted, setNotVideoSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (Object.keys(videoErrors).length === 0 && isVideoSubmitting) {
+      //function for api call
+      submitVideo();
+    }
+  }, [videoErrors]);
+
+  const handleVideoInputChange = (e) => {
+    const { name, value } = e.target;
+    setVideoObject({ ...videoObject, [name]: value });
+  };
+
+  function submitVideo() {
+    console.log("submitted successfully!");
+
+    API.saveVideo({
+      title: videoObject.videoTitle,
+      description: videoObject.videoDescription,
+      src: videoObject.videoUrl,
+      type: videoObject.videoType,
+    })
+      .then((res) => {
+        loadVideos();
+        setVideoSuccess(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        setNotVideoSubmitted(true);
+      });
+    //resetsform
+    setVideoObject({
+      videoTitle: "",
+      videoDescription: "",
+      videoUrl: "",
+      videoType: "",
+    });
+
+    setTimeout(() => {
+      setVideoSuccess(false);
+    }, 1500);
+  }
+
+  const handleVideoSubmit = (e) => {
+    if (e) e.preventDefault();
+    setVideoErrors(videoValidation(videoObject));
+    setIsVideoSubmitting(true);
+  };
+
+  /////////////////////////////// Links Form //////////////////////////
+
+  // const [videoObject, setVideoObject] = useState({});
+  //   const [videoErrors, setVideoErrors] = useState({});
+  //   //for showing a successful submission
+  //   const [videoSuccess, setVideoSuccess] = useState(false);
+  //   //works with use effect, with checking errors, will start submit, and let user know
+  //   const [isVideoSubmitting, setIsVideoSubmitting] = useState(false);
+  //   //if an unsuccesful submission, will show an error to user
+  //   const [notVideoSubmitted, setNotVideoSubmitted] = useState(false);
+
+  //   useEffect(() => {
+  //     if (Object.keys(videoErrors).length === 0 && isVideoSubmitting) {
+  //       //function for api call
+  //       submitVideo();
+  //     }
+  //   }, [videoErrors]);
+
+  //   const handleVideoInputChange = (e) => {
+  //     const { name, value } = e.target;
+  //     setVideoObject({ ...videoObject, [name]:value });
+  //   };
+
+  //   function submitVideo() {
+  //     console.log("submitted successfully!");
+  //     //when successful, setArticleSuccess(true)
+  //     //if unsuccesfful, setNotSubmitted(true)
+  //     // API.saveVideo({
+  //     //
+  //     // }).then((res) => {
+  //     //   loadVideos();
+  //     //   setVideoSuccess(true);
+  //     // }).catch((err) => {
+  //     //   console.log(err);
+  //     //   setNotVideoSubmitted(true);
+  //     // });
+  //     // //restform needed?
+
+  //     // setTimeout(() => {
+  //     //   setVideoSuccess(false);
+  //     // }, 1200)
+
+  //   };
+
+  //   const handleVideoSubmit = (e) => {
+  //     if (e) e.preventDefault();
+  //     setVideoErrors(videoValidation(videoObject));
+  //     setIsVideoSubmitting(true);
+  //   };
 
   return (
     <>
@@ -113,7 +361,14 @@ function Manage(props) {
 
       <div className="row" id="row-events">
         <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-          <AddEvent />
+          <AddEvent
+            handleEventInputChange={handleEventInputChange}
+            handleEventSubmit={handleEventSubmit}
+            eventObject={eventObject}
+            eventErrors={eventErrors}
+            eventSuccess={eventSuccess}
+            notEventSubmitted={notEventSubmitted}
+          />
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
           <div className="card" id="post-events-card">
@@ -142,7 +397,14 @@ function Manage(props) {
 
       <div className="row" id="row-articles">
         <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-          <AddResource />
+          <AddResource
+            handleArticleInputChange={handleArticleInputChange}
+            handleArticleSubmit={handleArticleSubmit}
+            articleObject={articleObject}
+            articleErrors={articleErrors}
+            articleSuccess={articleSuccess}
+            notSubmitted={notSubmitted}
+          />
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
           <div className="card" id="post-articles-card">
@@ -202,7 +464,14 @@ function Manage(props) {
 
       <div className="row" id="row-videos">
         <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-          <AddVideo />
+          <AddVideo
+            handleVideoInputChange={handleVideoInputChange}
+            handleVideoSubmit={handleVideoSubmit}
+            videoObject={videoObject}
+            videoErrors={videoErrors}
+            videoSuccess={videoSuccess}
+            notVideoSubmitted={notVideoSubmitted}
+          />
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
           <div className="card" id="post-videos-card">

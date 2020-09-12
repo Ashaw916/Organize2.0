@@ -1,0 +1,7 @@
+input.inputErr {
+    border-color: red;
+}
+
+textarea.inputErr {
+    border-color: red;
+}
