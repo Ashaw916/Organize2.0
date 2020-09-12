@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const usersController = require("../../controllers/usersController");
 const inviteController = require("../../controllers/InviteController");
+const userProfilesController = require("../../controllers/userProfilesController");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const cors = require("cors");
@@ -75,26 +76,26 @@ router.post("/register", (req, res) => {
   });
 });
 
-// Profile
-router.post("/profile", (req, res) => {
-  console.log("profile");
-  //look for user in collection
-  User.findOne({ email: req.body.email }, async (err, doc) => {
-    if (err) throw err;
-    if (doc) res.send("Alredy exists");
-    if (!doc) {
-      const hashedPassword = await bcrypt.hash(req.body.password, 10);
-      console.log("Success");
-      console.log(req.body.email);
-      const newUser = new User({
-        email: req.body.email,
-        password: hashedPassword,
-      });
-      await newUser.save();
-      res.send("Success");
-    }
-  });
-});
+// // Profile
+// router.post("/profile", (req, res) => {
+//   console.log("profile");
+//   //look for user in collection
+//   User.findOne({ email: req.body.email }, async (err, doc) => {
+//     if (err) throw err;
+//     if (doc) res.send("Alredy exists");
+//     if (!doc) {
+//       const hashedPassword = await bcrypt.hash(req.body.password, 10);
+//       console.log("Success");
+//       console.log(req.body.email);
+//       const newUser = new User({
+//         email: req.body.email,
+//         password: hashedPassword,
+//       });
+//       await newUser.save();
+//       res.send("Success");
+//     }
+//   });
+// });
 
 // Invite
 router.post("/invites", authToken, (req, res) => {
@@ -142,6 +143,10 @@ router.post("/invites", authToken, (req, res) => {
   // );
 });
 
+router.post("/profile", (req, res) => {
+  console.log("profile users");
+  userProfilesController.findOne(req, res);
+});
 //get users
 // router.get("/users", authToken, (req, res) => {
 //   res.send(req.users);

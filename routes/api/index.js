@@ -7,13 +7,15 @@ const linkRoutes = require("./links");
 const videoRoutes = require("./video");
 const userProfiles = require("./userProfiles");
 const user = require("./users");
+const auth = require("./auth");
 
 // Post routes
 router.use("/events", eventRoutes);
 router.use("/articles", articleRoutes);
 router.use("/links", linkRoutes);
 router.use("/videos", videoRoutes);
-router.use("/userProfiles", userProfiles);
+// router.use("/userProfiles", userProfiles);
 router.use("/users", user);
+router.use("/auth", auth);
 
 module.exports = router;
