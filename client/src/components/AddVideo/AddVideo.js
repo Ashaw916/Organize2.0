@@ -11,9 +11,9 @@ function AddVideo({
 }) {
   return (
     <>
-      <div className="card" id="manage-add-video">
+      <div className="card" id="add-video-card">
         <div className="card-header">
-          <h4 id="add-video-title">Add Video</h4>
+          <h4 id="add-video-header">Add Video</h4>
         </div>
         <div className="card-body">
           <form noValidate>
