@@ -488,16 +488,23 @@ function Manage() {
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {loadDonations.map((link) => (
-                  <li className="list-group-item manage-post" key={link._id}>
-                    {link.title}
+                {getDonations.map((donation) => (
+                  <li className="list-group-item" key={donation._id}>
+                    {donation.title}
                     <button
                       type="button"
-                      className="btn btn btn-sm delete-btn"
-                      onClick={() => deleteDonation(link._id)}
+                      className="btn btn btn-sm"
+                      onClick={() => deleteDonation(donation._id)}
                     >
                       Delete
                     </button>
+                    {/* <button
+                      type="button"
+                      className="btn btn btn-sm"
+                      onClick={() => updatingDonation(donation._id)}
+                    >
+                      Edit
+                    </button> */}
                     {/* <button
                       type="button"
                       className="btn btn btn-sm"
