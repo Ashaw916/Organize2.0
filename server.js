@@ -39,7 +39,7 @@ app.use(cookieParser("svsas"));
 app.use(routes);
 app.use("/", require("./routes/index"));
 app.use("/users", require("./routes/api/users"));
-app.use("/api/auth", require("./routes/api/auth"));
+app.use("/auth", require("./routes/api/auth"));
 app.use("/api/events", require("./routes/api/events"));
 app.use("/api/articles", require("./routes/api/articles"));
 app.use("/api/links", require("./routes/api/links"));

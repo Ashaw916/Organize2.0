@@ -1,0 +1,9 @@
+.goodbye {
+  padding: 1rem;
+}
+
+.padding {
+  display: flex;
+  justify-content: center;
+  margin: 20rem 0;
+}
