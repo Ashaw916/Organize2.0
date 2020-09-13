@@ -41,6 +41,7 @@ function AddDonation() {
           <button type="submit" className="btn btn-add">
             Add
           </button>
+          {/*another button that appears, disabling or making the add button disappear?*/}
         </div>
       </div>
     </>

@@ -7,7 +7,7 @@ import API from "../../utils/API";
 import eventValidation from "../../utils/EventValidation";
 import articleValidation from "../../utils/ArticleValidation";
 import videoValidation from "../../utils/VideoValidation";
-// import linkValidation from "../../utils/LinkValidation";
+import donationValidation from "../../utils/DonateValidation";
 import "../css/Manage.css";
 
 ////////////////////////////////// For Loading Events, Articles, Videos ///////////////////////////
@@ -19,7 +19,7 @@ function Manage() {
   const [getEvents, setGetEvents] = useState([]);
   const [getArticles, setGetArticles] = useState([]);
   const [getVideos, setGetVideos] = useState([]);
-  const [getLinks, setGetLinks] = useState([]);
+  const [getDonations, setGetDonations] = useState([]);
 
   //functions to load arrays of objects for the page
   function loadEvents() {
@@ -46,11 +46,11 @@ function Manage() {
       .catch((err) => console.log(err));
   }
 
-  function loadLinks() {
+  function loadDonations() {
     API.getLinks()
       .then((res) => {
         console.log(res.data);
-        setGetLinks(res.data);
+        setGetDonations(res.data);
       })
       .catch((err) => console.log(err));
   }
@@ -72,7 +72,7 @@ function Manage() {
   }, []);
 
   useEffect(() => {
-    loadLinks();
+    loadDonations();
   }, []);
 
   useEffect(() => {
@@ -92,9 +92,9 @@ function Manage() {
       .catch((err) => console.log(err));
   }
 
-  function deleteLink(id) {
-    API.deleteLink(id)
-      .then((res) => loadLinks())
+  function deleteDonation(id) {
+    API.deleteDonation(id)
+      .then((res) => loadDonations())
       .catch((err) => console.log(err));
   }
 
@@ -136,7 +136,6 @@ function Manage() {
     console.log(sDate);
     console.log(eDate);
 
-    ////////////////////////the path for url might work, test it out ---via atlas once
     API.saveEvent({
       title: eventObject.title,
       start_date: sDate,
@@ -144,7 +143,7 @@ function Manage() {
       description: eventObject.description,
       location: eventObject.location,
       organization: eventObject.organization,
-      event_url: "/events", //this might need to be a https url of the heroku address/events or this will need to be a click event in the calendar component
+      event_url: "/events",
     })
       .then((res) => {
         loadEvents();
@@ -302,56 +301,83 @@ function Manage() {
     setIsVideoSubmitting(true);
   };
 
-  /////////////////////////////// Links Form //////////////////////////
+/////////////////////////////// Donate Form //////////////////////////
 
-  // const [videoObject, setVideoObject] = useState({});
-  //   const [videoErrors, setVideoErrors] = useState({});
-  //   //for showing a successful submission
-  //   const [videoSuccess, setVideoSuccess] = useState(false);
-  //   //works with use effect, with checking errors, will start submit, and let user know
-  //   const [isVideoSubmitting, setIsVideoSubmitting] = useState(false);
-  //   //if an unsuccesful submission, will show an error to user
-  //   const [notVideoSubmitted, setNotVideoSubmitted] = useState(false);
+// const [videoObject, setVideoObject] = useState({});
+//   const [videoErrors, setVideoErrors] = useState({});
+//   //for showing a successful submission
+//   const [videoSuccess, setVideoSuccess] = useState(false);
+//   //works with use effect, with checking errors, will start submit, and let user know
+//   const [isDonateSubmitting, setIsVideoSubmitting] = useState(false);
+//   //if an unsuccesful submission, will show an error to user
+//   const [notVideoSubmitted, setNotVideoSubmitted] = useState(false);
+//   //holds errors when updating a donation link
+//   // const [donationUpdateErrors, setDonationUpdateErrors] = useState({});
 
-  //   useEffect(() => {
-  //     if (Object.keys(videoErrors).length === 0 && isVideoSubmitting) {
-  //       //function for api call
-  //       submitVideo();
-  //     }
-  //   }, [videoErrors]);
+//   //triggers when erros object keys have length of 0 when submitting a new donation
+//   useEffect(() => {
+//     if (Object.keys(videoErrors).length === 0 && isDonateSubmitting) {
+//       //function for api call
+//       submitVideo();
+//     }
+//   }, [videoErrors]);
 
-  //   const handleVideoInputChange = (e) => {
-  //     const { name, value } = e.target;
-  //     setVideoObject({ ...videoObject, [name]:value });
-  //   };
+//   // //triggers when erros object keys have length of 0 when submitting an update to an already existing donation
+//   // useEffect(() => {
+//   //   if (Object.keys(donationUpdateErrors).length === 0 && isDonateSubmitting) {
+//   //     //function for PUT api call
+//   //   }
+//   // }, [donationUpdateErrors])
 
-  //   function submitVideo() {
-  //     console.log("submitted successfully!");
-  //     //when successful, setArticleSuccess(true)
-  //     //if unsuccesfful, setNotSubmitted(true)
-  //     // API.saveVideo({
-  //     //
-  //     // }).then((res) => {
-  //     //   loadVideos();
-  //     //   setVideoSuccess(true);
-  //     // }).catch((err) => {
-  //     //   console.log(err);
-  //     //   setNotVideoSubmitted(true);
-  //     // });
-  //     // //restform needed?
+//   const handleVideoInputChange = (e) => {
+//     const { name, value } = e.target;
+//     setVideoObject({ ...videoObject, [name]:value });
+//   };
 
-  //     // setTimeout(() => {
-  //     //   setVideoSuccess(false);
-  //     // }, 1200)
+//   function submitVideo() {
+//     console.log("submitted successfully!");
+//     //when successful, setArticleSuccess(true)
+//     //if unsuccesfful, setNotSubmitted(true)
+//     // API.saveVideo({
+//     //   
+//     // }).then((res) => {
+//     //   loadVideos();
+//     //   setVideoSuccess(true);
+//     // }).catch((err) => {
+//     //   console.log(err);
+//     //   setNotVideoSubmitted(true);
+//     // });
+//     // //restform needed?
 
-  //   };
+//     // setTimeout(() => {
+//     //   setVideoSuccess(false);
+//     // }, 1200)
 
-  //   const handleVideoSubmit = (e) => {
-  //     if (e) e.preventDefault();
-  //     setVideoErrors(videoValidation(videoObject));
-  //     setIsVideoSubmitting(true);
-  //   };
+//   };
 
+//   const handleVideoSubmit = (e) => {
+//     if (e) e.preventDefault();
+//     setVideoErrors(videoValidation(videoObject));
+//     setIsVideoSubmitting(true);
+//   };
+// //listens for click of 'edit' button and grabs id for a donation link that already exists
+//   const updatingDonation = (e, id) => {
+//     if (e) e.preventDefault();
+//     console.log(id);
+//     //save the id to a state, that id is passed to api call via useeffect
+//     //calls a api call that gets data per that id and that .then of the api call saves the data to the donateObject (<-- is that it or do i need somethign else (to get the form to fill)? check the forms activities) that i would think fills the form inputs
+//     //
+//   };
+// //handles the click of the update button in the form
+//   const submitDonateUpdate = (e) => {
+//     if (e) e.preventDefault();
+//     //setDonationUpdateErrors(donationValidation(donationObject));
+//     //setDonationSubmitting
+//   };
+
+  //about the form button, how to change it...
+
+  
   return (
     <>
       <div className="jumbotron jumbotron-fluid" id="manage-jumbo-container">
@@ -392,6 +418,13 @@ function Manage() {
                     >
                       Delete Event
                     </button>
+                    {/* <button
+                      type="button"
+                      className="btn btn btn-sm"
+                      onClick={() => handleUpdateEvent(event._id)}
+                    >
+                      Update
+                    </button> */}
                   </li>
                 ))}
               </ul>
@@ -430,6 +463,13 @@ function Manage() {
                     >
                       Delete
                     </button>
+                    {/* <button
+                      type="button"
+                      className="btn btn btn-sm"
+                      onClick={() => handleUpdateArticle(article._id)}
+                    >
+                      Edit
+                    </button> */}
                   </li>
                 ))}
               </ul>
@@ -440,7 +480,9 @@ function Manage() {
 
       <div className="row" id="row-donations">
         <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-          <AddDonation />
+          <AddDonation 
+          
+          />
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
           <div className="card" id="post-donations-card">
@@ -459,6 +501,13 @@ function Manage() {
                     >
                       Delete
                     </button>
+                    {/* <button
+                      type="button"
+                      className="btn btn btn-sm"
+                      onClick={() => updatingDonation(donation._id)}
+                    >
+                      Edit
+                    </button> */}
                   </li>
                 ))}
               </ul>
@@ -495,6 +544,13 @@ function Manage() {
                     >
                       Delete
                     </button>
+                    {/* <button
+                      type="button"
+                      className="btn btn btn-sm"
+                      onClick={() => handleUpdateVideo(video._id)}
+                    >
+                      Edit
+                    </button> */}
                   </li>
                 ))}
               </ul>

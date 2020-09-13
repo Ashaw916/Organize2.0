@@ -5,7 +5,7 @@ import API from "../../utils/API";
 import { set } from "mongoose";
 import { Link } from "react-router-dom";
 
-function Landing(props) {
+function Landing() {
   const [event, setEvent] = useState([]);
   // console.log(props);
 
@@ -24,7 +24,7 @@ function Landing(props) {
             start: events[i].start_date,
             end: events[i].end_date,
             title: events[i].title,
-            url: events[i].eventurl,
+            url: events[i].event_url,
             description: events[i].description,
             extendedProps: {
               location: events[i].location,
