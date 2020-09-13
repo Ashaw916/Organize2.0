@@ -55,7 +55,7 @@ class Contact extends Component {
                   id="contact-img"
                 />
                 <h2 className="card-title" id="contact-title">
-                  Participating Organizations
+                  Contact Participating Organizations
                 </h2>
               </div>
               <div className="card-body" id="contact-body">

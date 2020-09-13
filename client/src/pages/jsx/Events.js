@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import Pagination from "../../components/Pagination/Pagination";
 import API from "../../utils/API";
+import "../css/Events.css";
 
 function Events() {
   const [events, setEvents] = useState([]);
@@ -14,6 +15,14 @@ function Events() {
     API.getEvents()
       .then((res) => setEvents(res.data))
       .catch((err) => console.log(err));
+  }
+
+  function splitDate(str) {
+    return str.slice(5, 10);
+  }
+
+  function splitYear(str) {
+    return str.slice(0, 4);
   }
 
   return (
@@ -33,29 +42,37 @@ function Events() {
           </div>
         </div>
 
-        <div className="row">
-          <div className="col-2"></div>
-          <div className="col-8" id="events-img">
-            <div className="events-jumbo-title">Events</div>
-          </div>
-          <div className="col-2"></div>
-        </div>
-
-        {events.map((event) => (
-          <div className="row">
-            <div className="col-2" />
-            <div className="col-8" key={event._id}>
-              <div className="card col-12" id="donation-cards-wrapper">
-                <a href={event.src} className="btn btn" target="_blank">
-                  <div className="card-body" id="donate-card">
-                    <h4>{event.title}</h4>
-                  </div>
-                </a>
+        <div className="container-events" id="events-wrapper">
+          {events.map((event) => (
+            <div
+              className="card col-xs-6 col-sm-6 col-md-3 col-lg-3"
+              id="event-cards-wrapper"
+              key={event._id}
+            >
+              <div className="card-body" id="event-card">
+                <h6 id="event-card-title">{event.title}</h6>
+                <p className="event-card-ptag">
+                  START DATE:{" "}
+                  <span className="event-spantag">
+                    {splitDate(event.start_date)}-{splitYear(event.start_date)}
+                  </span>
+                </p>
+                <p className="event-card-ptag">
+                  TIME:{" "}
+                  <span className="event-spantag">{event.start_time}</span>
+                </p>
+                <p className="event-card-ptag">
+                  LOCATION:{" "}
+                  <span className="event-spantag">{event.location}</span>
+                </p>
+                <p className="event-card-ptag">
+                  POSTED BY:{" "}
+                  <span className="event-spantag">{event.organization}</span>
+                </p>
               </div>
             </div>
-            <div className="col-2" />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </>
   );

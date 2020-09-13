@@ -1,11 +1,29 @@
-#profile-card-top,
-#jumbo-card-top {
-  background-color: darkred;
-  color: #ebf0fffb;
+.profile-wrapper,
+#invite-wrapper {
+  -webkit-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
 }
-
+#jumbo-card-top {
+  padding-top: 15px !important;
+  min-height: 250px;
+  background-image: url("../../images/profile.png");
+  background-size: cover;
+}
+#profile-table-header {
+  margin-bottom: 20px;
+}
 #profile-card-top {
   padding-left: 50px;
+  color: darkred;
+}
+#profile-lead {
+  font-size: 16px !important;
+}
+.profile-form-input {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
 }
 #invite-wrapper {
   margin-top: 50px;
