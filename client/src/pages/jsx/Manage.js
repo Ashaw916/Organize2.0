@@ -301,83 +301,82 @@ function Manage() {
     setIsVideoSubmitting(true);
   };
 
-/////////////////////////////// Donate Form //////////////////////////
+  /////////////////////////////// Donate Form //////////////////////////
 
-// const [videoObject, setVideoObject] = useState({});
-//   const [videoErrors, setVideoErrors] = useState({});
-//   //for showing a successful submission
-//   const [videoSuccess, setVideoSuccess] = useState(false);
-//   //works with use effect, with checking errors, will start submit, and let user know
-//   const [isDonateSubmitting, setIsVideoSubmitting] = useState(false);
-//   //if an unsuccesful submission, will show an error to user
-//   const [notVideoSubmitted, setNotVideoSubmitted] = useState(false);
-//   //holds errors when updating a donation link
-//   // const [donationUpdateErrors, setDonationUpdateErrors] = useState({});
+  // const [videoObject, setVideoObject] = useState({});
+  //   const [videoErrors, setVideoErrors] = useState({});
+  //   //for showing a successful submission
+  //   const [videoSuccess, setVideoSuccess] = useState(false);
+  //   //works with use effect, with checking errors, will start submit, and let user know
+  //   const [isDonateSubmitting, setIsVideoSubmitting] = useState(false);
+  //   //if an unsuccesful submission, will show an error to user
+  //   const [notVideoSubmitted, setNotVideoSubmitted] = useState(false);
+  //   //holds errors when updating a donation link
+  //   // const [donationUpdateErrors, setDonationUpdateErrors] = useState({});
 
-//   //triggers when erros object keys have length of 0 when submitting a new donation
-//   useEffect(() => {
-//     if (Object.keys(videoErrors).length === 0 && isDonateSubmitting) {
-//       //function for api call
-//       submitVideo();
-//     }
-//   }, [videoErrors]);
+  //   //triggers when erros object keys have length of 0 when submitting a new donation
+  //   useEffect(() => {
+  //     if (Object.keys(videoErrors).length === 0 && isDonateSubmitting) {
+  //       //function for api call
+  //       submitVideo();
+  //     }
+  //   }, [videoErrors]);
 
-//   // //triggers when erros object keys have length of 0 when submitting an update to an already existing donation
-//   // useEffect(() => {
-//   //   if (Object.keys(donationUpdateErrors).length === 0 && isDonateSubmitting) {
-//   //     //function for PUT api call
-//   //   }
-//   // }, [donationUpdateErrors])
+  //   // //triggers when erros object keys have length of 0 when submitting an update to an already existing donation
+  //   // useEffect(() => {
+  //   //   if (Object.keys(donationUpdateErrors).length === 0 && isDonateSubmitting) {
+  //   //     //function for PUT api call
+  //   //   }
+  //   // }, [donationUpdateErrors])
 
-//   const handleVideoInputChange = (e) => {
-//     const { name, value } = e.target;
-//     setVideoObject({ ...videoObject, [name]:value });
-//   };
+  //   const handleVideoInputChange = (e) => {
+  //     const { name, value } = e.target;
+  //     setVideoObject({ ...videoObject, [name]:value });
+  //   };
 
-//   function submitVideo() {
-//     console.log("submitted successfully!");
-//     //when successful, setArticleSuccess(true)
-//     //if unsuccesfful, setNotSubmitted(true)
-//     // API.saveVideo({
-//     //   
-//     // }).then((res) => {
-//     //   loadVideos();
-//     //   setVideoSuccess(true);
-//     // }).catch((err) => {
-//     //   console.log(err);
-//     //   setNotVideoSubmitted(true);
-//     // });
-//     // //restform needed?
+  //   function submitVideo() {
+  //     console.log("submitted successfully!");
+  //     //when successful, setArticleSuccess(true)
+  //     //if unsuccesfful, setNotSubmitted(true)
+  //     // API.saveVideo({
+  //     //
+  //     // }).then((res) => {
+  //     //   loadVideos();
+  //     //   setVideoSuccess(true);
+  //     // }).catch((err) => {
+  //     //   console.log(err);
+  //     //   setNotVideoSubmitted(true);
+  //     // });
+  //     // //restform needed?
 
-//     // setTimeout(() => {
-//     //   setVideoSuccess(false);
-//     // }, 1200)
+  //     // setTimeout(() => {
+  //     //   setVideoSuccess(false);
+  //     // }, 1200)
 
-//   };
+  //   };
 
-//   const handleVideoSubmit = (e) => {
-//     if (e) e.preventDefault();
-//     setVideoErrors(videoValidation(videoObject));
-//     setIsVideoSubmitting(true);
-//   };
-// //listens for click of 'edit' button and grabs id for a donation link that already exists
-//   const updatingDonation = (e, id) => {
-//     if (e) e.preventDefault();
-//     console.log(id);
-//     //save the id to a state, that id is passed to api call via useeffect
-//     //calls a api call that gets data per that id and that .then of the api call saves the data to the donateObject (<-- is that it or do i need somethign else (to get the form to fill)? check the forms activities) that i would think fills the form inputs
-//     //
-//   };
-// //handles the click of the update button in the form
-//   const submitDonateUpdate = (e) => {
-//     if (e) e.preventDefault();
-//     //setDonationUpdateErrors(donationValidation(donationObject));
-//     //setDonationSubmitting
-//   };
+  //   const handleVideoSubmit = (e) => {
+  //     if (e) e.preventDefault();
+  //     setVideoErrors(videoValidation(videoObject));
+  //     setIsVideoSubmitting(true);
+  //   };
+  // //listens for click of 'edit' button and grabs id for a donation link that already exists
+  //   const updatingDonation = (e, id) => {
+  //     if (e) e.preventDefault();
+  //     console.log(id);
+  //     //save the id to a state, that id is passed to api call via useeffect
+  //     //calls a api call that gets data per that id and that .then of the api call saves the data to the donateObject (<-- is that it or do i need somethign else (to get the form to fill)? check the forms activities) that i would think fills the form inputs
+  //     //
+  //   };
+  // //handles the click of the update button in the form
+  //   const submitDonateUpdate = (e) => {
+  //     if (e) e.preventDefault();
+  //     //setDonationUpdateErrors(donationValidation(donationObject));
+  //     //setDonationSubmitting
+  //   };
 
   //about the form button, how to change it...
 
-  
   return (
     <>
       <div className="jumbotron jumbotron-fluid" id="manage-jumbo-container">
@@ -480,9 +479,7 @@ function Manage() {
 
       <div className="row" id="row-donations">
         <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-          <AddDonation 
-          
-          />
+          <AddDonation />
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
           <div className="card" id="post-donations-card">
@@ -491,13 +488,13 @@ function Manage() {
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getLinks.map((link) => (
+                {loadDonations.map((link) => (
                   <li className="list-group-item manage-post" key={link._id}>
                     {link.title}
                     <button
                       type="button"
                       className="btn btn btn-sm delete-btn"
-                      onClick={() => deleteLink(link._id)}
+                      onClick={() => deleteDonation(link._id)}
                     >
                       Delete
                     </button>
