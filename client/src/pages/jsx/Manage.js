@@ -7,7 +7,7 @@ import API from "../../utils/API";
 import eventValidation from "../../utils/EventValidation";
 import articleValidation from "../../utils/ArticleValidation";
 import videoValidation from "../../utils/VideoValidation";
-import donationValidation from "../../utils/DonationValidation";
+import donationValidation from "../../utils/DonateValidation";
 import "../css/Manage.css";
 
 ////////////////////////////////// For Loading Events, Articles, Videos ///////////////////////////
@@ -19,7 +19,7 @@ function Manage() {
   const [getEvents, setGetEvents] = useState([]);
   const [getArticles, setGetArticles] = useState([]);
   const [getVideos, setGetVideos] = useState([]);
-  const [getLinks, setGetLinks] = useState([]);
+  const [getDonations, setgetDonations] = useState([]);
 
   //functions to load arrays of objects for the page
   function loadEvents() {
@@ -42,11 +42,11 @@ function Manage() {
       .catch((err) => console.log(err));
   }
 
-  function loadLinks() {
-    API.getLinks()
+  function loaddonations() {
+    API.getDonations()
       .then((res) => {
         console.log(res.data);
-        setGetLinks(res.data);
+        setgetDonations(res.data);
       })
       .catch((err) => console.log(err));
   }
@@ -68,7 +68,7 @@ function Manage() {
   }, []);
 
   useEffect(() => {
-    loadLinks();
+    loaddonations();
   }, []);
 
   useEffect(() => {
@@ -88,9 +88,9 @@ function Manage() {
       .catch((err) => console.log(err));
   }
 
-  function deleteLink(id) {
-    API.deleteLink(id)
-      .then((res) => loadLinks())
+  function deletedonation(id) {
+    API.deletedonation(id)
+      .then((res) => loaddonations())
       .catch((err) => console.log(err));
   }
 
@@ -388,6 +388,13 @@ const [videoObject, setVideoObject] = useState({});
                     >
                       Delete
                     </button>
+                    <button
+                      type="button"
+                      className="btn btn btn-sm"
+                      onClick={() => handleUpdateEvent(event._id)}
+                    >
+                      Update
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -426,6 +433,13 @@ const [videoObject, setVideoObject] = useState({});
                     >
                       Delete
                     </button>
+                    <button
+                      type="button"
+                      className="btn btn btn-sm"
+                      onClick={() => handleUpdateArticle(article._id)}
+                    >
+                      Edit
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -447,15 +461,22 @@ const [videoObject, setVideoObject] = useState({});
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getLinks.map((link) => (
-                  <li className="list-group-item" key={link._id}>
-                    {link.title}
+                {getDonations.map((donation) => (
+                  <li className="list-group-item" key={donation._id}>
+                    {donation.title}
                     <button
                       type="button"
                       className="btn btn btn-sm"
-                      onClick={() => deleteLink(link._id)}
+                      onClick={() => deletedonation(donation._id)}
                     >
                       Delete
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn btn-sm"
+                      onClick={() => handleUpdateDonation(donation._id)}
+                    >
+                      Edit
                     </button>
                   </li>
                 ))}
@@ -492,6 +513,13 @@ const [videoObject, setVideoObject] = useState({});
                       onClick={() => deleteVideo(video._id)}
                     >
                       Delete
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn btn-sm"
+                      onClick={() => handleUpdateVideo(video._id)}
+                    >
+                      Edit
                     </button>
                   </li>
                 ))}
