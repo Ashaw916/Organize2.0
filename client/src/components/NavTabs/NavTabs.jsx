@@ -115,7 +115,7 @@ function NavTabs() {
                 location.pathname === "/admin" ? "nav-link active" : "nav-link"
               }
             >
-              Admin
+              Login/Register
             </Link>
           </li>
           <li className="nav-item">
@@ -140,18 +140,16 @@ function NavTabs() {
               Profile
             </Link>
           </li>
-          {/* <li className="nav-item">
+          <li className="nav-item">
             <Link
-              to="/contact/learn"
+              to="/logout"
               className={
-                location.pathname === "/contact/learn"
-                  ? "nav-link active"
-                  : "nav-link"
+                location.pathname === "/logout" ? "nav-link active" : "nav-link"
               }
             >
-              Learn
+              Logout
             </Link>
-          </li> */}
+          </li>
         </ul>
       </div>
     </nav>

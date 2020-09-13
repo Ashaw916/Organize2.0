@@ -18,11 +18,14 @@ function LoginUser(props) {
       withCredentials: true,
       url: "/users/login",
     }).then((response) => {
+      console.log("react response", response.data);
+      console.log("react response2");
       if (response.data === "No User Exists") {
         alert("You are not registered");
       }
       if (response.data !== "No User Exists") {
-        localStorage.setItem("token", response.data);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", response.data.user);
         props.history.push("/profile");
       } else {
         props.history.push("/");

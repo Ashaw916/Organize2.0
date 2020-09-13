@@ -5,7 +5,7 @@ const eventRoutes = require("./events");
 const articleRoutes = require("./articles");
 const linkRoutes = require("./links");
 const videoRoutes = require("./video");
-const userProfiles = require("./userProfiles");
+// const userProfiles = require("./userProfiles");
 const user = require("./users");
 const auth = require("./auth");
 
