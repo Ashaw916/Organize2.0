@@ -11,9 +11,23 @@ module.exports = {
       })
       .catch((err) => res.status(422).json(err));
   },
-  findById: function (req, res) {
-    console.log(req);
-    db.Auth.findById(req.user).then((data) => console.log(data));
+  findOne: function (req, res) {
+    console.log("res", res);
+    console.log("req", res);
+    db.Auth.findOne({ user: req.user }, (err, doc) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Result : ", doc.bool);
+      }
+      console.log("res", res);
+    }).then((doc, res) => {
+      if (doc.bool === "false") {
+        res.send("invalid");
+      }
+      console.log(doc.bool);
+      res.send("valid");
+    });
     //   .catch((err) => res.status(422).json(err));
   },
   create: function (req, res) {
@@ -23,12 +37,12 @@ module.exports = {
   },
   update: function (req, res) {
     console.log("before", req);
-    console.log({ user: req.user }, req.bool);
+    // console.log({ user: req.user }, req.bool);
 
     db.Auth.updateOne({ user: req.user }, { $set: { bool: req.bool } }).then(
-      (req) => {
-        console.log("after", req);
-        // res.json(res);
+      (res) => {
+        console.log("after");
+        // res.send("logout");
       }
     );
     //   .catch((err, res) => res.status(422).json(err));

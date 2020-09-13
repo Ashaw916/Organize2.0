@@ -83,9 +83,6 @@ function Manage() {
   }
 
   function deleteArticle(id) {
-    // const accessTokenObj = JSON.stringify(localStorage.getItem("token"));
-    // console.log(user);
-
     API.deleteArticle(id)
       .then((res) => loadArticles())
       .catch((err) => console.log(err));

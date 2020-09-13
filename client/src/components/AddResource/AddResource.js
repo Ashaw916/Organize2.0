@@ -21,8 +21,6 @@ function AddResource({
               <div className="form-group col-md-6">
                 <label htmlFor="title">Title</label>
                 <input
-                  onChange={handleInputChange}
-                  name="title"
                   type="text"
                   className={`form-control ${
                     articleErrors.title ? "inputErr" : ""
@@ -41,8 +39,6 @@ function AddResource({
               <div className="form-group col-md-6">
                 <label htmlFor="author">Author</label>
                 <input
-                  onChange={handleInputChange}
-                  name="author"
                   type="text"
                   className={`form-control ${
                     articleErrors.author ? "inputErr" : ""
@@ -131,12 +127,7 @@ function AddResource({
                 </div>
               </div>
             </div>
-            <button
-              type="submit"
-              className="btn btn-add"
-              disabled={!(formObject.body && formObject.title)}
-              onClick={handleFormSubmit}
-            >
+            <button type="submit" className="btn btn-add">
               Add Resource
             </button>
             {articleSuccess && <div className="success">Submitted</div>}

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import NavTabs from "./components/NavTabs/NavTabs";
 import Landing from "./pages/jsx/Landing";
 import Video from "./pages/jsx/Video";
-
+// import Route from "./components/Routes";
 import Events from "./pages/jsx/Events.js";
 import Resources from "./pages/jsx/Resources.jsx";
 import Contact from "./pages/jsx/Contact";
@@ -14,34 +14,38 @@ import Profile from "./pages/jsx/Profile";
 import Donate from "./pages/jsx/Donate";
 import Logout from "./components/Logout/Logout";
 import Axios from "axios";
-import API from "./utils/API";
 
 function App(props, user) {
   const userObj = JSON.stringify(localStorage.getItem("user"));
-  // console.log("userObj", userObj);
-  // API.auth(accessTokenObj);
-  // Axios.get("/auth").then((res) => {
-  //   console.log(res.data, "hello");
-  // });
+  console.log("userObj", userObj);
+  let userRes;
   Axios({
     method: "POST",
     data: {
       user: userObj,
     },
     url: "/auth",
-  }).then((response) => {
-    console.log("res react", response);
-    // if (response.data === "Already invited") {
-    //   alert("Already invited");
-    // } else {
-    //   alert("Invite successful");
-    // }
-  });
-  // const PrivateRoute = ({ component: Component, ...rest }) => (
+  })
+    .then((response) => {
+      console.log("res react", response.data);
+      if (response.data === "valid") {
+        let userRes = "valid";
+
+        console.log("userRes1", userRes);
+        return userRes;
+      } else {
+        let userRes = "invalid";
+        return userRes;
+      }
+    })
+    .then((userRes) => {
+      console.log("userRes2", userRes);
+    });
+  // const Route = ({ component: Component, ...rest }, userRes) => (
   //   <Route
   //     {...rest}
   //     render={(props) =>
-  //       user === "auth success" ? (
+  //       userRes === "valid" ? (
   //         <Component {...props} />
   //       ) : (
   //         <Redirect
@@ -53,7 +57,6 @@ function App(props, user) {
   //     }
   //   />
   // );
-
   return (
     <Router>
       <div>
