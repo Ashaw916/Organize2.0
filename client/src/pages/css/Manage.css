@@ -34,10 +34,16 @@
   box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
 }
 
+.manage-post {
+  font-weight: bold;
+}
 .btn-add {
   background-color: #bfd1d3;
   border: 1px solid rgba(0, 0, 0, 0.125);
   color: #e25b4b;
+}
+.delete-btn {
+  float: right;
 }
 /*position each row of add and post cards*/
 #row-events,

@@ -22,7 +22,7 @@ module.exports = {
             organization: req.body.organization,
             host: req.body.host,
           });
-          newInvite.save().then((dbModel) => {
+          newInvite.save().then((res) => {
             res.send("Success");
           });
         }

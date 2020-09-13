@@ -30,8 +30,12 @@ function Manage() {
       .catch((err) => console.log(err));
   }
   //slices incoming iso date, so only get the date part
-  function sliceDate(date) {
-    return date.slice(0, 10);
+  function splitDate(str) {
+    return str.slice(5, 10);
+  }
+
+  function splitYear(str) {
+    return str.slice(0, 4);
   }
 
   function loadArticles() {
@@ -404,14 +408,15 @@ function Manage() {
             <div className="card-body">
               <ul className="list-group list-group-flush">
                 {getEvents.map((event) => (
-                  <li className="list-group-item" key={event._id}>
-                    {event.title}: {event.start_date}{" "}
+                  <li className="list-group-item manage-post" key={event._id}>
+                    {event.title}: {splitDate(event.start_date)}-
+                    {splitYear(event.start_date)}{" "}
                     <button
                       type="button"
-                      className="btn btn btn-sm"
+                      className="btn btn btn-sm delete-btn"
                       onClick={() => deleteEvent(event._id)}
                     >
-                      Delete
+                      Delete Event
                     </button>
                     {/* <button
                       type="button"
@@ -449,11 +454,11 @@ function Manage() {
             <div className="card-body">
               <ul className="list-group list-group-flush">
                 {getArticles.map((article) => (
-                  <li className="list-group-item" key={article._id}>
+                  <li className="list-group-item manage-post" key={article._id}>
                     {article.title}
                     <button
                       type="button"
-                      className="btn btn btn-sm"
+                      className="btn btn btn-sm delete-btn"
                       onClick={() => deleteArticle(article._id)}
                     >
                       Delete
@@ -486,13 +491,13 @@ function Manage() {
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getDonations.map((donation) => (
-                  <li className="list-group-item" key={donation._id}>
-                    {donation.title}
+                {getLinks.map((link) => (
+                  <li className="list-group-item manage-post" key={link._id}>
+                    {link.title}
                     <button
                       type="button"
-                      className="btn btn btn-sm"
-                      onClick={() => deleteDonation(donation._id)}
+                      className="btn btn btn-sm delete-btn"
+                      onClick={() => deleteLink(link._id)}
                     >
                       Delete
                     </button>
@@ -530,11 +535,11 @@ function Manage() {
             <div className="card-body">
               <ul className="list-group list-group-flush">
                 {getVideos.map((video) => (
-                  <li className="list-group-item" key={video._id}>
+                  <li className="list-group-item manage-post" key={video._id}>
                     {video.title}
                     <button
                       type="button"
-                      className="btn btn-danger btn-sm"
+                      className="btn btn btn-sm delete-btn"
                       onClick={() => deleteVideo(video._id)}
                     >
                       Delete
