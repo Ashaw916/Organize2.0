@@ -6,4 +6,5 @@ module.exports = {
   User: require("./User"),
   Invite: require("./invite"),
   UserProfile: require("./UserProfile"),
+  Auth: require("./auth"),
 };

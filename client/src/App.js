@@ -10,48 +10,52 @@ import Footer from "./components/Footer";
 import Manage from "./pages/jsx/Manage";
 import Profile from "./pages/jsx/Profile";
 import Donate from "./pages/jsx/Donate";
+import Logout from "./components/Logout/Logout";
 import Axios from "axios";
 import API from "./utils/API";
 
-function App() {
-  const accessTokenObj = JSON.stringify(localStorage.getItem("token"));
-  console.log("accessTokenObj", accessTokenObj);
-  API.auth(accessTokenObj);
+function App(props, user) {
+  const userObj = JSON.stringify(localStorage.getItem("user"));
+  // console.log("userObj", userObj);
+  // API.auth(accessTokenObj);
+  // Axios.get("/auth").then((res) => {
+  //   console.log(res.data, "hello");
+  // });
   Axios({
     method: "POST",
     data: {
-      token: accessTokenObj,
+      user: userObj,
     },
-    url: "/api/auth",
+    url: "/auth",
   }).then((response) => {
-    console.log("res react", response.data);
-    //   // if (response.data === "Already invited") {
-    //   //   alert("Already invited");
-    //   // } else {
-    //   //   alert("Invite successful");
-    //   // }
+    console.log("res react", response);
+    // if (response.data === "Already invited") {
+    //   alert("Already invited");
+    // } else {
+    //   alert("Invite successful");
+    // }
   });
-  const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route
-      {...rest}
-      render={(props) =>
-        accessTokenObj === "auth success" ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/Admin",
-            }}
-          />
-        )
-      }
-    />
-  );
+  // const PrivateRoute = ({ component: Component, ...rest }) => (
+  //   <Route
+  //     {...rest}
+  //     render={(props) =>
+  //       user === "auth success" ? (
+  //         <Component {...props} />
+  //       ) : (
+  //         <Redirect
+  //           to={{
+  //             pathname: "/Admin",
+  //           }}
+  //         />
+  //       )
+  //     }
+  //   />
+  // );
 
   return (
     <Router>
       <div>
-        <NavTabs />
+        <NavTabs {...props} />
         <Route exact path="/" component={Landing} />
         <Route exact path="/resources" component={Resources} />
         <Route exact path="/video" component={Video} />
@@ -60,6 +64,7 @@ function App() {
         <Route exact path="/Admin" component={Admin} />
         <Route exact path="/Manage" component={Manage} />
         <Route exact path="/Profile" component={Profile} />
+        <Route exact path="/Logout" component={Logout} />
       </div>
       <Footer />
     </Router>

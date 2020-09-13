@@ -10,8 +10,8 @@ export default {
     return axios.get("/api/events/" + id);
   },
   // Deletes the event with the given id
-  deleteEvent: function (id) {
-    return axios.delete("/api/events/" + id);
+  deleteEvent: function (id, eventData) {
+    return axios.delete("/api/events/" + id + eventData);
   },
   // Saves an event to the database
   saveEvent: function (eventData) {
@@ -31,8 +31,8 @@ export default {
     return axios.get("/api/articles/" + id);
   },
   // Deletes the article with the given id
-  deleteArticle: function (id) {
-    return axios.delete("/api/articles/" + id);
+  deleteArticle: function (id, articleData) {
+    return axios.delete("/api/articles/" + id + articleData);
   },
   // Saves an article to the database
   saveArticle: function (articleData) {
@@ -52,8 +52,8 @@ export default {
     return axios.get("/api/links/" + id);
   },
   // Deletes the link with the given id
-  deleteLink: function (id) {
-    return axios.delete("/api/links/" + id);
+  deleteLink: function (id, linkData) {
+    return axios.delete("/api/links/" + id + linkData);
   },
   // Saves a link to the database
   saveLink: function (linkData) {
@@ -73,16 +73,16 @@ export default {
     return axios.get("/api/videos/" + id);
   },
   // Deletes the link with the given id
-  deleteVideo: function (id) {
-    return axios.delete("/api/videos/" + id);
+  deleteVideo: function (id, videoData) {
+    return axios.delete("/api/videos/" + id, videoData);
   },
   // Saves a link to the database
-  saveVideo: function (linkData) {
-    return axios.post("/api/videos", linkData);
+  saveVideo: function (videoData) {
+    return axios.post("/api/videos", videoData);
   },
   // Updates a link
-  updateVideo: function (id, linkData) {
-    return axios.put("/api/videos/" + id, linkData);
+  updateVideo: function (id, videoData) {
+    return axios.put("/api/videos/" + id, videoData);
   },
   auth: function (token) {
     return axios.post("/api/auth", (token) => {

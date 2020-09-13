@@ -1,7 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import API from "../../utils/API";
 
 function AddResource(props) {
-  console.log(props);
+  // States
+  const [formObject, setFormObject] = useState("");
+
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    setFormObject({ ...formObject, [name]: value });
+  }
+
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    const accessTokenObj = JSON.stringify(localStorage.getItem("token"));
+    console.log(accessTokenObj);
+    if (formObject.title && formObject.body) {
+      API.saveArticle({
+        title: formObject.title,
+        body: formObject.body,
+        description: formObject.description,
+        source: formObject.source,
+        type: formObject.type,
+        token: accessTokenObj,
+      }).catch((err) => console.log(err));
+    }
+  }
+
   return (
     <>
       <div className="card " id="manage-add-resource">
@@ -14,6 +38,8 @@ function AddResource(props) {
               <div className="form-group col-md-6">
                 <label htmlFor="title">Title</label>
                 <input
+                  onChange={handleInputChange}
+                  name="title"
                   type="text"
                   className="form-control"
                   id="title"
@@ -23,6 +49,8 @@ function AddResource(props) {
               <div className="form-group col-md-6">
                 <label htmlFor="author">Author</label>
                 <input
+                  onChange={handleInputChange}
+                  name="author"
                   type="text"
                   className="form-control"
                   id="author"
@@ -33,14 +61,18 @@ function AddResource(props) {
             <div className="form-group">
               <label htmlFor="resource-body">Body</label>
               <textarea
+                onChange={handleInputChange}
+                name="body"
                 className="form-control"
-                id="exampleFormControlTextarea1"
+                id="body"
                 rows="3"
               ></textarea>
             </div>
             <div className="form-group">
               <label htmlFor="resource-description">Brief Description</label>
               <textarea
+                onChange={handleInputChange}
+                name="description"
                 className="form-control"
                 id="description"
                 rows="1"
@@ -49,16 +81,33 @@ function AddResource(props) {
             <div className="form-row">
               <div className="form-group col">
                 <label htmlFor="source">Source(url)</label>
-                <input type="text" className="form-control" id="source" />
+                <input
+                  onChange={handleInputChange}
+                  name="source"
+                  type="text"
+                  className="form-control"
+                  id="source"
+                />
               </div>
               <div className="form-row">
                 <div className="form-group col">
                   <label htmlFor="type">Type/keyword(s)</label>
-                  <input type="text" className="form-control" id="type" />
+                  <input
+                    onChange={handleInputChange}
+                    name="type"
+                    type="text"
+                    className="form-control"
+                    id="type"
+                  />
                 </div>
               </div>
             </div>
-            <button type="submit" className="btn btn-add">
+            <button
+              type="submit"
+              className="btn btn-add"
+              disabled={!(formObject.body && formObject.title)}
+              onClick={handleFormSubmit}
+            >
               Add Resource
             </button>
           </form>
