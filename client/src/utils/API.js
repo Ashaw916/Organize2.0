@@ -85,10 +85,11 @@ export default {
     return axios.put("/api/videos/" + id, videoData);
   },
 
-  // //get all userProfiles
-  // getUserProfiles: function () {
-  //   return axios.get("/api/userprofiles");
-  // }
+  //get all userProfiles
+  getProfiles: function () {
+    return axios.get("/users/profile");
+  },
+
   auth: function (token) {
     return axios.post("/api/auth", (token) => {
       console.log(token);
@@ -96,4 +97,3 @@ export default {
   },
 
 };
-
