@@ -12,12 +12,16 @@ function Video() {
   // Loads all books and sets them to books
   function loadVideos() {
     API.getVideos()
-      .then((res) => setVideos(res.data))
+      .then((res) => setVideos(res.data.reverse()))
       .catch((err) => console.log(err));
   }
 
   function splitDate(str) {
-    return str.slice(0, 10);
+    return str.slice(5, 10);
+  }
+
+  function splitYear(str) {
+    return str.slice(0, 4);
   }
 
   return (
@@ -50,7 +54,8 @@ function Video() {
                         </a>
                       </div>
                       <small className="text-muted">
-                        {splitDate(video.date_added)}
+                        {splitDate(video.date_added)}-
+                        {splitYear(video.date_added)}
                       </small>
                     </div>
                   </div>

@@ -18,11 +18,11 @@ function Admin(props) {
         </div>
       </div>
       <div className="row">
-        <div className="col">
+        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
           <Login {...props} />
         </div>
 
-        <div className="col">
+        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
           <Registration />
         </div>
       </div>
