@@ -19,7 +19,7 @@ function Manage() {
   const [getEvents, setGetEvents] = useState([]);
   const [getArticles, setGetArticles] = useState([]);
   const [getVideos, setGetVideos] = useState([]);
-  const [getDonations, setgetDonations] = useState([]);
+  const [getDonations, setGetDonations] = useState([]);
 
   //functions to load arrays of objects for the page
   function loadEvents() {
@@ -42,11 +42,11 @@ function Manage() {
       .catch((err) => console.log(err));
   }
 
-  function loaddonations() {
-    API.getDonations()
+  function loadDonations() {
+    API.getLinks()
       .then((res) => {
         console.log(res.data);
-        setgetDonations(res.data);
+        setGetDonations(res.data);
       })
       .catch((err) => console.log(err));
   }
@@ -68,7 +68,7 @@ function Manage() {
   }, []);
 
   useEffect(() => {
-    loaddonations();
+    loadDonations();
   }, []);
 
   useEffect(() => {
@@ -88,9 +88,9 @@ function Manage() {
       .catch((err) => console.log(err));
   }
 
-  function deletedonation(id) {
-    API.deletedonation(id)
-      .then((res) => loaddonations())
+  function deleteDonation(id) {
+    API.deleteDonation(id)
+      .then((res) => loadDonations())
       .catch((err) => console.log(err));
   }
 
@@ -132,7 +132,6 @@ function Manage() {
     console.log(sDate);
     console.log(eDate);
 
-    ////////////////////////the path for url might work, test it out ---via atlas once
     API.saveEvent({
       title: eventObject.title,
       start_date: sDate,
@@ -140,7 +139,7 @@ function Manage() {
       description: eventObject.description,
       location: eventObject.location,
       organization: eventObject.organization,
-      event_url: "/events", //this might need to be a https url of the heroku address/events or this will need to be a click event in the calendar component
+      event_url: "/events",
     })
       .then((res) => {
         loadEvents();
@@ -493,7 +492,7 @@ function Manage() {
                     <button
                       type="button"
                       className="btn btn btn-sm"
-                      onClick={() => deletedonation(donation._id)}
+                      onClick={() => deleteDonation(donation._id)}
                     >
                       Delete
                     </button>

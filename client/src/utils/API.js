@@ -85,8 +85,8 @@ export default {
     return axios.put("/api/videos/" + id, videoData);
   },
 
-  //get all userProfiles
-  getProfiles: function () {
+  //get one profile
+  getProfile: function () {
     return axios.get("/users/profile");
   },
 

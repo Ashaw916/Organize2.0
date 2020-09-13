@@ -5,7 +5,7 @@ import API from "../../utils/API";
 import { set } from "mongoose";
 import { Link } from "react-router-dom";
 
-function Landing(props) {
+function Landing() {
   const [event, setEvent] = useState([]);
   // console.log(props);
 
