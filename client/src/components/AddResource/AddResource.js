@@ -11,9 +11,9 @@ function AddResource({
 }) {
   return (
     <>
-      <div className="card " id="manage-add-resource">
+      <div className="card " id="add-resource-card">
         <div className="card-header text-center">
-          <h4 id="add-resource-title">Add Article or Resource</h4>
+          <h4 id="add-resource-header">Add Article or Resource</h4>
         </div>
         <div className="card-body">
           <form onSubmit={handleArticleSubmit} noValidate>

@@ -1,33 +1,35 @@
 import React, { useState, useEffect } from "react";
-import AddResource from "../../components/AddResource/AddResource";
 import AddEvent from "../../components/AddEvent/AddEvent";
+import AddResource from "../../components/AddResource/AddResource";
+import AddDonation from "../../components/AddDonation/AddDonation";
 import AddVideo from "../../components/AddVideo/AddVideo";
-import ListVideo from "../../components/ListVideo/ListVideo";
 import API from "../../utils/API";
 import eventValidation from "../../utils/EventValidation";
 import articleValidation from "../../utils/ArticleValidation";
 import videoValidation from "../../utils/VideoValidation";
-// import linkValidation from "../../utils/LinkValidation";
+import donationValidation from "../../utils/DonationValidation";
 import "../css/Manage.css";
 
 ////////////////////////////////// For Loading Events, Articles, Videos ///////////////////////////
 
 function Manage() {
-// function Manage(props) {
+  // function Manage(props) {
 
   //states for events, articles, and videos
   const [getEvents, setGetEvents] = useState([]);
   const [getArticles, setGetArticles] = useState([]);
   const [getVideos, setGetVideos] = useState([]);
+  const [getLinks, setGetLinks] = useState([]);
+
   //functions to load arrays of objects for the page
   function loadEvents() {
     API.getEvents()
       .then((res) => {
-        setGetEvents(res.data)
+        setGetEvents(res.data);
       })
       .catch((err) => console.log(err));
-  };
-//slices incoming iso date, so only get the date part
+  }
+  //slices incoming iso date, so only get the date part
   function sliceDate(date) {
     return date.slice(0, 10);
   }
@@ -36,6 +38,15 @@ function Manage() {
     API.getArticles()
       .then((res) => {
         setGetArticles(res.data);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function loadLinks() {
+    API.getLinks()
+      .then((res) => {
+        console.log(res.data);
+        setGetLinks(res.data);
       })
       .catch((err) => console.log(err));
   }
@@ -57,6 +68,10 @@ function Manage() {
   }, []);
 
   useEffect(() => {
+    loadLinks();
+  }, []);
+
+  useEffect(() => {
     loadVideos();
   }, []);
 
@@ -73,13 +88,19 @@ function Manage() {
       .catch((err) => console.log(err));
   }
 
+  function deleteLink(id) {
+    API.deleteLink(id)
+      .then((res) => loadLinks())
+      .catch((err) => console.log(err));
+  }
+
   function deleteVideo(id) {
     API.deleteVideo(id)
       .then((res) => loadVideos())
       .catch((err) => console.log(err));
   }
 
-  //////////////////////// FOR EVENT FORM ///////////////////////// 
+  //////////////////////// FOR EVENT FORM /////////////////////////
 
   const [eventObject, setEventObject] = useState({});
   const [eventErrors, setEventErrors] = useState({});
@@ -99,7 +120,7 @@ function Manage() {
 
   const handleEventInputChange = (e) => {
     const { name, value } = e.target;
-    setEventObject({ ...eventObject, [name]:value });
+    setEventObject({ ...eventObject, [name]: value });
   };
 
   function submitEvent() {
@@ -110,7 +131,7 @@ function Manage() {
 
     console.log(sDate);
     console.log(eDate);
-    
+
     ////////////////////////the path for url might work, test it out ---via atlas once
     API.saveEvent({
       title: eventObject.title,
@@ -119,18 +140,19 @@ function Manage() {
       description: eventObject.description,
       location: eventObject.location,
       organization: eventObject.organization,
-      event_url: "/events",//this might need to be a https url of the heroku address/events or this will need to be a click event in the calendar component
+      event_url: "/events", //this might need to be a https url of the heroku address/events or this will need to be a click event in the calendar component
     })
-    .then((res) => {
-      loadEvents();
-      setEventSuccess(true);
-    })
-    .catch((err) => {
-      console.log(err);
-      setNotEventSubmitted(true);
-    });
-     // RESET FORM HERE
-     setEventObject({//add event_url if want it back, and uncomment out in validation and in addevent
+      .then((res) => {
+        loadEvents();
+        setEventSuccess(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        setNotEventSubmitted(true);
+      });
+    // RESET FORM HERE
+    setEventObject({
+      //add event_url if want it back, and uncomment out in validation and in addevent
       title: "",
       start_date: "",
       end_date: "",
@@ -143,9 +165,8 @@ function Manage() {
 
     setTimeout(() => {
       setEventSuccess(false);
-    }, 1500)
-
-  };
+    }, 1500);
+  }
 
   const handleEventSubmit = (e) => {
     if (e) e.preventDefault();
@@ -174,26 +195,28 @@ function Manage() {
 
   const handleArticleInputChange = (e) => {
     const { name, value } = e.target;
-    setArticleObject({ ...articleObject, [name]:value });
+    setArticleObject({ ...articleObject, [name]: value });
   };
 
   function submitArticle() {
     console.log("submitted successfully!");
-  
+
     API.saveArticle({
       title: articleObject.title,
       author: articleObject.author,
       body: articleObject.body,
       description: articleObject.description,
       source: articleObject.source_url,
-      type: articleObject.type
-    }).then((res) => {
-      loadArticles();
-      setArticleSuccess(true);
-    }).catch((err) => {
-      console.log(err);
-      setNotSubmitted(true);
-    });
+      type: articleObject.type,
+    })
+      .then((res) => {
+        loadArticles();
+        setArticleSuccess(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        setNotSubmitted(true);
+      });
     //resets form
     setArticleObject({
       title: "",
@@ -201,15 +224,13 @@ function Manage() {
       body: "",
       description: "",
       source: "",
-      type: ""
+      type: "",
     });
 
     setTimeout(() => {
       setArticleSuccess(false);
-    }, 1500)
-
-  };
-
+    }, 1500);
+  }
 
   const handleArticleSubmit = (e) => {
     if (e) e.preventDefault();
@@ -238,7 +259,7 @@ function Manage() {
 
   const handleVideoInputChange = (e) => {
     const { name, value } = e.target;
-    setVideoObject({ ...videoObject, [name]:value });
+    setVideoObject({ ...videoObject, [name]: value });
   };
 
   function submitVideo() {
@@ -248,14 +269,16 @@ function Manage() {
       title: videoObject.videoTitle,
       description: videoObject.videoDescription,
       src: videoObject.videoUrl,
-      type: videoObject.videoType
-    }).then((res) => {
-      loadVideos();
-      setVideoSuccess(true);
-    }).catch((err) => {
-      console.log(err);
-      setNotVideoSubmitted(true);
-    });
+      type: videoObject.videoType,
+    })
+      .then((res) => {
+        loadVideos();
+        setVideoSuccess(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        setNotVideoSubmitted(true);
+      });
     //resetsform
     setVideoObject({
       videoTitle: "",
@@ -266,9 +289,8 @@ function Manage() {
 
     setTimeout(() => {
       setVideoSuccess(false);
-    }, 1500)
-
-  };
+    }, 1500);
+  }
 
   const handleVideoSubmit = (e) => {
     if (e) e.preventDefault();
@@ -276,7 +298,7 @@ function Manage() {
     setIsVideoSubmitting(true);
   };
 
-/////////////////////////////// Links/Donate Form //////////////////////////
+/////////////////////////////// Donate Form //////////////////////////
 
 const [videoObject, setVideoObject] = useState({});
   const [videoErrors, setVideoErrors] = useState({});
@@ -338,21 +360,59 @@ const [videoObject, setVideoObject] = useState({});
         </div>
       </div>
 
-      <div className="row" id="row-articles">
+      <div className="row" id="row-events">
         <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-          <AddResource 
-          handleArticleInputChange={handleArticleInputChange}
-          handleArticleSubmit={handleArticleSubmit}
-          articleObject={articleObject}
-          articleErrors={articleErrors}
-          articleSuccess={articleSuccess}
-          notSubmitted={notSubmitted}
+          <AddEvent
+            handleEventInputChange={handleEventInputChange}
+            handleEventSubmit={handleEventSubmit}
+            eventObject={eventObject}
+            eventErrors={eventErrors}
+            eventSuccess={eventSuccess}
+            notEventSubmitted={notEventSubmitted}
           />
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-          <div className="card" id="manage-articles-post">
+          <div className="card" id="post-events-card">
             <div className="card-header">
-              <h4 id="manage-articles">Your Posted Articles and Resources</h4>
+              <h4 id="post-events-header">Your Posted Events</h4>
+            </div>
+            <div className="card-body">
+              <ul className="list-group list-group-flush">
+                {getEvents.map((event) => (
+                  <li className="list-group-item" key={event._id}>
+                    {event.title}: {event.start_date}{" "}
+                    <button
+                      type="button"
+                      className="btn btn btn-sm"
+                      onClick={() => deleteEvent(event._id)}
+                    >
+                      Delete
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="row" id="row-articles">
+        <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+          <AddResource
+            handleArticleInputChange={handleArticleInputChange}
+            handleArticleSubmit={handleArticleSubmit}
+            articleObject={articleObject}
+            articleErrors={articleErrors}
+            articleSuccess={articleSuccess}
+            notSubmitted={notSubmitted}
+          />
+        </div>
+        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <div className="card" id="post-articles-card">
+            <div className="card-header">
+              <h4 id="post-articles-header">
+                Your Posted Articles and Resources
+              </h4>
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
@@ -374,37 +434,26 @@ const [videoObject, setVideoObject] = useState({});
         </div>
       </div>
 
-      <div className="row" id="row-events">
-        <div
-          className="col-xs-12 col-sm-12 col-md-5 col-lg-5"
-          id="add-events-wrapper"
-        >
-          <AddEvent 
-          handleEventInputChange={handleEventInputChange}
-          handleEventSubmit={handleEventSubmit}
-          eventObject={eventObject}
-          eventErrors={eventErrors}
-          eventSuccess={eventSuccess}
-          notEventSubmitted={notEventSubmitted}
+      <div className="row" id="row-donations">
+        <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+          <AddDonation 
+          
           />
         </div>
-        <div
-          className="col-xs-12 col-sm-12 col-md-6 col-lg-6"
-          id="post-events-wrapper"
-        >
-          <div className="card" id="manage-events">
+        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <div className="card" id="post-donations-card">
             <div className="card-header">
-              <h4 id="manage-events-title">Your Posted Events</h4>
+              <h4 id="post-donations-header">Your Posted Donation Resources</h4>
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getEvents.map((event) => (
-                  <li className="list-group-item" key={event._id}>
-                    {event.title}: {sliceDate(event.start_date)}{" "}
+                {getLinks.map((link) => (
+                  <li className="list-group-item" key={link._id}>
+                    {link.title}
                     <button
                       type="button"
-                      className="btn btn-danger btn-sm"
-                      onClick={() => deleteEvent(event._id)}
+                      className="btn btn btn-sm"
+                      onClick={() => deleteLink(link._id)}
                     >
                       Delete
                     </button>
@@ -418,19 +467,19 @@ const [videoObject, setVideoObject] = useState({});
 
       <div className="row" id="row-videos">
         <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-          <AddVideo 
-          handleVideoInputChange={handleVideoInputChange}
-          handleVideoSubmit={handleVideoSubmit}
-          videoObject={videoObject}
-          videoErrors={videoErrors}
-          videoSuccess={videoSuccess}
-          notVideoSubmitted={notVideoSubmitted}
+          <AddVideo
+            handleVideoInputChange={handleVideoInputChange}
+            handleVideoSubmit={handleVideoSubmit}
+            videoObject={videoObject}
+            videoErrors={videoErrors}
+            videoSuccess={videoSuccess}
+            notVideoSubmitted={notVideoSubmitted}
           />
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-          <div className="card" id="manage-videos-post">
+          <div className="card" id="post-videos-card">
             <div className="card-header">
-              <h4 id="manage-video-posts">Your Posted Videos</h4>
+              <h4 id="post-videos-header">Your Posted Videos</h4>
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">

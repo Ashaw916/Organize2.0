@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import { Link, Route } from "react-router-dom";
 // import Table from "../../components/Table/Table.js";
 import API from "../../utils/API";
+import { getUsers } from "../../resources/users";
 import "../css/Contact.css";
 import Contactimg from "../../images/contactimg.png";
 
@@ -92,7 +93,11 @@ class Contact extends Component {
                       <tr>
                         <td className="contact-org">{user.organization}</td>
                         <td>{user.email}</td>
-                        <a href={user.website} target="_blank" rel="noopener noreferrer">
+                        <a
+                          href={user.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <td>{user.website}</td>
                         </a>
                         <td>{user.facebook}</td>
