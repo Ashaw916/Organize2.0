@@ -101,7 +101,7 @@ function AddEvent({
                   required
                 />
                 <small id="textHelp" className="form-text text-muted">
-                  hh:mm (e.g. 01:00, 11:00)
+                  hh:mm AM/PM(e.g. 01:00, 11:00)
                 </small>
                 {eventErrors.start_time && (
                   <p className="err">{eventErrors.start_time}</p>
@@ -121,7 +121,7 @@ function AddEvent({
                   required
                 />
                 <small id="textHelp" className="form-text text-muted">
-                  hh:mm (e.g. 09:00, 12:00)
+                  hh:mm AM/PM(e.g. 09:00, 12:00)
                 </small>
                 {eventErrors.end_time && (
                   <p className="err">{eventErrors.end_time}</p>

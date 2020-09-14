@@ -24,11 +24,11 @@ class Contact extends Component {
   //   console.log(this.state);
   // }
 
-  // componentDidMount() {
-  //   API.getProfiles()
-  //     .then((res) => this.setState({ users: res.data }))
-  //     .catch((err) => console.log(err));
-  // };
+  componentDidMount() {
+    API.getProfile()
+      .then((res) => this.setState({ users: res.data }))
+      .catch((err) => console.log(err));
+  }
 
   raiseSort = (path) => {
     const sortColumn = { ...this.props.sortColumn };
@@ -55,7 +55,7 @@ class Contact extends Component {
             <div className="card col-12" id="contact-card">
               <div className="card-img-top">
                 <img
-                  class="card-img-top"
+                  className="card-img-top"
                   src={Contactimg}
                   alt="contact-img"
                   id="contact-img"
