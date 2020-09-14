@@ -24,11 +24,11 @@ class Contact extends Component {
   //   console.log(this.state);
   // }
 
-  componentDidMount() {
-    API.getProfiles()
-      .then((res) => this.setState({ users: res.data }))
-      .catch((err) => console.log(err));
-  };
+  // componentDidMount() {
+  //   API.getProfiles()
+  //     .then((res) => this.setState({ users: res.data }))
+  //     .catch((err) => console.log(err));
+  // };
 
   raiseSort = (path) => {
     const sortColumn = { ...this.props.sortColumn };

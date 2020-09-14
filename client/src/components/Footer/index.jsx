@@ -9,7 +9,7 @@ function Footer() {
         <div className="container" id="bottom-info">
           <div className="row">
             <div className="col">
-              <h4 id="footer-about">Organize 2.0 a Community Organizing Hub</h4>
+              <h4 id="footer-about">Organize a Community Organizing Hub</h4>
             </div>
           </div>
 
@@ -40,7 +40,7 @@ function Footer() {
           <hr />
         </div>
         <div className="footer-copyright text-center py-3">
-          Organize 2.0 | &copy;{new Date().getFullYear()}
+          Organize | &copy;{new Date().getFullYear()}
         </div>
       </footer>
     </>
