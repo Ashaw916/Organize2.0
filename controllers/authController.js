@@ -20,7 +20,7 @@ module.exports = {
       } else {
         console.log("Result : ", doc.bool);
       }
-      console.log("res", res);
+      // console.log("res", res);
     }).then((doc, res) => {
       if (doc.bool === "false") {
         res.send("invalid");

@@ -10,7 +10,7 @@ function NavTabs() {
   return (
     <nav className="navbar navbar-expand-lg">
       <a className="navbar-brand" href="#">
-        Organize 2.0
+        Organize
       </a>
       <button
         className="navbar-toggler"
