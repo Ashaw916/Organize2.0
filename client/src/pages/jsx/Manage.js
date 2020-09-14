@@ -315,6 +315,7 @@ function Manage() {
     setIsVideoSubmitting(true);
   };
 
+
 /////////////////////////////// Donate Form //////////////////////////
 
 const [donateObject, setDonateObject] = useState({});
@@ -402,9 +403,9 @@ const [donateObject, setDonateObject] = useState({});
 //     //setDonationSubmitting
 //   };
 
+
   //about the form button, how to change it...
 
-  
   return (
     <>
       <div className="jumbotron jumbotron-fluid" id="manage-jumbo-container">
@@ -529,10 +530,22 @@ const [donateObject, setDonateObject] = useState({});
                     <button
                       type="button"
                       className="btn btn btn-sm delete-btn"
+//                   <li className="list-group-item" key={donation._id}>
+//                     {donation.title}
+//                     <button
+//                       type="button"
+//                       className="btn btn btn-sm"
                       onClick={() => deleteDonation(donation._id)}
                     >
                       Delete
                     </button>
+                    {/* <button
+                      type="button"
+                      className="btn btn btn-sm"
+                      onClick={() => updatingDonation(donation._id)}
+                    >
+                      Edit
+                    </button> */}
                     {/* <button
                       type="button"
                       className="btn btn btn-sm"
