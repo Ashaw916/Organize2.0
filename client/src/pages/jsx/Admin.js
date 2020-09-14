@@ -1,27 +1,28 @@
 import React from "react";
 import { Link, Route } from "react-router-dom";
+import "../css/Admin.css";
 
 import Registration from "../../components/Registration/Registration.js";
 import Login from "../../components/Login/Login.js";
 
 function Admin(props) {
+  // console.log(props);
   return (
     <div className="container">
       <div className="row">
-        <div className="col">
-          <h1>Admin Page</h1>
-          <p>
-            Administrators are by invitation only. If you have received an
-            invitation please register to set up your account.
-          </p>
+        <div className="col-12" id="admin-info">
+          <h6>
+            Administrators are by invitation only. If you received an invitation
+            please register to set up your account.
+          </h6>
         </div>
       </div>
       <div className="row">
-        <div className="col">
-          <Login />
+        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <Login {...props} />
         </div>
 
-        <div className="col">
+        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
           <Registration />
         </div>
       </div>

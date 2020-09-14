@@ -9,15 +9,11 @@ const userProfile = new mongoose.Schema({
     type: String,
     required: true,
   },
-  role: {
-    type: "admin",
-    required: true,
-  },
-  facebook: {
+  website: {
     type: String,
     required: false,
   },
-  twitter: {
+  facebook: {
     type: String,
     required: false,
   },
@@ -25,7 +21,7 @@ const userProfile = new mongoose.Schema({
     type: String,
     required: false,
   },
-  website: {
+  twitter: {
     type: String,
     required: false,
   },

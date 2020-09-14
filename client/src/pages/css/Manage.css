@@ -1,0 +1,59 @@
+#manage-jumbo-container {
+  background: darkred;
+  margin: auto;
+}
+#jumbo-img-container {
+  background-image: url("../../images/managejumbo.png");
+  background-size: cover;
+  padding: 50px;
+  border-radius: 5px;
+}
+
+#add-event-header,
+#add-resource-header,
+#add-donation-header,
+#add-video-header,
+#post-events-header,
+#post-articles-header,
+#post-donations-header,
+#post-videos-header {
+  color: #ebf0fffb !important;
+  padding-top: 10px;
+}
+
+#post-events-card,
+#post-articles-card,
+#post-donations-card,
+#post-videos-card,
+#add-event-card,
+#add-resource-card,
+#add-donation-card,
+#add-video-card {
+  -webkit-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+}
+
+.manage-post {
+  font-weight: bold;
+}
+.btn-add {
+  background-color: #bfd1d3;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  color: #e25b4b;
+}
+.delete-btn {
+  float: right;
+}
+/*position each row of add and post cards*/
+#row-events,
+#row-articles,
+#row-donations,
+#row-videos {
+  margin: auto;
+  padding: 50px 50px 50px 50px;
+}
+#row-events,
+#row-donations {
+  background-color: #bfd1d3;
+}

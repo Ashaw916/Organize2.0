@@ -1,19 +1,39 @@
-import React, { Component } from "react";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid"
+import React from "react";
+import FullCalendar, { isPropsEqual, Component } from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+// import bootstrapPlugin from "@fullcalendar/bootstrap";
+// import interactionPlugin from "@fullcalendar/interaction"
+// import { render } from "ejs";
+// import $ from "jquery";
 
-export default class Calendar extends Component {
-    render() {
-        return (
-            <FullCalendar 
-                plugins={[ dayGridPlugin ]}
-                initialView="dayGridMonth"
-                headerToolbar={{
-                    left: "prev, next today",
-                    center: "title",
-                    right: "dayGridMonth,timeGridWeek,timeGridDay"
-                }}
-            />
-        )
-    }
-};
+class Calendar extends Component {
+  calendarComponentRef = React.createRef();
+
+  render() {
+    const { events } = this.props;
+    return (
+      <FullCalendar
+        plugins={[dayGridPlugin]}
+        views={{
+          month: {
+            type: "dayGridMonth",
+          },
+          week: {
+            type: "dayGridWeek",
+          },
+          day: {
+            type: "dayGridDay",
+          },
+        }}
+        headerToolbar={{
+          left: "prev,next",
+          center: "title",
+          right: "today",
+        }}
+        events={events}
+      />
+    );
+  }
+}
+
+export default Calendar;

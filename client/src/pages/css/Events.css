@@ -1,0 +1,28 @@
+#events-wrapper {
+  border: 6px solid #bfd1d3;
+  border-radius: 8px;
+  -webkit-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+}
+.container-events {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#event-cards-wrapper {
+  border-radius: 4px;
+}
+
+#event-card-title {
+  color: #e25b4b;
+  font-weight: bold;
+}
+.event-card-ptag {
+  margin: 0px;
+  font-size: 10px;
+  font-weight: bold;
+}
+.event-spantag {
+  font-weight: normal;
+}

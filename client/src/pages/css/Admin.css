@@ -1,1 +1,28 @@
+#admin-info {
+  background-color: #bfd1d3;
+  -webkit-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  margin-bottom: 25px;
+  padding-top: 25px;
+  padding-bottom: 15px;
+  border-radius: 5px;
+  text-align: center;
+  text-shadow: 2px 2px 3px #ffffff;
+}
+#login-title,
+#registration-title {
+  color: #ebf0fffb;
+}
+.btn-admin {
+  background-color: #bfd1d3;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  color: #e25b4b;
+}
 
+#login-card,
+#registration-card {
+  -webkit-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+}

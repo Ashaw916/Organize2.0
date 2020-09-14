@@ -1,29 +1,40 @@
 import React, { useState } from "react";
 import Axios from "axios";
 
-function Invite() {
+function Invite(props) {
   const [inviteEmail, setInviteEmail] = useState("");
   const [inviteOrg, setInviteOrg] = useState("");
   const [host, setHost] = useState("");
+
   const invite = (e) => {
     e.preventDefault();
+    const accessTokenObj = JSON.stringify(localStorage.getItem("token"));
+    console.log("token 1", accessTokenObj);
     console.log("invite");
+    // console.log(props);
     Axios({
       method: "POST",
       data: {
         email: inviteEmail,
         organization: inviteOrg,
         host: host,
+        token: accessTokenObj,
       },
-      withCredentials: true,
-      url: "/invites",
+      url: "/users/invites",
+    }).then((response) => {
+      console.log("res react", response.data);
+      if (response.data === "exists") {
+        alert("Already invited");
+      } else {
+        alert("Invite successful");
+      }
     });
   };
   return (
     <>
       <div className="card">
         <div className="card-header">
-          I am the Invite Component<h4>Invite Another User</h4>
+          <h4 id="profile-invite-title">Invite Another Organization</h4>
         </div>
         <div className="card-body">
           <p>Please enter information for the user you would like to invite</p>
@@ -58,7 +69,7 @@ function Invite() {
                 onChange={(e) => setHost(e.target.value)}
               />
             </div>
-            <button type="submit" className="btn btn-primary" onClick={invite}>
+            <button type="submit" className="btn btn-add" onClick={invite}>
               Invite
             </button>
           </form>

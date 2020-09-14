@@ -1,0 +1,43 @@
+#donate-img {
+  margin-bottom: 20px;
+  margin-top: 10px;
+  position: relative;
+  text-align: center;
+  color: #ebf0fffb;
+  font-weight: bold;
+  font-size: 2em;
+}
+.donate-jumbo-title {
+  position: absolute;
+  top: 75%;
+  left: 32%;
+  transform: translate(-50%, -50%);
+}
+
+.donate-jumbo {
+  max-width: 100%;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  background-color: #bfd1d3;
+  position: relative;
+  padding: 2px;
+  padding-bottom: 0px;
+  -webkit-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+}
+
+#donation-cards-wrapper {
+  margin-bottom: 20px;
+  background-color: #bfd1d3;
+  -webkit-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+}
+#donate-card {
+  padding: 10px;
+}
+a.btn {
+  padding: 0px;
+  margin: 0px;
+}

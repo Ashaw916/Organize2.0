@@ -3,33 +3,29 @@ const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const routes = require("./routes");
-const cors = require("cors");
+// const cors = require("cors");
 const app = express();
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const jwt = require("jsonwebtoken");
+
 //port
 const PORT = process.env.PORT || 3001;
 
 // Passport Config
 require("./config/passport")(passport);
 
-// DB Config
-const db = require("./config/keys").mongoURI;
-// //JWT
-// app.use(express.json());
 // middleware here
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // cors
-app.use(
-  cors({
-    origin: "http://localhost:3001",
-    credentials: true,
-    saveUninitialized: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: "http://localhost:3001",
+//     credentials: true,
+//     saveUninitialized: true,
+//   })
+// );
 app.use(
   session({
     secret: "svsas",
@@ -38,15 +34,15 @@ app.use(
   })
 );
 app.use(cookieParser("svsas"));
+
 //routes
 app.use(routes);
 app.use("/", require("./routes/index"));
 app.use("/users", require("./routes/api/users"));
-// app.use("/userprofiles", require("./routes/api/userProfiles"));
-app.use("/events", require("./routes/api/events"));
-app.use("/articles", require("./routes/api/articles"));
-app.use("/links", require("./routes/api/links"));
-// app.use("/invites", require("./routes/api/invite.js"));
+app.use("/auth", require("./routes/api/auth"));
+app.use("/api/events", require("./routes/api/events"));
+app.use("/api/articles", require("./routes/api/articles"));
+app.use("/api/links", require("./routes/api/links"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -60,13 +56,6 @@ mongoose
   })
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
-// mongoose
-//   .connect(process.env.MONGODB_URI, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => console.log("MongoDB Connected"))
-//   .catch((err) => console.log(err));
 
 // Passport middleware
 app.use(passport.initialize());

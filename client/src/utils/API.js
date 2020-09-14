@@ -10,8 +10,8 @@ export default {
     return axios.get("/api/events/" + id);
   },
   // Deletes the event with the given id
-  deleteEvent: function (id) {
-    return axios.delete("/api/events/" + id);
+  deleteEvent: function (id, eventData) {
+    return axios.delete("/api/events/" + id + eventData);
   },
   // Saves an event to the database
   saveEvent: function (eventData) {
@@ -31,8 +31,8 @@ export default {
     return axios.get("/api/articles/" + id);
   },
   // Deletes the article with the given id
-  deleteArticle: function (id) {
-    return axios.delete("/api/articles/" + id);
+  deleteArticle: function (id, articleData) {
+    return axios.delete("/api/articles/" + id + articleData);
   },
   // Saves an article to the database
   saveArticle: function (articleData) {
@@ -52,8 +52,8 @@ export default {
     return axios.get("/api/links/" + id);
   },
   // Deletes the link with the given id
-  deleteLink: function (id) {
-    return axios.delete("/api/links/" + id);
+  deleteLink: function (id, linkData) {
+    return axios.delete("/api/links/" + id + linkData);
   },
   // Saves a link to the database
   saveLink: function (linkData) {
@@ -62,5 +62,37 @@ export default {
   // Updates a link
   updateLink: function (id, linkData) {
     return axios.put("/api/links/" + id, linkData);
+  },
+
+  // Gets all videos
+  getVideos: function () {
+    return axios.get("/api/videos");
+  },
+  // Gets the video with the given id
+  getVideo: function (id) {
+    return axios.get("/api/videos/" + id);
+  },
+  // Deletes the video with the given id
+  deleteVideo: function (id) {
+    return axios.delete("/api/videos/" + id);
+  },
+  // Saves a video to the database
+  saveVideo: function (videoData) {
+    return axios.post("/api/videos", videoData);
+  },
+  // Updates a video
+  updateVideo: function (id, videoData) {
+    return axios.put("/api/videos/" + id, videoData);
+  },
+
+  //get one profile
+  getProfile: function () {
+    return axios.get("/users/profile");
+  },
+
+  auth: function (token) {
+    return axios.post("/api/auth", (token) => {
+      console.log(token);
+    });
   },
 };

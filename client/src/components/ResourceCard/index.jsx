@@ -9,18 +9,13 @@ function ResourceCard(props) {
       </div>
       <div className="col-10 mb-4">
         <div className="card text-center">
-          <div className="card-header">I am a ResourceCard Component</div>
+          <div className="card-header">{props.author}</div>
           <div className="card-body">
-            <h5 className="card-title">Special title treatment</h5>
-            <p className="card-text">
-              With supporting text below as a natural lead-in to additional
-              content.
-            </p>
-            <a href="#" className="btn btn-primary">
-              Go somewhere
-            </a>
+            <h5 className="card-title">{props.title}</h5>
+            <p className="card-text">{props.description}</p>
+            <a href="#" className="btn btn-primary">{props.source}</a>
           </div>
-          <div className="card-footer text-muted">2 days ago</div>
+          <div className="card-footer text-muted">{props.dateAdded}</div>
         </div>
       </div>
     </>

@@ -1,35 +1,23 @@
 import React from "react";
 
-function SearchForm() {
+function SearchForm(props) {
   return (
     <>
-      <form className="form-inline">
-        <div className="form-group mb-2">
-          <label for="staticEmail2" className="sr-only">
-            Email
-          </label>
+      <form className="form-inline" id="resource-searchForm">
+        <div className="form-group">
+          <label className="sr-only">Type to search by term</label>
           <input
             type="text"
-            readonly
-            className="form-control-plaintext"
-            id="staticEmail2"
-            value="Search Articles"
-          />
-        </div>
-        <div className="form-group mx-sm-3 mb-2">
-          <label for="inputPassword2" className="sr-only">
-            Type to search by term
-          </label>
-          <input
-            type="password"
             className="form-control"
-            id="inputPassword2"
+            id="searchTerm"
             placeholder="Type to search by term"
+            value={props.search}
+            onChange={props.update}
           />
         </div>
-        <button type="submit" className="btn btn-primary mb-2">
-          Submit
-        </button>
+        {/* <button type="submit" className="btn btn-primary" id="search-btn">
+          Search
+        </button> */}
       </form>
     </>
   );

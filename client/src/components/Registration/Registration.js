@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import Axios from "axios";
 
-function Registration() {
+function Registration(props) {
   const [regEmail, setRegEmail] = useState("");
   const [regPassword, setRegPassword] = useState("");
+  const [regOrg, setRegOrg] = useState("");
+  const [regSite, setRegSite] = useState("");
+  const [regFbook, setRegFbook] = useState("");
+  const [regInsta, setRegInsta] = useState("");
+  const [regTwitter, setRegTwitter] = useState("");
+
   const register = (e) => {
     e.preventDefault();
     console.log("submit");
@@ -15,17 +21,48 @@ function Registration() {
       },
       withCredentials: true,
       url: "/users/register",
-    }).then((res) => console.log(res));
+    })
+      .then((response) => {
+        console.log("react", response.data);
+        if (response.data === "You haven't been invited") {
+          alert(
+            "You have not been invited. Please contact the site administators if you wish to contribute."
+          );
+        } else if (response.data === "Alredy exists") {
+          alert(
+            "There is already an account associated with this email. Please contact the site administators."
+          );
+        } else {
+          alert("You are now registered. Welcome!");
+        }
+      })
+      .then(
+        Axios({
+          method: "POST",
+          data: {
+            email: regEmail,
+            organization: regOrg,
+            website: regSite,
+            facebook: regFbook,
+            instagram: regInsta,
+            twitter: regTwitter,
+          },
+          url: "/users/profile",
+        })
+      );
   };
+
   return (
     <>
-      <div className="card">
-        <div className="card-header">Registration</div>
+      <div className="card" id="registration-card">
+        <div className="card-header">
+          <h4 id="registration-title">Register</h4>
+        </div>
         <div className="card-body">
           <form id="registration">
             <div className="form-row">
-              <div className="form-group col-md-6">
-                <label htmlFor="inputEmail">Email</label>
+              <div className="form-group col-md-12">
+                <label htmlFor="inputEmail4">Email</label>
                 <input
                   type="email"
                   className="form-control"
@@ -35,7 +72,7 @@ function Registration() {
                 />
               </div>
               <div className="form-group col-md-6">
-                <label htmlFor="inputPassword4">Password</label>
+                <label htmlFor="inputPassword4">Choose a Password</label>
                 <input
                   type="password"
                   className="form-control"
@@ -44,60 +81,77 @@ function Registration() {
                   onChange={(e) => setRegPassword(e.target.value)}
                 />
               </div>
+              <div className="form-group col-md-6">
+                <label htmlFor="inputPassword4">Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  placeholder="Re-type your password"
+                />
+              </div>
             </div>
+
             <div className="form-group">
-              <label htmlFor="inputAddress">Address</label>
+              <label htmlFor="organization">Organization Name</label>
               <input
                 type="text"
                 className="form-control"
-                id="inputAddress"
-                placeholder="1234 Main St"
+                id="organization"
+                placeholder="Enter your Organization's name"
+                onChange={(e) => setRegOrg(e.target.value)}
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="inputAddress2">Address 2</label>
-              <input
-                type="text"
-                className="form-control"
-                id="inputAddress2"
-                placeholder="Apartment, studio, or floor"
-              />
-            </div>
+
             <div className="form-row">
               <div className="form-group col-md-6">
-                <label htmlFor="inputCity">City</label>
-                <input type="text" className="form-control" id="inputCity" />
-              </div>
-              <div className="form-group col-md-4">
-                <label htmlFor="inputState">State</label>
-                <select id="inputState" className="form-control" defaultValue>
-                  <option>Choose...</option>
-                  <option>...</option>
-                </select>
-              </div>
-              <div className="form-group col-md-2">
-                <label htmlFor="inputZip">Zip</label>
-                <input type="text" className="form-control" id="inputZip" />
-              </div>
-            </div>
-            <div className="form-group">
-              <div className="form-check">
+                <label htmlFor="website">Organization's website</label>
                 <input
-                  className="form-check-input"
-                  type="checkbox"
-                  id="gridCheck"
+                  type="website"
+                  className="form-control"
+                  id="website"
+                  placeholder="Website url"
+                  onChange={(e) => setRegSite(e.target.value)}
                 />
-                <label className="form-check-label" htmlFor="gridCheck">
-                  Check me out
-                </label>
+              </div>
+
+              <div className="form-group col-md-6">
+                <label htmlFor="facebook">Facebook Page</label>
+                <input
+                  type="facebook"
+                  className="form-control"
+                  id="facebook"
+                  placeholder="FB url"
+                  onChange={(e) => setRegFbook(e.target.value)}
+                />
               </div>
             </div>
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={register}
-            >
-              Sign in
+
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <label htmlFor="instagram">Instagram</label>
+                <input
+                  type="instagram"
+                  className="form-control"
+                  id="instagram"
+                  placeholder="Insta handle @"
+                  onChange={(e) => setRegInsta(e.target.value)}
+                />
+              </div>
+              <div className="form-group col-md-6">
+                <label htmlFor="twitter">Twitter</label>
+                <input
+                  type="twitter"
+                  className="form-control"
+                  id="twitter"
+                  placeholder="Twitter handle @"
+                  onChange={(e) => setRegTwitter(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <button type="submit" className="btn btn-admin" onClick={register}>
+              Register
             </button>
           </form>
         </div>

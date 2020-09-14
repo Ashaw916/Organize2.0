@@ -11,7 +11,7 @@
     "client": "cd client && npm run start",
     "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install",
-    "build": "webpack --mode production",
+    "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
   "author": "",
@@ -28,6 +28,8 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
+    "@fullcalendar/bootstrap": "^5.3.1",
+    "@fullcalendar/interaction": "^5.3.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -43,7 +45,9 @@
     "express": "^4.16.3",
     "express-ejs-layouts": "^2.5.0",
     "express-session": "^1.17.1",
+    "font-awesome": "^4.7.0",
     "if-env": "^1.0.4",
+    "jquery": "^3.5.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.3.16",
     "node": "^14.8.0",
