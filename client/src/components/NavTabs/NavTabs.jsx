@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Axios from "axios";
 
-function NavTabs() {
+function NavTabs(props) {
   // We'll go into the Hooks API later, for now, we are just using some code
   // from the react-router docs (https://reacttraining.com/react-router/web/api/Hooks/uselocation)
   // This allows the component to check the route any time the user uses a link to navigate.
@@ -34,6 +34,7 @@ function NavTabs() {
           return userRes;
         } else {
           let userRes = "invalid";
+          console.log("userRes1", userRes);
           return userRes;
         }
       })
@@ -45,7 +46,7 @@ function NavTabs() {
   if (userAuth === "valid") {
     console.log("auth success react");
   }
-
+  const hide = "hidden";
   return (
     <nav className="navbar navbar-expand-lg">
       <a className="navbar-brand" href="#">
@@ -161,23 +162,18 @@ function NavTabs() {
             <Link
               to="/manage"
               className={
-                location.pathname === "/manage" ? "nav-link active" : "nav-link" +
-                userAuth === "invalid" ? "hidden" : ""
+                location.pathname === "/manage"
+                  ? "nav-link active"
+                  : "nav-link" + userAuth === "invalid"
+                  ? "hidden"
+                  : ""
               }
             >
               Manage
             </Link>
           </li>
           <li className="nav-item">
-            <Link
-              to="/profile"
-              className={
-                location.pathname === "/profile"
-                  ? "nav-link active"
-                  : "nav-link" +
-                  userAuth === "invalid" ? "hidden" : ""
-                }
-            >
+            <Link to="/profile" className={hide}>
               Profile
             </Link>
           </li>
@@ -185,8 +181,11 @@ function NavTabs() {
             <Link
               to="/logout"
               className={
-                location.pathname === "/logout" ? "nav-link active" : "nav-link" +
-                userAuth === "invalid" ? "hidden" : ""
+                location.pathname === "/logout"
+                  ? "nav-link active"
+                  : "nav-link" + userAuth === "invalid"
+                  ? "hidden"
+                  : ""
               }
             >
               Logout
