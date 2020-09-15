@@ -47,8 +47,6 @@ function NavTabs(props) {
     // console.log("auth success react");
   }
 
-  const hide = "hidden";
-
   return (
     <nav className="navbar navbar-expand-lg">
       <a className="navbar-brand" href="#">
