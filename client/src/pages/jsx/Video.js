@@ -4,6 +4,7 @@ import VideoLiveStream from "../../components/VideoLiveStream/VideoLiveStream";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import Pagination from "../../components/Pagination/Pagination";
 import { paginate } from "../../utils/paginate";
+import moment from "moment";
 import "../css/Video.css";
 
 class Video extends Component {
@@ -51,13 +52,13 @@ class Video extends Component {
     this.setState({ searchTerm: event.target.value, currentPage: 1 });
   }
 
-  splitDate = (str) => {
-    str.slice(5, 10);
-  };
+  // function splitDate(str) {
+  //   return str.slice(5, 10);
+  // }
 
-  splitYear = (str) => {
-    str.slice(0, 4);
-  };
+  // function splitYear(str) {
+  //   return str.slice(0, 4);
+  // }
 
   render() {
     const { videos: allVideos, currentPage, pageSize, searchTerm } = this.state;
@@ -125,12 +126,12 @@ class Video extends Component {
                           </a>
                         </div>
                         <small className="text-muted">
-                          {this.splitDate(video.date_added)}
+                          Added {moment(video.date_added).format("MMM D, YYYY")}
                         </small>
                       </div>
                       <small className="text-muted">
-                        {this.splitDate(video.date_added)}-
-                        {this.splitYear(video.date_added)}
+                        {/* {this.splitDate(video.date_added)}-
+                        {this.splitYear(video.date_added)} */}
                       </small>
                     </div>
                   </div>

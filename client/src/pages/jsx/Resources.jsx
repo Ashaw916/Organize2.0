@@ -3,6 +3,7 @@ import { paginate } from "../../utils/paginate";
 import Pagination from "../../components/Pagination/Pagination";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import API from "../../utils/API";
+import moment from "moment";
 import "../css/Resources.css";
 import Newsgroup from "../../images/newsgroup.png";
 import Newsprotest from "../../images/newsprotest.png";
@@ -164,6 +165,13 @@ class Resources extends Component {
                           data-parent="#accordion"
                         >
                           <div className="card-body">{article.body}</div>
+                        </div>
+                        <div className="text-right mr-2">
+                          <small className="text-muted">
+                            Posted {moment(article.date_added).from(moment())}{" "}
+                            on{" "}
+                            {moment(article.date_added).format("MMM D, YYYY")}
+                          </small>
                         </div>
                       </div>
                     </div>
