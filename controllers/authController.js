@@ -41,8 +41,14 @@ module.exports = {
 
     db.Auth.updateOne({ user: req.user }, { $set: { bool: req.bool } }).then(
       (res) => {
+        if (!res) res.send("no res");
+        if (res) {
+          // res.send("res");
+          console.log(res);
+          return res;
+        }
         console.log("after");
-        // res.send("logout");
+        return res.send("logout controller");
       }
     );
     //   .catch((err, res) => res.status(422).json(err));
