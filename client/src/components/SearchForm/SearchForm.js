@@ -15,9 +15,13 @@ function SearchForm(props) {
             onChange={props.update}
           />
         </div>
-        {/* <button type="submit" className="btn btn-primary" id="search-btn">
-          Search
-        </button> */}
+        <button
+          type={props.clear}
+          className="btn btn-primary ml-2"
+          id="search-btn"
+        >
+          Clear
+        </button>
       </form>
     </>
   );
