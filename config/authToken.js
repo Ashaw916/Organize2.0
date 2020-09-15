@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 // auth token
 function authToken(req, res, next) {
-  console.log("req.body.token", req.body);
+  // console.log("req.body.token", req);
   const token = req.body.token.replace(/['"]+/g, "");
   // console.log("token:", token);
   // console.log(token);
@@ -12,7 +12,7 @@ function authToken(req, res, next) {
     return res.sendStatus(401);
   } else {
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-      const token = req.body.token.replace(/['"]+/g, "");
+      // const token = req.body.token.replace(/['"]+/g, "");
       // console.log("user jwt", token);
       if (err) {
         console.log("err", err);

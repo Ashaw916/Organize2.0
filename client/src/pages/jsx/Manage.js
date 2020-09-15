@@ -7,7 +7,7 @@ import API from "../../utils/API";
 import eventValidation from "../../utils/EventValidation";
 import articleValidation from "../../utils/ArticleValidation";
 import videoValidation from "../../utils/VideoValidation";
-// import linkValidation from "../../utils/LinkValidation";
+import donateValidation from "../../utils/DonateValidation";
 import "../css/Manage.css";
 
 ////////////////////////////////// For Loading Events, Articles, Videos ///////////////////////////
@@ -19,7 +19,7 @@ function Manage() {
   const [getEvents, setGetEvents] = useState([]);
   const [getArticles, setGetArticles] = useState([]);
   const [getVideos, setGetVideos] = useState([]);
-  const [getLinks, setGetLinks] = useState([]);
+  const [getDonations, setGetDonations] = useState([]);
 
   //functions to load arrays of objects for the page
   function loadEvents() {
@@ -30,8 +30,12 @@ function Manage() {
       .catch((err) => console.log(err));
   }
   //slices incoming iso date, so only get the date part
-  function sliceDate(date) {
-    return date.slice(0, 10);
+  function splitDate(str) {
+    return str.slice(5, 10);
+  }
+
+  function splitYear(str) {
+    return str.slice(0, 4);
   }
 
   function loadArticles() {
@@ -42,11 +46,11 @@ function Manage() {
       .catch((err) => console.log(err));
   }
 
-  function loadLinks() {
+  function loadDonations() {
     API.getLinks()
       .then((res) => {
         console.log(res.data);
-        setGetLinks(res.data);
+        setGetDonations(res.data);
       })
       .catch((err) => console.log(err));
   }
@@ -68,7 +72,7 @@ function Manage() {
   }, []);
 
   useEffect(() => {
-    loadLinks();
+    loadDonations();
   }, []);
 
   useEffect(() => {
@@ -88,9 +92,9 @@ function Manage() {
       .catch((err) => console.log(err));
   }
 
-  function deleteLink(id) {
+  function deleteDonation(id) {
     API.deleteLink(id)
-      .then((res) => loadLinks())
+      .then((res) => loadDonations())
       .catch((err) => console.log(err));
   }
 
@@ -132,7 +136,6 @@ function Manage() {
     console.log(sDate);
     console.log(eDate);
 
-    ////////////////////////the path for url might work, test it out ---via atlas once
     API.saveEvent({
       title: eventObject.title,
       start_date: sDate,
@@ -140,7 +143,7 @@ function Manage() {
       description: eventObject.description,
       location: eventObject.location,
       organization: eventObject.organization,
-      event_url: "/events", //this might need to be a https url of the heroku address/events or this will need to be a click event in the calendar component
+      event_url: "/events",
     })
       .then((res) => {
         loadEvents();
@@ -166,6 +169,10 @@ function Manage() {
     setTimeout(() => {
       setEventSuccess(false);
     }, 1500);
+
+    setTimeout(() => {
+      setNotEventSubmitted(false);
+    }, 20000)
   }
 
   const handleEventSubmit = (e) => {
@@ -201,6 +208,8 @@ function Manage() {
   function submitArticle() {
     console.log("submitted successfully!");
 
+    setNotSubmitted(false);
+
     API.saveArticle({
       title: articleObject.title,
       author: articleObject.author,
@@ -230,6 +239,10 @@ function Manage() {
     setTimeout(() => {
       setArticleSuccess(false);
     }, 1500);
+
+    setTimeout(() => {
+      setNotSubmitted(false);
+    }, 20000)
   }
 
   const handleArticleSubmit = (e) => {
@@ -290,6 +303,10 @@ function Manage() {
     setTimeout(() => {
       setVideoSuccess(false);
     }, 1500);
+
+    setTimeout(() => {
+      setNotVideoSubmitted(false);
+    }, 20000)
   }
 
   const handleVideoSubmit = (e) => {
@@ -298,55 +315,96 @@ function Manage() {
     setIsVideoSubmitting(true);
   };
 
-  /////////////////////////////// Links Form //////////////////////////
 
-  // const [videoObject, setVideoObject] = useState({});
-  //   const [videoErrors, setVideoErrors] = useState({});
-  //   //for showing a successful submission
-  //   const [videoSuccess, setVideoSuccess] = useState(false);
-  //   //works with use effect, with checking errors, will start submit, and let user know
-  //   const [isVideoSubmitting, setIsVideoSubmitting] = useState(false);
-  //   //if an unsuccesful submission, will show an error to user
-  //   const [notVideoSubmitted, setNotVideoSubmitted] = useState(false);
+/////////////////////////////// Donate Form //////////////////////////
 
-  //   useEffect(() => {
-  //     if (Object.keys(videoErrors).length === 0 && isVideoSubmitting) {
-  //       //function for api call
-  //       submitVideo();
-  //     }
-  //   }, [videoErrors]);
+const [donateObject, setDonateObject] = useState({});
+  const [donateErrors, setDonateErrors] = useState({});
+  //for showing a successful submission
+  const [donateSuccess, setDonateSuccess] = useState(false);
+  //works with use effect, with checking errors, will start submit, and let user know
+  const [isDonateSubmitting, setIsDonateSubmitting] = useState(false);
+  //if an unsuccesful submission, will show an error to user
+  const [notDonateSubmitted, setNotDonateSubmitted] = useState(false);
+  //holds errors when updating a donation link
+  // const [donationUpdateErrors, setDonationUpdateErrors] = useState({});
 
-  //   const handleVideoInputChange = (e) => {
-  //     const { name, value } = e.target;
-  //     setVideoObject({ ...videoObject, [name]:value });
-  //   };
+  //triggers when erros object keys have length of 0 when submitting a new donation
+  useEffect(() => {
+    if (Object.keys(donateErrors).length === 0 && isDonateSubmitting) {
+      //function for api call
+      submitDonate();
+    }
+  }, [donateErrors]);
 
-  //   function submitVideo() {
-  //     console.log("submitted successfully!");
-  //     //when successful, setArticleSuccess(true)
-  //     //if unsuccesfful, setNotSubmitted(true)
-  //     // API.saveVideo({
-  //     //
-  //     // }).then((res) => {
-  //     //   loadVideos();
-  //     //   setVideoSuccess(true);
-  //     // }).catch((err) => {
-  //     //   console.log(err);
-  //     //   setNotVideoSubmitted(true);
-  //     // });
-  //     // //restform needed?
+  // //triggers when erros object keys have length of 0 when submitting an update to an already existing donation
+  // useEffect(() => {
+  //   if (Object.keys(donationUpdateErrors).length === 0 && isDonateSubmitting) {
+  //     //function for PUT api call
+  //   }
+  // }, [donationUpdateErrors])
 
-  //     // setTimeout(() => {
-  //     //   setVideoSuccess(false);
-  //     // }, 1200)
+  const handleDonateInputChange = (e) => {
+    const { name, value } = e.target;
+    setDonateObject({ ...donateObject, [name]:value });
+  };
 
-  //   };
+  function submitDonate() {
+    console.log("submitted successfully!");
+    //when successful, setArticleSuccess(true)
+    //if unsuccesfful, setNotSubmitted(true)
+    API.saveLink({
+      title: donateObject.donationTitle,
+      description: donateObject.donationDescription,
+      url: donateObject.donationUrl,
+      type: donateObject.donationType
+    }).then((res) => {
+      loadDonations();
+      setDonateSuccess(true);
+    }).catch((err) => {
+      console.log(err);
+      setNotDonateSubmitted(true);
+    });
+    //resets form
+    setDonateObject({
+      donationTitle: "",
+      donationDescription: "",
+      donationUrl: "",
+      donationType: "",
+    });
 
-  //   const handleVideoSubmit = (e) => {
-  //     if (e) e.preventDefault();
-  //     setVideoErrors(videoValidation(videoObject));
-  //     setIsVideoSubmitting(true);
-  //   };
+    setTimeout(() => {
+      setDonateSuccess(false);
+    }, 1200)
+
+    setTimeout(() => {
+      setNotVideoSubmitted(false);
+    }, 20000)
+
+  };
+
+  const handleDonateSubmit = (e) => {
+    if (e) e.preventDefault();
+    setDonateErrors(donateValidation(donateObject));
+    setIsDonateSubmitting(true);
+  };
+// //listens for click of 'edit' button and grabs id for a donation link that already exists
+//   const updatingDonation = (e, id) => {
+//     if (e) e.preventDefault();
+//     console.log(id);
+//     //save the id to a state, that id is passed to api call via useeffect
+//     //calls a api call that gets data per that id and that .then of the api call saves the data to the donateObject (<-- is that it or do i need somethign else (to get the form to fill)? check the forms activities) that i would think fills the form inputs
+//     //
+//   };
+// //handles the click of the update button in the form
+//   const submitDonateUpdate = (e) => {
+//     if (e) e.preventDefault();
+//     //setDonationUpdateErrors(donationValidation(donationObject));
+//     //setDonationSubmitting
+//   };
+
+
+  //about the form button, how to change it...
 
   return (
     <>
@@ -378,15 +436,23 @@ function Manage() {
             <div className="card-body">
               <ul className="list-group list-group-flush">
                 {getEvents.map((event) => (
-                  <li className="list-group-item" key={event._id}>
-                    {event.title}: {event.start_date}{" "}
+                  <li className="list-group-item manage-post" key={event._id}>
+                    {event.title}: {splitDate(event.start_date)}-
+                    {splitYear(event.start_date)}{" "}
                     <button
                       type="button"
-                      className="btn btn btn-sm"
+                      className="btn btn btn-sm delete-btn"
                       onClick={() => deleteEvent(event._id)}
                     >
-                      Delete
+                      Delete Event
                     </button>
+                    {/* <button
+                      type="button"
+                      className="btn btn btn-sm"
+                      onClick={() => handleUpdateEvent(event._id)}
+                    >
+                      Update
+                    </button> */}
                   </li>
                 ))}
               </ul>
@@ -416,15 +482,22 @@ function Manage() {
             <div className="card-body">
               <ul className="list-group list-group-flush">
                 {getArticles.map((article) => (
-                  <li className="list-group-item" key={article._id}>
+                  <li className="list-group-item manage-post" key={article._id}>
                     {article.title}
                     <button
                       type="button"
-                      className="btn btn btn-sm"
+                      className="btn btn btn-sm delete-btn"
                       onClick={() => deleteArticle(article._id)}
                     >
                       Delete
                     </button>
+                    {/* <button
+                      type="button"
+                      className="btn btn btn-sm"
+                      onClick={() => handleUpdateArticle(article._id)}
+                    >
+                      Edit
+                    </button> */}
                   </li>
                 ))}
               </ul>
@@ -435,7 +508,14 @@ function Manage() {
 
       <div className="row" id="row-donations">
         <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-          <AddDonation />
+          <AddDonation 
+          handleDonateInputChange={handleDonateInputChange}
+          handleDonateSubmit={handleDonateSubmit}
+          donateObject={donateObject}
+          donateSuccess={donateSuccess}
+          donateErrors={donateErrors}
+          notDonateSubmitted={notDonateSubmitted}
+          />
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
           <div className="card" id="post-donations-card">
@@ -444,16 +524,35 @@ function Manage() {
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getLinks.map((link) => (
-                  <li className="list-group-item" key={link._id}>
-                    {link.title}
+                {getDonations.map((donation) => (
+                  <li className="list-group-item manage-post" key={donation._id}>
+                    {donation.title}
                     <button
                       type="button"
-                      className="btn btn btn-sm"
-                      onClick={() => deleteLink(link._id)}
+                      className="btn btn btn-sm delete-btn"
+//                   <li className="list-group-item" key={donation._id}>
+//                     {donation.title}
+//                     <button
+//                       type="button"
+//                       className="btn btn btn-sm"
+                      onClick={() => deleteDonation(donation._id)}
                     >
                       Delete
                     </button>
+                    {/* <button
+                      type="button"
+                      className="btn btn btn-sm"
+                      onClick={() => updatingDonation(donation._id)}
+                    >
+                      Edit
+                    </button> */}
+                    {/* <button
+                      type="button"
+                      className="btn btn btn-sm"
+                      onClick={() => updatingDonation(donation._id)}
+                    >
+                      Edit
+                    </button> */}
                   </li>
                 ))}
               </ul>
@@ -481,15 +580,22 @@ function Manage() {
             <div className="card-body">
               <ul className="list-group list-group-flush">
                 {getVideos.map((video) => (
-                  <li className="list-group-item" key={video._id}>
+                  <li className="list-group-item manage-post" key={video._id}>
                     {video.title}
                     <button
                       type="button"
-                      className="btn btn-danger btn-sm"
+                      className="btn btn btn-sm delete-btn"
                       onClick={() => deleteVideo(video._id)}
                     >
                       Delete
                     </button>
+                    {/* <button
+                      type="button"
+                      className="btn btn btn-sm"
+                      onClick={() => handleUpdateVideo(video._id)}
+                    >
+                      Edit
+                    </button> */}
                   </li>
                 ))}
               </ul>

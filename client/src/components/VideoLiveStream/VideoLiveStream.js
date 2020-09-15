@@ -57,9 +57,9 @@ function VideoLiveStream() {
                     </button>
                   </a>
                 </div>
-                <small className="text-muted">
+                {/* <small className="text-muted">
                   Date Added: {videos.date_added}
-                </small>
+                </small> */}
               </div>
             </div>
           </div>

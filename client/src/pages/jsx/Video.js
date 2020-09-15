@@ -15,6 +15,7 @@ class Video extends Component {
     searchResults: [],
   };
 
+<<<<<<< HEAD
   componentDidMount() {
     API.getVideos().then((res) => {
       const videos = res.data;
@@ -49,6 +50,24 @@ class Video extends Component {
   updateSearch(event) {
     event.preventDefault();
     this.setState({ searchTerm: event.target.value, currentPage: 1 });
+=======
+  useEffect(() => {
+    loadVideos();
+  }, []);
+  // Loads all books and sets them to books
+  function loadVideos() {
+    API.getVideos()
+      .then((res) => setVideos(res.data.reverse()))
+      .catch((err) => console.log(err));
+  }
+
+  function splitDate(str) {
+    return str.slice(5, 10);
+  }
+
+  function splitYear(str) {
+    return str.slice(0, 4);
+>>>>>>> c06d4d0475d603b8929e49b82f1e417700c12564
   }
 
   render() {
@@ -124,6 +143,10 @@ class Video extends Component {
                           {splitDate(video.date_added)}
                         </small>
                       </div>
+                      <small className="text-muted">
+                        {splitDate(video.date_added)}-
+                        {splitYear(video.date_added)}
+                      </small>
                     </div>
                   </div>
                 </div>

@@ -5,7 +5,7 @@ import API from "../../utils/API";
 import { set } from "mongoose";
 import { Link } from "react-router-dom";
 
-function Landing(props) {
+function Landing() {
   const [event, setEvent] = useState([]);
   // console.log(props);
 
@@ -24,7 +24,7 @@ function Landing(props) {
             start: events[i].start_date,
             end: events[i].end_date,
             title: events[i].title,
-            url: events[i].eventurl,
+            url: events[i].event_url,
             description: events[i].description,
             extendedProps: {
               location: events[i].location,
@@ -73,7 +73,9 @@ function Landing(props) {
           <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Community Resources</h5>
-              <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <h6 className="card-subtitle mb-2 text-muted">
+                Articles, blog posts, resources
+              </h6>
               <Link to="/resources" className="stretched-link"></Link>
             </div>
           </div>
@@ -81,7 +83,9 @@ function Landing(props) {
           <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Donate</h5>
-              <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <h6 className="card-subtitle mb-2 text-muted">
+                Find community-recommended causes
+              </h6>
               <Link to="/donate" className="stretched-link"></Link>
             </div>
           </div>
@@ -89,7 +93,9 @@ function Landing(props) {
           <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Video Links</h5>
-              <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <h6 className="card-subtitle mb-2 text-muted">
+                Livestream important events, search archive
+              </h6>
               <Link to="/video" className="stretched-link"></Link>
             </div>
           </div>
@@ -97,7 +103,9 @@ function Landing(props) {
           <div className="card col-xs-12 col-sm-12 col-md col-lg" id="tile">
             <div className="card-body">
               <h5 className="card-title">Connect</h5>
-              <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <h6 className="card-subtitle mb-2 text-muted">
+                Contact contributing organizations
+              </h6>
               <Link to="/contact" className="stretched-link"></Link>
             </div>
           </div>

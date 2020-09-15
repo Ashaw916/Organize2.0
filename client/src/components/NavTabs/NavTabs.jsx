@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Axios from "axios";
 
 function NavTabs() {
   // We'll go into the Hooks API later, for now, we are just using some code
@@ -7,10 +8,48 @@ function NavTabs() {
   // This allows the component to check the route any time the user uses a link to navigate.
   const location = useLocation();
 
+  const [userAuth, setUserAuth] = useState({});
+
+  useEffect(() => {
+    Auth();
+  }, []);
+
+  const Auth = (props, user) => {
+    const userObj = JSON.stringify(localStorage.getItem("user"));
+    console.log("userObj", userObj);
+    let userRes;
+    Axios({
+      method: "POST",
+      data: {
+        user: userObj,
+      },
+      url: "/auth",
+    })
+      .then((response) => {
+        console.log("res react", response.data);
+        if (response.data === "valid") {
+          let userRes = "valid";
+
+          console.log("userRes1", userRes);
+          return userRes;
+        } else {
+          let userRes = "invalid";
+          return userRes;
+        }
+      })
+      .then((userRes) => {
+        setUserAuth(userRes);
+      });
+  };
+  console.log("after async", userAuth);
+  if (userAuth === "valid") {
+    console.log("auth success react");
+  }
+
   return (
     <nav className="navbar navbar-expand-lg">
       <a className="navbar-brand" href="#">
-        Organize 2.0
+        Organize
       </a>
       <button
         className="navbar-toggler"
@@ -31,7 +70,7 @@ function NavTabs() {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
             />
           </svg>
@@ -115,14 +154,15 @@ function NavTabs() {
                 location.pathname === "/admin" ? "nav-link active" : "nav-link"
               }
             >
-              Admin
+              Login/Register
             </Link>
           </li>
           <li className="nav-item">
             <Link
               to="/manage"
               className={
-                location.pathname === "/manage" ? "nav-link active" : "nav-link"
+                location.pathname === "/manage" ? "nav-link active" : "nav-link" +
+                userAuth === "invalid" ? "hidden" : ""
               }
             >
               Manage
@@ -134,24 +174,24 @@ function NavTabs() {
               className={
                 location.pathname === "/profile"
                   ? "nav-link active"
-                  : "nav-link"
-              }
+                  : "nav-link" +
+                  userAuth === "invalid" ? "hidden" : ""
+                }
             >
               Profile
             </Link>
           </li>
-          {/* <li className="nav-item">
+          <li className="nav-item">
             <Link
-              to="/contact/learn"
+              to="/logout"
               className={
-                location.pathname === "/contact/learn"
-                  ? "nav-link active"
-                  : "nav-link"
+                location.pathname === "/logout" ? "nav-link active" : "nav-link" +
+                userAuth === "invalid" ? "hidden" : ""
               }
             >
-              Learn
+              Logout
             </Link>
-          </li> */}
+          </li>
         </ul>
       </div>
     </nav>
