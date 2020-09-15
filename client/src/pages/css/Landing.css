@@ -79,6 +79,11 @@ h5 {
   border: 1px darkred solid !important;
 }
 
+.fc-event-time,
+.fc-event-title {
+  padding: 0 1px;
+  white-space: normal;
+}
 @media screen and (max-width: 767px) {
   #tile {
     margin: 10px 0px 10px 0px;
@@ -94,5 +99,38 @@ h5 {
   #tile {
     margin: 10px 0px 10px 0px;
     width: 100%;
+  }
+  #calendar-jumbo > div {
+    height: 450px;
+  }
+  /* #calendar-jumbo > div > div > div.fc-view-harness.fc-view-harness-active {
+    height: 500px;
+  } */
+  /* #calendar-jumbo
+    > div
+    > div
+    > div.fc-view-harness.fc-view-harness-active
+    > div {
+    height: 40px;
+  } */
+  #calendar-jumbo > div > div {
+    height: 450px;
+  }
+  #calendar-jumbo
+    > div
+    > div
+    > div.fc-view-harness.fc-view-harness-active
+    > div
+    > table {
+    height: 400px;
+  }
+  #calendar-jumbo .fc-daygrid-event-dot {
+    background-color: rgb(38, 95, 150);
+  }
+  #calendar-jumbo .fc-event-time {
+    display: none;
+  }
+  #calendar-jumbo .fc-event-title {
+    display: none;
   }
 }

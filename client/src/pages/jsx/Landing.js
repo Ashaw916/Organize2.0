@@ -48,7 +48,7 @@ function Landing() {
           <div className="jumbotron jumbotron-fluid col" id="landing-jumbo">
             <div className="container" id="landing-jumbo-height">
               <h1 className="display-4" id="landing-header">
-                Organize 2.0
+                Organize
               </h1>
               <p className="lead"></p>
             </div>
@@ -58,7 +58,7 @@ function Landing() {
         <div className="row" id="landing-r2">
           <div className="col">
             <h4 id="jumbo-h4">
-              Organize 2.0 <span className="color-span">||</span> Connect{" "}
+              Organize <span className="color-span">||</span> Connect{" "}
               <span className="color-span">||</span> Share{" "}
               <span className="color-span">||</span> Mobilize
             </h4>
