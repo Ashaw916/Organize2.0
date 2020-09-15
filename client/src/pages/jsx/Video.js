@@ -47,9 +47,14 @@ class Video extends Component {
     });
   };
 
-  updateSearch(event) {
+  handleSearchEvent(event) {
     event.preventDefault();
     this.setState({ searchTerm: event.target.value, currentPage: 1 });
+  }
+
+  handleClearSearch(event) {
+    event.preventDefault();
+    this.setState({ searchTerm: "", currentPage: 1 });
   }
 
   // function splitDate(str) {
@@ -85,14 +90,14 @@ class Video extends Component {
         <div className="album py-5 bg-light" id="videoMain-wrapper">
           <div className="container">
             <div className="row">
-              <div className="col-3 my-2">
+              <div className="ml-4 mb-2">
                 <SearchForm
                   search={this.state.searchTerm}
-                  update={this.updateSearch.bind(this)}
+                  update={this.handleSearchEvent.bind(this)}
+                  clear={this.handleClearSearch}
                 />
               </div>
-              <div className="col-5"></div>
-              <div className="col-4 my-2">
+              <div className="">
                 <Pagination
                   itemsCount={filtered.length}
                   pageSize={pageSize}
@@ -137,6 +142,19 @@ class Video extends Component {
                   </div>
                 </div>
               ))}
+            </div>
+            <div className="row">
+              <div className="col-2"></div>
+              <div className="col-10 mx-5 float-right">
+                <Pagination
+                  itemsCount={filtered.length}
+                  pageSize={pageSize}
+                  currentPage={currentPage}
+                  onPageChange={this.handlePageChange}
+                  onNextPageChange={this.handleNextPageChange}
+                  onPreviousPageChange={this.handlePreviousPageChange}
+                />
+              </div>
             </div>
           </div>
         </div>

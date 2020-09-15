@@ -20,7 +20,7 @@ class Resources extends Component {
 
   componentDidMount() {
     API.getArticles().then((res) => {
-      const articles = res.data;
+      const articles = res.data.reverse();
       this.setState({ articles });
     });
   }
@@ -40,17 +40,22 @@ class Resources extends Component {
 
   handleNextPageChange = () => {
     this.setState((state) => {
-      const totalPages = Math.ceil(state.articles.length / state.pageSize);
-      console.log(totalPages);
-      if (state.currentPage >= totalPages) {
-        return { currentPage: totalPages };
+      console.log(state);
+      if (state.currentPage >= state.pageSize) {
+        return { currentPage: state.pageSize };
       }
       return { currentPage: state.currentPage + 1 };
     });
   };
 
   handleSearchEvent(event) {
+    event.preventDefault();
     this.setState({ searchTerm: event.target.value, currentPage: 1 });
+  }
+
+  handleClearSearch(event) {
+    event.preventDefault();
+    this.setState({ searchTerm: "", currentPage: 1 });
   }
 
   render() {
@@ -74,6 +79,8 @@ class Resources extends Component {
 
     const articles = paginate(filtered, currentPage, pageSize);
 
+    const articlesDisplayed = filtered.length;
+
     return (
       <>
         <div className="container">
@@ -92,11 +99,12 @@ class Resources extends Component {
               <SearchForm
                 search={this.state.searchTerm}
                 update={this.handleSearchEvent.bind(this)}
+                clear={this.handleClearSearch}
               />
             </div>
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
               <Pagination
-                itemsCount={filtered.length}
+                itemsCount={articlesDisplayed}
                 pageSize={pageSize}
                 currentPage={currentPage}
                 onPageChange={this.handlePageChange}

@@ -34,12 +34,12 @@ function Events() {
           <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <h4 id="search-title">Search Events</h4>
           </div>
-          <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+          {/* <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <SearchForm />
           </div>
           <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <Pagination />
-          </div>
+          </div> */}
         </div>
 
         <div className="container-events" id="events-wrapper">

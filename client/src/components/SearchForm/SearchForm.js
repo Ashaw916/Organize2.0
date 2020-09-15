@@ -5,7 +5,6 @@ function SearchForm(props) {
     <>
       <form className="form-inline" id="resource-searchForm">
         <div className="form-group">
-          {/* <h4 className="mx-2">Search</h4> */}
           <label className="sr-only">Type to search by term</label>
           <input
             type="text"
@@ -16,9 +15,13 @@ function SearchForm(props) {
             onChange={props.update}
           />
         </div>
-        {/* <button type="submit" className="btn btn-primary" id="search-btn">
-          Search
-        </button> */}
+        <button
+          type={props.clear}
+          className="btn btn-primary ml-2"
+          id="search-btn"
+        >
+          Clear
+        </button>
       </form>
     </>
   );
