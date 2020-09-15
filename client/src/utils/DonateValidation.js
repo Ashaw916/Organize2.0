@@ -13,10 +13,10 @@ export default function donateValidation(values) {
     } else if (values.donationDescription.length < 20) {
       errors.donationDescription = "Must be 20 or more characters long"
     }
-    if (!values.donationUrl) {
-      errors.donationUrl = "A source url is required";
-    } else if (!validUrl.test(values.donationUrl)) {
-      errors.donationUrl = "Url is invalid"
+    if (!values.src) {
+      errors.src = "A source url is required";
+    } else if (!validUrl.test(values.src)) {
+      errors.src = "Url is invalid"
     }
     if (!values.donationType) {
       errors.donationType = "Type of Donation Link is required";

@@ -49,19 +49,19 @@ function AddDonation({
             </div>
 
             <div className="form-group">
-              <label htmlFor="url">Donation url</label>
+              <label htmlFor="src">Donation url</label>
               <input
                 type="text"
-                className={`form-control ${donateErrors.url ? "inputErr" : ""}`}
-                id="url"
-                placeholder="url"
-                name="url"
+                className={`form-control ${donateErrors.src ? "inputErr" : ""}`}
+                id="src"
+                placeholder="Source Url"
+                name="src"
                 onChange={handleDonateInputChange}
-                value={donateObject.url || ""}
+                value={donateObject.src || ""}
                 required
               />
               <small id="textHelp" className="form-text text-muted">Source Url</small>
-              {donateErrors.url && (<p className="err">{donateErrors.url}</p>)}
+              {donateErrors.src && (<p className="err">{donateErrors.src}</p>)}
             </div>
 
             <div className="form-group">
