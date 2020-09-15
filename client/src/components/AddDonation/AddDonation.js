@@ -4,8 +4,10 @@ import "./AddDonationStyle.css";
 function AddDonation({
   handleDonateInputChange,
   handleDonateSubmit,
+  submitDonateUpdate,
   donateObject,
   donateErrors,
+  donationUpdateErrors,
   donateSuccess,
   notDonateSubmitted
 }) {
@@ -21,7 +23,7 @@ function AddDonation({
               <label htmlFor="title">Donation Resource</label>
               <input
                 type="text"
-                className={`form-control ${donateErrors.title ? "inputErr" : ""}`}
+                className={`form-control ${donateErrors.title ? "inputErr" : donationUpdateErrors.title ? "inputErr" : ""}`}
                 id="title"
                 placeholder="Title of Resource for Recommended Donation"
                 name="donationTitle"
@@ -31,12 +33,13 @@ function AddDonation({
               />
               <small id="textHelp" className="form-text text-muted">Title of Resource for Recommended Donation</small>
               {donateErrors.title && (<p className="err">{donateErrors.title}</p>)}
+              {donationUpdateErrors.title && (<p className="err">{donationUpdateErrors.title}</p>)}
             </div>
 
             <div className="form-group">
               <label htmlFor="description">Brief Description</label>
               <textarea
-                className={`form-control ${donateErrors.description ? "inputErr" : ""}`}
+                className={`form-control ${donateErrors.description ? "inputErr" : donationUpdateErrors.description ? "inputErr" : ""}`}
                 id="description"
                 rows="1"
                 name="description"
@@ -46,13 +49,14 @@ function AddDonation({
               ></textarea>
               <small id="textHelp" className="form-text text-muted">Describe the Donation</small>
               {donateErrors.description && (<p className="err">{donateErrors.description}</p>)}
+              {donationUpdateErrors.description && (<p className="err">{donationUpdateErrors.description}</p>)}
             </div>
 
             <div className="form-group">
               <label htmlFor="src">Donation url</label>
               <input
                 type="text"
-                className={`form-control ${donateErrors.src ? "inputErr" : ""}`}
+                className={`form-control ${donateErrors.src ? "inputErr" : donationUpdateErrors.src ? "inputErr" : ""}`}
                 id="src"
                 placeholder="Source Url"
                 name="src"
@@ -62,13 +66,14 @@ function AddDonation({
               />
               <small id="textHelp" className="form-text text-muted">Source Url</small>
               {donateErrors.src && (<p className="err">{donateErrors.src}</p>)}
+              {donationUpdateErrors.src && (<p className="err">{donationUpdateErrors.src}</p>)}
             </div>
 
             <div className="form-group">
               <label htmlFor="type">Donation Type</label>
               <input
                 type="text"
-                className={`form-control ${donateErrors.type ? "inputErr" : ""}`}
+                className={`form-control ${donateErrors.type ? "inputErr" : donationUpdateErrors.type ? "inputErr" : ""}`}
                 id="type"
                 placeholder="Type of Donation"
                 name="type"
@@ -78,10 +83,14 @@ function AddDonation({
               />
               <small id="textHelp" className="form-text text-muted">Type of Donation</small>
               {donateErrors.type && (<p className="err">{donateErrors.type}</p>)}
+              {donationUpdateErrors.type && (<p className="err">{donationUpdateErrors.type}</p>)}
             </div>
           </form>
           <button type="submit" className="btn btn-add" onClick={handleDonateSubmit}>
             Add
+          </button>
+          <button type="submit" className="btn btn-add" onClick={submitDonateUpdate}>
+            Update
           </button>
           {donateSuccess && <div className="success">Submitted</div>}
           {notDonateSubmitted && <div className="notSubmitted">Not Submitted :(</div>}

@@ -321,7 +321,7 @@ const [donateObject, setDonateObject] = useState({});
   const [donateErrors, setDonateErrors] = useState({});
   //for showing a successful submission
   const [donateSuccess, setDonateSuccess] = useState(false);
-  //works with use effect, with checking errors, will start submit, and let user know
+  //works with use effect, with checking errors, will start submit
   const [isDonateSubmitting, setIsDonateSubmitting] = useState(false);
   //if an unsuccesful submission, will show an error to user
   const [notDonateSubmitted, setNotDonateSubmitted] = useState(false);
@@ -329,6 +329,8 @@ const [donateObject, setDonateObject] = useState({});
   const [donationUpdateErrors, setDonationUpdateErrors] = useState({});
   //holds id to request one donate document
   const [donateId, setDonateId] = useState("");
+  //works with useEffect for updating entry, works with checking errors while updating
+  const [isDonationUpdating, setIsDonationUpdating] = useState(false);
 
   //triggers when erros object keys have length of 0 when submitting a new donation
   useEffect(() => {
@@ -339,11 +341,12 @@ const [donateObject, setDonateObject] = useState({});
   }, [donateErrors]);
 
   // //triggers when erros object keys have length of 0 when submitting an update to an already existing donation
-  // useEffect(() => {
-  //   if (Object.keys(donationUpdateErrors).length === 0 && isDonateSubmitting) {
-  //     //function for PUT api call
-  //   }
-  // }, [donationUpdateErrors])
+  useEffect(() => {
+    if (Object.keys(donationUpdateErrors).length === 0 && isDonationUpdating) {
+      //function for PUT api call
+      updateDonation();
+    }
+  }, [donationUpdateErrors])
 
   useEffect(() => {
     API.getLink(donateId)
@@ -363,10 +366,10 @@ const [donateObject, setDonateObject] = useState({});
     //when successful, setArticleSuccess(true)
     //if unsuccesfful, setNotSubmitted(true)
     API.saveLink({
-      title: donateObject.donationTitle,
-      description: donateObject.donationDescription,
-      url: donateObject.donationUrl,
-      type: donateObject.donationType
+      title: donateObject.title,
+      description: donateObject.description,
+      url: donateObject.src,
+      type: donateObject.type
     }).then((res) => {
       loadDonations();
       setDonateSuccess(true);
@@ -376,10 +379,46 @@ const [donateObject, setDonateObject] = useState({});
     });
     //resets form
     setDonateObject({
-      donationTitle: "",
-      donationDescription: "",
-      donationUrl: "",
-      donationType: "",
+      title: "",
+      description: "",
+      src: "",
+      type: "",
+    });
+
+    setTimeout(() => {
+      setDonateSuccess(false);
+    }, 1200)
+
+    setTimeout(() => {
+      setNotVideoSubmitted(false);
+    }, 20000)
+
+  };
+
+  function updateDonation() {
+    console.log("updated successfully!!");
+
+    API.updateLink(donateId, {
+      title: donateObject.title,
+      description: donateObject.description,
+      src: donateObject.src,
+      type: donateObject.type
+    })
+    .then((res) => {
+      loadDonations();
+      setDonateSuccess(true);
+    })
+    .catch((err) => {
+      console.log(err);
+      setNotDonateSubmitted(true);
+    })
+
+    //resets form
+    setDonateObject({
+      title: "",
+      description: "",
+      src: "",
+      type: "",
     });
 
     setTimeout(() => {
@@ -402,15 +441,14 @@ const [donateObject, setDonateObject] = useState({});
     console.log(id);
     //save the id to a state, that id is passed to api call via useeffect
     setDonateId(id);
-    //calls a api call that gets data per that id and that .then of the api call saves the data to the donateObject (<-- is that it or do i need somethign else (to get the form to fill)? check the forms activities) that i would think fills the form inputs
-    //
   };
 // //handles the click of the update button in the form
-//   const submitDonateUpdate = (e) => {
-//     if (e) e.preventDefault();
-//     //setDonationUpdateErrors(donationValidation(donationObject));
-//     //setDonationSubmitting
-//   };
+  const submitDonateUpdate = (e) => {
+    if (e) e.preventDefault();
+    console.log("update click")
+    setDonationUpdateErrors(donateValidation(donateObject));
+    setIsDonationUpdating(true);
+  };
 
   //about the form button, how to change it...
 
@@ -520,9 +558,11 @@ const [donateObject, setDonateObject] = useState({});
           <AddDonation 
           handleDonateInputChange={handleDonateInputChange}
           handleDonateSubmit={handleDonateSubmit}
+          submitDonateUpdate={submitDonateUpdate}
           donateObject={donateObject}
           donateSuccess={donateSuccess}
           donateErrors={donateErrors}
+          donationUpdateErrors={donationUpdateErrors}
           notDonateSubmitted={notDonateSubmitted}
           />
         </div>
