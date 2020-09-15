@@ -10,30 +10,33 @@ router.post("/", (req, res) => {
   // authController.findOne({
   //   user: userId,
   // });
-  Auth.findOne({ user: userId }, (err, doc) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Result : ", doc.bool);
-    }
-    // console.log("res", );
-  }).then((req, res) => {
-    console.log("doc", req);
-    if (req.bool === "false") {
-      console.log("invalid", req.bool);
-      sendInvalid();
-    }
-    console.log("valid", req.bool);
-    sendValid();
-  });
-
-  function sendValid() {
-    return res.send("valid");
-  }
-  function sendInvalid() {
+  if (userId === "none") {
     return res.send("invalid");
-  }
+  } else {
+    Auth.findOne({ user: userId }, (err, doc) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Result : ", doc.bool);
+      }
+      // console.log("res", );
+    }).then((req, res) => {
+      console.log("doc", req);
+      if (req.bool === "false") {
+        console.log("invalid", req.bool);
+        sendInvalid();
+      }
+      console.log("valid", req.bool);
+      sendValid();
+    });
 
+    function sendValid() {
+      return res.send("valid");
+    }
+    function sendInvalid() {
+      return res.send("invalid");
+    }
+  }
   //   .catch((err) => res.status(422).json(err));
 });
 

@@ -22,10 +22,6 @@ import { PrivateRoute } from "./components/PrivateRoutes/index";
 import Axios from "axios";
 
 function App(props, user) {
-  const componentDidMount = () => {
-    console.log("mount");
-  };
-
   const [userAuth, setUserAuth] = useState({});
 
   useEffect(() => {
@@ -47,22 +43,23 @@ function App(props, user) {
         console.log("res react", response.data);
         if (response.data === "valid") {
           let userRes = "valid";
-
-          console.log("userRes1", userRes);
+          console.log("if", userRes);
           return userRes;
         } else {
           let userRes = "invalid";
+          console.log("else", userRes);
           return userRes;
         }
       })
       .then((userRes) => {
         setUserAuth(userRes);
+        console.log("setUserAuth", userRes);
       });
   };
-  console.log("after async", userAuth);
-  if (userAuth === "valid") {
-    console.log("auth success react");
-  }
+  // // console.log("after async", userAuth);
+  // if (userAuth === "valid") {
+  //   // console.log("auth success react");
+  // }
   const PrivateRoute = ({ component: Component, ...rest }) => {
     return (
       <Route
@@ -87,45 +84,62 @@ function App(props, user) {
     );
   };
 
-  // const PrivateRoute = ({ component: Component, ...rest }, userRes) => (
-  //   <Route
-  //     {...rest}
-  //     render={(props) =>
-  //       userAuth === "valid" ? (
-  //         <Component {...props} />
-  //       ) : (
-  //         <Redirect
-  //           to={{
-  //             pathname: "/Admin",
-  //           }}
-  //         />
-  //       )
-  //     }
-  //   />
-  // );
-
+  const reloadContainer = (e) => e.target.parentElement.forcedReload(false);
+  function update() {
+    this.forceUpdate();
+  }
   return (
     <Router>
       <div>
-        <NavTabs {...props} onClick={Auth} />
+        <NavTabs {...props} />
         <Switch>
-          <Route exact path="/" component={Landing} onClick={Auth} />
-          <Route exact path="/events" component={Events} onClick={Auth} />
-          <Route exact path="/resources" component={Resources} onClick={Auth} />
-          <Route exact path="/video" component={Video} onClick={Auth} />
-          <Route exact path="/donate" component={Donate} onLoad={Auth} />
-          <Route exact path="/contact" component={Contact} onLoad={Auth} />
-          <Route exact path="/Admin" component={Admin} onLoad={Auth} />
-          <PrivateRoute exact path="/Manage" component={Manage} onLoad={Auth} />
+          <Route exact path="/" component={Landing} onLoadedData={update} />
+          <Route
+            exact
+            path="/events"
+            component={Events}
+            onLoadedData={update}
+          />
+          <Route
+            exact
+            path="/resources"
+            component={Resources}
+            onLoadedData={update}
+          />
+          <Route exact path="/video" component={Video} onLoadedData={update} />
+          <Route
+            exact
+            path="/donate"
+            component={Donate}
+            onLoadedData={update}
+          />
+          <Route
+            exact
+            path="/contact"
+            component={Contact}
+            onLoadedData={update}
+          />
+          <Route exact path="/admin" component={Admin} onLoadedData={update} />
           <PrivateRoute
             exact
-            path="/Profile"
-            component={Profile}
-            onLoad={Auth}
+            path="/manage"
+            component={Manage}
+            onLoadedData={update}
           />
-          <PrivateRoute exact path="/Logout" component={Logout} onLoad={Auth} />
+          <PrivateRoute
+            exact
+            path="/profile"
+            component={Profile}
+            onLoadedData={update}
+          />
+          <PrivateRoute
+            exact
+            path="/logout"
+            component={Logout}
+            onLoadedData={update}
+          />
           {/* <Route exact path="/Logout" component={Logout} /> */}
-          <Route component={() => "404 NOT FOUND"} />
+          <Route component={() => "404 NOT FOUND"} onLoadedData={update} />
         </Switch>
       </div>
       <Footer />

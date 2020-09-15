@@ -16,7 +16,8 @@ function LogoutUser(props) {
       url: "/users/logout",
     });
     console.log("logout then");
-    localStorage.clear();
+    // localStorage.clear();
+    localStorage.setItem("user", "none");
     // window.location.href = "/";
     props.history.push("/");
   });
