@@ -91,7 +91,7 @@ function AddResource({
             </div>
             <div className="form-row">
               <div className="form-group col">
-                <label for="source">Source(url)</label>
+                <label htmlFor="source">Source(url)</label>
                 <input
                   type="text"
                   className={`form-control ${
@@ -109,7 +109,7 @@ function AddResource({
               </div>
               <div className="form-row">
                 <div className="form-group col">
-                  <label for="type">Type/keyword(s)</label>
+                  <label htmlFor="type">Type/keyword(s)</label>
                   <input
                     type="text"
                     className={`form-control ${

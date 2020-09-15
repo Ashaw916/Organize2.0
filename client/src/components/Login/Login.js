@@ -6,6 +6,10 @@ function LoginUser(props) {
   // console.log(props);
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  function refreshPage() {
+    window.location.forcedReload(false);
+  }
+
   const login = (e) => {
     e.preventDefault();
     console.log("login");
@@ -30,6 +34,7 @@ function LoginUser(props) {
         window.location.reload();
         props.history.push("/profile");
       } else {
+        e.target.parentElement.forcedReload();
         props.history.push("/");
       }
     });
@@ -67,6 +72,9 @@ function LoginUser(props) {
                 onChange={(e) => setLoginPassword(e.target.value)}
               />
             </div>
+            <button type="submit" className="btn btn-admin" onClick={login}>
+              Login
+            </button>
             <button type="submit" className="btn btn-admin" onClick={login}>
               Login
             </button>

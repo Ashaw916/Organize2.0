@@ -49,7 +49,7 @@ function Manage() {
   function loadDonations() {
     API.getLinks()
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setGetDonations(res.data);
       })
       .catch((err) => console.log(err));
@@ -172,7 +172,7 @@ function Manage() {
 
     setTimeout(() => {
       setNotEventSubmitted(false);
-    }, 20000)
+    }, 20000);
   }
 
   const handleEventSubmit = (e) => {
@@ -242,7 +242,7 @@ function Manage() {
 
     setTimeout(() => {
       setNotSubmitted(false);
-    }, 20000)
+    }, 20000);
   }
 
   const handleArticleSubmit = (e) => {
@@ -306,7 +306,7 @@ function Manage() {
 
     setTimeout(() => {
       setNotVideoSubmitted(false);
-    }, 20000)
+    }, 20000);
   }
 
   const handleVideoSubmit = (e) => {
@@ -315,10 +315,9 @@ function Manage() {
     setIsVideoSubmitting(true);
   };
 
+  /////////////////////////////// Donate Form //////////////////////////
 
-/////////////////////////////// Donate Form //////////////////////////
-
-const [donateObject, setDonateObject] = useState({});
+  const [donateObject, setDonateObject] = useState({});
   const [donateErrors, setDonateErrors] = useState({});
   //for showing a successful submission
   const [donateSuccess, setDonateSuccess] = useState(false);
@@ -346,7 +345,7 @@ const [donateObject, setDonateObject] = useState({});
 
   const handleDonateInputChange = (e) => {
     const { name, value } = e.target;
-    setDonateObject({ ...donateObject, [name]:value });
+    setDonateObject({ ...donateObject, [name]: value });
   };
 
   function submitDonate() {
@@ -357,14 +356,16 @@ const [donateObject, setDonateObject] = useState({});
       title: donateObject.donationTitle,
       description: donateObject.donationDescription,
       url: donateObject.donationUrl,
-      type: donateObject.donationType
-    }).then((res) => {
-      loadDonations();
-      setDonateSuccess(true);
-    }).catch((err) => {
-      console.log(err);
-      setNotDonateSubmitted(true);
-    });
+      type: donateObject.donationType,
+    })
+      .then((res) => {
+        loadDonations();
+        setDonateSuccess(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        setNotDonateSubmitted(true);
+      });
     //resets form
     setDonateObject({
       donationTitle: "",
@@ -375,34 +376,32 @@ const [donateObject, setDonateObject] = useState({});
 
     setTimeout(() => {
       setDonateSuccess(false);
-    }, 1200)
+    }, 1200);
 
     setTimeout(() => {
       setNotVideoSubmitted(false);
-    }, 20000)
-
-  };
+    }, 20000);
+  }
 
   const handleDonateSubmit = (e) => {
     if (e) e.preventDefault();
     setDonateErrors(donateValidation(donateObject));
     setIsDonateSubmitting(true);
   };
-// //listens for click of 'edit' button and grabs id for a donation link that already exists
-//   const updatingDonation = (e, id) => {
-//     if (e) e.preventDefault();
-//     console.log(id);
-//     //save the id to a state, that id is passed to api call via useeffect
-//     //calls a api call that gets data per that id and that .then of the api call saves the data to the donateObject (<-- is that it or do i need somethign else (to get the form to fill)? check the forms activities) that i would think fills the form inputs
-//     //
-//   };
-// //handles the click of the update button in the form
-//   const submitDonateUpdate = (e) => {
-//     if (e) e.preventDefault();
-//     //setDonationUpdateErrors(donationValidation(donationObject));
-//     //setDonationSubmitting
-//   };
-
+  // //listens for click of 'edit' button and grabs id for a donation link that already exists
+  //   const updatingDonation = (e, id) => {
+  //     if (e) e.preventDefault();
+  //     console.log(id);
+  //     //save the id to a state, that id is passed to api call via useeffect
+  //     //calls a api call that gets data per that id and that .then of the api call saves the data to the donateObject (<-- is that it or do i need somethign else (to get the form to fill)? check the forms activities) that i would think fills the form inputs
+  //     //
+  //   };
+  // //handles the click of the update button in the form
+  //   const submitDonateUpdate = (e) => {
+  //     if (e) e.preventDefault();
+  //     //setDonationUpdateErrors(donationValidation(donationObject));
+  //     //setDonationSubmitting
+  //   };
 
   //about the form button, how to change it...
 
@@ -508,13 +507,13 @@ const [donateObject, setDonateObject] = useState({});
 
       <div className="row" id="row-donations">
         <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-          <AddDonation 
-          handleDonateInputChange={handleDonateInputChange}
-          handleDonateSubmit={handleDonateSubmit}
-          donateObject={donateObject}
-          donateSuccess={donateSuccess}
-          donateErrors={donateErrors}
-          notDonateSubmitted={notDonateSubmitted}
+          <AddDonation
+            handleDonateInputChange={handleDonateInputChange}
+            handleDonateSubmit={handleDonateSubmit}
+            donateObject={donateObject}
+            donateSuccess={donateSuccess}
+            donateErrors={donateErrors}
+            notDonateSubmitted={notDonateSubmitted}
           />
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -525,16 +524,19 @@ const [donateObject, setDonateObject] = useState({});
             <div className="card-body">
               <ul className="list-group list-group-flush">
                 {getDonations.map((donation) => (
-                  <li className="list-group-item manage-post" key={donation._id}>
+                  <li
+                    className="list-group-item manage-post"
+                    key={donation._id}
+                  >
                     {donation.title}
                     <button
                       type="button"
                       className="btn btn btn-sm delete-btn"
-//                   <li className="list-group-item" key={donation._id}>
-//                     {donation.title}
-//                     <button
-//                       type="button"
-//                       className="btn btn btn-sm"
+                      //                   <li className="list-group-item" key={donation._id}>
+                      //                     {donation.title}
+                      //                     <button
+                      //                       type="button"
+                      //                       className="btn btn btn-sm"
                       onClick={() => deleteDonation(donation._id)}
                     >
                       Delete
