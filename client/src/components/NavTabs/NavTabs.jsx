@@ -46,6 +46,8 @@ function NavTabs() {
     console.log("auth success react");
   }
 
+  const hide = "hidden";
+
   return (
     <nav className="navbar navbar-expand-lg">
       <a className="navbar-brand" href="#">
@@ -160,10 +162,7 @@ function NavTabs() {
           <li className="nav-item">
             <Link
               to="/manage"
-              className={
-                location.pathname === "/manage" ? "nav-link active" : "nav-link" +
-                userAuth === "invalid" ? "hidden" : ""
-              }
+              className={userAuth === "valid" ? "nav-link" : "nav-link hidden"}
             >
               Manage
             </Link>
@@ -171,12 +170,7 @@ function NavTabs() {
           <li className="nav-item">
             <Link
               to="/profile"
-              className={
-                location.pathname === "/profile"
-                  ? "nav-link active"
-                  : "nav-link" +
-                  userAuth === "invalid" ? "hidden" : ""
-                }
+              className={userAuth === "valid" ? "nav-link" : "nav-link hidden"}
             >
               Profile
             </Link>
@@ -184,10 +178,7 @@ function NavTabs() {
           <li className="nav-item">
             <Link
               to="/logout"
-              className={
-                location.pathname === "/logout" ? "nav-link active" : "nav-link" +
-                userAuth === "invalid" ? "hidden" : ""
-              }
+              className={userAuth === "valid" ? "nav-link" : "nav-link hidden"}
             >
               Logout
             </Link>
