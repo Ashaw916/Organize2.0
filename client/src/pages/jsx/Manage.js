@@ -326,7 +326,9 @@ const [donateObject, setDonateObject] = useState({});
   //if an unsuccesful submission, will show an error to user
   const [notDonateSubmitted, setNotDonateSubmitted] = useState(false);
   //holds errors when updating a donation link
-  // const [donationUpdateErrors, setDonationUpdateErrors] = useState({});
+  const [donationUpdateErrors, setDonationUpdateErrors] = useState({});
+  //holds id to request one donate document
+  const [donateId, setDonateId] = useState("");
 
   //triggers when erros object keys have length of 0 when submitting a new donation
   useEffect(() => {
@@ -342,6 +344,14 @@ const [donateObject, setDonateObject] = useState({});
   //     //function for PUT api call
   //   }
   // }, [donationUpdateErrors])
+
+  useEffect(() => {
+    API.getLink(donateId)
+      .then((res) => {
+        console.log(res.data);
+        setDonateObject(res.data)})
+      .catch((err) => console.log(err));
+  }, [donateId])
 
   const handleDonateInputChange = (e) => {
     const { name, value } = e.target;
@@ -388,13 +398,13 @@ const [donateObject, setDonateObject] = useState({});
     setIsDonateSubmitting(true);
   };
 // //listens for click of 'edit' button and grabs id for a donation link that already exists
-//   const updatingDonation = (e, id) => {
-//     if (e) e.preventDefault();
-//     console.log(id);
-//     //save the id to a state, that id is passed to api call via useeffect
-//     //calls a api call that gets data per that id and that .then of the api call saves the data to the donateObject (<-- is that it or do i need somethign else (to get the form to fill)? check the forms activities) that i would think fills the form inputs
-//     //
-//   };
+  const updatingDonation = (id) => {
+    console.log(id);
+    //save the id to a state, that id is passed to api call via useeffect
+    setDonateId(id);
+    //calls a api call that gets data per that id and that .then of the api call saves the data to the donateObject (<-- is that it or do i need somethign else (to get the form to fill)? check the forms activities) that i would think fills the form inputs
+    //
+  };
 // //handles the click of the update button in the form
 //   const submitDonateUpdate = (e) => {
 //     if (e) e.preventDefault();
@@ -443,7 +453,7 @@ const [donateObject, setDonateObject] = useState({});
                       className="btn btn btn-sm delete-btn"
                       onClick={() => deleteEvent(event._id)}
                     >
-                      Delete Event
+                      Delete
                     </button>
                     {/* <button
                       type="button"
@@ -533,13 +543,13 @@ const [donateObject, setDonateObject] = useState({});
                     >
                       Delete
                     </button>
-                    {/* <button
+                    <button
                       type="button"
                       className="btn btn btn-sm"
                       onClick={() => updatingDonation(donation._id)}
                     >
                       Edit
-                    </button> */}
+                    </button>
                   </li>
                 ))}
               </ul>

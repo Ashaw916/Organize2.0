@@ -18,66 +18,66 @@ function AddDonation({
         <div className="card-body">
           <form noValidate>
             <div className="form-group">
-              <label htmlFor="donationTitle">Donation Resource</label>
+              <label htmlFor="title">Donation Resource</label>
               <input
                 type="text"
-                className={`form-control ${donateErrors.donationTitle ? "inputErr" : ""}`}
-                id="donationTitle"
+                className={`form-control ${donateErrors.title ? "inputErr" : ""}`}
+                id="title"
                 placeholder="Title of Resource for Recommended Donation"
                 name="donationTitle"
                 onChange={handleDonateInputChange}
-                value={donateObject.donationTitle || ""}
+                value={donateObject.title || ""}
                 required
               />
               <small id="textHelp" className="form-text text-muted">Title of Resource for Recommended Donation</small>
-              {donateErrors.donationTitle && (<p className="err">{donateErrors.donationTitle}</p>)}
+              {donateErrors.title && (<p className="err">{donateErrors.title}</p>)}
             </div>
 
             <div className="form-group">
-              <label htmlFor="donationDescription">Brief Description</label>
+              <label htmlFor="description">Brief Description</label>
               <textarea
-                className={`form-control ${donateErrors.donationDescription ? "inputErr" : ""}`}
-                id="donationDescription"
+                className={`form-control ${donateErrors.description ? "inputErr" : ""}`}
+                id="description"
                 rows="1"
-                name="donationDescription"
+                name="description"
                 onChange={handleDonateInputChange}
-                value={donateObject.donationDescription || ""}
+                value={donateObject.description || ""}
                 required
               ></textarea>
               <small id="textHelp" className="form-text text-muted">Describe the Donation</small>
-              {donateErrors.donationDescription && (<p className="err">{donateErrors.donationDescription}</p>)}
+              {donateErrors.description && (<p className="err">{donateErrors.description}</p>)}
             </div>
 
             <div className="form-group">
-              <label htmlFor="donationUrl">Donation url</label>
+              <label htmlFor="url">Donation url</label>
               <input
                 type="text"
-                className={`form-control ${donateErrors.donationUrl ? "inputErr" : ""}`}
-                id="donationUrl"
-                placeholder="Donation Url"
-                name="donationUrl"
+                className={`form-control ${donateErrors.url ? "inputErr" : ""}`}
+                id="url"
+                placeholder="url"
+                name="url"
                 onChange={handleDonateInputChange}
-                value={donateObject.donationUrl || ""}
+                value={donateObject.url || ""}
                 required
               />
               <small id="textHelp" className="form-text text-muted">Source Url</small>
-              {donateErrors.donationUrl && (<p className="err">{donateErrors.donationUrl}</p>)}
+              {donateErrors.url && (<p className="err">{donateErrors.url}</p>)}
             </div>
 
             <div className="form-group">
-              <label htmlFor="donationType">Donation Type</label>
+              <label htmlFor="type">Donation Type</label>
               <input
                 type="text"
-                className={`form-control ${donateErrors.donationType ? "inputErr" : ""}`}
-                id="donationType"
+                className={`form-control ${donateErrors.type ? "inputErr" : ""}`}
+                id="type"
                 placeholder="Type of Donation"
-                name="donationType"
+                name="type"
                 onChange={handleDonateInputChange}
-                value={donateObject.donationType || ""}
+                value={donateObject.type || ""}
                 required
               />
               <small id="textHelp" className="form-text text-muted">Type of Donation</small>
-              {donateErrors.donationType && (<p className="err">{donateErrors.donationType}</p>)}
+              {donateErrors.type && (<p className="err">{donateErrors.type}</p>)}
             </div>
           </form>
           <button type="submit" className="btn btn-add" onClick={handleDonateSubmit}>
