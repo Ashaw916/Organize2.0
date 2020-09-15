@@ -3,6 +3,7 @@ import { paginate } from "../../utils/paginate";
 import Pagination from "../../components/Pagination/Pagination";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import API from "../../utils/API";
+import moment from "moment";
 import "../css/Resources.css";
 import Newsgroup from "../../images/newsgroup.png";
 import Newsprotest from "../../images/newsprotest.png";
@@ -19,7 +20,7 @@ class Resources extends Component {
 
   componentDidMount() {
     API.getArticles().then((res) => {
-      const articles = res.data;
+      const articles = res.data.reverse();
       this.setState({ articles });
     });
   }
@@ -39,18 +40,22 @@ class Resources extends Component {
 
   handleNextPageChange = () => {
     this.setState((state) => {
-      const totalPages = Math.ceil(state.articles.length / state.pageSize);
-      console.log(totalPages);
-      if (state.currentPage >= totalPages) {
-        return { currentPage: totalPages };
+      console.log(state);
+      if (state.currentPage >= state.pageSize) {
+        return { currentPage: state.pageSize };
       }
       return { currentPage: state.currentPage + 1 };
     });
   };
 
-  updateSearch(event) {
+  handleSearchEvent(event) {
     event.preventDefault();
     this.setState({ searchTerm: event.target.value, currentPage: 1 });
+  }
+
+  handleClearSearch(event) {
+    event.preventDefault();
+    this.setState({ searchTerm: "", currentPage: 1 });
   }
 
   render() {
@@ -74,6 +79,8 @@ class Resources extends Component {
 
     const articles = paginate(filtered, currentPage, pageSize);
 
+    const articlesDisplayed = filtered.length;
+
     return (
       <>
         <div className="container">
@@ -91,12 +98,13 @@ class Resources extends Component {
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
               <SearchForm
                 search={this.state.searchTerm}
-                update={this.updateSearch.bind(this)}
+                update={this.handleSearchEvent.bind(this)}
+                clear={this.handleClearSearch}
               />
             </div>
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
               <Pagination
-                itemsCount={filtered.length}
+                itemsCount={articlesDisplayed}
                 pageSize={pageSize}
                 currentPage={currentPage}
                 onPageChange={this.handlePageChange}
@@ -106,7 +114,7 @@ class Resources extends Component {
             </div>
           </div>
 
-          <div className="row">
+          <div className="row mt-2">
             <div className="col-3 img-responsive" id="image-wrapper">
               <div className="news-pic-wrapper">
                 <img className="news-pic" src={Newsgroup} />
@@ -166,11 +174,32 @@ class Resources extends Component {
                         >
                           <div className="card-body">{article.body}</div>
                         </div>
+                        <div className="text-right mr-2">
+                          <small className="text-muted">
+                            Posted {moment(article.date_added).from(moment())}{" "}
+                            on{" "}
+                            {moment(article.date_added).format("MMM D, YYYY")}
+                          </small>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+              <Pagination
+                itemsCount={filtered.length}
+                pageSize={pageSize}
+                currentPage={currentPage}
+                onPageChange={this.handlePageChange}
+                onNextPageChange={this.handleNextPageChange}
+                onPreviousPageChange={this.handlePreviousPageChange}
+              />
             </div>
           </div>
         </div>
