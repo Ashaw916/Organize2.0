@@ -24,6 +24,9 @@ body {
   color: darkred;
   font-weight: bold;
 }
+.hidden {
+  display: none !important;
+}
 
 #bottom-info {
   text-align: center;

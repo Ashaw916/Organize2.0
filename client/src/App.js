@@ -22,6 +22,10 @@ import { PrivateRoute } from "./components/PrivateRoutes/index";
 import Axios from "axios";
 
 function App(props, user) {
+  const componentDidMount = () => {
+    console.log("mount");
+  };
+
   const [userAuth, setUserAuth] = useState({});
 
   useEffect(() => {
@@ -82,6 +86,7 @@ function App(props, user) {
       />
     );
   };
+
   // const PrivateRoute = ({ component: Component, ...rest }, userRes) => (
   //   <Route
   //     {...rest}
@@ -102,18 +107,23 @@ function App(props, user) {
   return (
     <Router>
       <div>
-        <NavTabs {...props} />
+        <NavTabs {...props} onClick={Auth} />
         <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/events" component={Events} />
-          <Route exact path="/resources" component={Resources} />
-          <Route exact path="/video" component={Video} />
-          <Route exact path="/donate" component={Donate} />
-          <Route exact path="/contact" component={Contact} />
-          <Route exact path="/Admin" component={Admin} />
-          <PrivateRoute exact path="/Manage" component={Manage} />
-          <PrivateRoute exact path="/Profile" component={Profile} />
-          <PrivateRoute exact path="/Logout" component={Logout} />
+          <Route exact path="/" component={Landing} onClick={Auth} />
+          <Route exact path="/events" component={Events} onClick={Auth} />
+          <Route exact path="/resources" component={Resources} onClick={Auth} />
+          <Route exact path="/video" component={Video} onClick={Auth} />
+          <Route exact path="/donate" component={Donate} onLoad={Auth} />
+          <Route exact path="/contact" component={Contact} onLoad={Auth} />
+          <Route exact path="/Admin" component={Admin} onLoad={Auth} />
+          <PrivateRoute exact path="/Manage" component={Manage} onLoad={Auth} />
+          <PrivateRoute
+            exact
+            path="/Profile"
+            component={Profile}
+            onLoad={Auth}
+          />
+          <PrivateRoute exact path="/Logout" component={Logout} onLoad={Auth} />
           {/* <Route exact path="/Logout" component={Logout} /> */}
           <Route component={() => "404 NOT FOUND"} />
         </Switch>
