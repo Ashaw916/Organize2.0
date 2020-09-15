@@ -90,6 +90,11 @@ export default {
     return axios.get("/users/profile");
   },
 
+  // Get a user
+  getUser: function() {
+    return axios.get("/users");
+  },
+
   auth: function (token) {
     return axios.post("/api/auth", (token) => {
       console.log(token);
