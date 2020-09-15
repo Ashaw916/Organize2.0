@@ -28,11 +28,7 @@ class Contact extends Component {
     API.getProfile()
       .then((res) => this.setState({ users: res.data }))
       .catch((err) => console.log(err));
-<<<<<<< HEAD
   }
-=======
-  };
->>>>>>> 46b3337bdb6fb4e29d839e8b26cb81d969639615
 
   raiseSort = (path) => {
     const sortColumn = { ...this.props.sortColumn };
