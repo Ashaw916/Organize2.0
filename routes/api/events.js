@@ -5,15 +5,23 @@ const eventsController = require("../../controllers/eventsController");
 // Matches with "/api/events"
 router.route("/").get(eventsController.findAll);
 
+router.post("/", (req, res) => {
+  eventsController.create(req, res);
+});
+
 // Matches with "/api/events/:id"
-router.route("/:id").get(eventsController.findById);
+router
+  .route("/:id")
+  .get(eventsController.findById)
+  .put(eventsController.update)
+  .delete(eventsController.remove);
 
 //authToken, goes inbetween /events and (req, res)
 
-router.route("/events", (req, res) => {
-  eventsController.create;
-  eventsController.update;
-  eventsController.remove;
-});
+// router.route("/events", (req, res) => {
+//   eventsController.create;
+//   eventsController.update;
+//   eventsController.remove;
+// });
 
 module.exports = router;
