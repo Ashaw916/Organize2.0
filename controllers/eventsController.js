@@ -16,6 +16,7 @@ module.exports = {
   create: function (req, res) {
     console.log("create", req.body);
     db.Events.create(req.body)
+    .then(({ _id }) => db.User.findOneAndUpdate({}, { $push: { events: _id } }, { new: true }))
       .then((dbModel) => {
         console.log(dbModel);
         res.json(dbModel)

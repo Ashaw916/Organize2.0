@@ -6,7 +6,8 @@ const linkSchema = new Schema({
   date_added: { type: Date, default: Date.now },
   description: { type: String, required: true },
   url: { type: String, required: true },
-  type: { type: String, required: true }
+  type: { type: String, required: true },
+  user: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
 const Links = mongoose.model("Links", linkSchema);
