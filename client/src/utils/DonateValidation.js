@@ -5,13 +5,13 @@ export default function donateValidation(values) {
 
     if(!values.title) {
       errors.title = "A title is required";
-    } else if (values.title.length < 5) {
-      errors.title = "Must be 5 or more characters long"
+    } else if (values.title.length < 2) {
+      errors.title = "Must be 2 or more characters long"
     }
     if (!values.description) {
       errors.description = "A description is required";
-    } else if (values.description.length < 20) {
-      errors.description = "Must be 20 or more characters long"
+    } else if (values.description.length < 15) {
+      errors.description = "Must be 15 or more characters long"
     }
     if (!values.src) {
       errors.src = "A source url is required";

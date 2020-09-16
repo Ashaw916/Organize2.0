@@ -103,6 +103,7 @@ function AddResource({
                   value={articleObject.source_url || ""}
                   required
                 />
+                <small id="textHelp" className="form-text text-muted">e.g. https://www.example.com/page</small>
                 {articleErrors.source_url && (
                   <p className="err">{articleErrors.source_url}</p>
                 )}

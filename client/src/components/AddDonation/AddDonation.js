@@ -9,7 +9,8 @@ function AddDonation({
   donateErrors,
   donationUpdateErrors,
   donateSuccess,
-  notDonateSubmitted
+  notDonateSubmitted,
+  donateId
 }) {
   return (
     <>
@@ -26,7 +27,7 @@ function AddDonation({
                 className={`form-control ${donateErrors.title ? "inputErr" : donationUpdateErrors.title ? "inputErr" : ""}`}
                 id="title"
                 placeholder="Title of Resource for Recommended Donation"
-                name="donationTitle"
+                name="title"
                 onChange={handleDonateInputChange}
                 value={donateObject.title || ""}
                 required
@@ -64,7 +65,7 @@ function AddDonation({
                 value={donateObject.src || ""}
                 required
               />
-              <small id="textHelp" className="form-text text-muted">Source Url</small>
+              <small id="textHelp" className="form-text text-muted">e.g. https://www.example.com/page</small>
               {donateErrors.src && (<p className="err">{donateErrors.src}</p>)}
               {donationUpdateErrors.src && (<p className="err">{donationUpdateErrors.src}</p>)}
             </div>
@@ -86,15 +87,14 @@ function AddDonation({
               {donationUpdateErrors.type && (<p className="err">{donationUpdateErrors.type}</p>)}
             </div>
           </form>
-          <button type="submit" className="btn btn-add" onClick={handleDonateSubmit}>
+          <button type="submit" className="btn btn-add" onClick={handleDonateSubmit} disabled={!(donateId.length === 0)}>
             Add
           </button>
-          <button type="submit" className="btn btn-add" onClick={submitDonateUpdate}>
+          <button type="submit" className="btn btn-add" onClick={submitDonateUpdate} disabled={(donateId.length === 0)}>
             Update
           </button>
           {donateSuccess && <div className="success">Submitted</div>}
           {notDonateSubmitted && <div className="notSubmitted">Not Submitted :(</div>}
-          {/*another button that appears, disabling or making the add button disappear?*/}
         </div>
       </div>
     </>
