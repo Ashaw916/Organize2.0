@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -18,54 +18,56 @@ import Manage from "./pages/jsx/Manage";
 import Profile from "./pages/jsx/Profile";
 import Donate from "./pages/jsx/Donate";
 import Logout from "./components/Logout/Logout";
-import { PrivateRoute } from "./components/PrivateRoutes/index";
+import { Context } from "./utils/AuthContext";
+import { Auth } from "./components/PrivateRoutes/Auth";
 import Axios from "axios";
 
-function App(props, user) {
-  const [userAuth, setUserAuth] = useState({});
+function App(props, Auth) {
+  const [state, dispatch] = useContext({ Context });
 
   useEffect(() => {
     Auth();
   }, []);
 
-  const Auth = (props, user) => {
-    const userObj = JSON.stringify(localStorage.getItem("user"));
-    console.log("userObj", userObj);
-    let userRes;
-    Axios({
-      method: "POST",
-      data: {
-        user: userObj,
-      },
-      url: "/auth",
-    })
-      .then((response) => {
-        console.log("res react", response.data);
-        if (response.data === "valid") {
-          let userRes = "valid";
-          console.log("if", userRes);
-          return userRes;
-        } else {
-          let userRes = "invalid";
-          console.log("else", userRes);
-          return userRes;
-        }
-      })
-      .then((userRes) => {
-        setUserAuth(userRes);
-        console.log("setUserAuth", userRes);
-      });
-  };
+  // const Auth = (props, user) => {
+  //   const userObj = JSON.stringify(localStorage.getItem("user"));
+  //   console.log("userObj", userObj);
+  //   let userRes;
+  //   Axios({
+  //     method: "POST",
+  //     data: {
+  //       user: userObj,
+  //     },
+  //     url: "/auth",
+  //   }).then((response) => {
+  //     console.log("res react", response.data);
+  //     if (response.data === "valid") {
+  //       let userRes = response.data;
+  //       console.log("if", userRes);
+  //       return userRes;
+  //       dispatch({ type: "USER_VALID", payload: userRes });
+  //     } else {
+  //       let userRes = "invalid";
+  //       console.log("else", userRes);
+  //       return userRes;
+  //       dispatch({ type: "USER_INVALID", payload: userRes });
+  //     }
+  //   });
+  //   // .then((userRes) => {
+  //   //   setUserAuth(userRes);
+  //   //   console.log("setUserAuth", userRes);
+  //   // });
+  // };
   // // console.log("after async", userAuth);
   // if (userAuth === "valid") {
   //   // console.log("auth success react");
   // }
-  const PrivateRoute = ({ component: Component, ...rest }) => {
+  const PrivateRoute = ({ component: Component, setUserAuth, ...rest }) => {
     return (
       <Route
         {...rest}
         render={(props) => {
-          if (userAuth === "valid") {
+          if (state === "valid") {
             return <Component {...props} />;
           } else {
             return (
@@ -85,61 +87,49 @@ function App(props, user) {
   };
 
   const reloadContainer = (e) => e.target.parentElement.forcedReload(false);
-  function update() {
-    this.forceUpdate();
-  }
+
   return (
     <Router>
       <div>
         <NavTabs {...props} />
         <Switch>
-          <Route exact path="/" component={Landing} onLoadedData={update} />
-          <Route
-            exact
-            path="/events"
-            component={Events}
-            onLoadedData={update}
-          />
+          <Route exact path="/" component={Landing} onLoadedData={Auth} />
+          <Route exact path="/events" component={Events} onLoadedData={Auth} />
           <Route
             exact
             path="/resources"
             component={Resources}
-            onLoadedData={update}
+            onLoadedData={Auth}
           />
-          <Route exact path="/video" component={Video} onLoadedData={update} />
-          <Route
-            exact
-            path="/donate"
-            component={Donate}
-            onLoadedData={update}
-          />
+          <Route exact path="/video" component={Video} onLoadedData={Auth} />
+          <Route exact path="/donate" component={Donate} onLoadedData={Auth} />
           <Route
             exact
             path="/contact"
             component={Contact}
-            onLoadedData={update}
+            onLoadedData={Auth}
           />
-          <Route exact path="/admin" component={Admin} onLoadedData={update} />
+          <Route exact path="/admin" component={Admin} onLoadedData={Auth} />
           <PrivateRoute
             exact
             path="/manage"
             component={Manage}
-            onLoadedData={update}
+            onLoadedData={Auth}
           />
           <PrivateRoute
             exact
             path="/profile"
             component={Profile}
-            onLoadedData={update}
+            onLoadedData={Auth}
           />
           <PrivateRoute
             exact
             path="/logout"
             component={Logout}
-            onLoadedData={update}
+            // setUserAuth={(state) => setUserAuth(state)}
           />
           {/* <Route exact path="/Logout" component={Logout} /> */}
-          <Route component={() => "404 NOT FOUND"} onLoadedData={update} />
+          <Route component={() => "404 NOT FOUND"} />
         </Switch>
       </div>
       <Footer />
