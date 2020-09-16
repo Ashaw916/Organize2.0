@@ -8,6 +8,9 @@ function AddEvent({
   eventErrors,
   eventSuccess,
   notEventSubmitted,
+  submitEventUpdate,
+  eventUpdateErrors,
+  eventId
 }) {
   return (
     <>
@@ -25,7 +28,7 @@ function AddEvent({
                 <input
                   type="text"
                   className={`form-control ${
-                    eventErrors.title ? "inputErr" : ""
+                    eventErrors.title ? "inputErr" : eventUpdateErrors.title ? "inputErr" : ""
                   }`}
                   id="event-title"
                   placeholder="Event Title"
@@ -35,11 +38,12 @@ function AddEvent({
                   required
                 />
                 <small id="textHelp" className="form-text text-muted">
-                  MM/DD/YYYY
+                  Title
                 </small>
                 {eventErrors.title && (
                   <p className="err">{eventErrors.title}</p>
                 )}
+                {eventUpdateErrors.title && (<p className="err">{eventUpdateErrors.title}</p>)}
               </div>
             </div>
 

@@ -136,9 +136,15 @@ function Manage() {
   }, [donationUpdateErrors])
 
   useEffect(() => {
-    API.getLink(donateId)
+    API.getEvent(eventId)
       .then((res) => {
-        setDonateObject(res.data)})
+        console.log(res.data);
+        //split start date and end date into start date and time & end date and time
+          //see if the form will turn them back into mm/dd/yyyy and 12 hr otherwise will need conversion functions
+       // setEventObject({
+      //  title: res.data.title ?????
+      // })
+      })
       .catch((err) => console.log(err));
   }, [donateId])
 
