@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { Link, Route } from "react-router-dom";
 import ContactTable from "../../components/ContactTable/ContactTable";
 import API from "../../utils/API";
 import "../css/Contact.css";
