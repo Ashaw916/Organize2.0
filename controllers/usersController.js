@@ -6,6 +6,10 @@ module.exports = {
     // console.log("controller", req);
     db.User.find(req.query)
       .sort({ date: -1 })
+      .populate("articles")
+      .populate("events")
+      .populate("videos")
+      .populate("links")
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },

@@ -23,6 +23,7 @@ module.exports = {
     //   console.log("controller ", res);
     //   console.log("body ", req.body);
     db.Articles.create(req.body)
+      .then(({ _id }) => db.User.findOneAndUpdate({}, { $push: { articles: _id } }, { new: true }))
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
     // });
