@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Axios from "axios";
 
-function NavTabs() {
+function NavTabs(props) {
   // We'll go into the Hooks API later, for now, we are just using some code
   // from the react-router docs (https://reacttraining.com/react-router/web/api/Hooks/uselocation)
   // This allows the component to check the route any time the user uses a link to navigate.
@@ -16,7 +16,7 @@ function NavTabs() {
 
   const Auth = (props, user) => {
     const userObj = JSON.stringify(localStorage.getItem("user"));
-    console.log("userObj", userObj);
+    // console.log("userObj", userObj);
     let userRes;
     Axios({
       method: "POST",
@@ -26,14 +26,15 @@ function NavTabs() {
       url: "/auth",
     })
       .then((response) => {
-        console.log("res react", response.data);
+        // console.log("res react", response.data);
         if (response.data === "valid") {
           let userRes = "valid";
 
-          console.log("userRes1", userRes);
+          // console.log("userRes1", userRes);
           return userRes;
         } else {
           let userRes = "invalid";
+          // console.log("userRes1", userRes);
           return userRes;
         }
       })
@@ -41,12 +42,10 @@ function NavTabs() {
         setUserAuth(userRes);
       });
   };
-  console.log("after async", userAuth);
+  // console.log("after async", userAuth);
   if (userAuth === "valid") {
-    console.log("auth success react");
+    // console.log("auth success react");
   }
-
-  const hide = "hidden";
 
   return (
     <nav className="navbar navbar-expand-lg">

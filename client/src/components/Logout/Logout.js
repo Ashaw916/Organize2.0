@@ -16,13 +16,21 @@ function LogoutUser(props) {
       url: "/users/logout",
     });
     console.log("logout then");
-    localStorage.clear();
+    // localStorage.clear();
+    localStorage.setItem("user", "none");
+    localStorage.setItem("token", "");
     // window.location.href = "/";
     props.history.push("/");
   });
+  function update() {
+    this.forceUpdate();
+  }
   return (
     <div className="padding">
-      <h1 className="goodbye"> Good Bye</h1>
+      <h1 className="goodbye" onLoadedData={update}>
+        {" "}
+        Good Bye
+      </h1>
     </div>
   );
 }
