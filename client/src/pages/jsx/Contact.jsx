@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-// import { Link, Route } from "react-router-dom";
-// import Table from "../../components/Table/Table.js";
 import API from "../../utils/API";
-import { getUsers } from "../../resources/users";
 import "../css/Contact.css";
 import Contactimg from "../../images/contactimg.png";
 
@@ -28,7 +25,7 @@ class Contact extends Component {
     API.getProfile()
       .then((res) => this.setState({ users: res.data }))
       .catch((err) => console.log(err));
-  };
+  }
 
   raiseSort = (path) => {
     const sortColumn = { ...this.props.sortColumn };
