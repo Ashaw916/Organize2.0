@@ -75,9 +75,6 @@ function LoginUser(props) {
             <button type="submit" className="btn btn-admin" onClick={login}>
               Login
             </button>
-            <button type="submit" className="btn btn-admin" onClick={login}>
-              Login
-            </button>
           </form>
         </div>
       </div>
