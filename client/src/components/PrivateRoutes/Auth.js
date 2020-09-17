@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Context } from "../../utils/AuthContext";
+// import AuthContext from "./utils/AuthContext";
 import Axios from "axios";
 
-const Auth = (props, user) => {
-  const [state, dispatch] = useContext({ Context });
+const Auth = () => {
   const userObj = JSON.stringify(localStorage.getItem("user"));
   console.log("userObj", userObj);
   let userRes;
@@ -18,18 +17,12 @@ const Auth = (props, user) => {
     if (response.data === "valid") {
       let userRes = response.data;
       console.log("if", userRes);
-      //   return userRes;
-      dispatch({ type: "USER_VALID", payload: userRes });
+      // checkAuth("valid");
     } else {
       let userRes = response.data;
       console.log("else", userRes);
-      //   return userRes;
-      dispatch({ type: "USER_INVALID", payload: userRes });
+      // checkAuth("invalid");
     }
   });
-  // .then((userRes) => {
-  //   setUserAuth(userRes);
-  //   console.log("setUserAuth", userRes);
-  // });
 };
 export default Auth;

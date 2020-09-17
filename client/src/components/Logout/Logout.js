@@ -1,4 +1,4 @@
-import React, { useState, component, useEffect } from "react";
+import React, { useState, component, useEffect, useContext } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -8,12 +8,13 @@ import {
 import "./style.css";
 import Axios from "axios";
 import auth from "../PrivateRoutes/Auth";
+import AuthContext from "../../utils/AuthContext";
 
-function LogoutUser({ setUserAuth }) {
-  console.log(setUserAuth);
+function LogoutUser({ checkAuth }) {
+  let { authStatus } = useContext(AuthContext);
   const userObj = JSON.stringify(localStorage.getItem("user"));
-  setUserAuth("invalid");
-  useEffect(() => {
+  // setUserAuth("invalid");
+  useEffect((checkAuth) => {
     console.log("logout");
     Axios({
       method: "POST",
@@ -23,9 +24,12 @@ function LogoutUser({ setUserAuth }) {
 
       url: "/users/logout",
     });
-
+    // const authRes = "invalid";
+    authStatus = "invalid";
+    // console.log("logout then", authRes);
+    // checkAuth(authRes);
     // setUserAuth("invalid");
-    console.log("logout then");
+    // console.log("logout then", authRes);
     // localStorage.clear();
     localStorage.setItem("user", "none");
     localStorage.setItem("token", "");
@@ -34,14 +38,12 @@ function LogoutUser({ setUserAuth }) {
   }, []);
 
   return (
-    <Redirect to="/" />
-    // <div className="padding">
-    //   <h1 className="goodbye" onLoadedData={update}>
-    //     {" "}
-    //     Good Bye
-    //   </h1>
-    // </div>
-    // );
+    <div className="padding">
+      <h1 className="goodbye">
+        Good Bye
+        {/* Add timer to redirect */}
+      </h1>
+    </div>
   );
 }
 export default LogoutUser;

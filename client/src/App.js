@@ -17,123 +17,86 @@ import Footer from "./components/Footer";
 import Manage from "./pages/jsx/Manage";
 import Profile from "./pages/jsx/Profile";
 import Donate from "./pages/jsx/Donate";
-import Logout from "./components/Logout/Logout";
-import { Context } from "./utils/AuthContext";
-import { Auth } from "./components/PrivateRoutes/Auth";
+import LogoutUser from "./components/Logout/Logout";
+// import { Context } from "./utils/AuthContext";
+import Auth from "./components/PrivateRoutes/Auth";
+import PrivateRoute from "./components/PrivateRoutes/index";
+import AuthContext from "./utils/AuthContext";
 import Axios from "axios";
 
-function App(props, Auth) {
-  const [state, dispatch] = useContext({ Context });
+function App() {
+  let { authStatus } = useContext(AuthContext);
+
+  //   ({
+  //   authStatus: "",
+  // });
+  // console.log("authStatus", authStatus);
+
+  function checkAuth(authRes) {
+    console.log("checkAuth", authRes);
+    // setUserAuthState({
+    // ...userAuthState,
+    authStatus = "valid";
+    // });
+  }
 
   useEffect(() => {
-    Auth();
+    // Auth();
+    const userObj = JSON.stringify(localStorage.getItem("user"));
+    console.log("userObj", userObj);
+    let userRes;
+    Axios({
+      method: "POST",
+      data: {
+        user: userObj,
+      },
+      url: "/auth",
+    }).then((response) => {
+      console.log("res react", response.data);
+      if (response.data === "valid") {
+        let userRes = response.data;
+        console.log("if", userRes);
+        checkAuth("valid");
+      } else {
+        let userRes = response.data;
+        console.log("else", userRes);
+        checkAuth("invalid");
+      }
+    });
   }, []);
 
-  // const Auth = (props, user) => {
-  //   const userObj = JSON.stringify(localStorage.getItem("user"));
-  //   console.log("userObj", userObj);
-  //   let userRes;
-  //   Axios({
-  //     method: "POST",
-  //     data: {
-  //       user: userObj,
-  //     },
-  //     url: "/auth",
-  //   }).then((response) => {
-  //     console.log("res react", response.data);
-  //     if (response.data === "valid") {
-  //       let userRes = response.data;
-  //       console.log("if", userRes);
-  //       return userRes;
-  //       dispatch({ type: "USER_VALID", payload: userRes });
-  //     } else {
-  //       let userRes = "invalid";
-  //       console.log("else", userRes);
-  //       return userRes;
-  //       dispatch({ type: "USER_INVALID", payload: userRes });
-  //     }
-  //   });
-  //   // .then((userRes) => {
-  //   //   setUserAuth(userRes);
-  //   //   console.log("setUserAuth", userRes);
-  //   // });
-  // };
-  // // console.log("after async", userAuth);
-  // if (userAuth === "valid") {
-  //   // console.log("auth success react");
-  // }
-  const PrivateRoute = ({ component: Component, setUserAuth, ...rest }) => {
-    return (
-      <Route
-        {...rest}
-        render={(props) => {
-          if (state === "valid") {
-            return <Component {...props} />;
-          } else {
-            return (
-              <Redirect
-                to={{
-                  pathname: "/admin",
-                  state: {
-                    from: props.location,
-                  },
-                }}
-              />
-            );
-          }
-        }}
-      />
-    );
-  };
-
-  const reloadContainer = (e) => e.target.parentElement.forcedReload(false);
-
   return (
-    <Router>
-      <div>
-        <NavTabs {...props} />
-        <Switch>
-          <Route exact path="/" component={Landing} onLoadedData={Auth} />
-          <Route exact path="/events" component={Events} onLoadedData={Auth} />
-          <Route
-            exact
-            path="/resources"
-            component={Resources}
-            onLoadedData={Auth}
-          />
-          <Route exact path="/video" component={Video} onLoadedData={Auth} />
-          <Route exact path="/donate" component={Donate} onLoadedData={Auth} />
-          <Route
-            exact
-            path="/contact"
-            component={Contact}
-            onLoadedData={Auth}
-          />
-          <Route exact path="/admin" component={Admin} onLoadedData={Auth} />
-          <PrivateRoute
-            exact
-            path="/manage"
-            component={Manage}
-            onLoadedData={Auth}
-          />
-          <PrivateRoute
-            exact
-            path="/profile"
-            component={Profile}
-            onLoadedData={Auth}
-          />
-          <PrivateRoute
-            exact
-            path="/logout"
-            component={Logout}
-            // setUserAuth={(state) => setUserAuth(state)}
-          />
-          {/* <Route exact path="/Logout" component={Logout} /> */}
-          <Route component={() => "404 NOT FOUND"} />
-        </Switch>
-      </div>
-      <Footer />
-    </Router>
+    <AuthContext.Provider value={authStatus}>
+      <Router>
+        <div>
+          <NavTabs />
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/events" component={Events} />
+            <Route exact path="/resources" component={Resources} />
+            <Route exact path="/video" component={Video} />
+            <Route exact path="/donate" component={Donate} />
+            <Route exact path="/contact" component={Contact} />
+            <Route
+              exact
+              path="/admin"
+              component={Admin}
+              checkAuth={checkAuth}
+            />
+            <PrivateRoute exact path="/manage" component={Manage} />
+            <PrivateRoute exact path="/profile" component={Profile} />
+            <Route
+              exact
+              path="/logout"
+              component={LogoutUser}
+              checkAuth={checkAuth}
+            />
+            <Route component={() => "404 NOT FOUND"} />
+          </Switch>
+        </div>
+        <Footer />
+      </Router>
+    </AuthContext.Provider>
   );
 }
 

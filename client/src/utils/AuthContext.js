@@ -1,17 +1,21 @@
-import React, { createContext, useReducer } from "react";
-import Reducer from "./Reducer";
+// import React, { useState } from "react";
 
-const initialState = {
-  auth: "invalid",
-  error: null,
-};
+// const State = { auth: "invalid" };
 
-const Store = ({ Provider }) => {
-  const [state, dispatch] = useReducer(Reducer, initialState);
-  return (
-    <Context.Provider value={[state, dispatch]}>{Provider}</Context.Provider>
-  );
-};
+// export const AuthContext = React.createContext(State);
+// export default ({ children }) => {
+//   const [userAuthState, setUserAuthState] = useState(State);
+//   return (
+//     <AuthContext.Provider value={[userAuthState, setUserAuthState]}>
+//       {children}
+//     </AuthContext.Provider>
+//   );
+// };
 
-export const Context = createContext(initialState);
-export default Store;
+import React from "react";
+
+const AuthContext = React.createContext({
+  authStatus: "Invalid",
+});
+
+export default AuthContext;
