@@ -16,6 +16,9 @@ import NavTabs from "../../components/NavTabs/NavTabs";
 function Manage() {
   // function Manage(props) {
 
+    let userObj = JSON.stringify(localStorage.getItem("user"));
+    const userObjId = userObj.slice(1,-1);
+
   //states for events, articles, and videos
   const [getEvents, setGetEvents] = useState([]);
   const [getArticles, setGetArticles] = useState([]);
@@ -145,6 +148,7 @@ function Manage() {
       location: eventObject.location,
       organization: eventObject.organization,
       event_url: "/events",
+      user: userObjId
     })
       .then((res) => {
         loadEvents();
@@ -218,6 +222,7 @@ function Manage() {
       description: articleObject.description,
       source: articleObject.source_url,
       type: articleObject.type,
+      user: userObjId
     })
       .then((res) => {
         loadArticles();
@@ -284,6 +289,7 @@ function Manage() {
       description: videoObject.videoDescription,
       src: videoObject.videoUrl,
       type: videoObject.videoType,
+      user: userObjId
     })
       .then((res) => {
         loadVideos();
@@ -358,6 +364,7 @@ function Manage() {
       description: donateObject.donationDescription,
       url: donateObject.donationUrl,
       type: donateObject.donationType,
+      user: userObjId
     })
       .then((res) => {
         loadDonations();
@@ -436,7 +443,7 @@ function Manage() {
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getEvents.map((event) => (
+                {getEvents.filter(event => event.user === userObjId).map((event) => (
                   <li className="list-group-item manage-post" key={event._id}>
                     {event.title}: {splitDate(event.start_date)}-
                     {splitYear(event.start_date)}{" "}
@@ -482,7 +489,7 @@ function Manage() {
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getArticles.map((article) => (
+                {getArticles.filter(article => article.user === userObjId).map((article) => (
                   <li className="list-group-item manage-post" key={article._id}>
                     {article.title}
                     <button
@@ -525,7 +532,7 @@ function Manage() {
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getDonations.map((donation) => (
+                {getDonations.filter(donation => donation.user === userObjId).map((donation) => (
                   <li
                     className="list-group-item manage-post"
                     key={donation._id}
@@ -583,7 +590,7 @@ function Manage() {
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getVideos.map((video) => (
+                {getVideos.filter(video => video.user === userObjId).map((video) => (
                   <li className="list-group-item manage-post" key={video._id}>
                     {video.title}
                     <button
