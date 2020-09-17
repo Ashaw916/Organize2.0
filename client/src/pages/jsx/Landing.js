@@ -9,10 +9,6 @@ import { Link } from "react-router-dom";
 function Landing() {
   const [event, setEvent] = useState([]);
   // console.log(props);
-  // function Event() { }
-  // Event.prototype.dateClick = function () {
-  //   alert("alert")
-  // }
 
   //call api route to get all events
   function loadEvents() {
@@ -29,7 +25,7 @@ function Landing() {
             start: events[i].start_date,
             end: events[i].end_date,
             title: events[i].title,
-            // url: events[i].event_url,
+            url: events[i].event_url,
             description: events[i].description,
             extendedProps: {
               location: events[i].location,
