@@ -27,19 +27,6 @@ import Axios from "axios";
 function App() {
   const [userAuth, setUserAuth] = useState({});
 
-  // //   ({
-  // //   authStatus: "",
-  // // });
-  // // console.log("authStatus", authStatus);
-
-  // function checkAuth(authRes) {
-  //   console.log("checkAuth", authRes);
-  //   // setUserAuthState({
-  //   // ...userAuthState,
-  //   authStatus = "valid";
-  //   // });
-  // }
-
   useEffect(() => {
     // Auth();
     const userObj = JSON.stringify(localStorage.getItem("user"));
@@ -93,7 +80,6 @@ function App() {
     <AuthContext.Provider value={userAuth}>
       <Router>
         <div>
-          {/* <NavTabs /> */}
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/events" component={Events} />
@@ -110,7 +96,6 @@ function App() {
         </div>
         <Footer />
       </Router>
-      //{" "}
     </AuthContext.Provider>
   );
 }
