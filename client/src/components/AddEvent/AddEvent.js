@@ -53,7 +53,7 @@ function AddEvent({
                 <input
                   type="date"
                   className={`form-control ${
-                    eventErrors.start_date ? "inputErr" : ""
+                    eventErrors.start_date ? "inputErr" : eventUpdateErrors.title ? "inputErr" : ""
                   }`}
                   id="start_date"
                   name="start_date"
@@ -67,13 +67,16 @@ function AddEvent({
                 {eventErrors.start_date && (
                   <p className="err">{eventErrors.start_date}</p>
                 )}
+                {eventUpdateErrors.start_date && (
+                  <p className="err">{eventUpdateErrors.start_date}</p>
+                )}
               </div>
               <div className="form-group col-md-6">
                 <label htmlFor="end_date">End Date</label>
                 <input
                   type="date"
                   className={`form-control ${
-                    eventErrors.end_date ? "inputErr" : ""
+                    eventErrors.end_date ? "inputErr" : eventUpdateErrors.title ? "inputErr" : ""
                   }`}
                   id="end_date"
                   name="end_date"
@@ -87,6 +90,9 @@ function AddEvent({
                 {eventErrors.end_date && (
                   <p className="err">{eventErrors.end_date}</p>
                 )}
+                {eventUpdateErrors.end_date && (
+                  <p className="err">{eventUpdateErrors.end_date}</p>
+                )}
               </div>
             </div>
 
@@ -96,7 +102,7 @@ function AddEvent({
                 <input
                   type="time"
                   className={`form-control ${
-                    eventErrors.start_time ? "inputErr" : ""
+                    eventErrors.start_time ? "inputErr" : eventUpdateErrors.title ? "inputErr" : ""
                   }`}
                   id="start_time"
                   name="start_time"
@@ -110,13 +116,16 @@ function AddEvent({
                 {eventErrors.start_time && (
                   <p className="err">{eventErrors.start_time}</p>
                 )}
+                {eventUpdateErrors.start_time && (
+                  <p className="err">{eventUpdateErrors.start_time}</p>
+                )}
               </div>
               <div className="form-group col-md-4">
                 <label htmlFor="end_time">End time</label>
                 <input
                   type="time"
                   className={`form-control ${
-                    eventErrors.end_time ? "inputErr" : ""
+                    eventErrors.end_time ? "inputErr" : eventUpdateErrors.title ? "inputErr" : ""
                   }`}
                   id="end_time"
                   name="end_time"
@@ -130,6 +139,9 @@ function AddEvent({
                 {eventErrors.end_time && (
                   <p className="err">{eventErrors.end_time}</p>
                 )}
+                {eventUpdateErrors.end_time && (
+                  <p className="err">{eventUpdateErrors.end_time}</p>
+                )}
               </div>
             </div>
 
@@ -140,7 +152,7 @@ function AddEvent({
                   <input
                     type="text"
                     className={`form-control ${
-                      eventErrors.organization ? "inputErr" : ""
+                      eventErrors.organization ? "inputErr" : eventUpdateErrors.title ? "inputErr" : ""
                     }`}
                     id="organization"
                     placeholder="Organization Name"
@@ -155,13 +167,16 @@ function AddEvent({
                   {eventErrors.organization && (
                     <p className="err">{eventErrors.organization}</p>
                   )}
+                  {eventUpdateErrors.organization && (
+                    <p className="err">{eventUpdateErrors.organization}</p>
+                  )}
                 </div>
               </div>
               {/* <div className="form-group col">
                 <label htmlFor="source">Event(url)</label>
                 <input
                   type="url"
-                  className={`form-control ${eventErrors.event_url ? "inputErr" : ""}`}
+                  className={`form-control ${eventErrors.event_url ? "inputErr" : eventUpdateErrors.title ? "inputErr" : ""}`}
                   id="event_url"
                   placeholder="Url to Event"
                   name="event_url"
@@ -171,6 +186,7 @@ function AddEvent({
                 />
                 <small id="textHelp" className="form-text text-muted">http(s)://website/page</small>
                 {eventErrors.event_url && (<p className="err">{eventErrors.event_url}</p>)}
+                {eventUpdateErrors.event_url && (<p className="err">{eventUpdateErrors.event_url}</p>)}
               </div> */}
             </div>
 
@@ -178,7 +194,7 @@ function AddEvent({
               <label htmlFor="description">Description</label>
               <textarea
                 className={`form-control ${
-                  eventErrors.description ? "inputErr" : ""
+                  eventErrors.description ? "inputErr" : eventUpdateErrors.title ? "inputErr" : ""
                 }`}
                 id="description"
                 rows="1"
@@ -193,13 +209,16 @@ function AddEvent({
               {eventErrors.description && (
                 <p className="err">{eventErrors.description}</p>
               )}
+              {eventUpdateErrors.description && (
+                <p className="err">{eventUpdateErrors.description}</p>
+              )}
             </div>
 
             <div className="form-group">
               <label htmlFor="location">Location</label>
               <textarea
                 className={`form-control ${
-                  eventErrors.location ? "inputErr" : ""
+                  eventErrors.location ? "inputErr" : eventUpdateErrors.title ? "inputErr" : ""
                 }`}
                 id="location"
                 rows="1"
@@ -214,13 +233,25 @@ function AddEvent({
               {eventErrors.location && (
                 <p className="err">{eventErrors.location}</p>
               )}
+              {eventUpdateErrors.location && (
+                <p className="err">{eventUpdateErrors.location}</p>
+              )}
             </div>
             <button
               type="submit"
               className="btn btn-add"
               onClick={handleEventSubmit}
+              disabled={!(eventId.length === 0)}
             >
               Add Event
+            </button>
+            <button
+              type="submit"
+              className="btn btn-add"
+              onClick={submitEventUpdate}
+              disabled={(eventId.length === 0)}
+            >
+              Update Event
             </button>
             {eventSuccess && <div className="success">Submitted</div>}
             {notEventSubmitted && (

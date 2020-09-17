@@ -9,7 +9,6 @@ const eventSchema = new mongoose.Schema({
   organization: { type: String, required: true },
   event_url: { type: String, required: true },
   date_added: { type: Date, default: Date.now },
-  user_id: { type: String, required: true },
 });
 
 module.exports = mongoose.model("Events", eventSchema);
