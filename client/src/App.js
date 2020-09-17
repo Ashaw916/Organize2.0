@@ -20,25 +20,25 @@ import Donate from "./pages/jsx/Donate";
 import LogoutUser from "./components/Logout/Logout";
 // import { Context } from "./utils/AuthContext";
 import Auth from "./utils/Auth";
-import PrivateRoute from "./components/PrivateRoutes/index";
+// import PrivateRoute from "./components/PrivateRoutes/index";
 import AuthContext from "./utils/AuthContext";
 import Axios from "axios";
 
 function App() {
-  let { authStatus } = useContext(AuthContext);
+  const [userAuth, setUserAuth] = useState({});
 
-  //   ({
-  //   authStatus: "",
-  // });
-  // console.log("authStatus", authStatus);
+  // //   ({
+  // //   authStatus: "",
+  // // });
+  // // console.log("authStatus", authStatus);
 
-  function checkAuth(authRes) {
-    console.log("checkAuth", authRes);
-    // setUserAuthState({
-    // ...userAuthState,
-    authStatus = "valid";
-    // });
-  }
+  // function checkAuth(authRes) {
+  //   console.log("checkAuth", authRes);
+  //   // setUserAuthState({
+  //   // ...userAuthState,
+  //   authStatus = "valid";
+  //   // });
+  // }
 
   useEffect(() => {
     // Auth();
@@ -56,17 +56,41 @@ function App() {
       if (response.data === "valid") {
         let userRes = response.data;
         console.log("if", userRes);
-        checkAuth("valid");
+        setUserAuth("valid");
+        // checkAuth("valid");
       } else {
         let userRes = response.data;
         console.log("else", userRes);
-        checkAuth("invalid");
+        setUserAuth("invalid");
+        // checkAuth("invalid");
       }
     });
   }, []);
-
+  console.log("after", userAuth);
+  const PrivateRoute = ({ component: Component, ...rest }) => {
+    const state = "valid";
+    return (
+      <Route
+        {...rest}
+        render={(props) => {
+          if (userAuth === "valid") {
+            console.log("PR", userAuth);
+            return <Component {...props} />;
+          } else {
+            return (
+              <Redirect
+                to={{
+                  pathname: "/admin",
+                }}
+              />
+            );
+          }
+        }}
+      />
+    );
+  };
   return (
-    <AuthContext.Provider value={authStatus}>
+    <AuthContext.Provider value={userAuth}>
       <Router>
         <div>
           {/* <NavTabs /> */}
@@ -77,25 +101,16 @@ function App() {
             <Route exact path="/video" component={Video} />
             <Route exact path="/donate" component={Donate} />
             <Route exact path="/contact" component={Contact} />
-            <Route
-              exact
-              path="/admin"
-              component={Admin}
-              checkAuth={checkAuth}
-            />
+            <Route exact path="/admin" component={Admin} />
             <PrivateRoute exact path="/manage" component={Manage} />
             <PrivateRoute exact path="/profile" component={Profile} />
-            <PrivateRoute
-              exact
-              path="/logout"
-              component={LogoutUser}
-              checkAuth={checkAuth}
-            />
+            <Route exact path="/logout" component={LogoutUser} />
             <Route component={() => "404 NOT FOUND"} />
           </Switch>
         </div>
         <Footer />
       </Router>
+      //{" "}
     </AuthContext.Provider>
   );
 }

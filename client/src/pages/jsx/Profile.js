@@ -5,15 +5,15 @@ import NavTabs from "../../components/NavTabs/NavTabs";
 // import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import API from "../../utils/API";
 import auth from "../../utils/Auth";
-import AuthContext from "../../utils/AuthContext";
+// import AuthContext from "../../utils/AuthContext";
 
 function Profile() {
-  let { authStatus } = useContext(AuthContext);
+  // let { authStatus } = useContext(AuthContext);
   const [user, setUser] = useState({});
   // console.log("profile authostatus:", authStatus);
   useEffect(() => {
     auth();
-    console.log(authStatus);
+    // console.log(authStatus);
     API.getProfile()
       .then((res) => setUser(res.data))
       .catch((err) => console.log(err));

@@ -15,7 +15,7 @@
 import React from "react";
 
 const AuthContext = React.createContext({
-  authStatus: "Invalid",
+  userAuth: "Invalid",
 });
 
 export default AuthContext;
