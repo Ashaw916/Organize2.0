@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SearchForm from "../../components/SearchForm/SearchForm";
+import FilterDropdown from "../../components/FilterDropdown/FilterDropdown";
 import Pagination from "../../components/Pagination/Pagination";
 import API from "../../utils/API";
 import "../css/Events.css";
@@ -34,12 +35,13 @@ function Events() {
           <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <h4 id="search-title">Search Events</h4>
           </div>
-          {/* <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+          <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <SearchForm />
           </div>
           <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <Pagination />
-          </div> */}
+          </div>
+          <FilterDropdown data={events} />
         </div>
 
         <div className="container-events" id="events-wrapper">
