@@ -76,7 +76,7 @@ function Registration(props) {
                 <input
                   type="password"
                   className="form-control"
-                  id="password"
+                  id="password1"
                   placeholder="Password"
                   onChange={(e) => setRegPassword(e.target.value)}
                 />
@@ -86,7 +86,7 @@ function Registration(props) {
                 <input
                   type="password"
                   className="form-control"
-                  id="password"
+                  id="password2"
                   placeholder="Re-type your password"
                 />
               </div>

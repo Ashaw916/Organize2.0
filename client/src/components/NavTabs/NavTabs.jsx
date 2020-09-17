@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Axios from "axios";
 
-function NavTabs(props) {
+function NavTabs() {
   // We'll go into the Hooks API later, for now, we are just using some code
   // from the react-router docs (https://reacttraining.com/react-router/web/api/Hooks/uselocation)
   // This allows the component to check the route any time the user uses a link to navigate.
@@ -11,10 +11,10 @@ function NavTabs(props) {
   const [userAuth, setUserAuth] = useState({});
 
   useEffect(() => {
-    Auth();
-  }, []);
+    // Auth();
+    // console.log("nav:", userAuth);
 
-  const Auth = (props, user) => {
+    // const Auth = () => {
     const userObj = JSON.stringify(localStorage.getItem("user"));
     // console.log("userObj", userObj);
     let userRes;
@@ -30,21 +30,22 @@ function NavTabs(props) {
         if (response.data === "valid") {
           let userRes = "valid";
 
-          // console.log("userRes1", userRes);
+          console.log("userRes1", userRes);
           return userRes;
         } else {
           let userRes = "invalid";
-          // console.log("userRes1", userRes);
+          console.log("userRes2", userRes);
           return userRes;
         }
       })
       .then((userRes) => {
         setUserAuth(userRes);
       });
-  };
+    // };
+  }, []);
   // console.log("after async", userAuth);
   if (userAuth === "valid") {
-    // console.log("auth success react");
+    console.log("auth success react", userAuth);
   }
 
   return (
@@ -152,7 +153,7 @@ function NavTabs(props) {
             <Link
               to="/admin"
               className={
-                location.pathname === "/admin" ? "nav-link active" : "nav-link"
+                userAuth === "invalid" ? "nav-link" : "nav-link hidden"
               }
             >
               Login/Register

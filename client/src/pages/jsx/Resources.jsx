@@ -8,6 +8,7 @@ import "../css/Resources.css";
 import Newsgroup from "../../images/newsgroup.png";
 import Newsprotest from "../../images/newsprotest.png";
 import Newswoman from "../../images/newswoman.png";
+import NavTabs from "../../components/NavTabs/NavTabs";
 
 class Resources extends Component {
   state = {
@@ -84,6 +85,7 @@ class Resources extends Component {
 
     return (
       <>
+        <NavTabs />
         <div className="container">
           <div className="jumbotron jumbotron-fluid" id="resource-jumbo">
             <div className="container" id="jumbo-height">

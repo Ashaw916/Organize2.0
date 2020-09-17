@@ -9,6 +9,7 @@ import articleValidation from "../../utils/ArticleValidation";
 import videoValidation from "../../utils/VideoValidation";
 import donateValidation from "../../utils/DonateValidation";
 import "../css/Manage.css";
+import NavTabs from "../../components/NavTabs/NavTabs";
 
 ////////////////////////////////// For Loading Events, Articles, Videos ///////////////////////////
 
@@ -414,6 +415,7 @@ function Manage() {
 
   return (
     <>
+      <NavTabs />
       <div className="jumbotron jumbotron-fluid" id="manage-jumbo-container">
         <div className="container" id="jumbo-img-container">
           <h1 className="display-4">Manage</h1>

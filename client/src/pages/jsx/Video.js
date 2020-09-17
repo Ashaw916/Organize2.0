@@ -6,6 +6,7 @@ import Pagination from "../../components/Pagination/Pagination";
 import { paginate } from "../../utils/paginate";
 import moment from "moment";
 import "../css/Video.css";
+import NavTabs from "../../components/NavTabs/NavTabs";
 
 class Video extends Component {
   state = {
@@ -83,6 +84,7 @@ class Video extends Component {
 
     return (
       <>
+        <NavTabs />
         <div className="container">
           <VideoLiveStream />
         </div>
