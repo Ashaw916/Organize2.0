@@ -40,9 +40,10 @@ class Resources extends Component {
 
   handleNextPageChange = () => {
     this.setState((state) => {
-      console.log(state);
-      if (state.currentPage >= state.pageSize) {
-        return { currentPage: state.pageSize };
+      const totalPages = Math.ceil(state.articles.length / state.pageSize);
+      console.log(totalPages);
+      if (state.currentPage >= totalPages) {
+        return { currentPage: totalPages };
       }
       return { currentPage: state.currentPage + 1 };
     });
