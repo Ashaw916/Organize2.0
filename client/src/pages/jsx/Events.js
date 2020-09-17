@@ -3,6 +3,7 @@ import SearchForm from "../../components/SearchForm/SearchForm";
 import FilterDropdown from "../../components/FilterDropdown/FilterDropdown";
 import Pagination from "../../components/Pagination/Pagination";
 import { paginate } from "../../utils/paginate";
+import { searchParams } from "../../utils/search";
 import API from "../../utils/API";
 import "../css/Events.css";
 import { render } from "ejs";
@@ -32,10 +33,32 @@ class Events extends Component {
     this.setState({ searchTerm: event.target.value, currentPage: 1 });
   }
 
-  handleClearSearch(event) {
-    event.preventDefault();
-    this.setState({ searchTerm: "", currentPage: 1 });
-  }
+  // handleClearSearch = (event) => {
+  //   event.preventDefault();
+  //   this.setState(() => {
+  //     return { searchTerm: "", currentPage: 1 };
+  //   });
+  // };
+
+  handlePreviousPageChange = () => {
+    this.setState((state) => {
+      if (state.currentPage <= 1) {
+        return { currentPage: 1 };
+      }
+      return { currentPage: state.currentPage - 1 };
+    });
+  };
+
+  handleNextPageChange = () => {
+    this.setState((state) => {
+      const totalPages = Math.ceil(state.events.length / state.pageSize);
+      console.log(totalPages);
+      if (state.currentPage >= totalPages) {
+        return { currentPage: totalPages };
+      }
+      return { currentPage: state.currentPage + 1 };
+    });
+  };
 
   render() {
     const { events: allEvents, currentPage, pageSize, searchTerm } = this.state;
@@ -71,7 +94,7 @@ class Events extends Component {
               <SearchForm
                 search={this.state.searchTerm}
                 update={this.handleSearchEvent.bind(this)}
-                clear={this.handleClearSearch}
+                // clear={this.handleClearSearch}
               />
             </div>
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
