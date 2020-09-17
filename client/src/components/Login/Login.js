@@ -32,7 +32,8 @@ function LoginUser(props) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", response.data.user);
         window.location.reload();
-        props.history.push("/profile");
+        console.log("--->", props.history);
+        // props.history.push("/profile");
       } else {
         e.target.parentElement.forcedReload();
         props.history.push("/");
