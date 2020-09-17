@@ -3,6 +3,7 @@ import SearchForm from "../../components/SearchForm/SearchForm";
 import Pagination from "../../components/Pagination/Pagination";
 import API from "../../utils/API";
 import "../css/Events.css";
+import NavTabs from "../../components/NavTabs/NavTabs";
 
 function Events() {
   const [events, setEvents] = useState([]);
@@ -27,6 +28,7 @@ function Events() {
 
   return (
     <>
+      <NavTabs />
       <div className="container">
         <div className="row"></div>
 

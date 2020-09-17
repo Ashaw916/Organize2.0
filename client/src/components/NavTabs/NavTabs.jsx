@@ -12,7 +12,8 @@ function NavTabs() {
 
   useEffect(() => {
     Auth();
-  }, []);
+    console.log("nav:", userAuth);
+  }, [userAuth]);
 
   const Auth = () => {
     const userObj = JSON.stringify(localStorage.getItem("user"));

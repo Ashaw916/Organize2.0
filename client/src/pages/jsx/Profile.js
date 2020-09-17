@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import "../css/Profile.css";
 import Invite from "../../components/Invite/Invite.js";
+import NavTabs from "../../components/NavTabs/NavTabs";
 // import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import API from "../../utils/API";
-import auth from "../../components/PrivateRoutes/Auth";
+import auth from "../../utils/Auth";
 import AuthContext from "../../utils/AuthContext";
 
 function Profile() {
@@ -20,6 +21,7 @@ function Profile() {
 
   return (
     <>
+      <NavTabs />
       <div className="container">
         <div className="profile-wrapper">
           <div className="card" id="profile-container">

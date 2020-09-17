@@ -5,6 +5,7 @@ import { paginate } from "../../utils/paginate";
 import API from "../../utils/API";
 import "../css/Donate.css";
 import Donatejumbo from "../../images/donatejumbo.png";
+import NavTabs from "../../components/NavTabs/NavTabs";
 
 class Donate extends Component {
   state = {
@@ -52,6 +53,7 @@ class Donate extends Component {
 
     return (
       <>
+        <NavTabs />
         <div className="container">
           <div className="row"></div>
           <div className="row">

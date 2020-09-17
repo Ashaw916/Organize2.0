@@ -19,7 +19,7 @@ import Profile from "./pages/jsx/Profile";
 import Donate from "./pages/jsx/Donate";
 import LogoutUser from "./components/Logout/Logout";
 // import { Context } from "./utils/AuthContext";
-import Auth from "./components/PrivateRoutes/Auth";
+import Auth from "./utils/Auth";
 import PrivateRoute from "./components/PrivateRoutes/index";
 import AuthContext from "./utils/AuthContext";
 import Axios from "axios";
@@ -69,7 +69,7 @@ function App() {
     <AuthContext.Provider value={authStatus}>
       <Router>
         <div>
-          <NavTabs />
+          {/* <NavTabs /> */}
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/events" component={Events} />
@@ -85,7 +85,7 @@ function App() {
             />
             <PrivateRoute exact path="/manage" component={Manage} />
             <PrivateRoute exact path="/profile" component={Profile} />
-            <Route
+            <PrivateRoute
               exact
               path="/logout"
               component={LogoutUser}

@@ -6,6 +6,7 @@ import "../css/Contact.css";
 import Contactimg from "../../images/contactimg.png";
 import _ from "lodash";
 import Table from "../../components/Table/Table";
+import NavTabs from "../../components/NavTabs/NavTabs";
 
 class Contact extends Component {
   state = {
@@ -32,6 +33,7 @@ class Contact extends Component {
 
     return (
       <>
+        <NavTabs />
         <div className="container">
           <div className="row">
             <div className="card col-12" id="contact-card">
