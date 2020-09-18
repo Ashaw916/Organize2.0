@@ -136,42 +136,50 @@ function Manage() {
     }
   }, [eventUpdateErrors])
 
-  function splitDBDate(str) {
-    return str.split("T")
-  }
+  function splitDBDate(obj) {
+  
+    const startISODate = obj.start_date;
+    const endISODate = obj.end_date;
+    console.log(startISODate);
+    console.log(endISODate);
 
-  useEffect(() => {
-    API.getEvent(eventId)
+
+    const dbSDate = startISODate.split("T");
+    const dbEDate = endISODate.split("T");
+    const sDateOnly = dbSDate[0];
+    const sTimeOnly = dbSDate[1];
+    const eDateOnly = dbEDate[0];
+    const eTimeOnly = dbEDate[1];
+
+    console.log(dbSDate);
+    console.log(dbEDate);
+    console.log(sDateOnly);
+    console.log(sTimeOnly);
+    console.log(eDateOnly);
+    console.log(eTimeOnly);
+
+    setEventObject({
+       title: obj.title,
+       start_date: sDateOnly,
+       end_date: eDateOnly,
+       start_time: sTimeOnly,
+       end_time: eTimeOnly,
+       organization: obj.organization,
+       description: obj.description,
+       location: obj.location,
+      });
+  };
+
+  //split start date and end date into start date and time & end date and time
+    //see if the form will turn them back into mm/dd/yyyy and 12 hr otherwise will need conversion functions
+
+  function getOneEvent(id) {
+    API.getEvent(id)
       .then((res) => {
-       const data = res.data;
-       console.log(data);
-        //split start date and end date into start date and time & end date and time
-          //see if the form will turn them back into mm/dd/yyyy and 12 hr otherwise will need conversion functions
-       const dbSDate = splitDBDate(data.start_date);
-        // const dbSDate = data.start_date.split("T");
-      const dbEDate = splitDBDate(data.end_date);
-      //  const dbEDate = data.end_data.split("T");
-      //  const sDateOnly = dbSDate[0];
-      //  const sTimeOnly = dbSDate[1];
-      //  const eDateOnly = dbEDate[0];
-      //  const eTimeOnly = dbEDate[1];
-       console.log(dbSDate);
-       console.log(dbEDate);
-      //  console.log(sDateOnly);
-      //  console.log(sTimeOnly);
-          // setEventObject({
-      //  title: res.data.title,
-      //  start_date: sDateOnly,
-      //  end_date: eDateOnly,
-      //  start_time: sTimeOnly,
-      //  end_time: eTimeOnly,
-      //  organization: res.data.organization,
-      //  description: res.data.description,
-      //  location: res.data.location,
-      // })
+       splitDBDate(res.data);
       })
       .catch((err) => console.log(err));
-  }, [eventId])
+  }; 
 
   const handleEventInputChange = (e) => {
     const { name, value } = e.target;
@@ -282,6 +290,7 @@ function Manage() {
     console.log(id);
     //save the id to a state, that id is passed to api call via useeffect
     setEventId(id);
+    getOneEvent(id);
   };
   //handles the click of the update button in the form
   const submitEventUpdate = (e) => {
@@ -325,6 +334,7 @@ function Manage() {
   useEffect(() => {
     API.getArticle(articleId)
       .then((res) => {
+        console.log(res.data);
         setArticleObject(res.data)})
       .catch((err) => console.log(err));
   }, [articleId])

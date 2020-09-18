@@ -53,7 +53,7 @@ function AddEvent({
                 <input
                   type="date"
                   className={`form-control ${
-                    eventErrors.start_date ? "inputErr" : eventUpdateErrors.title ? "inputErr" : ""
+                    eventErrors.start_date ? "inputErr" : eventUpdateErrors.start_date ? "inputErr" : ""
                   }`}
                   id="start_date"
                   name="start_date"
@@ -76,7 +76,7 @@ function AddEvent({
                 <input
                   type="date"
                   className={`form-control ${
-                    eventErrors.end_date ? "inputErr" : eventUpdateErrors.title ? "inputErr" : ""
+                    eventErrors.end_date ? "inputErr" : eventUpdateErrors.end_date ? "inputErr" : ""
                   }`}
                   id="end_date"
                   name="end_date"
@@ -102,7 +102,7 @@ function AddEvent({
                 <input
                   type="time"
                   className={`form-control ${
-                    eventErrors.start_time ? "inputErr" : eventUpdateErrors.title ? "inputErr" : ""
+                    eventErrors.start_time ? "inputErr" : eventUpdateErrors.start_time ? "inputErr" : ""
                   }`}
                   id="start_time"
                   name="start_time"
@@ -125,7 +125,7 @@ function AddEvent({
                 <input
                   type="time"
                   className={`form-control ${
-                    eventErrors.end_time ? "inputErr" : eventUpdateErrors.title ? "inputErr" : ""
+                    eventErrors.end_time ? "inputErr" : eventUpdateErrors.end_time ? "inputErr" : ""
                   }`}
                   id="end_time"
                   name="end_time"
@@ -152,7 +152,7 @@ function AddEvent({
                   <input
                     type="text"
                     className={`form-control ${
-                      eventErrors.organization ? "inputErr" : eventUpdateErrors.title ? "inputErr" : ""
+                      eventErrors.organization ? "inputErr" : eventUpdateErrors.organization ? "inputErr" : ""
                     }`}
                     id="organization"
                     placeholder="Organization Name"
@@ -176,17 +176,17 @@ function AddEvent({
                 <label htmlFor="source">Event(url)</label>
                 <input
                   type="url"
-                  className={`form-control ${eventErrors.event_url ? "inputErr" : eventUpdateErrors.title ? "inputErr" : ""}`}
-                  id="event_url"
+                  className={`form-control ${eventErrors.url ? "inputErr" : eventUpdateErrors.url ? "inputErr" : ""}`}
+                  id="url"
                   placeholder="Url to Event"
-                  name="event_url"
+                  name="url"
                   onChange={handleEventInputChange}
-                  value={eventObject.event_url || ""}
+                  value={eventObject.url || ""}
                   required
                 />
                 <small id="textHelp" className="form-text text-muted">http(s)://website/page</small>
-                {eventErrors.event_url && (<p className="err">{eventErrors.event_url}</p>)}
-                {eventUpdateErrors.event_url && (<p className="err">{eventUpdateErrors.event_url}</p>)}
+                {eventErrors.url && (<p className="err">{eventErrors.url}</p>)}
+                {eventUpdateErrors.url && (<p className="err">{eventUpdateErrors.url}</p>)}
               </div> */}
             </div>
 
@@ -194,7 +194,7 @@ function AddEvent({
               <label htmlFor="description">Description</label>
               <textarea
                 className={`form-control ${
-                  eventErrors.description ? "inputErr" : eventUpdateErrors.title ? "inputErr" : ""
+                  eventErrors.description ? "inputErr" : eventUpdateErrors.description ? "inputErr" : ""
                 }`}
                 id="description"
                 rows="1"
@@ -218,7 +218,7 @@ function AddEvent({
               <label htmlFor="location">Location</label>
               <textarea
                 className={`form-control ${
-                  eventErrors.location ? "inputErr" : eventUpdateErrors.title ? "inputErr" : ""
+                  eventErrors.location ? "inputErr" : eventUpdateErrors.location ? "inputErr" : ""
                 }`}
                 id="location"
                 rows="1"
