@@ -10,7 +10,7 @@ const eventSchema = new Schema({
   organization: { type: String, required: true },
   event_url: { type: String, required: true },
   date_added: { type: Date, default: Date.now },
-  user: { type: Schema.Types.ObjectId, ref: 'User' },
+  user: { type: Schema.Types.ObjectId, ref: "User" },
 });
 
 module.exports = mongoose.model("Events", eventSchema);

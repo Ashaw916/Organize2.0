@@ -6,7 +6,6 @@ import Registration from "../../components/Registration/Registration.js";
 import Login from "../../components/Login/Login.js";
 
 function Admin(props) {
-  // console.log(props);
   return (
     <>
       <NavTabs />
