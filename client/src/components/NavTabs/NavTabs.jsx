@@ -54,9 +54,7 @@ function NavTabs() {
 
   return (
     <nav className="navbar navbar-expand-lg">
-      <a className="navbar-brand" href="#">
-        Organize
-      </a>
+      <a className="navbar-brand">Organize</a>
       <button
         className="navbar-toggler"
         type="button"
