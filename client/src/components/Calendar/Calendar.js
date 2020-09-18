@@ -31,6 +31,30 @@ class Calendar extends Component {
           right: "today",
         }}
         events={events}
+        // eventClick={function (info) {
+        //   info.jsEvent.preventDefault();
+        //   console.log(info);
+        //   let eventAlert = "";
+        //   let title = info.event._def.title;
+        //   let start = info.event._instance.range.start;
+        //   for (const [title, start, end, desc, loc, org, url] of Object.entries(
+        //     {
+        //       hello: "🌎",
+        //       wassup: "👀✨😍🔥",
+        //     }
+        //   )) {
+        //     eventAlert += `${title}: ${start}\n`;
+        //   }
+        //   alert(eventAlert);
+        //   alert(eventAlert.JSON.stringify());
+        // }}
+        //     eventClick: function(info) {
+        //   info.jsEvent.preventDefault(); // don't let the browser navigate
+
+        //   if (info.event.url) {
+        //     window.open(info.event.url);
+        //   }
+        // }
       />
     );
   }
