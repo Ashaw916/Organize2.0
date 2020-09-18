@@ -140,9 +140,6 @@ function Manage() {
   
     const startISODate = obj.start_date;
     const endISODate = obj.end_date;
-    console.log(startISODate);
-    console.log(endISODate);
-
 
     const dbSDate = startISODate.split("T");
     const dbEDate = endISODate.split("T");
@@ -150,13 +147,6 @@ function Manage() {
     const sTimeOnly = dbSDate[1];
     const eDateOnly = dbEDate[0];
     const eTimeOnly = dbEDate[1];
-
-    console.log(dbSDate);
-    console.log(dbEDate);
-    console.log(sDateOnly);
-    console.log(sTimeOnly);
-    console.log(eDateOnly);
-    console.log(eTimeOnly);
 
     setEventObject({
        title: obj.title,
@@ -169,9 +159,6 @@ function Manage() {
        location: obj.location,
       });
   };
-
-  //split start date and end date into start date and time & end date and time
-    //see if the form will turn them back into mm/dd/yyyy and 12 hr otherwise will need conversion functions
 
   function getOneEvent(id) {
     API.getEvent(id)
