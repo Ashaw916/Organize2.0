@@ -8,7 +8,8 @@ const articleSchema = new Schema({
   date_added: { type: Date, default: Date.now },
   description: { type: String, required: true },
   source: { type: String, required: true },
-  type: { type: String, required: true }
+  type: { type: String, required: true },
+  user: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
 const Articles = mongoose.model("Articles", articleSchema);

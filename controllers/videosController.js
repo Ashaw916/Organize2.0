@@ -15,6 +15,7 @@ module.exports = {
   },
   create: function (req, res) {
     db.Videos.create(req.body)
+    .then(({ _id }) => db.User.findOneAndUpdate({}, { $push: { videos: _id } }, { new: true }))
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },

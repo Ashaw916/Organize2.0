@@ -12,6 +12,10 @@ router
 //   eventsController.create(req, res);
 // });
 
+router.post("/", (req, res) => {
+  eventsController.create(req, res);
+});
+
 // Matches with "/api/events/:id"
 router
   .route("/:id")

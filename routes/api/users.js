@@ -136,7 +136,8 @@ router.post("/profile", (req, res) => {
   userProfilesController.findOne(req, res);
 });
 // get
-router.route("./profile/:id").get(userProfilesController.findOne);
+router.route("/profile/:id").get(userProfilesController.findOne);
+router.route("/profile").get(userProfilesController.findAll);
 
 //users
 router.route("/users", authToken).get(usersController.findAll);

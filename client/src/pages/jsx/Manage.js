@@ -9,10 +9,14 @@ import articleValidation from "../../utils/ArticleValidation";
 import videoValidation from "../../utils/VideoValidation";
 import donateValidation from "../../utils/DonateValidation";
 import "../css/Manage.css";
+import NavTabs from "../../components/NavTabs/NavTabs";
 
 ////////////////////////////////// For Loading Events, Articles, Videos ///////////////////////////
 
 function Manage() {
+
+    let userObj = JSON.stringify(localStorage.getItem("user"));
+    const userObjId = userObj.slice(1,-1);
 
   //states for events, articles, and videos
   const [getEvents, setGetEvents] = useState([]);
@@ -186,6 +190,7 @@ function Manage() {
       location: eventObject.location,
       organization: eventObject.organization,
       event_url: "/events",
+      user: userObjId
     })
       .then((res) => {
         loadEvents();
@@ -214,7 +219,7 @@ function Manage() {
 
     setTimeout(() => {
       setNotEventSubmitted(false);
-    }, 22000)
+    }, 23000)
   };
 
   function updateEvent() {
@@ -340,6 +345,7 @@ function Manage() {
       description: articleObject.description,
       source: articleObject.source,
       type: articleObject.type,
+      user: userObjId
     })
       .then((res) => {
         loadArticles();
@@ -560,7 +566,7 @@ function Manage() {
 
 /////////////////////////////// Donate Form //////////////////////////
 
-const [donateObject, setDonateObject] = useState({});
+  const [donateObject, setDonateObject] = useState({});
   const [donateErrors, setDonateErrors] = useState({});
   //for showing a successful submission
   const [donateSuccess, setDonateSuccess] = useState(false);
@@ -601,7 +607,7 @@ const [donateObject, setDonateObject] = useState({});
 
   const handleDonateInputChange = (e) => {
     const { name, value } = e.target;
-    setDonateObject({ ...donateObject, [name]:value });
+    setDonateObject({ ...donateObject, [name]: value });
   };
 
   function submitDonate() {
@@ -693,6 +699,7 @@ const [donateObject, setDonateObject] = useState({});
   
   return (
     <>
+      <NavTabs />
       <div className="jumbotron jumbotron-fluid" id="manage-jumbo-container">
         <div className="container" id="jumbo-img-container">
           <h1 className="display-4">Manage</h1>
@@ -723,7 +730,7 @@ const [donateObject, setDonateObject] = useState({});
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getEvents.map((event) => (
+                {getEvents.filter(event => event.user === userObjId).map((event) => (
                   <li className="list-group-item manage-post" key={event._id}>
                     {event.title}: {splitDate(event.start_date)}-
                     {splitYear(event.start_date)}{" "}
@@ -772,7 +779,7 @@ const [donateObject, setDonateObject] = useState({});
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getArticles.map((article) => (
+                {getArticles.filter(article => article.user === userObjId).map((article) => (
                   <li className="list-group-item manage-post" key={article._id}>
                     {article.title}
                     <button
@@ -818,8 +825,11 @@ const [donateObject, setDonateObject] = useState({});
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getDonations.map((donation) => (
-                  <li className="list-group-item manage-post" key={donation._id}>
+                {getDonations.filter(donation => donation.user === userObjId).map((donation) => (
+                  <li
+                    className="list-group-item manage-post"
+                    key={donation._id}
+                  >
                     {donation.title}
                     <button
                       type="button"
@@ -864,7 +874,7 @@ const [donateObject, setDonateObject] = useState({});
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getVideos.map((video) => (
+                {getVideos.filter(video => video.user === userObjId).map((video) => (
                   <li className="list-group-item manage-post" key={video._id}>
                     {video.title}
                     <button

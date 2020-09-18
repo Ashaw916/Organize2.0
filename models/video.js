@@ -7,6 +7,7 @@ const videoSchema = new Schema({
   description: { type: String, required: true },
   src: { type: String, required: true },
   type: { type: String, required: true },
+  user: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
 const Videos = mongoose.model("Videos", videoSchema);

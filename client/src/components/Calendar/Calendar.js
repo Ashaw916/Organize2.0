@@ -7,10 +7,26 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 // import $ from "jquery";
 
 class Calendar extends Component {
+  constructor() {
+    super();
+    this.state = {
+      modal: false,
+    };
+    this.toggle = this.toggle.bind(this);
+  }
+  toggle(eventClickInfo) {
+    console.log("eventClickInfo", eventClickInfo);
+
+    this.setState((prevState) => ({
+      modal: !prevState.modal,
+    }));
+  }
+
   calendarComponentRef = React.createRef();
 
   render() {
     const { events } = this.props;
+    console.log(this.props);
     return (
       <FullCalendar
         plugins={[dayGridPlugin]}

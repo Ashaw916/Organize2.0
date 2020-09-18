@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../css/Landing.css";
 import Calendar from "../../components/Calendar/Calendar";
 import API from "../../utils/API";
+import NavTabs from "../../components/NavTabs/NavTabs";
 import { set } from "mongoose";
 import { Link } from "react-router-dom";
 
@@ -43,12 +44,13 @@ function Landing() {
 
   return (
     <>
+      <NavTabs />
       <div className="container">
         <div className="row" id="landing-r1">
           <div className="jumbotron jumbotron-fluid col" id="landing-jumbo">
             <div className="container" id="landing-jumbo-height">
               <h1 className="display-4" id="landing-header">
-                Organize 2.0
+                Organize
               </h1>
               <p className="lead"></p>
             </div>
@@ -58,7 +60,7 @@ function Landing() {
         <div className="row" id="landing-r2">
           <div className="col">
             <h4 id="jumbo-h4">
-              Organize 2.0 <span className="color-span">||</span> Connect{" "}
+              Organize <span className="color-span">||</span> Connect{" "}
               <span className="color-span">||</span> Share{" "}
               <span className="color-span">||</span> Mobilize
             </h4>
