@@ -31,30 +31,23 @@ class Calendar extends Component {
           right: "today",
         }}
         events={events}
-        // eventClick={function (info) {
-        //   info.jsEvent.preventDefault();
-        //   console.log(info);
-        //   let eventAlert = "";
-        //   let title = info.event._def.title;
-        //   let start = info.event._instance.range.start;
-        //   for (const [title, start, end, desc, loc, org, url] of Object.entries(
-        //     {
-        //       hello: "🌎",
-        //       wassup: "👀✨😍🔥",
-        //     }
-        //   )) {
-        //     eventAlert += `${title}: ${start}\n`;
-        //   }
-        //   alert(eventAlert);
-        //   alert(eventAlert.JSON.stringify());
-        // }}
-        //     eventClick: function(info) {
-        //   info.jsEvent.preventDefault(); // don't let the browser navigate
+        eventClick={function (info) {
+          info.jsEvent.preventDefault();
 
-        //   if (info.event.url) {
-        //     window.open(info.event.url);
-        //   }
-        // }
+          var myObject = {
+            title: info.event._def.title,
+            start: info.event._instance.range.start,
+            end: info.event._instance.range.end,
+            description: info.event._def.extendedProps.description,
+            location: info.event._def.extendedProps.location,
+            organization: info.event._def.groupId,
+          };
+          var resultingString = "";
+          for (var property of Object.getOwnPropertyNames(myObject)) {
+            resultingString += `${property}: ${myObject[property]}\n`;
+          }
+          alert(resultingString);
+        }}
       />
     );
   }
