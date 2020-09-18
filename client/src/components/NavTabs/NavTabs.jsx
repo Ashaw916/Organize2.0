@@ -16,7 +16,11 @@ function NavTabs() {
 
     // const Auth = () => {
     const userObj = JSON.stringify(localStorage.getItem("user"));
+    console.log(userObj);
     // console.log("userObj", userObj);
+    // if (userObj === null) {
+    //   setUserAuth("invalid");
+    // } else {
     let userRes;
     Axios({
       method: "POST",
@@ -41,7 +45,7 @@ function NavTabs() {
       .then((userRes) => {
         setUserAuth(userRes);
       });
-    // };
+    // }
   }, []);
   // console.log("after async", userAuth);
   if (userAuth === "valid") {
@@ -50,9 +54,7 @@ function NavTabs() {
 
   return (
     <nav className="navbar navbar-expand-lg">
-      <a className="navbar-brand" href="#">
-        Organize
-      </a>
+      <a className="navbar-brand">Organize</a>
       <button
         className="navbar-toggler"
         type="button"
@@ -152,9 +154,7 @@ function NavTabs() {
           <li className="nav-item">
             <Link
               to="/admin"
-              className={
-                userAuth === "invalid" ? "nav-link" : "nav-link hidden"
-              }
+              className={userAuth !== "valid" ? "nav-link" : "nav-link hidden"}
             >
               Login/Register
             </Link>

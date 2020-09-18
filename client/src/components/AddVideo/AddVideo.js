@@ -4,10 +4,13 @@ import "./AddVideoStyle.css";
 function AddVideo({
   handleVideoInputChange,
   handleVideoSubmit,
+  submitVideoUpdate,
   videoObject,
   videoErrors,
   videoSuccess,
-  notVideoSubmitted
+  notVideoSubmitted,
+  videoUpdateErrors,
+  videoId
 }) {
   return (
     <>
@@ -18,71 +21,78 @@ function AddVideo({
         <div className="card-body">
           <form noValidate>
             <div className="form-group">
-              <label htmlFor="videoTitle">Video Title</label>
+              <label htmlFor="title">Video Title</label>
               <input
                 type="text"
-                className={`form-control ${videoErrors.videoTitle ? "inputErr" : ""}`}
-                id="videoTitle"
+                className={`form-control ${videoErrors.title ? "inputErr" : videoUpdateErrors.title ? "inputErr" : ""}`}
+                id="title"
                 placeholder="Enter Title for Video"
-                name="videoTitle"
+                name="title"
                 onChange={handleVideoInputChange}
-                value={videoObject.videoTitle || ""}
+                value={videoObject.title || ""}
                 required
               />
-              {videoErrors.videoTitle && (<p className="err">{videoErrors.videoTitle}</p>)}
+              {videoErrors.title && (<p className="err">{videoErrors.title}</p>)}
+              {videoUpdateErrors.title && (<p className="err">{videoErrors.title}</p>)}
             </div>
 
             <div className="form-group">
-              <label htmlFor="exampleFormControlTextarea1">
+              <label htmlFor="description">
                 Brief Description
               </label>
               <textarea
-                className={`form-control ${videoErrors.videoDescription ? "inputErr" : ""}`}
-                id="videoDescription"
+                className={`form-control ${videoErrors.description ? "inputErr" : videoUpdateErrors.description ? "inputErr" : ""}`}
+                id="description"
                 rows="2"
-                name="videoDescription"
+                name="description"
                 onChange={handleVideoInputChange}
-                value={videoObject.videoDescription || ""}
+                value={videoObject.description || ""}
                 required
               ></textarea>
-              {videoErrors.videoDescription && (<p className="err">{videoErrors.videoDescription}</p>)}
+              {videoErrors.description && (<p className="err">{videoErrors.description}</p>)}
+              {videoUpdateErrors.description && (<p className="err">{videoErrors.description}</p>)}
             </div>
 
             <div className="form-group">
-              <label htmlFor="videoUrl">Video Url</label>
+              <label htmlFor="src">Video Url</label>
               <input
                 type="text"
-                className={`form-control ${videoErrors.videoUrl ? "inputErr" : ""}`}
-                id="videoUrl"
+                className={`form-control ${videoErrors.src ? "inputErr" : videoUpdateErrors.src ? "inputErr" : ""}`}
+                id="src"
                 placeholder="Video url"
-                name="videoUrl"
+                name="src"
                 onChange={handleVideoInputChange}
-                value={videoObject.videoUrl || ""}
+                value={videoObject.src || ""}
                 required
               />
               <small id="textHelp" className="form-text text-muted">Embedded Link Only</small>
               <small id="textHelp" className="form-text text-muted">src="http(s)://www.dailymotion.com/embed/video"</small>
-              {videoErrors.videoUrl && (<p className="err">{videoErrors.videoUrl}</p>)}
+              {videoErrors.src && (<p className="err">{videoErrors.src}</p>)}
+              {videoUpdateErrors.src && (<p className="err">{videoErrors.src}</p>)}
             </div>
 
             <div className="form-group">
-              <label htmlFor="videoUrl">Video Type</label>
+              <label htmlFor="type">Video Type</label>
               <input
                 type="text"
-                className={`form-control ${videoErrors.videoType ? "inputErr" : ""}`}
-                id="videoType"
+                className={`form-control ${videoErrors.type ? "inputErr" : videoUpdateErrors.type ? "inputErr" : ""}`}
+                id="type"
                 placeholder="Type of Video"
-                name="videoType"
+                name="type"
                 onChange={handleVideoInputChange}
-                value={videoObject.videoType || ""}
+                value={videoObject.type || ""}
                 required
               />
               <small id="textHelp" className="form-text text-muted">Type of video (e.g. protest, tribute)</small>
-              {videoErrors.videoType && (<p className="err">{videoErrors.videoType}</p>)}
+              {videoErrors.type && (<p className="err">{videoErrors.type}</p>)}
+              {videoUpdateErrors.type && (<p className="err">{videoErrors.type}</p>)}
             </div>
           </form>
-          <button type="submit" className="btn btn-add" onClick={handleVideoSubmit} >
+          <button type="submit" className="btn btn-add" onClick={handleVideoSubmit} disabled={!(videoId.length === 0)}>
             Add Video
+          </button>
+          <button type="submit" className="btn btn-add" onClick={submitVideoUpdate} disabled={(videoId.length === 0)}>
+            Update
           </button>
           {videoSuccess && <div className="success">Submitted</div>}
           {notVideoSubmitted && <div className="notSubmitted">Not Submitted :(</div>}
