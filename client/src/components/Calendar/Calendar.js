@@ -7,26 +7,10 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 // import $ from "jquery";
 
 class Calendar extends Component {
-  constructor() {
-    super();
-    this.state = {
-      modal: false,
-    };
-    this.toggle = this.toggle.bind(this);
-  }
-  toggle(eventClickInfo) {
-    console.log("eventClickInfo", eventClickInfo);
-
-    this.setState((prevState) => ({
-      modal: !prevState.modal,
-    }));
-  }
-
   calendarComponentRef = React.createRef();
 
   render() {
     const { events } = this.props;
-    console.log(this.props);
     return (
       <FullCalendar
         plugins={[dayGridPlugin]}
@@ -47,6 +31,23 @@ class Calendar extends Component {
           right: "today",
         }}
         events={events}
+        eventClick={function (info) {
+          info.jsEvent.preventDefault();
+
+          var myObject = {
+            title: info.event._def.title,
+            start: info.event._instance.range.start,
+            end: info.event._instance.range.end,
+            description: info.event._def.extendedProps.description,
+            location: info.event._def.extendedProps.location,
+            organization: info.event._def.groupId,
+          };
+          var resultingString = "";
+          for (var property of Object.getOwnPropertyNames(myObject)) {
+            resultingString += `${property}: ${myObject[property]}\n`;
+          }
+          alert(resultingString);
+        }}
       />
     );
   }

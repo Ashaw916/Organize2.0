@@ -9,7 +9,6 @@ import "../css/Events.css";
 import NavTabs from "../../components/NavTabs/NavTabs";
 import { render } from "ejs";
 
-
 class Events extends Component {
   state = {
     events: [],
@@ -35,16 +34,12 @@ class Events extends Component {
     this.setState({ searchTerm: event.target.value, currentPage: 1 });
   }
 
-
- 
-
   // handleClearSearch = (event) => {
   //   event.preventDefault();
   //   this.setState(() => {
   //     return { searchTerm: "", currentPage: 1 };
   //   });
   // };
-
 
   handlePreviousPageChange = () => {
     this.setState((state) => {
@@ -85,11 +80,11 @@ class Events extends Component {
     const events = paginate(filtered, currentPage, pageSize);
 
     const eventsDisplayed = filtered.length;
- return (
-    <>
-      <NavTabs />
-      <div className="container">
-        <div className="row"></div>
+    return (
+      <>
+        <NavTabs />
+        <div className="container">
+          <div className="row"></div>
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
               <h4 id="search-title">Search Events</h4>
