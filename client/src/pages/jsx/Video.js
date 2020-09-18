@@ -19,7 +19,7 @@ class Video extends Component {
 
   componentDidMount() {
     API.getVideos().then((res) => {
-      const videos = res.data;
+      const videos = res.data.reverse();
       this.setState({ videos });
     });
   }
