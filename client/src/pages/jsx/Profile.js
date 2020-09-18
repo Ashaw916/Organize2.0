@@ -9,13 +9,23 @@ import auth from "../../utils/Auth";
 
 function Profile() {
   // let { authStatus } = useContext(AuthContext);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
+
   // console.log("profile authostatus:", authStatus);
+  // const userObj = user[0];
+  // console.log(email);
+  // console.log("saular test", userObj);
+
   useEffect(() => {
     auth();
     // console.log(authStatus);
     API.getProfile()
-      .then((res) => setUser(res.data))
+      .then((res) => {
+        setEmail(res.data.email);
+        console.log(res.data.email);
+        setUser(res.data);
+      })
       .catch((err) => console.log(err));
   }, []);
 
