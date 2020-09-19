@@ -14,7 +14,7 @@ function LogoutUser(props) {
         user: userObj,
       },
 
-      url: "/users/logout",
+      url: "/api/users/logout",
     });
     console.log("logout then");
     // localStorage.clear();

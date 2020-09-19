@@ -10,7 +10,10 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 
 //port
-const PORT = process.env.PORT || 3001;
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3001;
+}
 
 // Passport Config
 require("./config/passport")(passport);
@@ -20,18 +23,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(
   session({
-    secret: "svsas",
+    secret: process.env.SECRET,
     resave: true,
     saveUninitialized: true,
   })
 );
-app.use(cookieParser("svsas"));
+app.use(cookieParser(process.env.SECRET));
 
 //routes
 app.use(routes);
 app.use("/", require("./routes/index"));
-app.use("/users", require("./routes/api/users"));
-app.use("/auth", require("./routes/api/auth"));
+app.use("/api/users", require("./routes/api/users"));
+app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/events", require("./routes/api/events"));
 app.use("/api/articles", require("./routes/api/articles"));
 app.use("/api/links", require("./routes/api/links"));
@@ -57,7 +60,7 @@ app.use(passport.session());
 require("./config/auth")(passport);
 
 // Start the API server
-app.listen(PORT, function () {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+app.listen(port, function () {
+  console.log(`🌎  ==> API Server now listening on PORT ${port}!`);
 });
 console.log();
