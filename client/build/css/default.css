@@ -10,7 +10,7 @@ body {
 }
 .navbar-brand {
   font-size: 2rem;
-  color: darkred;
+  color: darkred !important;
 }
 .nav-link {
   color: #ebf0fffb;
