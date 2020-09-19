@@ -88,7 +88,11 @@ class Donate extends Component {
                     <h4 id="search-title">Search Donation Links</h4>
                   </div>
                   <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                    <SearchForm />
+                    <SearchForm
+                      search={this.state.searchTerm}
+                      update={this.handleSearchEvent.bind(this)}
+                      clear={this.handleClearSearch.bind(this)}
+                    />
                   </div>
                   <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <Pagination

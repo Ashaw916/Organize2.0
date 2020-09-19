@@ -95,7 +95,7 @@ class Events extends Component {
                 <SearchForm
                   search={this.state.searchTerm}
                   update={this.handleSearchEvent.bind(this)}
-                  // clear={this.handleClearSearch}
+                  clear={this.handleClearSearch.bind(this)}
                 />
               </div>
               <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
