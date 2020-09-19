@@ -84,23 +84,31 @@ class Video extends Component {
         <div className="album py-5 bg-light" id="videoMain-wrapper">
           <div className="container">
             <div className="row">
-              <div className="ml-4 mb-2">
-                <SearchForm
-                  search={this.state.searchTerm}
-                  update={this.handleSearchEvent.bind(this)}
-                  clear={this.handleClearSearch.bind(this)}
-                />
+              <div className="col-12" id="video-searchbar">
+                <div className="row">
+                  <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <h4 id="search-title">Search Video Links</h4>
+                  </div>
+                  <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <SearchForm
+                      search={this.state.searchTerm}
+                      update={this.handleSearchEvent.bind(this)}
+                      clear={this.handleClearSearch.bind(this)}
+                    />
+                  </div>
+                  <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <Pagination
+                      itemsCount={filtered.length}
+                      pageSize={pageSize}
+                      currentPage={currentPage}
+                      onPageChange={this.handlePageChange}
+                      onNextPageChange={this.handleNextPageChange}
+                      onPreviousPageChange={this.handlePreviousPageChange}
+                    />
+                  </div>
+                </div>
               </div>
-              <div className="">
-                <Pagination
-                  itemsCount={filtered.length}
-                  pageSize={pageSize}
-                  currentPage={currentPage}
-                  onPageChange={this.handlePageChange}
-                  onNextPageChange={this.handleNextPageChange}
-                  onPreviousPageChange={this.handlePreviousPageChange}
-                />
-              </div>
+
               <div className="col-6"></div>
             </div>
             <div className="row">

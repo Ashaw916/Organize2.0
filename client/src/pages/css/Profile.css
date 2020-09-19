@@ -10,6 +10,9 @@
   background-image: url("../../images/profile.png");
   background-size: cover;
 }
+.profile-table {
+  width: 100% !important;
+}
 #profile-table-header {
   margin-bottom: 20px;
 }
@@ -17,7 +20,8 @@
   padding-left: 50px;
   color: darkred;
 }
-#profile-lead {
+#profile-lead,
+.profile-table {
   font-size: 16px !important;
 }
 .profile-form-input {
