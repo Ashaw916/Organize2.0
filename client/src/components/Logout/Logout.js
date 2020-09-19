@@ -19,7 +19,7 @@ function LogoutUser(props) {
     });
     console.log("logout then");
     // localStorage.clear();
-    localStorage.setItem("user", "none");
+    localStorage.setItem("user", "null");
     localStorage.setItem("token", "");
     // window.location.href = "/";
     props.history.push("/");

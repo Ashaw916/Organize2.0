@@ -9,6 +9,10 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 
+if (process.env.NODE_ENV === "production") {
+  console.log("production");
+  app.use(express.static("client/build"));
+}
 //port
 const PORT = process.env.PORT || 3001;
 
@@ -36,13 +40,9 @@ app.use("/api/events", require("./routes/api/events"));
 app.use("/api/articles", require("./routes/api/articles"));
 app.use("/api/links", require("./routes/api/links"));
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
-
 // Connect to the Mongo DB
 mongoose
-  .connect(process.env.MONGODB_URI || "mongodb://localhost/organize", {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

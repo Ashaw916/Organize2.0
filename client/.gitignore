@@ -27,3 +27,5 @@ package-lock.json
 #debug
 
 debug.log
+
+.env
