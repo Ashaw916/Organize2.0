@@ -79,6 +79,14 @@ class Events extends Component {
 
     const events = paginate(filtered, currentPage, pageSize);
 
+    function splitDate(str) {
+      return str.slice(5, 10);
+    }
+
+    function splitYear(str) {
+      return str.slice(0, 4);
+    }
+
     const eventsDisplayed = filtered.length;
     return (
       <>
@@ -125,8 +133,8 @@ class Events extends Component {
                   <p className="event-card-ptag">
                     START DATE:{" "}
                     <span className="event-spantag">
-                      {/* {splitDate(event.start_date)}- */}
-                      {/* {splitYear(event.start_date)} */}
+                      {splitDate(event.start_date)}-
+                      {splitYear(event.start_date)}
                     </span>
                   </p>
                   <p className="event-card-ptag">
@@ -149,13 +157,6 @@ class Events extends Component {
       </>
     );
   }
-  // function splitDate(str) {
-  //   return str.slice(5, 10);
-  // }
-
-  // function splitYear(str) {
-  //   return str.slice(0, 4);
-  // }
 }
 
 export default Events;

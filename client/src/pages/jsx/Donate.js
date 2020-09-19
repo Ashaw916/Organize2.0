@@ -16,7 +16,7 @@ class Donate extends Component {
 
   componentDidMount() {
     API.getLinks().then((res) => {
-      const links = res.data;
+      const links = res.data.reverse();
       this.setState({ links });
     });
   }
