@@ -74,6 +74,8 @@ class Video extends Component {
 
     const videos = paginate(filtered, currentPage, pageSize);
 
+    const videosDisplayed = filtered.length;
+
     return (
       <>
         <NavTabs />
@@ -84,16 +86,18 @@ class Video extends Component {
         <div className="album py-5 bg-light" id="videoMain-wrapper">
           <div className="container">
             <div className="row">
-              <div className="ml-4 mb-2">
+              <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                {/* <h4 id="search-title">Video Archive</h4> */}
                 <SearchForm
                   search={this.state.searchTerm}
                   update={this.handleSearchEvent.bind(this)}
                   clear={this.handleClearSearch.bind(this)}
                 />
               </div>
-              <div className="">
+              <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+              <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <Pagination
-                  itemsCount={filtered.length}
+                  itemsCount={videosDisplayed}
                   pageSize={pageSize}
                   currentPage={currentPage}
                   onPageChange={this.handlePageChange}
@@ -101,7 +105,6 @@ class Video extends Component {
                   onPreviousPageChange={this.handlePreviousPageChange}
                 />
               </div>
-              <div className="col-6"></div>
             </div>
             <div className="row">
               {videos.map((video) => (
@@ -128,20 +131,18 @@ class Video extends Component {
                           Added {moment(video.date_added).format("MMM D, YYYY")}
                         </small>
                       </div>
-                      <small className="text-muted">
-                        {/* {this.splitDate(video.date_added)}-
-                        {this.splitYear(video.date_added)} */}
-                      </small>
+                      <small className="text-muted"></small>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
             <div className="row">
-              <div className="col-2"></div>
-              <div className="col-10 mx-5 float-right">
+              <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+              <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+              <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <Pagination
-                  itemsCount={filtered.length}
+                  itemsCount={videosDisplayed}
                   pageSize={pageSize}
                   currentPage={currentPage}
                   onPageChange={this.handlePageChange}
