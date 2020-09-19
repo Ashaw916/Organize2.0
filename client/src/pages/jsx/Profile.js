@@ -51,12 +51,17 @@ function Profile() {
                 View and update your Organization's profile information
               </h4>
 
-              <table className="table table-sm table-striped table-responsive">
+              <table
+                className="table table-sm table-striped table-responsive"
+                id="profile-table-all"
+              >
                 <thead></thead>
                 <tbody>
                   <tr>
                     <th scope="row">WEBSITE: </th>
-                    <td>{user.website}</td>
+                    <td className="profile-table">
+                      {user.website} www.socialorgfake.com
+                    </td>
                     <td>
                       <input
                         type="url"
@@ -75,7 +80,9 @@ function Profile() {
 
                   <tr>
                     <th scope="row">FACEBOOK</th>
-                    <td>{user.facebook}</td>
+                    <td className="profile-table">
+                      {user.facebook}Social Organizers Fake
+                    </td>
                     <td>
                       <span>
                         <input
@@ -95,7 +102,9 @@ function Profile() {
                   </tr>
                   <tr>
                     <th scope="row">INSTAGRAM</th>
-                    <td>{user.instagram}</td>
+                    <td className="profile-table">
+                      {user.instagram}@socialorgFake
+                    </td>
                     <td>
                       <span>
                         <input
@@ -115,7 +124,9 @@ function Profile() {
                   </tr>
                   <tr>
                     <th scope="row">TWITTER</th>
-                    <td>{user.twitter}</td>
+                    <td className="profile-table">
+                      {user.twitter}@socialorgFake
+                    </td>
                     <td>
                       <span>
                         <input

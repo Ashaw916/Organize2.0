@@ -724,22 +724,30 @@ function Manage() {
                   .filter((event) => event.user === userObjId)
                   .map((event) => (
                     <li className="list-group-item manage-post" key={event._id}>
-                      {event.title}: {splitDate(event.start_date)}-
-                      {splitYear(event.start_date)}{" "}
-                      <button
-                        type="button"
-                        className="btn btn btn-sm delete-btn"
-                        onClick={() => deleteEvent(event._id)}
-                      >
-                        Delete
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn btn-sm"
-                        onClick={() => updatingEvent(event._id)}
-                      >
-                        Edit
-                      </button>
+                      <div className="row">
+                        <div className="col-12">
+                          {event.title}: {splitDate(event.start_date)}-
+                          {splitYear(event.start_date)}{" "}
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-12">
+                          <button
+                            type="button"
+                            className="btn btn btn-sm manage-btn mr-2"
+                            onClick={() => updatingEvent(event._id)}
+                          >
+                            Edit
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn btn-sm delete-btn"
+                            onClick={() => deleteEvent(event._id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
                     </li>
                   ))}
               </ul>
@@ -778,21 +786,28 @@ function Manage() {
                       className="list-group-item manage-post"
                       key={article._id}
                     >
-                      {article.title}
-                      <button
-                        type="button"
-                        className="btn btn btn-sm delete-btn"
-                        onClick={() => deleteArticle(article._id)}
-                      >
-                        Delete
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn btn-sm"
-                        onClick={() => updatingArticle(article._id)}
-                      >
-                        Edit
-                      </button>
+                      <div className="row">
+                        <div className="col-12">{article.title}</div>
+                      </div>
+
+                      <div className="row">
+                        <div className="col-12">
+                          <button
+                            type="button"
+                            className="btn btn btn-sm manage-btn mr-2"
+                            onClick={() => updatingArticle(article._id)}
+                          >
+                            Edit
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn btn-sm delete-btn"
+                            onClick={() => deleteArticle(article._id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
                     </li>
                   ))}
               </ul>
@@ -829,21 +844,29 @@ function Manage() {
                       className="list-group-item manage-post"
                       key={donation._id}
                     >
-                      {donation.title}
-                      <button
-                        type="button"
-                        className="btn btn btn-sm delete-btn"
-                        onClick={() => deleteDonation(donation._id)}
-                      >
-                        Delete
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn btn-sm"
-                        onClick={() => updatingDonation(donation._id)}
-                      >
-                        Edit
-                      </button>
+                      <div className="row">
+                        <div className="col-12">{donation.title}</div>
+                      </div>
+
+                      <div className="row">
+                        <div className="col-12">
+                          <button
+                            type="button"
+                            className="btn btn btn-sm manage-btn mr-2"
+                            onClick={() => updatingDonation(donation._id)}
+                          >
+                            Edit
+                          </button>
+
+                          <button
+                            type="button"
+                            className="btn btn btn-sm delete-btn"
+                            onClick={() => deleteDonation(donation._id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
                     </li>
                   ))}
               </ul>
@@ -877,21 +900,27 @@ function Manage() {
                   .filter((video) => video.user === userObjId)
                   .map((video) => (
                     <li className="list-group-item manage-post" key={video._id}>
-                      {video.title}
-                      <button
-                        type="button"
-                        className="btn btn btn-sm delete-btn"
-                        onClick={() => deleteVideo(video._id)}
-                      >
-                        Delete
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn btn-sm"
-                        onClick={() => updatingVideo(video._id)}
-                      >
-                        Edit
-                      </button>
+                      <div className="row">
+                        <div className="col-12">{video.title}</div>
+                      </div>
+                      <div className="row">
+                        <div className="col-12">
+                          <button
+                            type="button"
+                            className="btn btn btn-sm manage-btn mr-2"
+                            onClick={() => updatingVideo(video._id)}
+                          >
+                            Edit
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn btn-sm delete-btn"
+                            onClick={() => deleteVideo(video._id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
                     </li>
                   ))}
               </ul>
