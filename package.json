@@ -54,5 +54,8 @@
     "node": "^14.8.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0"
+  },
+  "engines": {
+    "node": "v12.18.3"
   }
 }
