@@ -34,12 +34,10 @@ class Events extends Component {
     this.setState({ searchTerm: event.target.value, currentPage: 1 });
   }
 
-  // handleClearSearch = (event) => {
-  //   event.preventDefault();
-  //   this.setState(() => {
-  //     return { searchTerm: "", currentPage: 1 };
-  //   });
-  // };
+  handleClearSearch(event) {
+    event.preventDefault();
+    this.setState({ searchTerm: "", currentPage: 1 });
+  }
 
   handlePreviousPageChange = () => {
     this.setState((state) => {
@@ -79,6 +77,14 @@ class Events extends Component {
 
     const events = paginate(filtered, currentPage, pageSize);
 
+    function splitDate(str) {
+      return str.slice(5, 10);
+    }
+
+    function splitYear(str) {
+      return str.slice(0, 4);
+    }
+
     const eventsDisplayed = filtered.length;
     return (
       <>
@@ -97,7 +103,7 @@ class Events extends Component {
                 <SearchForm
                   search={this.state.searchTerm}
                   update={this.handleSearchEvent.bind(this)}
-                  // clear={this.handleClearSearch}
+                  clear={this.handleClearSearch.bind(this)}
                 />
               </div>
               <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -125,8 +131,8 @@ class Events extends Component {
                   <p className="event-card-ptag">
                     START DATE:{" "}
                     <span className="event-spantag">
-                      {/* {splitDate(event.start_date)}- */}
-                      {/* {splitYear(event.start_date)} */}
+                      {splitDate(event.start_date)}-
+                      {splitYear(event.start_date)}
                     </span>
                   </p>
                   <p className="event-card-ptag">
@@ -149,13 +155,6 @@ class Events extends Component {
       </>
     );
   }
-  // function splitDate(str) {
-  //   return str.slice(5, 10);
-  // }
-
-  // function splitYear(str) {
-  //   return str.slice(0, 4);
-  // }
 }
 
 export default Events;

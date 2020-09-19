@@ -19,7 +19,7 @@ class Video extends Component {
 
   componentDidMount() {
     API.getVideos().then((res) => {
-      const videos = res.data;
+      const videos = res.data.reverse();
       this.setState({ videos });
     });
   }
@@ -58,14 +58,6 @@ class Video extends Component {
     this.setState({ searchTerm: "", currentPage: 1 });
   }
 
-  // function splitDate(str) {
-  //   return str.slice(5, 10);
-  // }
-
-  // function splitYear(str) {
-  //   return str.slice(0, 4);
-  // }
-
   render() {
     const { videos: allVideos, currentPage, pageSize, searchTerm } = this.state;
 
@@ -96,7 +88,7 @@ class Video extends Component {
                 <SearchForm
                   search={this.state.searchTerm}
                   update={this.handleSearchEvent.bind(this)}
-                  clear={this.handleClearSearch}
+                  clear={this.handleClearSearch.bind(this)}
                 />
               </div>
               <div className="">
@@ -113,9 +105,10 @@ class Video extends Component {
             </div>
             <div className="row">
               {videos.map((video) => (
-                <div className="col-md-4">
-                  <div className="card mb-4 box-shadow" key={video._id}>
+                <div className="col-md-4" key={video._id}>
+                  <div className="card mb-4 box-shadow">
                     <iframe
+                      title={video.title}
                       className="card-img-top"
                       style={{ height: "300px", width: "auto" }}
                       src={video.src}
@@ -126,7 +119,11 @@ class Video extends Component {
                       <p className="card-text">{video.title}</p>
                       <div className="d-flex justify-content-between align-items-center">
                         <div className="btn-group">
-                          <a href={video.src} target="_blank">
+                          <a
+                            href={video.src}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             <button type="button" className="btn btn-sm">
                               Source
                             </button>

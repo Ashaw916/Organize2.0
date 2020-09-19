@@ -16,7 +16,7 @@ class Donate extends Component {
 
   componentDidMount() {
     API.getLinks().then((res) => {
-      const links = res.data;
+      const links = res.data.reverse();
       this.setState({ links });
     });
   }
@@ -45,6 +45,15 @@ class Donate extends Component {
     });
   };
 
+  handleSearchEvent(event) {
+    event.preventDefault();
+    this.setState({ searchTerm: event.target.value, currentPage: 1 });
+  }
+  handleClearSearch(event) {
+    event.preventDefault();
+    this.setState({ searchTerm: "", currentPage: 1 });
+  }
+
   render() {
     const { length: count } = this.state.links;
     const { links: allLinks, currentPage, pageSize } = this.state;
@@ -56,7 +65,7 @@ class Donate extends Component {
         <NavTabs />
 
         <div className="container">
-          <div clasName="container">
+          <div className="container">
             <div className="row">
               {/* <div className="col-2"></div> */}
 
@@ -66,7 +75,11 @@ class Donate extends Component {
                     <h4 id="search-title">Search Donation Links</h4>
                   </div>
                   <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                    <SearchForm />
+                    <SearchForm
+                      search={this.state.searchTerm}
+                      update={this.handleSearchEvent.bind(this)}
+                      clear={this.handleClearSearch.bind(this)}
+                    />
                   </div>
                   <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <Pagination
