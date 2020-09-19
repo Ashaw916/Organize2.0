@@ -1,7 +1,7 @@
 import React from "react";
 
 function SearchForm(props) {
-  const { search, update, handleClearSearch } = props;
+  const { search, update, clear } = props;
 
   return (
     <>
@@ -21,7 +21,7 @@ function SearchForm(props) {
           type="reset"
           className="btn btn-primary ml-2"
           id="search-btn"
-          // onClick={() => handleClearSearch()}
+          onClick={clear}
         >
           Clear
         </button>
