@@ -20,7 +20,7 @@ function Registration(props) {
         password: regPassword,
       },
       withCredentials: true,
-      url: "/users/register",
+      url: "/api/users/register",
     })
       .then((response) => {
         console.log("react", response.data);
@@ -64,6 +64,7 @@ function Registration(props) {
               <div className="form-group col-md-12">
                 <label htmlFor="inputEmail4">Email</label>
                 <input
+                  name="email"
                   type="email"
                   className="form-control"
                   id="email"
@@ -74,6 +75,7 @@ function Registration(props) {
               <div className="form-group col-md-6">
                 <label htmlFor="inputPassword4">Choose a Password</label>
                 <input
+                  name="password"
                   type="password"
                   className="form-control"
                   id="password1"
@@ -84,6 +86,7 @@ function Registration(props) {
               <div className="form-group col-md-6">
                 <label htmlFor="inputPassword4">Password</label>
                 <input
+                  name="password2"
                   type="password"
                   className="form-control"
                   id="password2"
