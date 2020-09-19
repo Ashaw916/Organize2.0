@@ -58,14 +58,6 @@ class Video extends Component {
     this.setState({ searchTerm: "", currentPage: 1 });
   }
 
-  // function splitDate(str) {
-  //   return str.slice(5, 10);
-  // }
-
-  // function splitYear(str) {
-  //   return str.slice(0, 4);
-  // }
-
   render() {
     const { videos: allVideos, currentPage, pageSize, searchTerm } = this.state;
 
@@ -96,7 +88,7 @@ class Video extends Component {
                 <SearchForm
                   search={this.state.searchTerm}
                   update={this.handleSearchEvent.bind(this)}
-                  clear={this.handleClearSearch}
+                  clear={this.handleClearSearch.bind(this)}
                 />
               </div>
               <div className="">
