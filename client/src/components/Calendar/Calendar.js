@@ -1,10 +1,10 @@
 import React from "react";
 import FullCalendar, { isPropsEqual, Component } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import moment from "moment";
 // import bootstrapPlugin from "@fullcalendar/bootstrap";
 // import interactionPlugin from "@fullcalendar/interaction"
 // import { render } from "ejs";
-// import $ from "jquery";
 
 class Calendar extends Component {
   calendarComponentRef = React.createRef();
@@ -36,8 +36,12 @@ class Calendar extends Component {
 
           var myObject = {
             title: info.event._def.title,
-            start: info.event._instance.range.start,
-            end: info.event._instance.range.end,
+            start: moment(info.event._instance.range.start).format(
+              "MMMM D, YYYY, h:mm a"
+            ),
+            end: moment(info.event._instance.range.end).format(
+              "MMMM D, YYYY, h:mm a"
+            ),
             description: info.event._def.extendedProps.description,
             location: info.event._def.extendedProps.location,
             organization: info.event._def.groupId,
