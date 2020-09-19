@@ -5,7 +5,6 @@ import moment from "moment";
 // import bootstrapPlugin from "@fullcalendar/bootstrap";
 // import interactionPlugin from "@fullcalendar/interaction"
 // import { render } from "ejs";
-// import $ from "jquery";
 
 class Calendar extends Component {
   calendarComponentRef = React.createRef();
