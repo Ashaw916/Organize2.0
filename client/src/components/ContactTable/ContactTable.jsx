@@ -16,38 +16,27 @@ class ContactTable extends Component {
   render() {
     const { users } = this.props;
     return (
-      <table className="table table-striped table-sm table-responsive">
+      <table
+        className="table table-striped table table-responsive"
+        id="contact-table"
+      >
         <thead>
-          <tr className="text-center">
-            <th scope="col" onClick={() => this.raiseSort("organization")}>
-              Organization
-            </th>
-            <th scope="col" onClick={() => this.raiseSort("email")}>
-              Email
-            </th>
-            <th scope="col" onClick={() => this.raiseSort("website")}>
-              Web
-            </th>
-            <th scope="col" onClick={() => this.raiseSort("facebook")}>
-              FB
-            </th>
-            <th scope="col" onClick={() => this.raiseSort("instagram")}>
-              Insta
-            </th>
-            <th scope="col" onClick={() => this.raiseSort("twitter")}>
-              Twitter
-            </th>
+          <tr className="col">
+            <th onClick={() => this.raiseSort("organization")}>Organization</th>
+            <th onClick={() => this.raiseSort("email")}>Email</th>
+            <th onClick={() => this.raiseSort("website")}>Web</th>
+            <th onClick={() => this.raiseSort("facebook")}>FB</th>
+            <th onClick={() => this.raiseSort("instagram")}>Insta</th>
+            <th onClick={() => this.raiseSort("twitter")}>Twitter</th>
           </tr>
         </thead>
-        <tbody style={{ fontSize: "10px" }}>
+        <tbody>
           {users.map((user) => (
             <tr key={user._id}>
               <td className="contact-org">{user.organization}</td>
-              <td>{user.email}</td>
-
-              <td>{user.website}</td>
-
-              <td>
+              <td className="contact-table-data">{user.email}</td>
+              <td className="contact-table-data">{user.website}</td>
+              <td className="contact-table-data">
                 <a
                   href={user.website}
                   target="_blank"
@@ -56,8 +45,8 @@ class ContactTable extends Component {
                   {user.facebook}
                 </a>
               </td>
-              <td>{user.instagram}</td>
-              <td>{user.twitter}</td>
+              <td className="contact-table-data">{user.instagram}</td>
+              <td className="contact-table-data">{user.twitter}</td>
             </tr>
           ))}
         </tbody>

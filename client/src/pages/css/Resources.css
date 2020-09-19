@@ -13,6 +13,20 @@
   margin-left: 100px;
   color: #ebf0fffb;
 }
+#resources-searchbar.container {
+  margin: 0px;
+  margin-bottom: 25px;
+}
+#resources-searchbar {
+  border: 3px solid #bfd1d3;
+  background-color: #ffffff;
+  padding: 15px 15px 0px 15px;
+  border-radius: 8px;
+  margin: 0px 20px 20px 20px;
+  -webkit-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+}
 #search-btn {
   background-color: #e25b4b !important;
   border: 1px #e25b4b solid !important;

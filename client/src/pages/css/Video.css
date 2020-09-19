@@ -29,6 +29,20 @@
 #video-card-body {
   height: 100%;
 }
+.py-5 {
+  padding-top: 0px !important;
+}
+#video-searchbar {
+  border: 3px solid #bfd1d3;
+  background-color: #ffffff;
+  padding: 15px 15px 15px 15px;
+  border-radius: 8px;
+  margin: 25px 0px 25px 0px;
+
+  -webkit-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+}
 
 .btn-sm {
   background-color: #bfd1d3 !important;
