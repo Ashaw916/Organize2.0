@@ -10,10 +10,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 
 //port
-let port = process.env.PORT;
-if (port == null || port == "") {
-  port = 3001;
-}
+const PORT = process.env.PORT || 3001;
 
 // Passport Config
 require("./config/passport")(passport);
@@ -60,7 +57,7 @@ app.use(passport.session());
 require("./config/auth")(passport);
 
 // Start the API server
-app.listen(port, function () {
-  console.log(`🌎  ==> API Server now listening on PORT ${port}!`);
+app.listen(PORT, function () {
+  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
 console.log();
