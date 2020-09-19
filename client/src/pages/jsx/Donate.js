@@ -12,6 +12,8 @@ class Donate extends Component {
     links: [],
     pageSize: 5,
     currentPage: 1,
+    searchTerm: "",
+    searchResults: [],
   };
 
   componentDidMount() {
@@ -56,10 +58,20 @@ class Donate extends Component {
   }
 
   render() {
-    const { length: count } = this.state.links;
-    const { links: allLinks, currentPage, pageSize } = this.state;
+    const { links: allLinks, currentPage, pageSize, searchTerm } = this.state;
 
-    const links = paginate(allLinks, currentPage, pageSize);
+    const filtered =
+      searchTerm !== ""
+        ? allLinks.filter(
+            (link) =>
+              link.title.includes(searchTerm) ||
+              link.title.toLowerCase().includes(searchTerm)
+          )
+        : allLinks;
+
+    const links = paginate(filtered, currentPage, pageSize);
+
+    const linksDisplayed = filtered.length;
 
     return (
       <>
@@ -84,7 +96,7 @@ class Donate extends Component {
                   </div>
                   <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <Pagination
-                      itemsCount={count}
+                      itemsCount={linksDisplayed}
                       pageSize={pageSize}
                       currentPage={currentPage}
                       onPageChange={this.handlePageChange}
