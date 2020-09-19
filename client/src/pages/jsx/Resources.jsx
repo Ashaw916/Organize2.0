@@ -99,24 +99,6 @@ class Resources extends Component {
                 <h4 id="search-title">Search Resources</h4>
               </div>
 
-<<<<<<< HEAD
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <SearchForm
-                search={this.state.searchTerm}
-                update={this.handleSearchEvent.bind(this)}
-                clear={this.handleClearSearch.bind(this)}
-              />
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <Pagination
-                itemsCount={articlesDisplayed}
-                pageSize={pageSize}
-                currentPage={currentPage}
-                onPageChange={this.handlePageChange}
-                onNextPageChange={this.handleNextPageChange}
-                onPreviousPageChange={this.handlePreviousPageChange}
-              />
-=======
               <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <SearchForm
                   search={this.state.searchTerm}
@@ -134,7 +116,6 @@ class Resources extends Component {
                   onPreviousPageChange={this.handlePreviousPageChange}
                 />
               </div>
->>>>>>> 83cf48fc1ef3d5f482ec88beabb89ec020ead75d
             </div>
           </div>
 
