@@ -48,7 +48,7 @@ function VideoLiveStream() {
               <h6>View livestream video or browse the video archive below.</h6>
               <hr />
               <h5>Current Live Stream</h5>
-              <p className="card-text">{videos.title}Video Title</p>
+              <p className="card-text">{videos.title}</p>
               <div className="d-flex justify-content-between align-items-center">
                 <div className="btn-group">
                   <a href={videos.src} target="_blank">
