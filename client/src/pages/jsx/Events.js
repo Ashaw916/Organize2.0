@@ -82,28 +82,32 @@ class Events extends Component {
       <>
         <NavTabs />
         <div className="container">
-          <div className="row"></div>
-          <div className="row">
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <h4 id="search-title">Search Events</h4>
-              {/* <FilterDropdown data={events} /> */}
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <SearchForm
-                search={this.state.searchTerm}
-                update={this.handleSearchEvent.bind(this)}
-                clear={this.handleClearSearch.bind(this)}
-              />
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <Pagination
-                itemsCount={eventsDisplayed}
-                pageSize={pageSize}
-                currentPage={currentPage}
-                onPageChange={this.handlePageChange}
-                onNextPageChange={this.handleNextPageChange}
-                onPreviousPageChange={this.handlePreviousPageChange}
-              />
+          <div className="container" id="event-searchbar">
+            <div className="row">
+              <div
+                className="col-xs-12 col-sm-12 col-md-4 col-lg-4"
+                id="search-title-wrapper"
+              >
+                <h4 id="search-title">Search Events</h4>
+                {/* <FilterDropdown data={events} /> */}
+              </div>
+              <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <SearchForm
+                  search={this.state.searchTerm}
+                  update={this.handleSearchEvent.bind(this)}
+                  // clear={this.handleClearSearch}
+                />
+              </div>
+              <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <Pagination
+                  itemsCount={eventsDisplayed}
+                  pageSize={pageSize}
+                  currentPage={currentPage}
+                  onPageChange={this.handlePageChange}
+                  onNextPageChange={this.handleNextPageChange}
+                  onPreviousPageChange={this.handlePreviousPageChange}
+                />
+              </div>
             </div>
           </div>
 
@@ -157,13 +161,6 @@ class Events extends Component {
       </>
     );
   }
-  // function splitDate(str) {
-  //   return str.slice(5, 10);
-  // }
 
-  // function splitYear(str) {
-  //   return str.slice(0, 4);
-  // }
-}
 
 export default Events;

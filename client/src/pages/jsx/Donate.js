@@ -76,28 +76,34 @@ class Donate extends Component {
     return (
       <>
         <NavTabs />
+
         <div className="container">
-          <div className="row"></div>
-          <div className="row">
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <h4 id="search-title">Search Donation Links</h4>
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <SearchForm
-                search={this.state.searchTerm}
-                update={this.handleSearchEvent.bind(this)}
-                clear={this.handleClearSearch.bind(this)}
-              />
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <Pagination
-                itemsCount={linksDisplayed}
-                pageSize={pageSize}
-                currentPage={currentPage}
-                onPageChange={this.handlePageChange}
-                onNextPageChange={this.handleNextPageChange}
-                onPreviousPageChange={this.handlePreviousPageChange}
-              />
+          <div clasName="container">
+            <div className="row">
+              {/* <div className="col-2"></div> */}
+
+              <div className="col-12" id="donation-searchbar">
+                <div className="row">
+                  <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <h4 id="search-title">Search Donation Links</h4>
+                  </div>
+                  <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <SearchForm />
+                  </div>
+                  <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <Pagination
+                      itemsCount={count}
+                      pageSize={pageSize}
+                      currentPage={currentPage}
+                      onPageChange={this.handlePageChange}
+                      onNextPageChange={this.handleNextPageChange}
+                      onPreviousPageChange={this.handlePreviousPageChange}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* <div className="col-2"></div> */}
             </div>
           </div>
 
