@@ -45,6 +45,16 @@ class Donate extends Component {
     });
   };
 
+  handleSearchEvent(event) {
+    event.preventDefault();
+    this.setState({ searchTerm: event.target.value, currentPage: 1 });
+  }
+
+  handleClearSearch(event) {
+    event.preventDefault();
+    this.setState({ searchTerm: "", currentPage: 1 });
+  }
+
   render() {
     const { length: count } = this.state.links;
     const { links: allLinks, currentPage, pageSize } = this.state;
