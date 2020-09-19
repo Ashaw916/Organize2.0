@@ -62,7 +62,7 @@ function Profile() {
                         type="url"
                         className="profile-form-input"
                         id="website"
-                        aria-describedBy="website"
+                        aria-describedby="website"
                         placeholder="enter new url"
                       />
                     </td>
@@ -82,7 +82,7 @@ function Profile() {
                           type="url"
                           className="profile-form-input"
                           id="facebook"
-                          aria-describedBy="facebook"
+                          aria-describedby="facebook"
                           placeholder="enter new url"
                         />
                       </span>
@@ -102,7 +102,7 @@ function Profile() {
                           type="text"
                           className="profile-form-input"
                           id="instagram"
-                          aria-describedBy="instagram"
+                          aria-describedby="instagram"
                           placeholder="enter new @"
                         />
                       </span>
@@ -122,7 +122,7 @@ function Profile() {
                           type="text"
                           className="profile-form-input"
                           id="twitter"
-                          aria-describedBy="twitter"
+                          aria-describedby="twitter"
                           placeholder="enter new @"
                         />
                       </span>

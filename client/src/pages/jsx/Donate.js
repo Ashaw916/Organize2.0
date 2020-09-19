@@ -108,9 +108,9 @@ class Donate extends Component {
           </div>
 
           {links.map((link) => (
-            <div className="row">
+            <div className="row" key={link._id}>
               <div className="col-2" />
-              <div className="col-8" key={link._id}>
+              <div className="col-8">
                 <div className="card col-12" id="donation-cards-wrapper">
                   <a href={link.src} className="btn btn" target="_blank">
                     <div className="card-body" id="donate-card">
