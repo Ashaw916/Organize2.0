@@ -7,13 +7,16 @@ import API from "../../utils/API";
 import eventValidation from "../../utils/EventValidation";
 import articleValidation from "../../utils/ArticleValidation";
 import videoValidation from "../../utils/VideoValidation";
-import donationValidation from "../../utils/DonateValidation";
+import donateValidation from "../../utils/DonateValidation";
 import "../css/Manage.css";
+import NavTabs from "../../components/NavTabs/NavTabs";
 
 ////////////////////////////////// For Loading Events, Articles, Videos ///////////////////////////
 
 function Manage() {
-  // function Manage(props) {
+
+    let userObj = JSON.stringify(localStorage.getItem("user"));
+    const userObjId = userObj.slice(1,-1);
 
   //states for events, articles, and videos
   const [getEvents, setGetEvents] = useState([]);
@@ -25,6 +28,7 @@ function Manage() {
   function loadEvents() {
     API.getEvents()
       .then((res) => {
+        console.log(res.data);
         setGetEvents(res.data);
       })
       .catch((err) => console.log(err));
@@ -49,7 +53,6 @@ function Manage() {
   function loadDonations() {
     API.getLinks()
       .then((res) => {
-        console.log(res.data);
         setGetDonations(res.data);
       })
       .catch((err) => console.log(err));
@@ -93,7 +96,7 @@ function Manage() {
   }
 
   function deleteDonation(id) {
-    API.deleteDonation(id)
+    API.deleteLink(id)
       .then((res) => loadDonations())
       .catch((err) => console.log(err));
   }
@@ -114,6 +117,13 @@ function Manage() {
   const [isEventSubmitting, setIsEventSubmitting] = useState(false);
   //if an unsuccesful submission, will show an error to user
   const [notEventSubmitted, setNotEventSubmitted] = useState(false);
+   //holds errors when updating a donation link
+   const [eventUpdateErrors, setEventUpdateErrors] = useState({});
+   //holds id to request one donate document
+   const [eventId, setEventId] = useState("");
+   //works with useEffect for updating entry, works with checking errors while updating
+   const [isEventUpdating, setIsEventUpdating] = useState(false);
+ 
 
   useEffect(() => {
     if (Object.keys(eventErrors).length === 0 && isEventSubmitting) {
@@ -122,19 +132,55 @@ function Manage() {
     }
   }, [eventErrors]);
 
+  //triggers when erros object keys have length of 0 when submitting an update to an already existing donation
+  useEffect(() => {
+    if (Object.keys(eventUpdateErrors).length === 0 && isEventUpdating) {
+      //function for PUT api call
+      updateEvent();
+    }
+  }, [eventUpdateErrors])
+
+  function splitDBDate(obj) {
+  
+    const startISODate = obj.start_date;
+    const endISODate = obj.end_date;
+
+    const dbSDate = startISODate.split("T");
+    const dbEDate = endISODate.split("T");
+    const sDateOnly = dbSDate[0];
+    const sTimeOnly = dbSDate[1];
+    const eDateOnly = dbEDate[0];
+    const eTimeOnly = dbEDate[1];
+
+    setEventObject({
+       title: obj.title,
+       start_date: sDateOnly,
+       end_date: eDateOnly,
+       start_time: sTimeOnly,
+       end_time: eTimeOnly,
+       organization: obj.organization,
+       description: obj.description,
+       location: obj.location,
+      });
+  };
+
+  function getOneEvent(id) {
+    API.getEvent(id)
+      .then((res) => {
+       splitDBDate(res.data);
+      })
+      .catch((err) => console.log(err));
+  }; 
+
   const handleEventInputChange = (e) => {
     const { name, value } = e.target;
     setEventObject({ ...eventObject, [name]: value });
   };
 
   function submitEvent() {
-    console.log("submitted successfully!");
 
     const sDate = `${eventObject.start_date}T${eventObject.start_time}`;
     const eDate = `${eventObject.end_date}T${eventObject.end_time}`;
-
-    console.log(sDate);
-    console.log(eDate);
 
     API.saveEvent({
       title: eventObject.title,
@@ -144,6 +190,7 @@ function Manage() {
       location: eventObject.location,
       organization: eventObject.organization,
       event_url: "/events",
+      user: userObjId
     })
       .then((res) => {
         loadEvents();
@@ -168,26 +215,98 @@ function Manage() {
 
     setTimeout(() => {
       setEventSuccess(false);
-    }, 1500);
-  }
+    }, 2300);
+
+    setTimeout(() => {
+      setNotEventSubmitted(false);
+    }, 23000)
+  };
+
+  function updateEvent() {
+
+    const sUpdateDate = `${eventObject.start_date}T${eventObject.start_time}`;
+    const eUpdateDate = `${eventObject.end_date}T${eventObject.end_time}`;
+
+
+    API.updateEvent(eventId, {
+      title: eventObject.title,
+      start_date: sUpdateDate,
+      end_date: eUpdateDate,
+      description: eventObject.description,
+      location: eventObject.location,
+      organization: eventObject.organization,
+      event_url: "/events",
+    })
+    .then((res) => {
+      loadEvents();
+      setEventSuccess(true);
+      setEventId("")
+    })
+    .catch((err) => {
+      console.log(err);
+      setNotEventSubmitted(true);
+      setEventId("");
+    })
+
+    //resets form
+    setEventObject({
+      //add event_url if want it back, and uncomment out in validation and in addevent
+      title: "",
+      start_date: "",
+      end_date: "",
+      start_time: "",
+      end_time: "",
+      organization: "",
+      description: "",
+      location: "",
+    });
+
+    setTimeout(() => {
+      setEventSuccess(false);
+    }, 2300);
+
+    setTimeout(() => {
+      setNotEventSubmitted(false);
+    }, 23000);
+
+  };
 
   const handleEventSubmit = (e) => {
     if (e) e.preventDefault();
-    console.log("eventsubmit");
     setEventErrors(eventValidation(eventObject));
     setIsEventSubmitting(true);
+  };
+
+  //listens for click of 'edit' button and grabs id for a donation link that already exists
+  const updatingEvent = (id) => {
+    console.log(id);
+    //save the id to a state, that id is passed to api call via useeffect
+    setEventId(id);
+    getOneEvent(id);
+  };
+  //handles the click of the update button in the form
+  const submitEventUpdate = (e) => {
+    if (e) e.preventDefault();
+    setEventUpdateErrors(eventValidation(eventObject));
+    setIsEventUpdating(true);
   };
 
   ////////////////////////////////////// For Articles Form /////////////////////////////////
 
   const [articleObject, setArticleObject] = useState({});
-  const [articleErrors, setAritcleErrors] = useState({});
+  const [articleErrors, setArticleErrors] = useState({});
   //for showing a successful submission
   const [articleSuccess, setArticleSuccess] = useState(false);
   //works with use effect, with checking errors, will start submit, and let user know
   const [isSubmitting, setIsSubmitting] = useState(false);
   //if an unsuccesful submission, will show an error to user
   const [notSubmitted, setNotSubmitted] = useState(false);
+ //holds errors when updating a donation link
+ const [articleUpdateErrors, setArticleUpdateErrors] = useState({});
+ //holds id to request one donate document
+ const [articleId, setArticleId] = useState("");
+ //works with useEffect for updating entry, works with checking errors while updating
+ const [isArticleUpdating, setIsArticleUpdating] = useState(false);
 
   useEffect(() => {
     if (Object.keys(articleErrors).length === 0 && isSubmitting) {
@@ -196,21 +315,37 @@ function Manage() {
     }
   }, [articleErrors]);
 
+  //triggers when erros object keys have length of 0 when submitting an update to an already existing donation
+  useEffect(() => {
+    if (Object.keys(articleUpdateErrors).length === 0 && isArticleUpdating) {
+      //function for PUT api call
+      updateArticle();
+    }
+  }, [articleUpdateErrors])
+
+  useEffect(() => {
+    API.getArticle(articleId)
+      .then((res) => {
+        console.log(res.data);
+        setArticleObject(res.data)})
+      .catch((err) => console.log(err));
+  }, [articleId])
+
   const handleArticleInputChange = (e) => {
     const { name, value } = e.target;
     setArticleObject({ ...articleObject, [name]: value });
   };
 
   function submitArticle() {
-    console.log("submitted successfully!");
 
     API.saveArticle({
       title: articleObject.title,
       author: articleObject.author,
       body: articleObject.body,
       description: articleObject.description,
-      source: articleObject.source_url,
+      source: articleObject.source,
       type: articleObject.type,
+      user: userObjId
     })
       .then((res) => {
         loadArticles();
@@ -232,14 +367,70 @@ function Manage() {
 
     setTimeout(() => {
       setArticleSuccess(false);
-    }, 1500);
-  }
+    }, 2300);
+
+    setTimeout(() => {
+      setNotSubmitted(false);
+    }, 23000)
+  };
+
+  function updateArticle() {
+
+    API.updateArticle(articleId, {
+      title: articleObject.title,
+      author: articleObject.author,
+      body: articleObject.body,
+      description: articleObject.description,
+      source: articleObject.source,
+      type: articleObject.type,
+    })
+    .then((res) => {
+      loadArticles();
+      setArticleSuccess(true);
+      setArticleId("")
+    })
+    .catch((err) => {
+      console.log(err);
+      setNotSubmitted(true);
+      setArticleId("");
+    })
+
+    //resets form
+    setArticleObject({
+      title: "",
+      author: "",
+      body: "",
+      description: "",
+      source: "",
+      type: "",
+    });
+
+    setTimeout(() => {
+      setArticleSuccess(false);
+    }, 2300);
+
+    setTimeout(() => {
+      setNotSubmitted(false);
+    }, 23000)
+
+  };
 
   const handleArticleSubmit = (e) => {
     if (e) e.preventDefault();
-    console.log("articlesubmit");
-    setAritcleErrors(articleValidation(articleObject));
+    setArticleErrors(articleValidation(articleObject));
     setIsSubmitting(true);
+  };
+
+   //listens for click of 'edit' button and grabs id for a donation link that already exists
+   const updatingArticle = (id) => {
+    //save the id to a state, that id is passed to api call via useeffect
+    setArticleId(id);
+  };
+  //handles the click of the update button in the form
+  const submitArticleUpdate = (e) => {
+    if (e) e.preventDefault();
+    setArticleUpdateErrors(articleValidation(articleObject));
+    setIsArticleUpdating(true);
   };
 
   //////////////////////////////////// For Videos Form ////////////////////////////////////
@@ -252,6 +443,12 @@ function Manage() {
   const [isVideoSubmitting, setIsVideoSubmitting] = useState(false);
   //if an unsuccesful submission, will show an error to user
   const [notVideoSubmitted, setNotVideoSubmitted] = useState(false);
+  //holds errors when updating a donation link
+  const [videoUpdateErrors, setVideoUpdateErrors] = useState({});
+  //holds id to request one donate document
+  const [videoId, setVideoId] = useState("");
+  //works with useEffect for updating entry, works with checking errors while updating
+  const [isVideoUpdating, setIsVideoUpdating] = useState(false);
 
   useEffect(() => {
     if (Object.keys(videoErrors).length === 0 && isVideoSubmitting) {
@@ -259,6 +456,20 @@ function Manage() {
       submitVideo();
     }
   }, [videoErrors]);
+  //triggers when erros object keys have length of 0 when submitting an update to an already existing donation
+  useEffect(() => {
+    if (Object.keys(videoUpdateErrors).length === 0 && isVideoUpdating) {
+      //function for PUT api call
+      updateVideo();
+    }
+  }, [videoUpdateErrors])
+
+  useEffect(() => {
+    API.getVideo(videoId)
+      .then((res) => {
+        setVideoObject(res.data)})
+      .catch((err) => console.log(err));
+  }, [videoId])
 
   const handleVideoInputChange = (e) => {
     const { name, value } = e.target;
@@ -266,13 +477,12 @@ function Manage() {
   };
 
   function submitVideo() {
-    console.log("submitted successfully!");
 
     API.saveVideo({
-      title: videoObject.videoTitle,
-      description: videoObject.videoDescription,
-      src: videoObject.videoUrl,
-      type: videoObject.videoType,
+      title: videoObject.title,
+      description: videoObject.description,
+      src: videoObject.src,
+      type: videoObject.type,
     })
       .then((res) => {
         loadVideos();
@@ -284,16 +494,57 @@ function Manage() {
       });
     //resetsform
     setVideoObject({
-      videoTitle: "",
-      videoDescription: "",
-      videoUrl: "",
-      videoType: "",
+      title: "",
+      description: "",
+      src: "",
+      type: "",
     });
 
     setTimeout(() => {
       setVideoSuccess(false);
-    }, 1500);
-  }
+    }, 2300);
+
+    setTimeout(() => {
+      setNotVideoSubmitted(false);
+    }, 23000)
+  };
+
+  function updateVideo() {
+
+    API.updateVideo(videoId, {
+      title: videoObject.title,
+      description: videoObject.description,
+      src: videoObject.src,
+      type: videoObject.type
+    })
+    .then((res) => {
+      loadVideos();
+      setVideoSuccess(true);
+      setVideoId("");
+    })
+    .catch((err) => {
+      console.log(err);
+      setNotVideoSubmitted(true);
+      setVideoId("");
+    })
+
+    //resets form
+    setVideoObject({
+      title: "",
+      description: "",
+      src: "",
+      type: "",
+    });
+
+    setTimeout(() => {
+      setVideoSuccess(false);
+    }, 2300)
+
+    setTimeout(() => {
+      setNotVideoSubmitted(false);
+    }, 23000)
+
+  };
 
   const handleVideoSubmit = (e) => {
     if (e) e.preventDefault();
@@ -301,84 +552,154 @@ function Manage() {
     setIsVideoSubmitting(true);
   };
 
-  /////////////////////////////// Donate Form //////////////////////////
+   //listens for click of 'edit' button and grabs id for a donation link that already exists
+   const updatingVideo = (id) => {
+    //save the id to a state, that id is passed to api call via useeffect
+    setVideoId(id);
+  };
+  //handles the click of the update button in the form
+  const submitVideoUpdate = (e) => {
+    if (e) e.preventDefault();
+    setVideoUpdateErrors(videoValidation(videoObject));
+    setIsVideoUpdating(true);
+  };
 
-  // const [videoObject, setVideoObject] = useState({});
-  //   const [videoErrors, setVideoErrors] = useState({});
-  //   //for showing a successful submission
-  //   const [videoSuccess, setVideoSuccess] = useState(false);
-  //   //works with use effect, with checking errors, will start submit, and let user know
-  //   const [isDonateSubmitting, setIsVideoSubmitting] = useState(false);
-  //   //if an unsuccesful submission, will show an error to user
-  //   const [notVideoSubmitted, setNotVideoSubmitted] = useState(false);
-  //   //holds errors when updating a donation link
-  //   // const [donationUpdateErrors, setDonationUpdateErrors] = useState({});
+/////////////////////////////// Donate Form //////////////////////////
 
-  //   //triggers when erros object keys have length of 0 when submitting a new donation
-  //   useEffect(() => {
-  //     if (Object.keys(videoErrors).length === 0 && isDonateSubmitting) {
-  //       //function for api call
-  //       submitVideo();
-  //     }
-  //   }, [videoErrors]);
+  const [donateObject, setDonateObject] = useState({});
+  const [donateErrors, setDonateErrors] = useState({});
+  //for showing a successful submission
+  const [donateSuccess, setDonateSuccess] = useState(false);
+  //works with use effect, with checking errors, will start submit
+  const [isDonateSubmitting, setIsDonateSubmitting] = useState(false);
+  //if an unsuccesful submission, will show an error to user
+  const [notDonateSubmitted, setNotDonateSubmitted] = useState(false);
+  //holds errors when updating a donation link
+  const [donationUpdateErrors, setDonationUpdateErrors] = useState({});
+  //holds id to request one donate document
+  const [donateId, setDonateId] = useState("");
+  //works with useEffect for updating entry, works with checking errors while updating
+  const [isDonationUpdating, setIsDonationUpdating] = useState(false);
 
-  //   // //triggers when erros object keys have length of 0 when submitting an update to an already existing donation
-  //   // useEffect(() => {
-  //   //   if (Object.keys(donationUpdateErrors).length === 0 && isDonateSubmitting) {
-  //   //     //function for PUT api call
-  //   //   }
-  //   // }, [donationUpdateErrors])
+  //triggers when erros object keys have length of 0 when submitting a new donation
+  useEffect(() => {
+    if (Object.keys(donateErrors).length === 0 && isDonateSubmitting) {
+      //function for api call
+      submitDonate();
+    }
+  }, [donateErrors]);
 
-  //   const handleVideoInputChange = (e) => {
-  //     const { name, value } = e.target;
-  //     setVideoObject({ ...videoObject, [name]:value });
-  //   };
+  //triggers when erros object keys have length of 0 when submitting an update to an already existing donation
+  useEffect(() => {
+    if (Object.keys(donationUpdateErrors).length === 0 && isDonationUpdating) {
+      //function for PUT api call
+      updateDonation();
+    }
+  }, [donationUpdateErrors])
 
-  //   function submitVideo() {
-  //     console.log("submitted successfully!");
-  //     //when successful, setArticleSuccess(true)
-  //     //if unsuccesfful, setNotSubmitted(true)
-  //     // API.saveVideo({
-  //     //
-  //     // }).then((res) => {
-  //     //   loadVideos();
-  //     //   setVideoSuccess(true);
-  //     // }).catch((err) => {
-  //     //   console.log(err);
-  //     //   setNotVideoSubmitted(true);
-  //     // });
-  //     // //restform needed?
+  useEffect(() => {
+    API.getLink(donateId)
+      .then((res) => {
+        console.log(res.data);
+        setDonateObject(res.data)})
+      .catch((err) => console.log(err));
+  }, [donateId])
 
-  //     // setTimeout(() => {
-  //     //   setVideoSuccess(false);
-  //     // }, 1200)
+  const handleDonateInputChange = (e) => {
+    const { name, value } = e.target;
+    setDonateObject({ ...donateObject, [name]: value });
+  };
 
-  //   };
+  function submitDonate() {
+   
+    API.saveLink({
+      title: donateObject.title,
+      description: donateObject.description,
+      url: donateObject.url,
+      type: donateObject.type
+    }).then((res) => {
+      loadDonations();
+      setDonateSuccess(true);
+    }).catch((err) => {
+      console.log(err);
+      setNotDonateSubmitted(true);
+    });
+    //resets form
+    setDonateObject({
+      title: "",
+      description: "",
+      url: "",
+      type: "",
+    });
 
-  //   const handleVideoSubmit = (e) => {
-  //     if (e) e.preventDefault();
-  //     setVideoErrors(videoValidation(videoObject));
-  //     setIsVideoSubmitting(true);
-  //   };
-  // //listens for click of 'edit' button and grabs id for a donation link that already exists
-  //   const updatingDonation = (e, id) => {
-  //     if (e) e.preventDefault();
-  //     console.log(id);
-  //     //save the id to a state, that id is passed to api call via useeffect
-  //     //calls a api call that gets data per that id and that .then of the api call saves the data to the donateObject (<-- is that it or do i need somethign else (to get the form to fill)? check the forms activities) that i would think fills the form inputs
-  //     //
-  //   };
-  // //handles the click of the update button in the form
-  //   const submitDonateUpdate = (e) => {
-  //     if (e) e.preventDefault();
-  //     //setDonationUpdateErrors(donationValidation(donationObject));
-  //     //setDonationSubmitting
-  //   };
+    setTimeout(() => {
+      setDonateSuccess(false);
+    }, 2300)
 
-  //about the form button, how to change it...
+    setTimeout(() => {
+      setNotDonateSubmitted(false);
+    }, 23000)
 
+  };
+
+  function updateDonation() {
+
+    API.updateLink(donateId, {
+      title: donateObject.title,
+      description: donateObject.description,
+      url: donateObject.url,
+      type: donateObject.type
+    })
+    .then((res) => {
+      loadDonations();
+      setDonateSuccess(true);
+      setDonateId("")
+    })
+    .catch((err) => {
+      console.log(err);
+      setNotDonateSubmitted(true);
+      setDonateId("");
+    })
+
+    //resets form
+    setDonateObject({
+      title: "",
+      description: "",
+      url: "",
+      type: "",
+    });
+
+    setTimeout(() => {
+      setDonateSuccess(false);
+    }, 2300)
+
+    setTimeout(() => {
+      setNotDonateSubmitted(false);
+    }, 23000)
+
+  };
+
+  const handleDonateSubmit = (e) => {
+    if (e) e.preventDefault();
+    setDonateErrors(donateValidation(donateObject));
+    setIsDonateSubmitting(true);
+  };
+   //listens for click of 'edit' button and grabs id for a donation link that already exists
+  const updatingDonation = (id) => {
+    //save the id to a state, that id is passed to api call via useeffect
+    console.log(id)
+    setDonateId(id);
+  };
+  //handles the click of the update button in the form
+  const submitDonateUpdate = (e) => {
+    if (e) e.preventDefault();
+    setDonationUpdateErrors(donateValidation(donateObject));
+    setIsDonationUpdating(true);
+  };
+  
   return (
     <>
+      <NavTabs />
       <div className="jumbotron jumbotron-fluid" id="manage-jumbo-container">
         <div className="container" id="jumbo-img-container">
           <h1 className="display-4">Manage</h1>
@@ -397,6 +718,9 @@ function Manage() {
             eventErrors={eventErrors}
             eventSuccess={eventSuccess}
             notEventSubmitted={notEventSubmitted}
+            submitEventUpdate={submitEventUpdate}
+            eventUpdateErrors={eventUpdateErrors}
+            eventId={eventId}
           />
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -406,7 +730,7 @@ function Manage() {
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getEvents.map((event) => (
+                {getEvents.filter(event => event.user === userObjId).map((event) => (
                   <li className="list-group-item manage-post" key={event._id}>
                     {event.title}: {splitDate(event.start_date)}-
                     {splitYear(event.start_date)}{" "}
@@ -415,15 +739,15 @@ function Manage() {
                       className="btn btn btn-sm delete-btn"
                       onClick={() => deleteEvent(event._id)}
                     >
-                      Delete Event
+                      Delete
                     </button>
-                    {/* <button
+                    <button
                       type="button"
                       className="btn btn btn-sm"
-                      onClick={() => handleUpdateEvent(event._id)}
+                      onClick={() => updatingEvent(event._id)}
                     >
-                      Update
-                    </button> */}
+                      Edit
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -441,6 +765,9 @@ function Manage() {
             articleErrors={articleErrors}
             articleSuccess={articleSuccess}
             notSubmitted={notSubmitted}
+            articleUpdateErrors={articleUpdateErrors}
+            articleId={articleId}
+            submitArticleUpdate={submitArticleUpdate}
           />
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -452,7 +779,7 @@ function Manage() {
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getArticles.map((article) => (
+                {getArticles.filter(article => article.user === userObjId).map((article) => (
                   <li className="list-group-item manage-post" key={article._id}>
                     {article.title}
                     <button
@@ -462,13 +789,13 @@ function Manage() {
                     >
                       Delete
                     </button>
-                    {/* <button
+                    <button
                       type="button"
                       className="btn btn btn-sm"
-                      onClick={() => handleUpdateArticle(article._id)}
+                      onClick={() => updatingArticle(article._id)}
                     >
                       Edit
-                    </button> */}
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -479,7 +806,17 @@ function Manage() {
 
       <div className="row" id="row-donations">
         <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-          <AddDonation />
+          <AddDonation 
+          handleDonateInputChange={handleDonateInputChange}
+          handleDonateSubmit={handleDonateSubmit}
+          submitDonateUpdate={submitDonateUpdate}
+          donateObject={donateObject}
+          donateSuccess={donateSuccess}
+          donateErrors={donateErrors}
+          donationUpdateErrors={donationUpdateErrors}
+          notDonateSubmitted={notDonateSubmitted}
+          donateId={donateId}
+          />
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
           <div className="card" id="post-donations-card">
@@ -488,30 +825,26 @@ function Manage() {
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getDonations.map((donation) => (
-                  <li className="list-group-item" key={donation._id}>
+                {getDonations.filter(donation => donation.user === userObjId).map((donation) => (
+                  <li
+                    className="list-group-item manage-post"
+                    key={donation._id}
+                  >
                     {donation.title}
                     <button
                       type="button"
-                      className="btn btn btn-sm"
+                      className="btn btn btn-sm delete-btn"
                       onClick={() => deleteDonation(donation._id)}
                     >
                       Delete
                     </button>
-                    {/* <button
+                    <button
                       type="button"
                       className="btn btn btn-sm"
                       onClick={() => updatingDonation(donation._id)}
                     >
                       Edit
-                    </button> */}
-                    {/* <button
-                      type="button"
-                      className="btn btn btn-sm"
-                      onClick={() => updatingDonation(donation._id)}
-                    >
-                      Edit
-                    </button> */}
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -525,10 +858,13 @@ function Manage() {
           <AddVideo
             handleVideoInputChange={handleVideoInputChange}
             handleVideoSubmit={handleVideoSubmit}
+            submitVideoUpdate={submitVideoUpdate}
             videoObject={videoObject}
             videoErrors={videoErrors}
             videoSuccess={videoSuccess}
             notVideoSubmitted={notVideoSubmitted}
+            videoUpdateErrors={videoUpdateErrors}
+            videoId={videoId}
           />
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -538,7 +874,7 @@ function Manage() {
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getVideos.map((video) => (
+                {getVideos.filter(video => video.user === userObjId).map((video) => (
                   <li className="list-group-item manage-post" key={video._id}>
                     {video.title}
                     <button
@@ -548,13 +884,13 @@ function Manage() {
                     >
                       Delete
                     </button>
-                    {/* <button
+                    <button
                       type="button"
                       className="btn btn btn-sm"
-                      onClick={() => handleUpdateVideo(video._id)}
+                      onClick={() => updatingVideo(video._id)}
                     >
                       Edit
-                    </button> */}
+                    </button>
                   </li>
                 ))}
               </ul>

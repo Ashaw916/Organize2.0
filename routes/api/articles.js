@@ -1,12 +1,14 @@
 const router = require("express").Router();
 const articlesController = require("../../controllers/articlesController");
-const authToken = require("../../config/authToken");
+// const authToken = require("../../config/authToken");
 
 // Matches with "/api/articles"
 router.route("/").get(articlesController.findAll);
 
+//authToken, <--- goes inbetween "/" and (req, res)
+
 // Matches with "/api/articles"
-router.post("/", authToken, (req, res) => {
+router.post("/", (req, res) => {
   articlesController.create(req, res);
 });
 

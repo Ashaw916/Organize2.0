@@ -1,6 +1,8 @@
 import React from "react";
 
 function SearchForm(props) {
+  const { search, update, handleClearSearch } = props;
+
   return (
     <>
       <form className="form-inline" id="resource-searchForm">
@@ -11,13 +13,18 @@ function SearchForm(props) {
             className="form-control"
             id="searchTerm"
             placeholder="Type to search by term"
-            value={props.search}
-            onChange={props.update}
+            value={search}
+            onChange={update}
           />
         </div>
-        {/* <button type="submit" className="btn btn-primary" id="search-btn">
-          Search
-        </button> */}
+        <button
+          type="reset"
+          className="btn btn-primary ml-2"
+          id="search-btn"
+          // onClick={() => handleClearSearch()}
+        >
+          Clear
+        </button>
       </form>
     </>
   );

@@ -5,3 +5,18 @@ input.inputErr {
 textarea.inputErr {
     border-color: red;
 }
+
+.success {
+    color: green;
+    font-weight: bold;
+}
+
+.notSubmitted {
+    color: orangered;
+    font-weight: bold;
+}
+
+.err {
+    color: red;
+    font-weight: bold;
+}

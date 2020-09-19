@@ -11,12 +11,16 @@ function NavTabs() {
   const [userAuth, setUserAuth] = useState({});
 
   useEffect(() => {
-    Auth();
-  }, []);
+    // Auth();
+    // console.log("nav:", userAuth);
 
-  const Auth = (props, user) => {
+    // const Auth = () => {
     const userObj = JSON.stringify(localStorage.getItem("user"));
-    console.log("userObj", userObj);
+    console.log(userObj);
+    // console.log("userObj", userObj);
+    // if (userObj === null) {
+    //   setUserAuth("invalid");
+    // } else {
     let userRes;
     Axios({
       method: "POST",
@@ -26,7 +30,7 @@ function NavTabs() {
       url: "/auth",
     })
       .then((response) => {
-        console.log("res react", response.data);
+        // console.log("res react", response.data);
         if (response.data === "valid") {
           let userRes = "valid";
 
@@ -34,25 +38,23 @@ function NavTabs() {
           return userRes;
         } else {
           let userRes = "invalid";
+          console.log("userRes2", userRes);
           return userRes;
         }
       })
       .then((userRes) => {
         setUserAuth(userRes);
       });
-  };
-  console.log("after async", userAuth);
+    // }
+  }, []);
+  // console.log("after async", userAuth);
   if (userAuth === "valid") {
-    console.log("auth success react");
+    console.log("auth success react", userAuth);
   }
-
-  const hide = "hidden";
 
   return (
     <nav className="navbar navbar-expand-lg">
-      <a className="navbar-brand" href="#">
-        Organize
-      </a>
+      <a className="navbar-brand">Organize</a>
       <button
         className="navbar-toggler"
         type="button"
@@ -152,9 +154,7 @@ function NavTabs() {
           <li className="nav-item">
             <Link
               to="/admin"
-              className={
-                location.pathname === "/admin" ? "nav-link active" : "nav-link"
-              }
+              className={userAuth !== "valid" ? "nav-link" : "nav-link hidden"}
             >
               Login/Register
             </Link>

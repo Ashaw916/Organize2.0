@@ -8,6 +8,9 @@ function AddEvent({
   eventErrors,
   eventSuccess,
   notEventSubmitted,
+  submitEventUpdate,
+  eventUpdateErrors,
+  eventId
 }) {
   return (
     <>
@@ -25,7 +28,7 @@ function AddEvent({
                 <input
                   type="text"
                   className={`form-control ${
-                    eventErrors.title ? "inputErr" : ""
+                    eventErrors.title ? "inputErr" : eventUpdateErrors.title ? "inputErr" : ""
                   }`}
                   id="event-title"
                   placeholder="Event Title"
@@ -35,11 +38,12 @@ function AddEvent({
                   required
                 />
                 <small id="textHelp" className="form-text text-muted">
-                  MM/DD/YYYY
+                  Title
                 </small>
                 {eventErrors.title && (
                   <p className="err">{eventErrors.title}</p>
                 )}
+                {eventUpdateErrors.title && (<p className="err">{eventUpdateErrors.title}</p>)}
               </div>
             </div>
 
@@ -49,7 +53,7 @@ function AddEvent({
                 <input
                   type="date"
                   className={`form-control ${
-                    eventErrors.start_date ? "inputErr" : ""
+                    eventErrors.start_date ? "inputErr" : eventUpdateErrors.start_date ? "inputErr" : ""
                   }`}
                   id="start_date"
                   name="start_date"
@@ -63,13 +67,16 @@ function AddEvent({
                 {eventErrors.start_date && (
                   <p className="err">{eventErrors.start_date}</p>
                 )}
+                {eventUpdateErrors.start_date && (
+                  <p className="err">{eventUpdateErrors.start_date}</p>
+                )}
               </div>
               <div className="form-group col-md-6">
                 <label htmlFor="end_date">End Date</label>
                 <input
                   type="date"
                   className={`form-control ${
-                    eventErrors.end_date ? "inputErr" : ""
+                    eventErrors.end_date ? "inputErr" : eventUpdateErrors.end_date ? "inputErr" : ""
                   }`}
                   id="end_date"
                   name="end_date"
@@ -83,6 +90,9 @@ function AddEvent({
                 {eventErrors.end_date && (
                   <p className="err">{eventErrors.end_date}</p>
                 )}
+                {eventUpdateErrors.end_date && (
+                  <p className="err">{eventUpdateErrors.end_date}</p>
+                )}
               </div>
             </div>
 
@@ -92,7 +102,7 @@ function AddEvent({
                 <input
                   type="time"
                   className={`form-control ${
-                    eventErrors.start_time ? "inputErr" : ""
+                    eventErrors.start_time ? "inputErr" : eventUpdateErrors.start_time ? "inputErr" : ""
                   }`}
                   id="start_time"
                   name="start_time"
@@ -101,10 +111,13 @@ function AddEvent({
                   required
                 />
                 <small id="textHelp" className="form-text text-muted">
-                  hh:mm (e.g. 01:00, 11:00)
+                  hh:mm AM/PM(e.g. 01:00, 11:00)
                 </small>
                 {eventErrors.start_time && (
                   <p className="err">{eventErrors.start_time}</p>
+                )}
+                {eventUpdateErrors.start_time && (
+                  <p className="err">{eventUpdateErrors.start_time}</p>
                 )}
               </div>
               <div className="form-group col-md-4">
@@ -112,7 +125,7 @@ function AddEvent({
                 <input
                   type="time"
                   className={`form-control ${
-                    eventErrors.end_time ? "inputErr" : ""
+                    eventErrors.end_time ? "inputErr" : eventUpdateErrors.end_time ? "inputErr" : ""
                   }`}
                   id="end_time"
                   name="end_time"
@@ -121,10 +134,13 @@ function AddEvent({
                   required
                 />
                 <small id="textHelp" className="form-text text-muted">
-                  hh:mm (e.g. 09:00, 12:00)
+                  hh:mm AM/PM(e.g. 09:00, 12:00)
                 </small>
                 {eventErrors.end_time && (
                   <p className="err">{eventErrors.end_time}</p>
+                )}
+                {eventUpdateErrors.end_time && (
+                  <p className="err">{eventUpdateErrors.end_time}</p>
                 )}
               </div>
             </div>
@@ -136,7 +152,7 @@ function AddEvent({
                   <input
                     type="text"
                     className={`form-control ${
-                      eventErrors.organization ? "inputErr" : ""
+                      eventErrors.organization ? "inputErr" : eventUpdateErrors.organization ? "inputErr" : ""
                     }`}
                     id="organization"
                     placeholder="Organization Name"
@@ -151,22 +167,26 @@ function AddEvent({
                   {eventErrors.organization && (
                     <p className="err">{eventErrors.organization}</p>
                   )}
+                  {eventUpdateErrors.organization && (
+                    <p className="err">{eventUpdateErrors.organization}</p>
+                  )}
                 </div>
               </div>
               {/* <div className="form-group col">
                 <label htmlFor="source">Event(url)</label>
                 <input
                   type="url"
-                  className={`form-control ${eventErrors.event_url ? "inputErr" : ""}`}
-                  id="event_url"
+                  className={`form-control ${eventErrors.url ? "inputErr" : eventUpdateErrors.url ? "inputErr" : ""}`}
+                  id="url"
                   placeholder="Url to Event"
-                  name="event_url"
+                  name="url"
                   onChange={handleEventInputChange}
-                  value={eventObject.event_url || ""}
+                  value={eventObject.url || ""}
                   required
                 />
                 <small id="textHelp" className="form-text text-muted">http(s)://website/page</small>
-                {eventErrors.event_url && (<p className="err">{eventErrors.event_url}</p>)}
+                {eventErrors.url && (<p className="err">{eventErrors.url}</p>)}
+                {eventUpdateErrors.url && (<p className="err">{eventUpdateErrors.url}</p>)}
               </div> */}
             </div>
 
@@ -174,7 +194,7 @@ function AddEvent({
               <label htmlFor="description">Description</label>
               <textarea
                 className={`form-control ${
-                  eventErrors.description ? "inputErr" : ""
+                  eventErrors.description ? "inputErr" : eventUpdateErrors.description ? "inputErr" : ""
                 }`}
                 id="description"
                 rows="1"
@@ -189,13 +209,16 @@ function AddEvent({
               {eventErrors.description && (
                 <p className="err">{eventErrors.description}</p>
               )}
+              {eventUpdateErrors.description && (
+                <p className="err">{eventUpdateErrors.description}</p>
+              )}
             </div>
 
             <div className="form-group">
               <label htmlFor="location">Location</label>
               <textarea
                 className={`form-control ${
-                  eventErrors.location ? "inputErr" : ""
+                  eventErrors.location ? "inputErr" : eventUpdateErrors.location ? "inputErr" : ""
                 }`}
                 id="location"
                 rows="1"
@@ -210,13 +233,25 @@ function AddEvent({
               {eventErrors.location && (
                 <p className="err">{eventErrors.location}</p>
               )}
+              {eventUpdateErrors.location && (
+                <p className="err">{eventUpdateErrors.location}</p>
+              )}
             </div>
             <button
               type="submit"
               className="btn btn-add"
               onClick={handleEventSubmit}
+              disabled={!(eventId.length === 0)}
             >
               Add Event
+            </button>
+            <button
+              type="submit"
+              className="btn btn-add"
+              onClick={submitEventUpdate}
+              disabled={(eventId.length === 0)}
+            >
+              Update Event
             </button>
             {eventSuccess && <div className="success">Submitted</div>}
             {notEventSubmitted && (
