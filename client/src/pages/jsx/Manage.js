@@ -14,9 +14,8 @@ import NavTabs from "../../components/NavTabs/NavTabs";
 ////////////////////////////////// For Loading Events, Articles, Videos ///////////////////////////
 
 function Manage() {
-
-    let userObj = JSON.stringify(localStorage.getItem("user"));
-    const userObjId = userObj.slice(1,-1);
+  let userObj = JSON.stringify(localStorage.getItem("user"));
+  const userObjId = userObj.slice(1, -1);
 
   //states for events, articles, and videos
   const [getEvents, setGetEvents] = useState([]);
@@ -117,13 +116,12 @@ function Manage() {
   const [isEventSubmitting, setIsEventSubmitting] = useState(false);
   //if an unsuccesful submission, will show an error to user
   const [notEventSubmitted, setNotEventSubmitted] = useState(false);
-   //holds errors when updating a donation link
-   const [eventUpdateErrors, setEventUpdateErrors] = useState({});
-   //holds id to request one donate document
-   const [eventId, setEventId] = useState("");
-   //works with useEffect for updating entry, works with checking errors while updating
-   const [isEventUpdating, setIsEventUpdating] = useState(false);
- 
+  //holds errors when updating a donation link
+  const [eventUpdateErrors, setEventUpdateErrors] = useState({});
+  //holds id to request one donate document
+  const [eventId, setEventId] = useState("");
+  //works with useEffect for updating entry, works with checking errors while updating
+  const [isEventUpdating, setIsEventUpdating] = useState(false);
 
   useEffect(() => {
     if (Object.keys(eventErrors).length === 0 && isEventSubmitting) {
@@ -138,10 +136,9 @@ function Manage() {
       //function for PUT api call
       updateEvent();
     }
-  }, [eventUpdateErrors])
+  }, [eventUpdateErrors]);
 
   function splitDBDate(obj) {
-  
     const startISODate = obj.start_date;
     const endISODate = obj.end_date;
 
@@ -153,24 +150,24 @@ function Manage() {
     const eTimeOnly = dbEDate[1];
 
     setEventObject({
-       title: obj.title,
-       start_date: sDateOnly,
-       end_date: eDateOnly,
-       start_time: sTimeOnly,
-       end_time: eTimeOnly,
-       organization: obj.organization,
-       description: obj.description,
-       location: obj.location,
-      });
-  };
+      title: obj.title,
+      start_date: sDateOnly,
+      end_date: eDateOnly,
+      start_time: sTimeOnly,
+      end_time: eTimeOnly,
+      organization: obj.organization,
+      description: obj.description,
+      location: obj.location,
+    });
+  }
 
   function getOneEvent(id) {
     API.getEvent(id)
       .then((res) => {
-       splitDBDate(res.data);
+        splitDBDate(res.data);
       })
       .catch((err) => console.log(err));
-  }; 
+  }
 
   const handleEventInputChange = (e) => {
     const { name, value } = e.target;
@@ -178,7 +175,6 @@ function Manage() {
   };
 
   function submitEvent() {
-
     const sDate = `${eventObject.start_date}T${eventObject.start_time}`;
     const eDate = `${eventObject.end_date}T${eventObject.end_time}`;
 
@@ -190,7 +186,7 @@ function Manage() {
       location: eventObject.location,
       organization: eventObject.organization,
       event_url: "/events",
-      user: userObjId
+      user: userObjId,
     })
       .then((res) => {
         loadEvents();
@@ -219,14 +215,12 @@ function Manage() {
 
     setTimeout(() => {
       setNotEventSubmitted(false);
-    }, 23000)
-  };
+    }, 23000);
+  }
 
   function updateEvent() {
-
     const sUpdateDate = `${eventObject.start_date}T${eventObject.start_time}`;
     const eUpdateDate = `${eventObject.end_date}T${eventObject.end_time}`;
-
 
     API.updateEvent(eventId, {
       title: eventObject.title,
@@ -237,16 +231,16 @@ function Manage() {
       organization: eventObject.organization,
       event_url: "/events",
     })
-    .then((res) => {
-      loadEvents();
-      setEventSuccess(true);
-      setEventId("")
-    })
-    .catch((err) => {
-      console.log(err);
-      setNotEventSubmitted(true);
-      setEventId("");
-    })
+      .then((res) => {
+        loadEvents();
+        setEventSuccess(true);
+        setEventId("");
+      })
+      .catch((err) => {
+        console.log(err);
+        setNotEventSubmitted(true);
+        setEventId("");
+      });
 
     //resets form
     setEventObject({
@@ -268,8 +262,7 @@ function Manage() {
     setTimeout(() => {
       setNotEventSubmitted(false);
     }, 23000);
-
-  };
+  }
 
   const handleEventSubmit = (e) => {
     if (e) e.preventDefault();
@@ -301,12 +294,12 @@ function Manage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   //if an unsuccesful submission, will show an error to user
   const [notSubmitted, setNotSubmitted] = useState(false);
- //holds errors when updating a donation link
- const [articleUpdateErrors, setArticleUpdateErrors] = useState({});
- //holds id to request one donate document
- const [articleId, setArticleId] = useState("");
- //works with useEffect for updating entry, works with checking errors while updating
- const [isArticleUpdating, setIsArticleUpdating] = useState(false);
+  //holds errors when updating a donation link
+  const [articleUpdateErrors, setArticleUpdateErrors] = useState({});
+  //holds id to request one donate document
+  const [articleId, setArticleId] = useState("");
+  //works with useEffect for updating entry, works with checking errors while updating
+  const [isArticleUpdating, setIsArticleUpdating] = useState(false);
 
   useEffect(() => {
     if (Object.keys(articleErrors).length === 0 && isSubmitting) {
@@ -321,15 +314,16 @@ function Manage() {
       //function for PUT api call
       updateArticle();
     }
-  }, [articleUpdateErrors])
+  }, [articleUpdateErrors]);
 
   useEffect(() => {
     API.getArticle(articleId)
       .then((res) => {
         console.log(res.data);
-        setArticleObject(res.data)})
+        setArticleObject(res.data);
+      })
       .catch((err) => console.log(err));
-  }, [articleId])
+  }, [articleId]);
 
   const handleArticleInputChange = (e) => {
     const { name, value } = e.target;
@@ -337,7 +331,6 @@ function Manage() {
   };
 
   function submitArticle() {
-
     API.saveArticle({
       title: articleObject.title,
       author: articleObject.author,
@@ -345,7 +338,7 @@ function Manage() {
       description: articleObject.description,
       source: articleObject.source,
       type: articleObject.type,
-      user: userObjId
+      user: userObjId,
     })
       .then((res) => {
         loadArticles();
@@ -371,11 +364,10 @@ function Manage() {
 
     setTimeout(() => {
       setNotSubmitted(false);
-    }, 23000)
-  };
+    }, 23000);
+  }
 
   function updateArticle() {
-
     API.updateArticle(articleId, {
       title: articleObject.title,
       author: articleObject.author,
@@ -384,16 +376,16 @@ function Manage() {
       source: articleObject.source,
       type: articleObject.type,
     })
-    .then((res) => {
-      loadArticles();
-      setArticleSuccess(true);
-      setArticleId("")
-    })
-    .catch((err) => {
-      console.log(err);
-      setNotSubmitted(true);
-      setArticleId("");
-    })
+      .then((res) => {
+        loadArticles();
+        setArticleSuccess(true);
+        setArticleId("");
+      })
+      .catch((err) => {
+        console.log(err);
+        setNotSubmitted(true);
+        setArticleId("");
+      });
 
     //resets form
     setArticleObject({
@@ -411,9 +403,8 @@ function Manage() {
 
     setTimeout(() => {
       setNotSubmitted(false);
-    }, 23000)
-
-  };
+    }, 23000);
+  }
 
   const handleArticleSubmit = (e) => {
     if (e) e.preventDefault();
@@ -421,8 +412,8 @@ function Manage() {
     setIsSubmitting(true);
   };
 
-   //listens for click of 'edit' button and grabs id for a donation link that already exists
-   const updatingArticle = (id) => {
+  //listens for click of 'edit' button and grabs id for a donation link that already exists
+  const updatingArticle = (id) => {
     //save the id to a state, that id is passed to api call via useeffect
     setArticleId(id);
   };
@@ -462,14 +453,15 @@ function Manage() {
       //function for PUT api call
       updateVideo();
     }
-  }, [videoUpdateErrors])
+  }, [videoUpdateErrors]);
 
   useEffect(() => {
     API.getVideo(videoId)
       .then((res) => {
-        setVideoObject(res.data)})
+        setVideoObject(res.data);
+      })
       .catch((err) => console.log(err));
-  }, [videoId])
+  }, [videoId]);
 
   const handleVideoInputChange = (e) => {
     const { name, value } = e.target;
@@ -477,12 +469,12 @@ function Manage() {
   };
 
   function submitVideo() {
-
     API.saveVideo({
       title: videoObject.title,
       description: videoObject.description,
       src: videoObject.src,
       type: videoObject.type,
+      user: userObjId,
     })
       .then((res) => {
         loadVideos();
@@ -506,27 +498,26 @@ function Manage() {
 
     setTimeout(() => {
       setNotVideoSubmitted(false);
-    }, 23000)
-  };
+    }, 23000);
+  }
 
   function updateVideo() {
-
     API.updateVideo(videoId, {
       title: videoObject.title,
       description: videoObject.description,
       src: videoObject.src,
-      type: videoObject.type
+      type: videoObject.type,
     })
-    .then((res) => {
-      loadVideos();
-      setVideoSuccess(true);
-      setVideoId("");
-    })
-    .catch((err) => {
-      console.log(err);
-      setNotVideoSubmitted(true);
-      setVideoId("");
-    })
+      .then((res) => {
+        loadVideos();
+        setVideoSuccess(true);
+        setVideoId("");
+      })
+      .catch((err) => {
+        console.log(err);
+        setNotVideoSubmitted(true);
+        setVideoId("");
+      });
 
     //resets form
     setVideoObject({
@@ -538,13 +529,12 @@ function Manage() {
 
     setTimeout(() => {
       setVideoSuccess(false);
-    }, 2300)
+    }, 2300);
 
     setTimeout(() => {
       setNotVideoSubmitted(false);
-    }, 23000)
-
-  };
+    }, 23000);
+  }
 
   const handleVideoSubmit = (e) => {
     if (e) e.preventDefault();
@@ -552,8 +542,8 @@ function Manage() {
     setIsVideoSubmitting(true);
   };
 
-   //listens for click of 'edit' button and grabs id for a donation link that already exists
-   const updatingVideo = (id) => {
+  //listens for click of 'edit' button and grabs id for a donation link that already exists
+  const updatingVideo = (id) => {
     //save the id to a state, that id is passed to api call via useeffect
     setVideoId(id);
   };
@@ -564,7 +554,7 @@ function Manage() {
     setIsVideoUpdating(true);
   };
 
-/////////////////////////////// Donate Form //////////////////////////
+  /////////////////////////////// Donate Form //////////////////////////
 
   const [donateObject, setDonateObject] = useState({});
   const [donateErrors, setDonateErrors] = useState({});
@@ -595,15 +585,16 @@ function Manage() {
       //function for PUT api call
       updateDonation();
     }
-  }, [donationUpdateErrors])
+  }, [donationUpdateErrors]);
 
   useEffect(() => {
     API.getLink(donateId)
       .then((res) => {
         console.log(res.data);
-        setDonateObject(res.data)})
+        setDonateObject(res.data);
+      })
       .catch((err) => console.log(err));
-  }, [donateId])
+  }, [donateId]);
 
   const handleDonateInputChange = (e) => {
     const { name, value } = e.target;
@@ -611,19 +602,21 @@ function Manage() {
   };
 
   function submitDonate() {
-   
     API.saveLink({
       title: donateObject.title,
       description: donateObject.description,
       url: donateObject.url,
-      type: donateObject.type
-    }).then((res) => {
-      loadDonations();
-      setDonateSuccess(true);
-    }).catch((err) => {
-      console.log(err);
-      setNotDonateSubmitted(true);
-    });
+      type: donateObject.type,
+      user: userObjId,
+    })
+      .then((res) => {
+        loadDonations();
+        setDonateSuccess(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        setNotDonateSubmitted(true);
+      });
     //resets form
     setDonateObject({
       title: "",
@@ -634,32 +627,30 @@ function Manage() {
 
     setTimeout(() => {
       setDonateSuccess(false);
-    }, 2300)
+    }, 2300);
 
     setTimeout(() => {
       setNotDonateSubmitted(false);
-    }, 23000)
-
-  };
+    }, 23000);
+  }
 
   function updateDonation() {
-
     API.updateLink(donateId, {
       title: donateObject.title,
       description: donateObject.description,
       url: donateObject.url,
-      type: donateObject.type
+      type: donateObject.type,
     })
-    .then((res) => {
-      loadDonations();
-      setDonateSuccess(true);
-      setDonateId("")
-    })
-    .catch((err) => {
-      console.log(err);
-      setNotDonateSubmitted(true);
-      setDonateId("");
-    })
+      .then((res) => {
+        loadDonations();
+        setDonateSuccess(true);
+        setDonateId("");
+      })
+      .catch((err) => {
+        console.log(err);
+        setNotDonateSubmitted(true);
+        setDonateId("");
+      });
 
     //resets form
     setDonateObject({
@@ -671,23 +662,22 @@ function Manage() {
 
     setTimeout(() => {
       setDonateSuccess(false);
-    }, 2300)
+    }, 2300);
 
     setTimeout(() => {
       setNotDonateSubmitted(false);
-    }, 23000)
-
-  };
+    }, 23000);
+  }
 
   const handleDonateSubmit = (e) => {
     if (e) e.preventDefault();
     setDonateErrors(donateValidation(donateObject));
     setIsDonateSubmitting(true);
   };
-   //listens for click of 'edit' button and grabs id for a donation link that already exists
+  //listens for click of 'edit' button and grabs id for a donation link that already exists
   const updatingDonation = (id) => {
     //save the id to a state, that id is passed to api call via useeffect
-    console.log(id)
+    console.log(id);
     setDonateId(id);
   };
   //handles the click of the update button in the form
@@ -696,7 +686,7 @@ function Manage() {
     setDonationUpdateErrors(donateValidation(donateObject));
     setIsDonationUpdating(true);
   };
-  
+
   return (
     <>
       <NavTabs />
@@ -730,26 +720,28 @@ function Manage() {
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getEvents.filter(event => event.user === userObjId).map((event) => (
-                  <li className="list-group-item manage-post" key={event._id}>
-                    {event.title}: {splitDate(event.start_date)}-
-                    {splitYear(event.start_date)}{" "}
-                    <button
-                      type="button"
-                      className="btn btn btn-sm delete-btn"
-                      onClick={() => deleteEvent(event._id)}
-                    >
-                      Delete
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn btn-sm"
-                      onClick={() => updatingEvent(event._id)}
-                    >
-                      Edit
-                    </button>
-                  </li>
-                ))}
+                {getEvents
+                  .filter((event) => event.user === userObjId)
+                  .map((event) => (
+                    <li className="list-group-item manage-post" key={event._id}>
+                      {event.title}: {splitDate(event.start_date)}-
+                      {splitYear(event.start_date)}{" "}
+                      <button
+                        type="button"
+                        className="btn btn btn-sm delete-btn"
+                        onClick={() => deleteEvent(event._id)}
+                      >
+                        Delete
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn btn-sm"
+                        onClick={() => updatingEvent(event._id)}
+                      >
+                        Edit
+                      </button>
+                    </li>
+                  ))}
               </ul>
             </div>
           </div>
@@ -779,25 +771,30 @@ function Manage() {
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getArticles.filter(article => article.user === userObjId).map((article) => (
-                  <li className="list-group-item manage-post" key={article._id}>
-                    {article.title}
-                    <button
-                      type="button"
-                      className="btn btn btn-sm delete-btn"
-                      onClick={() => deleteArticle(article._id)}
+                {getArticles
+                  .filter((article) => article.user === userObjId)
+                  .map((article) => (
+                    <li
+                      className="list-group-item manage-post"
+                      key={article._id}
                     >
-                      Delete
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn btn-sm"
-                      onClick={() => updatingArticle(article._id)}
-                    >
-                      Edit
-                    </button>
-                  </li>
-                ))}
+                      {article.title}
+                      <button
+                        type="button"
+                        className="btn btn btn-sm delete-btn"
+                        onClick={() => deleteArticle(article._id)}
+                      >
+                        Delete
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn btn-sm"
+                        onClick={() => updatingArticle(article._id)}
+                      >
+                        Edit
+                      </button>
+                    </li>
+                  ))}
               </ul>
             </div>
           </div>
@@ -806,16 +803,16 @@ function Manage() {
 
       <div className="row" id="row-donations">
         <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-          <AddDonation 
-          handleDonateInputChange={handleDonateInputChange}
-          handleDonateSubmit={handleDonateSubmit}
-          submitDonateUpdate={submitDonateUpdate}
-          donateObject={donateObject}
-          donateSuccess={donateSuccess}
-          donateErrors={donateErrors}
-          donationUpdateErrors={donationUpdateErrors}
-          notDonateSubmitted={notDonateSubmitted}
-          donateId={donateId}
+          <AddDonation
+            handleDonateInputChange={handleDonateInputChange}
+            handleDonateSubmit={handleDonateSubmit}
+            submitDonateUpdate={submitDonateUpdate}
+            donateObject={donateObject}
+            donateSuccess={donateSuccess}
+            donateErrors={donateErrors}
+            donationUpdateErrors={donationUpdateErrors}
+            notDonateSubmitted={notDonateSubmitted}
+            donateId={donateId}
           />
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -825,28 +822,30 @@ function Manage() {
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getDonations.filter(donation => donation.user === userObjId).map((donation) => (
-                  <li
-                    className="list-group-item manage-post"
-                    key={donation._id}
-                  >
-                    {donation.title}
-                    <button
-                      type="button"
-                      className="btn btn btn-sm delete-btn"
-                      onClick={() => deleteDonation(donation._id)}
+                {getDonations
+                  .filter((donation) => donation.user === userObjId)
+                  .map((donation) => (
+                    <li
+                      className="list-group-item manage-post"
+                      key={donation._id}
                     >
-                      Delete
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn btn-sm"
-                      onClick={() => updatingDonation(donation._id)}
-                    >
-                      Edit
-                    </button>
-                  </li>
-                ))}
+                      {donation.title}
+                      <button
+                        type="button"
+                        className="btn btn btn-sm delete-btn"
+                        onClick={() => deleteDonation(donation._id)}
+                      >
+                        Delete
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn btn-sm"
+                        onClick={() => updatingDonation(donation._id)}
+                      >
+                        Edit
+                      </button>
+                    </li>
+                  ))}
               </ul>
             </div>
           </div>
@@ -874,25 +873,27 @@ function Manage() {
             </div>
             <div className="card-body">
               <ul className="list-group list-group-flush">
-                {getVideos.filter(video => video.user === userObjId).map((video) => (
-                  <li className="list-group-item manage-post" key={video._id}>
-                    {video.title}
-                    <button
-                      type="button"
-                      className="btn btn btn-sm delete-btn"
-                      onClick={() => deleteVideo(video._id)}
-                    >
-                      Delete
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn btn-sm"
-                      onClick={() => updatingVideo(video._id)}
-                    >
-                      Edit
-                    </button>
-                  </li>
-                ))}
+                {getVideos
+                  .filter((video) => video.user === userObjId)
+                  .map((video) => (
+                    <li className="list-group-item manage-post" key={video._id}>
+                      {video.title}
+                      <button
+                        type="button"
+                        className="btn btn btn-sm delete-btn"
+                        onClick={() => deleteVideo(video._id)}
+                      >
+                        Delete
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn btn-sm"
+                        onClick={() => updatingVideo(video._id)}
+                      >
+                        Edit
+                      </button>
+                    </li>
+                  ))}
               </ul>
             </div>
           </div>

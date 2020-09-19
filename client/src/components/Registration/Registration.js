@@ -47,7 +47,7 @@ function Registration(props) {
             instagram: regInsta,
             twitter: regTwitter,
           },
-          url: "/users/profile",
+          url: "/api/users/profile",
         })
       );
   };

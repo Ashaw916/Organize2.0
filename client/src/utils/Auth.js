@@ -11,7 +11,7 @@ const Auth = () => {
     data: {
       user: userObj,
     },
-    url: "/auth",
+    url: "/api/auth",
   }).then((response) => {
     console.log("res react", response.data);
     if (response.data === "valid") {
