@@ -12,6 +12,8 @@ class Donate extends Component {
     links: [],
     pageSize: 5,
     currentPage: 1,
+    searchTerm: "",
+    searchResults: [],
   };
 
   componentDidMount() {
@@ -45,11 +47,31 @@ class Donate extends Component {
     });
   };
 
-  render() {
-    const { length: count } = this.state.links;
-    const { links: allLinks, currentPage, pageSize } = this.state;
+  handleSearchEvent(event) {
+    event.preventDefault();
+    this.setState({ searchTerm: event.target.value, currentPage: 1 });
+  }
 
-    const links = paginate(allLinks, currentPage, pageSize);
+  handleClearSearch(event) {
+    event.preventDefault();
+    this.setState({ searchTerm: "", currentPage: 1 });
+  }
+
+  render() {
+    const { links: allLinks, currentPage, pageSize, searchTerm } = this.state;
+
+    const filtered =
+      searchTerm !== ""
+        ? allLinks.filter(
+            (link) =>
+              link.title.includes(searchTerm) ||
+              link.title.toLowerCase().includes(searchTerm)
+          )
+        : allLinks;
+
+    const links = paginate(filtered, currentPage, pageSize);
+
+    const linksDisplayed = filtered.length;
 
     return (
       <>
@@ -61,11 +83,15 @@ class Donate extends Component {
               <h4 id="search-title">Search Donation Links</h4>
             </div>
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              {/* <SearchForm /> */}
+              <SearchForm
+                search={this.state.searchTerm}
+                update={this.handleSearchEvent.bind(this)}
+                clear={this.handleClearSearch}
+              />
             </div>
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
               <Pagination
-                itemsCount={count}
+                itemsCount={linksDisplayed}
                 pageSize={pageSize}
                 currentPage={currentPage}
                 onPageChange={this.handlePageChange}
@@ -89,7 +115,7 @@ class Donate extends Component {
               <div className="col-2" />
               <div className="col-8" key={link._id}>
                 <div className="card col-12" id="donation-cards-wrapper">
-                  <a href={link.src} className="btn btn" target="_blank">
+                  <a href={link.url} className="btn btn" target="_blank">
                     <div className="card-body" id="donate-card">
                       <h4>{link.title}</h4>
                     </div>
@@ -99,6 +125,20 @@ class Donate extends Component {
               <div className="col-2" />
             </div>
           ))}
+        </div>
+        <div className="row">
+          <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+          <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+          <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <Pagination
+              itemsCount={linksDisplayed}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onPageChange={this.handlePageChange}
+              onNextPageChange={this.handleNextPageChange}
+              onPreviousPageChange={this.handlePreviousPageChange}
+            />
+          </div>
         </div>
       </>
     );

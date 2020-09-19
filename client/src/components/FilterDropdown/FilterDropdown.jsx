@@ -32,7 +32,10 @@ function FilterDropdown(props) {
   return (
     <React.Fragment>
       <div className="">
-        <select class="form-control">
+        <select class="form-control" placeholder="Tooltip">
+          <label for="" class="sr-only" placeholder="Tooltip">
+            Password
+          </label>
           {data.map((data) => (
             <option key={data._id}></option>
           ))}

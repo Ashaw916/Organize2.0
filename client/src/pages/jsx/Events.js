@@ -88,7 +88,7 @@ class Events extends Component {
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
               <h4 id="search-title">Search Events</h4>
-              <FilterDropdown data={events} />
+              {/* <FilterDropdown data={events} /> */}
             </div>
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
               <SearchForm
@@ -140,6 +140,20 @@ class Events extends Component {
                 </div>
               </div>
             ))}
+          </div>
+          <div className="row mt-4">
+            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+              <Pagination
+                itemsCount={eventsDisplayed}
+                pageSize={pageSize}
+                currentPage={currentPage}
+                onPageChange={this.handlePageChange}
+                onNextPageChange={this.handleNextPageChange}
+                onPreviousPageChange={this.handlePreviousPageChange}
+              />
+            </div>
           </div>
         </div>
       </>
