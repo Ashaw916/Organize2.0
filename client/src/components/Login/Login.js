@@ -24,7 +24,7 @@ function LoginUser({ checkAuth }) {
         password: loginPassword,
       },
       withCredentials: true,
-      url: "/users/login",
+      url: "/api/users/login",
     }).then((response) => {
       if (response.data === "No User Exists") {
         alert("You are not registered");

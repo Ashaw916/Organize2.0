@@ -20,7 +20,7 @@ function Invite(props) {
         host: host,
         token: accessTokenObj,
       },
-      url: "/users/invites",
+      url: "/api/users/invites",
     }).then((response) => {
       console.log("res react", response.data);
       if (response.data === "exists") {
