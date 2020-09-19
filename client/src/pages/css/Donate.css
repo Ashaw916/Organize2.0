@@ -27,6 +27,17 @@
   box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
 }
 
+#donation-searchbar {
+  border: 3px solid #bfd1d3;
+  background-color: #ffffff;
+  padding: 15px 15px 0px 15px;
+  border-radius: 8px;
+  margin: 0px 20px 20px 20px;
+  -webkit-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
+}
+
 #donation-cards-wrapper {
   margin-bottom: 20px;
   background-color: #bfd1d3;

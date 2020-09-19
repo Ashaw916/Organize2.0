@@ -41,14 +41,21 @@ class ContactTable extends Component {
         </thead>
         <tbody style={{ fontSize: "10px" }}>
           {users.map((user) => (
-            <tr>
+            <tr key={user._id}>
               <td className="contact-org">{user.organization}</td>
               <td>{user.email}</td>
-              <a href={user.website} target="_blank" rel="noopener noreferrer">
-                <td>{user.website}</td>
-              </a>
-              <td>{user.facebook}</td>
 
+              <td>{user.website}</td>
+
+              <td>
+                <a
+                  href={user.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {user.facebook}
+                </a>
+              </td>
               <td>{user.instagram}</td>
               <td>{user.twitter}</td>
             </tr>

@@ -1,3 +1,6 @@
+element.style {
+  padding-right: 0px !important;
+}
 body {
   background-color: #ebf0fffb;
 }
@@ -30,6 +33,10 @@ body {
 }
 .hidden {
   display: none !important;
+}
+.page-item.active .page-link {
+  background-color: #e25b4b;
+  border-color: #e25b4b;
 }
 
 #bottom-info {
