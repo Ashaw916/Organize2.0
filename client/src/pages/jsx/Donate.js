@@ -16,7 +16,7 @@ class Donate extends Component {
 
   componentDidMount() {
     API.getLinks().then((res) => {
-      const links = res.data;
+      const links = res.data.reverse();
       this.setState({ links });
     });
   }
@@ -66,7 +66,7 @@ class Donate extends Component {
         <NavTabs />
 
         <div className="container">
-          <div clasName="container">
+          <div className="container">
             <div className="row">
               {/* <div className="col-2"></div> */}
 
@@ -113,7 +113,7 @@ class Donate extends Component {
               <div className="col-2" />
               <div className="col-8" key={link._id}>
                 <div className="card col-12" id="donation-cards-wrapper">
-                  <a href={link.src} className="btn btn" target="_blank">
+                  <a href={link.url} className="btn btn" target="_blank">
                     <div className="card-body" id="donate-card">
                       <h4>{link.title}</h4>
                     </div>

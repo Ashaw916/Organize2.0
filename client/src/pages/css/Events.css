@@ -1,7 +1,7 @@
 #event-searchbar {
   border: 3px solid #bfd1d3;
   background-color: #ffffff;
-  padding: 15px 0px 0px 15px !important;
+  padding: 15px 0px 15px 15px !important;
   border-radius: 8px;
   margin-bottom: 25px;
   -webkit-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);

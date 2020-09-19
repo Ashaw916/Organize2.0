@@ -122,14 +122,18 @@ class Resources extends Component {
           <div className="row mt-2">
             <div className="col-3 img-responsive" id="image-wrapper">
               <div className="news-pic-wrapper">
-                <img className="news-pic" src={Newsgroup} />
+                <img className="news-pic" src={Newsgroup} alt="news-group" />
               </div>
               <div className="news-pic-wrapper">
                 {" "}
-                <img className="news-pic" src={Newsprotest} />
+                <img
+                  className="news-pic"
+                  src={Newsprotest}
+                  alt="news-protest"
+                />
               </div>
               <div className="news-pic-wrapper">
-                <img className="news-pic" src={Newswoman} />
+                <img className="news-pic" src={Newswoman} alt="news-woman" />
               </div>
             </div>
 
@@ -152,6 +156,7 @@ class Resources extends Component {
                           href={article.source}
                           className="btn btn"
                           target="_blank"
+                          rel="noopener noreferrer"
                           id="resource-link"
                         >
                           Source: {article.source}
