@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Axios from "axios";
-
+//component for invite form on profile page
+//when form is submitted, json web token is saved into database to associate that invited email with that current member (ensuring no invited member can register without being hosted)
 function Invite(props) {
   const [inviteEmail, setInviteEmail] = useState("");
   const [inviteOrg, setInviteOrg] = useState("");

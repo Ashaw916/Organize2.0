@@ -6,6 +6,7 @@ import moment from "moment";
 // import interactionPlugin from "@fullcalendar/interaction"
 // import { render } from "ejs";
 
+//functional component for calendar on landing page, takes in events props from landing page and creates an onclick for a pop-up
 class Calendar extends Component {
   calendarComponentRef = React.createRef();
 

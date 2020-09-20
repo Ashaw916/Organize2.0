@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-
+//functional component for contact table on contact page
+//when column names are clicked, the table is sorted by that column name
 class ContactTable extends Component {
   raiseSort = (path) => {
     const sortColumn = { ...this.props.sortColumn };

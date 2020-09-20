@@ -1,6 +1,6 @@
 import React from "react";
 import "./AddDonationStyle.css";
-
+//passing prop values from manage.js to donation component
 function AddDonation({
   handleDonateInputChange,
   handleDonateSubmit,
