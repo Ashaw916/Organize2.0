@@ -7,8 +7,11 @@ import { paginate } from "../../utils/paginate";
 import moment from "moment";
 import "../css/Video.css";
 import NavTabs from "../../components/NavTabs/NavTabs";
-
+// component for video page
 class Video extends Component {
+  // videos holds the array of objects from database 
+  // pageSize and currentPage are for pagination
+  // searchTerm is for the search bar
   state = {
     videos: [],
     pageSize: 3,
@@ -16,14 +19,14 @@ class Video extends Component {
     searchTerm: "",
     searchResults: [],
   };
-
+// api call to database
   componentDidMount() {
     API.getVideos().then((res) => {
       const videos = res.data.reverse();
       this.setState({ videos });
     });
   }
-
+// handlePageChange, handlePreviousChange, and handleNextPageChange are functions for pagination
   handlePageChange = (page) => {
     this.setState({ currentPage: page });
   };
@@ -47,12 +50,12 @@ class Video extends Component {
       return { currentPage: state.currentPage + 1 };
     });
   };
-
+// handles input in search bar
   handleSearchEvent(event) {
     event.preventDefault();
     this.setState({ searchTerm: event.target.value, currentPage: 1 });
   }
-
+// clears search bar and results when clicked
   handleClearSearch(event) {
     event.preventDefault();
     this.setState({ searchTerm: "", currentPage: 1 });
@@ -60,7 +63,7 @@ class Video extends Component {
 
   render() {
     const { videos: allVideos, currentPage, pageSize, searchTerm } = this.state;
-
+// filters results based on a search term
     const filtered =
       searchTerm !== ""
         ? allVideos.filter(
@@ -71,7 +74,7 @@ class Video extends Component {
               video.description.toLowerCase().includes(searchTerm)
           )
         : allVideos;
-
+// variable holding result of paginate function (from pagination component)
     const videos = paginate(filtered, currentPage, pageSize);
 
     return (
