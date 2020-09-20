@@ -1,6 +1,6 @@
 import React from "react";
 import _ from "lodash";
-
+//functional component for pagination
 const Pagination = (props) => {
   const {
     itemsCount,

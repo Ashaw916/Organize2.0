@@ -1,6 +1,6 @@
 import React from "react";
 import "./Table.css";
-
+//table component
 function Table() {
   return (
     <>

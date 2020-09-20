@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Axios from "axios";
-
+//component for registration on admin page, validates someone has been invited or has already been invited
 function Registration(props) {
   const [regEmail, setRegEmail] = useState("");
   const [regPassword, setRegPassword] = useState("");

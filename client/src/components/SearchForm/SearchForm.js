@@ -1,5 +1,5 @@
 import React from "react";
-
+//functional component for search input
 function SearchForm(props) {
   const { search, update, clear } = props;
 

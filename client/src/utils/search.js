@@ -1,5 +1,5 @@
 import _ from "lodash";
-
+// function to filter based on search term
 export function searchParams(allEvents, searchTerm) {
   const filtered =
     searchTerm !== ""

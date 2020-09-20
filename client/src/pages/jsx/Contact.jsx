@@ -6,7 +6,7 @@ import Contactimg from "../../images/contactimg.png";
 import _ from "lodash";
 import Table from "../../components/Table/Table";
 import NavTabs from "../../components/NavTabs/NavTabs";
-
+// displays a table of all contact information for each organization
 class Contact extends Component {
   state = {
     users: [],

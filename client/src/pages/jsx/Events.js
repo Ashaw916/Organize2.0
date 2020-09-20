@@ -8,7 +8,8 @@ import API from "../../utils/API";
 import "../css/Events.css";
 import NavTabs from "../../components/NavTabs/NavTabs";
 import { render } from "ejs";
-
+// displays all events, can be searched by name of event, and location
+// pagination component is used here
 class Events extends Component {
   state = {
     events: [],

@@ -6,7 +6,7 @@ import API from "../../utils/API";
 import "../css/Donate.css";
 import Donatejumbo from "../../images/donatejumbo.png";
 import NavTabs from "../../components/NavTabs/NavTabs";
-
+// displays all donate links, pagination and seach bar components are used
 class Donate extends Component {
   state = {
     links: [],

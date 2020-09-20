@@ -4,7 +4,7 @@ import "../css/Admin.css";
 import NavTabs from "../../components/NavTabs/NavTabs";
 import Registration from "../../components/Registration/Registration.js";
 import Login from "../../components/Login/Login.js";
-
+// displays the login and registration components
 function Admin(props) {
   return (
     <>

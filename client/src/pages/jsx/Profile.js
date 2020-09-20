@@ -7,6 +7,8 @@ import API from "../../utils/API";
 import auth from "../../utils/Auth";
 // import AuthContext from "../../utils/AuthContext";
 
+//api call profile data for the logged in user
+// the correct data is displayed using the auth function from utils folder
 function Profile() {
   // let { authStatus } = useContext(AuthContext);
   const [user, setUser] = useState("");

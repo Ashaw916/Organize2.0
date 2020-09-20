@@ -1,6 +1,6 @@
 import React from "react";
 import "./AddVideoStyle.css";
-
+//passing prop values from manage.js to donation component
 function AddVideo({
   handleVideoInputChange,
   handleVideoSubmit,

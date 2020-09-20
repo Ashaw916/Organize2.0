@@ -1,3 +1,4 @@
+// validation for donate/links form, checks if there's a value at all and whether it meets one other requirement
 export default function donateValidation(values) {
   // const validUrl = RegExp(
   //   /https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)/

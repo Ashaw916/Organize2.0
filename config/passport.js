@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 
 // User model
 const User = require("../models/User");
-
+// checks if login credentials match what is in database
 module.exports = function (passport) {
   passport.use(
     new LocalStrategy({ usernameField: "email" }, (email, password, done) => {

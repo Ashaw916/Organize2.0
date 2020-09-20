@@ -1,6 +1,6 @@
 import { uniq } from "lodash";
 import React from "react";
-
+//dropdown menu functional component for events page
 function FilterDropdown(props) {
   const { data } = props;
 

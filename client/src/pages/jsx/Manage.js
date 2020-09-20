@@ -14,6 +14,7 @@ import NavTabs from "../../components/NavTabs/NavTabs";
 ////////////////////////////////// For Loading Events, Articles, Videos ///////////////////////////
 
 function Manage() {
+  // uses the user object id to make sure only posts created by the user is displayed
   let userObj = JSON.stringify(localStorage.getItem("user"));
   const userObjId = userObj.slice(1, -1);
 
@@ -36,11 +37,11 @@ function Manage() {
   function splitDate(str) {
     return str.slice(5, 10);
   }
-
+// slices incoming iso date, so only year is displayed
   function splitYear(str) {
     return str.slice(0, 4);
   }
-
+// load functions are api calls to database to pull information that is then saved in state
   function loadArticles() {
     API.getArticles()
       .then((res) => {
@@ -137,7 +138,7 @@ function Manage() {
       updateEvent();
     }
   }, [eventUpdateErrors]);
-
+// split incoming start and end date from database, splits it into date and time to be used to pre-populate form when updating a post
   function splitDBDate(obj) {
     const startISODate = obj.start_date;
     const endISODate = obj.end_date;
@@ -160,7 +161,7 @@ function Manage() {
       location: obj.location,
     });
   }
-
+// api call to get a posted event based on id
   function getOneEvent(id) {
     API.getEvent(id)
       .then((res) => {
@@ -168,12 +169,12 @@ function Manage() {
       })
       .catch((err) => console.log(err));
   }
-
+// handles input changed in form and saves to state
   const handleEventInputChange = (e) => {
     const { name, value } = e.target;
     setEventObject({ ...eventObject, [name]: value });
   };
-
+// when creating a new post, function creates an api call with all values from state object
   function submitEvent() {
     const sDate = `${eventObject.start_date}T${eventObject.start_time}`;
     const eDate = `${eventObject.end_date}T${eventObject.end_time}`;
@@ -208,7 +209,7 @@ function Manage() {
       description: "",
       location: "",
     });
-
+// clears out success and error messages after a certian amount of time
     setTimeout(() => {
       setEventSuccess(false);
     }, 2300);
@@ -217,7 +218,7 @@ function Manage() {
       setNotEventSubmitted(false);
     }, 23000);
   }
-
+// api call to update a post, each form has some form of updating api call
   function updateEvent() {
     const sUpdateDate = `${eventObject.start_date}T${eventObject.start_time}`;
     const eUpdateDate = `${eventObject.end_date}T${eventObject.end_time}`;
@@ -254,7 +255,7 @@ function Manage() {
       description: "",
       location: "",
     });
-
+// clears out success and error messages, all new submission and update api call have this timeout
     setTimeout(() => {
       setEventSuccess(false);
     }, 2300);
@@ -263,21 +264,21 @@ function Manage() {
       setNotEventSubmitted(false);
     }, 23000);
   }
-
+// listens for new submissino click, other functions have the same function
   const handleEventSubmit = (e) => {
     if (e) e.preventDefault();
     setEventErrors(eventValidation(eventObject));
     setIsEventSubmitting(true);
   };
 
-  //listens for click of 'edit' button and grabs id for a donation link that already exists
+  //listens for click of 'edit' button and grabs id for a donation link that already exists, this function is the same for the other forms
   const updatingEvent = (id) => {
     console.log(id);
     //save the id to a state, that id is passed to api call via useeffect
     setEventId(id);
     getOneEvent(id);
   };
-  //handles the click of the update button in the form
+  //handles the click of the update button in the form, this function is repeated for the other forms
   const submitEventUpdate = (e) => {
     if (e) e.preventDefault();
     setEventUpdateErrors(eventValidation(eventObject));
@@ -315,7 +316,7 @@ function Manage() {
       updateArticle();
     }
   }, [articleUpdateErrors]);
-
+// api call to get one post by the id
   useEffect(() => {
     API.getArticle(articleId)
       .then((res) => {
