@@ -67,23 +67,41 @@ All events may be viewed here, with the following information: name of event, st
 
 ##### Resources Page
 
-
+All resources (e.g. articles) may be viewed here, click on `Expand for aticle content` to see more information about each article. Use the search bar to look for specific articles and pagination to view more articles.
 
 ##### Donate Page
 
+Links to donation pages can be found here, click on one button under `Donate Here` and it will open in a new tab. Use the search bar to look for specific links and pagination to view more.
+
 ##### Video Page
+
+Video archive for past livestreams or videos, the most recently posted video will be shown at the top. This page also has a search bar and pagination.
 
 ##### Contact Page
 
+Contact information for all participating organizations. The following information will be shown: name of organization, email, website, facebook, instagram and twitter.
+
 ##### Login/Register
+
+Only invited users can have accounts and have the ability to post content to the website. If you were invited, use the `Register` form to register as an administrator. If you are an existing administrator, use the `Login` form.
 
 ### Private Usage
 
 ##### Manage Page
 
+As an administrator, use the manage page to post new content to the public side. Here all posted content can be viewed as well, seperated by category, `Events`, `Articles and Resources`, `Donation Resources`, and `Videos`. 
+
+All posts are able to be deleted or updated, clicking on edit will pre-populate the associated form where the information can be changed, click on the `Update` submission button to submit changes. Clicking on the delete button next to a post will immediately delete it.
+
 ##### Profile Page
 
+Here administrators can view the social media information they have on file, at this time they cannot be updated or changed.
+
+Here the form to invite another organization to the website can be found, in form we require three things: the email of the organization you would like to invite, the name of the organization and your email.
+
 ##### Logout
+
+To logout, travel to the navbar at the top of the website and click `Logout`. A goodbye message will appear to signify this successful action.
 
 ### Tech and Methods Breakdown
 
@@ -131,7 +149,9 @@ Two pages are privatized using an original private route function in the App.js,
 
 Five REST APIs were created to facilitate a pathway between the client and the database.
 
+Passport, bcryptjs, and json web tokens all work togehter to provide authentication and privatization for protected routes (Manage and Profile page).
 
+Nine models, created using Mongoose, make up the database.
 
 
 ### Contributors
