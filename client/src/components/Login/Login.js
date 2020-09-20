@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import AuthContext from "../../utils/AuthContext";
+//component for logging in, checks to see if username and password exist before letting in user
 function LoginUser({ checkAuth }) {
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");

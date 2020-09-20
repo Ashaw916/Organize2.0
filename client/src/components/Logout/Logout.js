@@ -3,7 +3,7 @@ import "./style.css";
 import Axios from "axios";
 import NavTabs from "../../components/NavTabs/NavTabs";
 // import auth from "../../utils/Auth";
-
+//logs out user when the button in navbar is clicked, uses json token to logout user
 function LogoutUser(props) {
   const userObj = JSON.stringify(localStorage.getItem("user"));
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-
+//function that privatizes particular routes
 const PrivateRoute = ({ component: Component, setUserAuth, ...rest }) => {
   const state = "valid";
   return (

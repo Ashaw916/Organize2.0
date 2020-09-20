@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
-
+//video component
 function VideoLiveStream() {
+  //holds array of objects from database
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
@@ -13,7 +14,7 @@ function VideoLiveStream() {
       .then((res) => setVideos(res.data.reverse()[0]))
       .catch((err) => console.log(err));
   }
-
+//slices isodate date added
   function splitDate(str) {
     return str.slice(0, 10);
   }
