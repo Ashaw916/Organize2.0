@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 // import AuthContext from "./utils/AuthContext";
 import Axios from "axios";
-
+// authenticating if user has a json web token
 const Auth = () => {
   const userObj = JSON.stringify(localStorage.getItem("user"));
   console.log("userObj", userObj);

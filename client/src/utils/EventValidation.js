@@ -1,5 +1,6 @@
+// validation for event form, checks if there's a value at all and whether it meets one other requirement
 export default function eventValidation(values) {
-
+// regex for varifying it's a correct date and time
     const validDateRegex = RegExp(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/);
     const validTimeRegex = RegExp(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/);
     // const validUrl = RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/);

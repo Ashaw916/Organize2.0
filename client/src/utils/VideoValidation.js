@@ -1,3 +1,4 @@
+// validation for video form, checks if there's a value at all and whether it meets one other requirement
 export default function videoValidation(values) {
     //looks for all youtube video links, not just embedded video links
     const validYoutube = RegExp(/^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/);

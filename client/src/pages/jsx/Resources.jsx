@@ -9,7 +9,8 @@ import Newsgroup from "../../images/newsgroup.png";
 import Newsprotest from "../../images/newsprotest.png";
 import Newswoman from "../../images/newswoman.png";
 import NavTabs from "../../components/NavTabs/NavTabs";
-
+//Displays resources, articles etc., pagination is used to break down the many resources into bite size pieces
+// there's also a search bar that filters the results from the api 
 class Resources extends Component {
   state = {
     articles: [],

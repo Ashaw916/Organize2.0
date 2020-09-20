@@ -1,5 +1,6 @@
+// validation for resource form, checks if there's a value at all and whether it meets one other requirement
 export default function articleValidation(values) {
-
+// regex for validating whether url is a valid address
     const validUrl = RegExp(/https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)/);
     let errors = {};
 

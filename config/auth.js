@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const localStrategy = require("passport-local").Strategy;
-
+// passport logs user in, and verifys they have an account
 module.exports = function (passport) {
   passport.use(
     new localStrategy((email, password, done) => {

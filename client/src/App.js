@@ -23,7 +23,7 @@ import Auth from "./utils/Auth";
 // import PrivateRoute from "./components/PrivateRoutes/index";
 import AuthContext from "./utils/AuthContext";
 import Axios from "axios";
-
+// privatizes manage and profile routes, checks if user has a json web token (if they do then they are authorized to access manage and profile)
 function App() {
   const [userAuth, setUserAuth] = useState({});
 
