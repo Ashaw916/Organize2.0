@@ -7,6 +7,7 @@ A centralized hub for social movement organizations to share information with th
 ## Table of Contents
 
 * [Demo](#demo)
+* [Launch](#launch)
 * [Overview](#overview)
 * [Public Usage](#public-usage)
     - [Home Page](#home-page)
@@ -25,7 +26,7 @@ A centralized hub for social movement organizations to share information with th
     - [Front-End](#front-end)
     - [Back-End](#back-end)
 * [Contributors](#contributors)
-* [Launch](#launch)
+    - [Periphery Contributor Guidelines](#periphery-contributor-guidelines)
 * [Future Development](#future-development)
 * [Join Our Team!](#join-our-team-!)
 
@@ -34,6 +35,11 @@ A centralized hub for social movement organizations to share information with th
 For a [video demo](https://youtu.be/5j6DQmioua4) of project. Skip to [7:00 mark for the demo of the webpage](https://youtu.be/5j6DQmioua4?t=420).
 
 For the [finished web page](https://organize-demo.herokuapp.com/)
+
+### Launch
+
+Date [application](https://organize-demo.herokuapp.com/) releases: 
+Debut: `September 20th, 2020`
 
 ### Overview
 
@@ -153,8 +159,9 @@ Passport, bcryptjs, and json web tokens all work togehter to provide authenticat
 
 Nine models, created using Mongoose, make up the database.
 
-
 ### Contributors
+
+##### Core (Founder) Contributors
 
 * Sandra Arredondo
 * Vanessa Bautista
@@ -162,9 +169,17 @@ Nine models, created using Mongoose, make up the database.
 * Aaron Young
 * Stephen Mayfield
 
-### Launch
+##### Periphery Contributors
 
-Date [application](https://organize-demo.herokuapp.com/) releases: `September 20th, 2020`
+No one yet!
+
+#### Periphery Contributor Guidelines
+
+New contributors MUST follow the below rules:
+
+* ONLY use JavaScript
+* The secrets to the database will NOT be shared, you will need to modify the server.js to work from your own database (local or MongoDB Atlas)
+* As you will need to modify the server.js, ONLY commit and push files that solve the issue you are solving, DO NOT commit and push the server.js
 
 ### Future Development
 
@@ -176,4 +191,7 @@ Date [application](https://organize-demo.herokuapp.com/) releases: `September 20
 
 ### Join Our Team!
 
-If you are interested in joining this project, you can contact Aaron Young!
+If you are interested in joining this project, you can contact @Ashaw916
+
+Keep in mind, if you would like to join our team as a contributor, you will need to follow the rules outlined under `Periphery Contributor Guidelines`.
+
