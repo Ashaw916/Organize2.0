@@ -1,6 +1,6 @@
 import React from "react";
 import "../../pages/css/ResourceCard.css";
-
+//card to hold profile information for profile page
 function ResourceCard(props) {
   return (
     <>

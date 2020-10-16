@@ -1,7 +1,7 @@
 //DEPENDENCIES
 import React from "react";
 
-//Create functional component
+//Footer functional component
 function Footer() {
   return (
     <>

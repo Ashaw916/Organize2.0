@@ -71,6 +71,26 @@ h5 {
   margin: 0px;
   padding: 0px;
 }
+#calendar-jumbo > div > div {
+  height: 700px;
+}
+#calendar-jumbo
+  > div
+  > div
+  > div.fc-view-harness.fc-view-harness-active
+  > div
+  > table {
+  height: 600px;
+}
+#calendar-jumbo .fc-daygrid-event-dot {
+  background-color: rgb(38, 95, 150);
+}
+#calendar-jumbo .fc-event-time {
+  background-color: dark-grey;
+}
+#calendar-jumbo .fc-event-title {
+  background-color: dark-grey;
+}
 .fc {
   background-color: #ebf0fffb;
 }

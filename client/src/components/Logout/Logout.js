@@ -1,10 +1,12 @@
 import React, { useState, component, useEffect } from "react";
 import "./style.css";
 import Axios from "axios";
-import auth from "../PrivateRoutes/Auth";
-
+import NavTabs from "../../components/NavTabs/NavTabs";
+// import auth from "../../utils/Auth";
+//logs out user when the button in navbar is clicked, uses json token to logout user
 function LogoutUser(props) {
   const userObj = JSON.stringify(localStorage.getItem("user"));
+
   useEffect(() => {
     console.log("logout");
     Axios({
@@ -13,25 +15,25 @@ function LogoutUser(props) {
         user: userObj,
       },
 
-      url: "/users/logout",
+      url: "/api/users/logout",
     });
     console.log("logout then");
     // localStorage.clear();
-    localStorage.setItem("user", "none");
+    localStorage.setItem("user", "null");
     localStorage.setItem("token", "");
     // window.location.href = "/";
     props.history.push("/");
-  });
-  function update() {
-    this.forceUpdate();
-  }
+  }, []);
+  // function update() {
+  //   this.forceUpdate();
+  // }
   return (
-    <div className="padding">
-      <h1 className="goodbye" onLoadedData={update}>
-        {" "}
-        Good Bye
-      </h1>
-    </div>
+    <>
+      <NavTabs />
+      <div className="padding">
+        <h1 className="goodbye"> Good Bye</h1>
+      </div>
+    </>
   );
 }
 

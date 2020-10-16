@@ -1,5 +1,6 @@
+// validation for resource form, checks if there's a value at all and whether it meets one other requirement
 export default function articleValidation(values) {
-
+// regex for validating whether url is a valid address
     const validUrl = RegExp(/https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)/);
     let errors = {};
 
@@ -23,10 +24,10 @@ export default function articleValidation(values) {
     } else if (values.description.length < 15) {
       errors.description = "Must be 15 or more characters long"
     }
-    if (!values.source_url) {
-      errors.source_url = "A source url is required";
-    } else if (!validUrl.test(values.source_url)) {
-      errors.source_url = "Url is invalid"
+    if (!values.source) {
+      errors.source = "A source url is required";
+    } else if (!validUrl.test(values.source)) {
+      errors.source = "Url is invalid"
     }
     if (!values.type) {
       errors.type = "Type of article is required";

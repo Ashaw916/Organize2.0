@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Axios from "axios";
-
-function LoginUser(props) {
-  // console.log(props);
+import { useHistory } from "react-router-dom";
+import AuthContext from "../../utils/AuthContext";
+//component for logging in, checks to see if username and password exist before letting in user
+function LoginUser({ checkAuth }) {
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  function refreshPage() {
-    window.location.forcedReload(false);
-  }
+  // const [userAuthState, setUserAuthState] = useState({
+  //   authState: "",
+  // });
+  let { authStatus } = useContext(AuthContext);
+
+  let history = useHistory();
 
   const login = (e) => {
     e.preventDefault();
@@ -21,24 +25,32 @@ function LoginUser(props) {
         password: loginPassword,
       },
       withCredentials: true,
-      url: "/users/login",
+      url: "/api/users/login",
     }).then((response) => {
-      // console.log("react response", response.data);
-      // console.log("react response2");
       if (response.data === "No User Exists") {
         alert("You are not registered");
       }
       if (response.data !== "No User Exists") {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", response.data.user);
-        window.location.reload();
-        console.log("--->", props.history);
-        // props.history.push("/profile");
+
+        authStatus = "valid";
+        // console.log("setUserAuthState");
+
+        history.push("/profile");
       } else {
-        e.target.parentElement.forcedReload();
-        props.history.push("/");
+        history.push("/");
       }
     });
+    // .then(
+    //   () =>
+    //     function checkAuth() {
+    //       setUserAuthState({
+    //         ...userAuthState,
+    //         authState: "valid",
+    //       });
+    //     }
+    // );
   };
 
   return (
@@ -50,11 +62,11 @@ function LoginUser(props) {
         <div className="card-body">
           <form id="login">
             <div className="form-group">
-              <label htmlFor="exampleInputEmail1">Email address</label>
+              <label htmlFor="loginEmail">Email address</label>
               <input
                 type="email"
                 className="form-control"
-                id="exampleInputEmail1"
+                id="loginEmail"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
                 onChange={(e) => setLoginUsername(e.target.value)}
@@ -73,9 +85,6 @@ function LoginUser(props) {
                 onChange={(e) => setLoginPassword(e.target.value)}
               />
             </div>
-            <button type="submit" className="btn btn-admin" onClick={login}>
-              Login
-            </button>
             <button type="submit" className="btn btn-admin" onClick={login}>
               Login
             </button>

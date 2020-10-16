@@ -10,7 +10,7 @@ router.post("/", (req, res) => {
   // authController.findOne({
   //   user: userId,
   // });
-  if (userId === "none") {
+  if (userId === "null") {
     return res.send("invalid");
   } else {
     Auth.findOne({ user: userId }, (err, doc) => {

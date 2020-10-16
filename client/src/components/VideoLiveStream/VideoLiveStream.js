@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
-
+//video component
 function VideoLiveStream() {
+  //holds array of objects from database
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
@@ -13,7 +14,7 @@ function VideoLiveStream() {
       .then((res) => setVideos(res.data.reverse()[0]))
       .catch((err) => console.log(err));
   }
-
+//slices isodate date added
   function splitDate(str) {
     return str.slice(0, 10);
   }
@@ -48,7 +49,7 @@ function VideoLiveStream() {
               <h6>View livestream video or browse the video archive below.</h6>
               <hr />
               <h5>Current Live Stream</h5>
-              <p className="card-text">{videos.title}Video Title</p>
+              <p className="card-text">{videos.title}</p>
               <div className="d-flex justify-content-between align-items-center">
                 <div className="btn-group">
                   <a href={videos.src} target="_blank">

@@ -87,12 +87,12 @@ export default {
 
   //get one profile
   getProfile: function () {
-    return axios.get("/users/profile");
+    return axios.get("/api/users/profile");
   },
 
   // Get a user
-  getUser: function() {
-    return axios.get("/users");
+  getUser: function () {
+    return axios.get("/api/users");
   },
 
   auth: function (token) {

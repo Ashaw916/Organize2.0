@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Axios from "axios";
-
+//component for registration on admin page, validates someone has been invited or has already been invited
 function Registration(props) {
   const [regEmail, setRegEmail] = useState("");
   const [regPassword, setRegPassword] = useState("");
@@ -20,7 +20,7 @@ function Registration(props) {
         password: regPassword,
       },
       withCredentials: true,
-      url: "/users/register",
+      url: "/api/users/register",
     })
       .then((response) => {
         console.log("react", response.data);
@@ -47,7 +47,7 @@ function Registration(props) {
             instagram: regInsta,
             twitter: regTwitter,
           },
-          url: "/users/profile",
+          url: "/api/users/profile",
         })
       );
   };
@@ -64,6 +64,7 @@ function Registration(props) {
               <div className="form-group col-md-12">
                 <label htmlFor="inputEmail4">Email</label>
                 <input
+                  name="email"
                   type="email"
                   className="form-control"
                   id="email"
@@ -74,9 +75,10 @@ function Registration(props) {
               <div className="form-group col-md-6">
                 <label htmlFor="inputPassword4">Choose a Password</label>
                 <input
+                  name="password"
                   type="password"
                   className="form-control"
-                  id="password"
+                  id="password1"
                   placeholder="Password"
                   onChange={(e) => setRegPassword(e.target.value)}
                 />
@@ -84,9 +86,10 @@ function Registration(props) {
               <div className="form-group col-md-6">
                 <label htmlFor="inputPassword4">Password</label>
                 <input
+                  name="password2"
                   type="password"
                   className="form-control"
-                  id="password"
+                  id="password2"
                   placeholder="Re-type your password"
                 />
               </div>

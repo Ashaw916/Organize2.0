@@ -8,7 +8,9 @@ import "../css/Resources.css";
 import Newsgroup from "../../images/newsgroup.png";
 import Newsprotest from "../../images/newsprotest.png";
 import Newswoman from "../../images/newswoman.png";
-
+import NavTabs from "../../components/NavTabs/NavTabs";
+//Displays resources, articles etc., pagination is used to break down the many resources into bite size pieces
+// there's also a search bar that filters the results from the api 
 class Resources extends Component {
   state = {
     articles: [],
@@ -40,9 +42,10 @@ class Resources extends Component {
 
   handleNextPageChange = () => {
     this.setState((state) => {
-      console.log(state);
-      if (state.currentPage >= state.pageSize) {
-        return { currentPage: state.pageSize };
+      const totalPages = Math.ceil(state.articles.length / state.pageSize);
+      console.log(totalPages);
+      if (state.currentPage >= totalPages) {
+        return { currentPage: totalPages };
       }
       return { currentPage: state.currentPage + 1 };
     });
@@ -83,6 +86,7 @@ class Resources extends Component {
 
     return (
       <>
+        <NavTabs />
         <div className="container">
           <div className="jumbotron jumbotron-fluid" id="resource-jumbo">
             <div className="container" id="jumbo-height">
@@ -90,41 +94,47 @@ class Resources extends Component {
             </div>
           </div>
 
-          <div className="row">
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <h4 id="search-title">Search Resources</h4>
-            </div>
+          <div className="container" id="resources-searchbar">
+            <div className="row">
+              <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <h4 id="search-title">Search Resources</h4>
+              </div>
 
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <SearchForm
-                search={this.state.searchTerm}
-                update={this.handleSearchEvent.bind(this)}
-                clear={this.handleClearSearch}
-              />
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <Pagination
-                itemsCount={articlesDisplayed}
-                pageSize={pageSize}
-                currentPage={currentPage}
-                onPageChange={this.handlePageChange}
-                onNextPageChange={this.handleNextPageChange}
-                onPreviousPageChange={this.handlePreviousPageChange}
-              />
+              <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <SearchForm
+                  search={this.state.searchTerm}
+                  update={this.handleSearchEvent.bind(this)}
+                  clear={this.handleClearSearch.bind(this)}
+                />
+              </div>
+              <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <Pagination
+                  itemsCount={articlesDisplayed}
+                  pageSize={pageSize}
+                  currentPage={currentPage}
+                  onPageChange={this.handlePageChange}
+                  onNextPageChange={this.handleNextPageChange}
+                  onPreviousPageChange={this.handlePreviousPageChange}
+                />
+              </div>
             </div>
           </div>
 
           <div className="row mt-2">
             <div className="col-3 img-responsive" id="image-wrapper">
               <div className="news-pic-wrapper">
-                <img className="news-pic" src={Newsgroup} />
+                <img className="news-pic" src={Newsgroup} alt="news-group" />
               </div>
               <div className="news-pic-wrapper">
                 {" "}
-                <img className="news-pic" src={Newsprotest} />
+                <img
+                  className="news-pic"
+                  src={Newsprotest}
+                  alt="news-protest"
+                />
               </div>
               <div className="news-pic-wrapper">
-                <img className="news-pic" src={Newswoman} />
+                <img className="news-pic" src={Newswoman} alt="news-woman" />
               </div>
             </div>
 
@@ -147,6 +157,7 @@ class Resources extends Component {
                           href={article.source}
                           className="btn btn"
                           target="_blank"
+                          rel="noopener noreferrer"
                           id="resource-link"
                         >
                           Source: {article.source}

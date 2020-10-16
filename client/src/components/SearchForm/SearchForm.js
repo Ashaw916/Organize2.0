@@ -1,6 +1,8 @@
 import React from "react";
-
+//functional component for search input
 function SearchForm(props) {
+  const { search, update, clear } = props;
+
   return (
     <>
       <form className="form-inline" id="resource-searchForm">
@@ -11,14 +13,15 @@ function SearchForm(props) {
             className="form-control"
             id="searchTerm"
             placeholder="Type to search by term"
-            value={props.search}
-            onChange={props.update}
+            value={search}
+            onChange={update}
           />
         </div>
         <button
-          type={props.clear}
+          type="reset"
           className="btn btn-primary ml-2"
           id="search-btn"
+          onClick={clear}
         >
           Clear
         </button>

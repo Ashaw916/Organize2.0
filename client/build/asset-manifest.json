@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/static/css/main.20823868.chunk.css",
+    "main.js": "/static/js/main.b952b726.chunk.js",
+    "main.js.map": "/static/js/main.b952b726.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.192800c2.js",
+    "runtime-main.js.map": "/static/js/runtime-main.192800c2.js.map",
+    "static/css/2.aa9c7ed0.chunk.css": "/static/css/2.aa9c7ed0.chunk.css",
+    "static/js/2.c14aade1.chunk.js": "/static/js/2.c14aade1.chunk.js",
+    "static/js/2.c14aade1.chunk.js.map": "/static/js/2.c14aade1.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.224baecc6d5651dfdc5aa06a31725d75.js": "/precache-manifest.224baecc6d5651dfdc5aa06a31725d75.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.aa9c7ed0.chunk.css.map": "/static/css/2.aa9c7ed0.chunk.css.map",
+    "static/css/main.20823868.chunk.css.map": "/static/css/main.20823868.chunk.css.map",
+    "static/js/2.c14aade1.chunk.js.LICENSE.txt": "/static/js/2.c14aade1.chunk.js.LICENSE.txt",
+    "static/media/contactimg.png": "/static/media/contactimg.8f3d9c7b.png",
+    "static/media/donatejumbo.png": "/static/media/donatejumbo.5d95646d.png",
+    "static/media/Manage.css": "/static/media/managejumbo.6bcce663.png",
+    "static/media/Resources.css": "/static/media/news_banner.c1cfb3ee.png",
+    "static/media/newsgroup.png": "/static/media/newsgroup.35d090cc.png",
+    "static/media/newsprotest.png": "/static/media/newsprotest.7806434d.png",
+    "static/media/newswoman.png": "/static/media/newswoman.5393c57e.png",
+    "static/media/Landing.css": "/static/media/organize_jumbo.3267e4c7.png",
+    "static/media/Profile.css": "/static/media/profile.70543444.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.192800c2.js",
+    "static/css/2.aa9c7ed0.chunk.css",
+    "static/js/2.c14aade1.chunk.js",
+    "static/css/main.20823868.chunk.css",
+    "static/js/main.b952b726.chunk.js"
+  ]
+}

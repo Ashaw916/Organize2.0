@@ -9,7 +9,7 @@
 /coverage
 
 # production
-/build
+# /build
 
 # misc
 .DS_Store
@@ -27,3 +27,5 @@ package-lock.json
 #debug
 
 debug.log
+
+.env

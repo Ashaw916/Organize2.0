@@ -12,7 +12,7 @@ module.exports = {
     db.UserProfile.findOne({ email: req.body.email }, async (err, doc) => {
       console.log(doc);
       if (err) throw err;
-      if (doc) res.send("Error: Duplicate entry");
+      if (doc) console.log("Error: Duplicate entry");
       if (!doc) {
         // const hashedPassword = await bcrypt.hash(req.body.password, 10);
         console.log("profile controller");

@@ -1,11 +1,23 @@
-select.inputErr {
-    border-color: red;
-}
-
+/*causes a red border color to appear when there's an error*/
 input.inputErr {
     border-color: red;
 }
-
+/*causes a red border color to appear when there's an error*/
 textarea.inputErr {
     border-color: red;
+}
+/*green success message when a form is successfully submitted*/
+.success {
+    color: green;
+    font-weight: bold;
+}
+/*An orangered warning message of a failed submission, only appears if saving to the backend was unsuccessful*/
+.notSubmitted {
+    color: orangered;
+    font-weight: bold;
+}
+/*for the validation error mesages*/
+.err {
+    color: red;
+    font-weight: bold;
 }

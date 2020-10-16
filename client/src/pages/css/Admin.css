@@ -1,5 +1,6 @@
 #admin-info {
-  background-color: #bfd1d3;
+  border: 3px solid #bfd1d3;
+  background-color: #ffffff;
   -webkit-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
   box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.75);
@@ -8,7 +9,6 @@
   padding-bottom: 15px;
   border-radius: 5px;
   text-align: center;
-  text-shadow: 2px 2px 3px #ffffff;
 }
 #login-title,
 #registration-title {
