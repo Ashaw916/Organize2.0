@@ -31,16 +31,19 @@ class Calendar extends Component {
           center: "title",
           right: "today",
         }}
+        timeZone="UTC"
         events={events}
         eventClick={function (info) {
           info.jsEvent.preventDefault();
 
+          console.log(info.event);
+
           var myObject = {
             title: info.event._def.title,
-            start: moment(info.event._instance.range.start).format(
+            start: moment.utc(info.event._instance.range.start).format(
               "MMMM D, YYYY, h:mm a"
             ),
-            end: moment(info.event._instance.range.end).format(
+            end: moment.utc(info.event._instance.range.end).format(
               "MMMM D, YYYY, h:mm a"
             ),
             description: info.event._def.extendedProps.description,
@@ -59,3 +62,12 @@ class Calendar extends Component {
 }
 
 export default Calendar;
+
+/*
+start: moment(info.event._instance.range.start).format(
+              "MMMM D, YYYY, h:mm a"
+            ),
+end: moment(info.event._instance.range.end).format(
+              "MMMM D, YYYY, h:mm a"
+            ),
+*/
