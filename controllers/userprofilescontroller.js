@@ -8,8 +8,9 @@ module.exports = {
       const profiles = await db.UserProfile.findAll({ where, order: [['date_added', 'DESC']] });
       res.json(profiles);
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   findOne: async function (req, res) {
     try {
@@ -25,16 +26,18 @@ module.exports = {
       });
       res.json(newUserProfile);
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   create: async function (req, res) {
     try {
       const profile = await db.UserProfile.create(req.body);
       res.json(profile);
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   update: async function (req, res) {
     try {
@@ -42,15 +45,17 @@ module.exports = {
       const profile = await db.UserProfile.findByPk(req.params.id);
       res.json(profile);
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   remove: async function (req, res) {
     try {
       const deleted = await db.UserProfile.destroy({ where: { id: req.params.id } });
       res.json({ deleted });
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
 };

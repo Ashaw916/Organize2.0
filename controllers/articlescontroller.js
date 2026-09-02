@@ -10,24 +10,27 @@ module.exports = {
       const articles = await db.Articles.findAll({ where, order: [['date_added', 'DESC']] });
       res.json(articles);
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   findById: async function (req, res) {
     try {
       const article = await db.Articles.findByPk(req.params.id);
       res.json(article);
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   create: async function (req, res) {
     try {
       const article = await db.Articles.create(req.body);
       res.json(article);
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   update: async function (req, res) {
     try {
@@ -35,15 +38,17 @@ module.exports = {
       const article = await db.Articles.findByPk(req.params.id);
       res.json(article);
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   remove: async function (req, res) {
     try {
       const deleted = await db.Articles.destroy({ where: { id: req.params.id } });
       res.json({ deleted });
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
 };

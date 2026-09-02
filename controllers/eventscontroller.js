@@ -8,16 +8,18 @@ module.exports = {
       const events = await db.Events.findAll({ where, order: [['date_added', 'DESC']] });
       res.json(events);
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   findById: async function (req, res) {
     try {
       const event = await db.Events.findByPk(req.params.id);
       res.json(event);
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   create: async function (req, res) {
     try {
@@ -25,8 +27,9 @@ module.exports = {
       const newEvent = await db.Events.create(req.body);
       res.json(newEvent);
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   update: async function (req, res) {
     try {
@@ -34,15 +37,17 @@ module.exports = {
       const event = await db.Events.findByPk(req.params.id);
       res.json(event);
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   remove: async function (req, res) {
     try {
       const deleted = await db.Events.destroy({ where: { id: req.params.id } });
       res.json({ deleted });
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
 };

@@ -9,8 +9,9 @@ module.exports = {
       const auths = await db.Auth.findAll({ where, order: [['date', 'DESC']] });
       res.json(auths);
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   findOne: async function (req, res) {
     try {
@@ -19,8 +20,9 @@ module.exports = {
       if (!auth) return res.send('invalid');
       return res.send(auth.bool ? 'valid' : 'invalid');
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   create: async function (req, res) {
     try {
@@ -28,8 +30,9 @@ module.exports = {
       const created = await db.Auth.create(data);
       res.json(created);
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   update: async function (req, res) {
     try {
@@ -39,15 +42,17 @@ module.exports = {
       const updated = await db.Auth.findOne({ where: { userId: userIdentifier } });
       res.json(updated);
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   remove: async function (req, res) {
     try {
       const deleted = await db.Auth.destroy({ where: { id: req.params.id } });
       res.json({ deleted });
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
 };

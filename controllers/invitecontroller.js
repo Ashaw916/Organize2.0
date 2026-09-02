@@ -8,8 +8,9 @@ module.exports = {
       const invites = await db.Invite.findAll({ where, order: [['date', 'DESC']] });
       res.json(invites);
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   findOne: async function (req, res) {
     try {
@@ -22,16 +23,18 @@ module.exports = {
       });
       res.send('Success');
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   create: async function (req, res) {
     try {
       const invite = await db.Invite.create(req.body);
       res.json(invite);
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   update: async function (req, res) {
     try {
@@ -39,15 +42,17 @@ module.exports = {
       const invite = await db.Invite.findByPk(req.params.id);
       res.json(invite);
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
   remove: async function (req, res) {
     try {
       const deleted = await db.Invite.destroy({ where: { id: req.params.id } });
       res.json({ deleted });
     } catch (err) {
-      res.status(422).json(err);
-    }
+  console.error("Controller error:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
   },
 };
