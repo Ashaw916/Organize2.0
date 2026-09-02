@@ -1,23 +1,14 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { sequelize, DataTypes } = require('./sequelize');
 
-const user = new Schema({
-  email: {
-    type: String,
-    required: true,
+const User = sequelize.define(
+  'User',
+  {
+    id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true },
+    email: { type: DataTypes.STRING, allowNull: false, unique: true },
+    password: { type: DataTypes.STRING, allowNull: false },
+    date: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
   },
-  password: {
-    type: String,
-    required: true,
-  },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-  articles: [{ type: Schema.Types.ObjectId, ref: 'Articles' }],
-  events: [{ type: Schema.Types.ObjectId, ref: 'Events' }],
-  videos: [{ type: Schema.Types.ObjectId, ref: 'Videos' }],
-  links: [{ type: Schema.Types.ObjectId, ref: 'Links' }],
-});
+  { tableName: 'users' }
+);
 
-module.exports = mongoose.model("User", user);
+module.exports = User;

@@ -1,22 +1,15 @@
-const mongoose = require("mongoose");
+const { sequelize, DataTypes } = require('./sequelize');
 
-const invite = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
+const Invite = sequelize.define(
+  'Invite',
+  {
+    id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true },
+    email: { type: DataTypes.STRING, allowNull: false },
+    organization: { type: DataTypes.STRING, allowNull: false },
+    host: { type: DataTypes.STRING, allowNull: false },
+    date: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
   },
-  organization: {
-    type: String,
-    required: true,
-  },
-  host: {
-    type: String,
-    required: true,
-  },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-});
+  { tableName: 'invites' }
+);
 
-module.exports = mongoose.model("Invite", invite);
+module.exports = Invite;

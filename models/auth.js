@@ -1,23 +1,14 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-const auth = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    reuired: true,
-    unique: true,
-    ref: "User",
-  },
-  bool: {
-    type: Boolean,
-    default: false,
-    required: true,
-  },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-});
+const { sequelize, DataTypes } = require('./sequelize');
 
-module.exports = mongoose.model("Auth", auth);
+const Auth = sequelize.define(
+  'Auth',
+  {
+    id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true },
+    userId: { type: DataTypes.INTEGER.UNSIGNED, allowNull: false, unique: true },
+    bool: { type: DataTypes.BOOLEAN, defaultValue: false, allowNull: false },
+    date: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+  },
+  { tableName: 'auth' }
+);
 
-// ref for joins indise of the user
+module.exports = Auth;

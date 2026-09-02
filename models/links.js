@@ -1,15 +1,17 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { sequelize, DataTypes } = require('./sequelize');
 
-const linkSchema = new Schema({
-  title: { type: String, required: true },
-  date_added: { type: Date, default: Date.now },
-  description: { type: String, required: true },
-  url: { type: String, required: true },
-  type: { type: String, required: true },
-  user: { type: Schema.Types.ObjectId, ref: 'User' },
-});
-
-const Links = mongoose.model("Links", linkSchema);
+const Links = sequelize.define(
+  'Links',
+  {
+    id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true },
+    title: { type: DataTypes.STRING, allowNull: false },
+    date_added: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+    description: { type: DataTypes.TEXT, allowNull: false },
+    url: { type: DataTypes.STRING, allowNull: false },
+    type: { type: DataTypes.STRING, allowNull: false },
+    userId: { type: DataTypes.INTEGER.UNSIGNED, allowNull: true },
+  },
+  { tableName: 'links' }
+);
 
 module.exports = Links;

@@ -1,34 +1,18 @@
-const mongoose = require("mongoose");
+const { sequelize, DataTypes } = require('./sequelize');
 
-const userProfile = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
+const UserProfile = sequelize.define(
+  'UserProfile',
+  {
+    id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true },
+    email: { type: DataTypes.STRING, allowNull: false },
+    organization: { type: DataTypes.STRING, allowNull: false },
+    website: { type: DataTypes.STRING, allowNull: true },
+    facebook: { type: DataTypes.STRING, allowNull: true },
+    instagram: { type: DataTypes.STRING, allowNull: true },
+    twitter: { type: DataTypes.STRING, allowNull: true },
+    date_added: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
   },
-  organization: {
-    type: String,
-    required: true,
-  },
-  website: {
-    type: String,
-    required: false,
-  },
-  facebook: {
-    type: String,
-    required: false,
-  },
-  instagram: {
-    type: String,
-    required: false,
-  },
-  twitter: {
-    type: String,
-    required: false,
-  },
-  date_added: {
-    type: Date,
-    default: Date.now,
-  },
-});
+  { tableName: 'user_profiles' }
+);
 
-module.exports = mongoose.model("UserProfile", userProfile);
+module.exports = UserProfile;
