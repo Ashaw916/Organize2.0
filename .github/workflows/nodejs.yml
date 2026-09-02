@@ -56,6 +56,15 @@ jobs:
           else
             echo "client/node_modules/ejs not present"
           fi
+      - name: Stub ejs in client node_modules (if root ejs exists)
+        run: |
+          if [ -d node_modules/ejs ] && [ ! -d client/node_modules/ejs ]; then
+            echo "Creating client/node_modules/ejs stub to shadow root ejs"
+            mkdir -p client/node_modules/ejs
+            printf "module.exports = {};" > client/node_modules/ejs/index.js
+          else
+            echo "No root ejs or client stub already present"
+          fi
       - name: Build
         env:
           NODE_OPTIONS: "--openssl-legacy-provider"
