@@ -29,4 +29,6 @@ jobs:
             npm install --no-audit --no-fund
           fi
       - name: Build
+        env:
+          NODE_OPTIONS: "--openssl-legacy-provider"
         run: npm run build
