@@ -28,6 +28,15 @@ jobs:
             echo "package-lock.json not found, running npm install"
             npm install --no-audit --no-fund
           fi
+      - name: Install client dependencies (deterministic)
+        run: |
+          if [ -f client/package-lock.json ]; then
+            echo "client/package-lock.json found, running npm ci in client"
+            cd client && npm ci --prefer-offline --no-audit --no-fund
+          else
+            echo "client/package-lock.json not found, running npm install in client"
+            cd client && npm install --no-audit --no-fund
+          fi
       - name: Build
         env:
           NODE_OPTIONS: "--openssl-legacy-provider"
