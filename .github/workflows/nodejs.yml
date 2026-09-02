@@ -1,0 +1,35 @@
+name: Node CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [26]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            echo "package-lock.json found, running npm ci"
+            npm ci --prefer-offline --no-audit --no-fund
+          else
+            echo "package-lock.json not found, running npm install"
+            npm install --no-audit --no-fund
+          fi
+      - name: Build
+        env:
+          NODE_OPTIONS: "--openssl-legacy-provider"
+          CI: "false"
+        run: npm run build

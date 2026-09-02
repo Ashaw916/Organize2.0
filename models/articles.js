@@ -1,17 +1,19 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { sequelize, DataTypes } = require('./sequelize');
 
-const articleSchema = new Schema({
-  title: { type: String, required: true },
-  author: { type: String, required: true },
-  body: { type: String, required: true },
-  date_added: { type: Date, default: Date.now },
-  description: { type: String, required: true },
-  source: { type: String, required: true },
-  type: { type: String, required: true },
-  user: { type: Schema.Types.ObjectId, ref: 'User' },
-});
-
-const Articles = mongoose.model("Articles", articleSchema);
+const Articles = sequelize.define(
+  'Articles',
+  {
+    id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true },
+    title: { type: DataTypes.STRING, allowNull: false },
+    author: { type: DataTypes.STRING, allowNull: false },
+    body: { type: DataTypes.TEXT, allowNull: false },
+    date_added: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+    description: { type: DataTypes.TEXT, allowNull: false },
+    source: { type: DataTypes.STRING, allowNull: false },
+    type: { type: DataTypes.STRING, allowNull: false },
+    userId: { type: DataTypes.INTEGER.UNSIGNED, allowNull: true },
+  },
+  { tableName: 'articles' }
+);
 
 module.exports = Articles;

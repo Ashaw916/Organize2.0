@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const eventsController = require("../../controllers/eventsController");
+const eventsController = require("../../controllers/eventscontroller");
 // const authToken = require("../../config/authToken");
 
 // Matches with "/api/events"

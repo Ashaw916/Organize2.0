@@ -1,17 +1,28 @@
 require("dotenv").config();
 const express = require("express");
 const router = express.Router();
-const usersController = require("../../controllers/usersController");
-const inviteController = require("../../controllers/InviteController");
-const userProfilesController = require("../../controllers/userProfilesController");
-const authController = require("../../controllers/authController");
+const usersController = require("../../controllers/userscontroller");
+const inviteController = require("../../controllers/invitecontroller");
+const userProfilesController = require("../../controllers/userprofilescontroller");
+const authController = require("../../controllers/authcontroller");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const authToken = require("../../config/authToken");
+const rateLimit = require('express-rate-limit');
+
+// simple login rate limiter: 5 attempts per 15 minutes per IP
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5,
+  message: { error: 'Too many login attempts, please try again after 15 minutes' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 // User model
-const User = require("../../models/User");
+const User = require("../../models/user");
 const Invite = require("../../models/invite");
 // const Auth = require("../../models/auth");
 
@@ -21,83 +32,56 @@ router.use(passport.session());
 require("../../config/auth")(passport);
 
 // Login
-router.post("/login", (req, res, next) => {
-  // console.log("hit login");
-  passport.authenticate("local", (err, user) => {
-    if (err) throw err;
-    if (!user) res.send("No User Exists");
-    else {
-      req.logIn(user, (err) => {
-        const payload = { user: { id: user.id } };
-        jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
-          // console.log("payload", payload);
-          // console.log("token login", user);
-          if (err) {
-            console.log(err);
-          }
-          // console.log(token);
-          const userObj = { token: token, user: payload.user.id };
-          res.json(userObj);
-          // console.log("payload2", payload.user.id);
-          authController.update({
-            user: payload.user.id,
-            bool: true,
-          });
-        });
-
-        if (err) throw err;
+router.post('/login', loginLimiter, (req, res, next) => {
+  passport.authenticate('local', async (err, user) => {
+    if (err) return next(err);
+    if (!user) return res.send('No User Exists');
+    req.logIn(user, async (err) => {
+      if (err) return next(err);
+      const payload = { user: { id: user.id } };
+      jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, async (err, token) => {
+        if (err) {
+          console.log(err);
+        }
+        const userObj = { token: token, user: payload.user.id };
+        res.json(userObj);
+        try {
+          // set auth bool true
+          await require('../../models').Auth.update({ bool: true }, { where: { userId: payload.user.id } });
+        } catch (e) {
+          // ignore
+        }
       });
-    }
+    });
   })(req, res, next);
 });
 
 //Logout route
-router.post("/logout", (req, res, next) => {
-  // console.log("hit logout", req.body);
-  const user = req.body.user.replace(/['"]+/g, "");
-  //send to controller
-  authController.update({
-    user: user,
-    bool: false,
-  });
+router.post('/logout', async (req, res, next) => {
+  try {
+    const user = req.body.user.replace(/['"]+/g, '');
+    await require('../../models').Auth.update({ bool: false }, { where: { userId: user } });
+    res.send('OK');
+  } catch (err) {
+    next(err);
+  }
 });
 
 // Register
-router.post("/register", (req, res) => {
-  // console.log("hit reg");
-  //checks for an invite in the db
-  Invite.findOne({ email: req.body.email }, async (err, doc) => {
-    if (err) throw err;
-    if (!doc) res.send("You haven't been invited");
-    if (doc) {
-      //checks for an existing user
-      User.findOne({ email: req.body.email }, async (err, doc) => {
-        if (err) throw err;
-        if (doc) res.send("Alredy exists");
-        if (!doc) {
-          const hashedPassword = await bcrypt.hash(req.body.password, 10);
-          //creates new user
-          const newUser = new User({
-            email: req.body.email,
-            password: hashedPassword,
-          });
-          //saves new user
-          await newUser.save();
-          res.send("Success");
-          User.findOne({ email: req.body.email }, async (err, doc) => {
-            if (err) throw err;
-            if (doc) {
-              //send to controller for authentication and sets status to logged out
-              authController.create({
-                user: doc._id,
-                bool: false,
-              });
-            }
-          });
-        }
-      });
-    }
-  });
+router.post('/register', async (req, res, next) => {
+  try {
+    const invite = await Invite.findOne({ where: { email: req.body.email } });
+    if (!invite) return res.send("You haven't been invited");
+    const existing = await User.findOne({ where: { email: req.body.email } });
+    if (existing) return res.send('Already exists');
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const newUser = await User.create({ email: req.body.email, password: hashedPassword });
+    res.send('Success');
+    // create auth row
+    const created = await require('../../models').Auth.create({ userId: newUser.id, bool: false });
+  } catch (err) {
+    next(err);
+  }
 });
 
 // Invite

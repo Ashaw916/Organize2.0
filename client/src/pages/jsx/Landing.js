@@ -3,7 +3,6 @@ import "../css/Landing.css";
 import Calendar from "../../components/Calendar/Calendar";
 import API from "../../utils/API";
 import NavTabs from "../../components/NavTabs/NavTabs";
-import { set } from "mongoose";
 import { Link } from "react-router-dom";
 
 function Landing() {
@@ -20,7 +19,7 @@ function Landing() {
         const events = res.data;
         for (let i = 0; i < events.length; i++) {
           const eventObj = {
-            id: events[i]._id,
+            id: events[i].id || events[i]._id,
             groupId: events[i].organization,
             start: events[i].start_date,
             end: events[i].end_date,

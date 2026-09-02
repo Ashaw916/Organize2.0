@@ -1,10 +1,4 @@
 /*
-    object-assign
-    (c) Sindre Sorhus
-    @license MIT
-    */
-
-/*
 object-assign
 (c) Sindre Sorhus
 @license MIT
@@ -36,7 +30,20 @@ object-assign
        */
 
 /*!
+                 * ignore
+                 */
+
+/*!
+               * Ensure `name` and `message` show up in toJSON output re: gh-9296
+               */
+
+/*!
                * Handle async validators
+               */
+
+/*!
+               * ignore
+               * @param {Readonly<CastError>} other
                */
 
 /*!
@@ -44,25 +51,12 @@ object-assign
                */
 
 /*!
-             * Ensure `name` and `message` show up in toJSON output re: gh-9296
-             */
+               * inspect helper
+               */
 
 /*!
-             * ignore
-             * @param {Readonly<CastError>} other
-             */
-
-/*!
-             * ignore
-             */
-
-/*!
-             * inspect helper
-             */
-
-/*!
-            * add message
-            */
+              * add message
+              */
 
 /*!
            * Checks for indexes added to subdocs using Schema.index().
@@ -72,11 +66,20 @@ object-assign
            */
 
 /*!
+           * OverwriteModel Error constructor.
+           */
+
+/*!
            * Recursively set nested arrays
            */
 
 /*!
            * ignore
+           */
+
+/*!
+           * toString helper
+           * TODO remove? This defaults to `${this.name}: ${this.message}`
            */
 
 /*!
@@ -128,10 +131,6 @@ object-assign
          */
 
 /*!
-         * OverwriteModel Error constructor.
-         */
-
-/*!
          * Registers remove event listeners for triggering
          * on subdocuments.
          *
@@ -141,11 +140,6 @@ object-assign
 
 /*!
          * ignore
-         */
-
-/*!
-         * toString helper
-         * TODO remove? This defaults to `${this.name}: ${this.message}`
          */
 
 /*!
@@ -269,10 +263,6 @@ object-assign
 /*!
        * Document exposes the NodeJS event emitter API, so you can use
        * `on`, `once`, etc.
-       */
-
-/*!
-       * Document keys to print warnings for
        */
 
 /*!
@@ -439,6 +429,10 @@ object-assign
        */
 
 /*!
+       * The class that Mongoose uses internally to instantiate this SchemaType's `options` property.
+       */
+
+/*!
        * Use native promises by default
        */
 
@@ -593,6 +587,11 @@ object-assign
 
 /*!
      * Helper for JSON.stringify
+     * Ensure `name` and `message` show up in toJSON output re: gh-9847
+     */
+
+/*!
+     * If `val` is an object, returns constructor name, if possible. Otherwise returns undefined.
      */
 
 /*!
@@ -876,26 +875,7 @@ object-assign
     * @param {string} value
     */
 
-/*!
-FullCalendar v5.2.1
-Docs & License: https://fullcalendar.io/
-(c) 2020 Adam Shaw
-*/
-
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
+/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
 /*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
@@ -926,15 +906,6 @@ PERFORMANCE OF THIS SOFTWARE.
  */
 
 /** @license React v16.13.1
- * react-dom.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-/** @license React v16.13.1
  * react-is.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -943,7 +914,16 @@ PERFORMANCE OF THIS SOFTWARE.
  * LICENSE file in the root directory of this source tree.
  */
 
-/** @license React v16.13.1
+/** @license React v16.14.0
+ * react-dom.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v16.14.0
  * react.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
