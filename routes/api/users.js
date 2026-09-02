@@ -10,6 +10,17 @@ const passport = require("passport");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const authToken = require("../../config/authToken");
+const rateLimit = require('express-rate-limit');
+
+// simple login rate limiter: 5 attempts per 15 minutes per IP
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5,
+  message: { error: 'Too many login attempts, please try again after 15 minutes' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 // User model
 const User = require("../../models/user");
 const Invite = require("../../models/invite");
@@ -21,7 +32,7 @@ router.use(passport.session());
 require("../../config/auth")(passport);
 
 // Login
-router.post('/login', (req, res, next) => {
+router.post('/login', loginLimiter, (req, res, next) => {
   passport.authenticate('local', async (err, user) => {
     if (err) return next(err);
     if (!user) return res.send('No User Exists');
