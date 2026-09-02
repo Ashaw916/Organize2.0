@@ -1,10 +1,9 @@
-import React from "react";
-import FullCalendar, { isPropsEqual, Component } from "@fullcalendar/react";
+import React, { Component } from "react";
+import FullCalendar, { isPropsEqual } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import moment from "moment";
 // import bootstrapPlugin from "@fullcalendar/bootstrap";
 // import interactionPlugin from "@fullcalendar/interaction"
-// import { render } from "ejs";
 
 //functional component for calendar on landing page, takes in events props from landing page and creates an onclick for a pop-up
 class Calendar extends Component {
