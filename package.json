@@ -57,6 +57,6 @@
     "sequelize": "^6.32.1"
   },
   "engines": {
-    "node": ">=26.0.0"
+    "node": "24.x"
   }
 }
