@@ -37,6 +37,16 @@ jobs:
             echo "client/package-lock.json not found, running npm install in client"
             cd client && npm install --no-audit --no-fund
           fi
+      - name: Debug client deps
+        run: |
+          echo "Node $(node -v)";
+          echo "npm $(npm -v)";
+          echo "Client package.json react-scripts:";
+          node -e "const p=require('./client/package.json'); console.log(p.dependencies && p.dependencies['react-scripts'] || p.devDependencies && p.devDependencies['react-scripts'] || 'not specified')"
+          echo "client/npm ls react-scripts and ejs (top-level)";
+          cd client && npm ls react-scripts --depth=0 || true
+          cd client && npm ls ejs --depth=0 || true
+          if [ -f client/node_modules/ejs/package.json ]; then echo '--- ejs package.json ---'; cat client/node_modules/ejs/package.json; fi
       - name: Build
         env:
           NODE_OPTIONS: "--openssl-legacy-provider"
