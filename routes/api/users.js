@@ -1,10 +1,10 @@
 require("dotenv").config();
 const express = require("express");
 const router = express.Router();
-const usersController = require("../../controllers/usersController");
-const inviteController = require("../../controllers/InviteController");
-const userProfilesController = require("../../controllers/userProfilesController");
-const authController = require("../../controllers/authController");
+const usersController = require("../../controllers/userscontroller");
+const inviteController = require("../../controllers/invitecontroller");
+const userProfilesController = require("../../controllers/userprofilescontroller");
+const authController = require("../../controllers/authcontroller");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const cors = require("cors");
