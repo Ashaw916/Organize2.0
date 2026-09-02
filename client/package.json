@@ -30,6 +30,10 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "browser": {
+    "ejs": false,
+    "express-ejs-layouts": false
+  },
   "browserslist": {
     "production": [
       ">0.2%",
