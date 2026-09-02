@@ -7,6 +7,7 @@ const app = express();
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const rateLimit = require('express-rate-limit');
 
 if (process.env.NODE_ENV === 'production') {
   console.log('production');
@@ -29,6 +30,16 @@ app.use(
   })
 );
 app.use(cookieParser(process.env.SECRET));
+
+// Global API rate limiter: apply to all /api routes
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: { error: 'Too many requests, please try again later.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+app.use('/api', apiLimiter);
 
 //routes
 app.use(routes);
