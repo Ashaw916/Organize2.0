@@ -47,6 +47,15 @@ jobs:
           cd client && npm ls react-scripts --depth=0 || true
           cd client && npm ls ejs --depth=0 || true
           if [ -f client/node_modules/ejs/package.json ]; then echo '--- ejs package.json ---'; cat client/node_modules/ejs/package.json; fi
+      - name: Remove ejs from client node_modules (workaround)
+        if: always()
+        run: |
+          if [ -d client/node_modules/ejs ]; then
+            echo "Removing client/node_modules/ejs to avoid bundling node-only fs dependency"
+            rm -rf client/node_modules/ejs
+          else
+            echo "client/node_modules/ejs not present"
+          fi
       - name: Build
         env:
           NODE_OPTIONS: "--openssl-legacy-provider"
