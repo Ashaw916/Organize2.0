@@ -11,7 +11,7 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const authToken = require("../../config/authToken");
 // User model
-const User = require("../../models/User");
+const User = require("../../models/user");
 const Invite = require("../../models/invite");
 // const Auth = require("../../models/auth");
 
