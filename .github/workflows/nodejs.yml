@@ -20,6 +20,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - name: Install dependencies
-        run: npm install
+        run: |
+          if [ -f package-lock.json ]; then
+            echo "package-lock.json found, running npm ci"
+            npm ci --prefer-offline --no-audit --no-fund
+          else
+            echo "package-lock.json not found, running npm install"
+            npm install --no-audit --no-fund
+          fi
       - name: Build
         run: npm run build
