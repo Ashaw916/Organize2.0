@@ -9,10 +9,8 @@ keys.js
 .env.test
 .vscode/
 .DS_Store
-package-lock.json
 
 # client
-client/package-lock.json
 client/.env
 client/.env.local
 
