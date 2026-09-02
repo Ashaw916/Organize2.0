@@ -1,33 +1,47 @@
-const db = require("../models");
+const db = require('../models');
 
 // Defining methods for the VideosController
 module.exports = {
-  findAll: function (req, res) {
-    db.Videos.find(req.query)
-      .sort({ date: -1 })
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+  findAll: async function (req, res) {
+    try {
+      const where = Object.keys(req.query || {}).length ? req.query : undefined;
+      const videos = await db.Videos.findAll({ where, order: [['date_added', 'DESC']] });
+      res.json(videos);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
-  findById: function (req, res) {
-    db.Videos.findById(req.params.id)
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+  findById: async function (req, res) {
+    try {
+      const video = await db.Videos.findByPk(req.params.id);
+      res.json(video);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
-  create: function (req, res) {
-    db.Videos.create(req.body)
-    .then(({ _id }) => db.User.findOneAndUpdate({}, { $push: { videos: _id } }, { new: true }))
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+  create: async function (req, res) {
+    try {
+      const video = await db.Videos.create(req.body);
+      res.json(video);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
-  update: function (req, res) {
-    db.Videos.findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+  update: async function (req, res) {
+    try {
+      await db.Videos.update(req.body, { where: { id: req.params.id } });
+      const video = await db.Videos.findByPk(req.params.id);
+      res.json(video);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
-  remove: function (req, res) {
-    db.Videos.findById({ _id: req.params.id })
-      .then((dbModel) => dbModel.remove())
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+  remove: async function (req, res) {
+    try {
+      const deleted = await db.Videos.destroy({ where: { id: req.params.id } });
+      res.json({ deleted });
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
 };

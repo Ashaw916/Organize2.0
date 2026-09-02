@@ -1,37 +1,48 @@
-const db = require("../models");
+const db = require('../models');
 
 // Defining methods for the eventsController
 module.exports = {
-  findAll: function (req, res) {
-    db.Events.find(req.query)
-      .sort({ date: -1 })
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+  findAll: async function (req, res) {
+    try {
+      const where = Object.keys(req.query || {}).length ? req.query : undefined;
+      const events = await db.Events.findAll({ where, order: [['date_added', 'DESC']] });
+      res.json(events);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
-  findById: function (req, res) {
-    db.Events.findById(req.params.id)
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+  findById: async function (req, res) {
+    try {
+      const event = await db.Events.findByPk(req.params.id);
+      res.json(event);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
-  create: function (req, res) {
-    console.log("create", req.body);
-    db.Events.create(req.body)
-    .then(({ _id }) => db.User.findOneAndUpdate({}, { $push: { events: _id } }, { new: true }))
-      .then((dbModel) => {
-        console.log(dbModel);
-        res.json(dbModel)
-      })
-      .catch((err) => res.status(422).json(err));
+  create: async function (req, res) {
+    try {
+      // If req.body includes userId, use it; otherwise ignore association
+      const newEvent = await db.Events.create(req.body);
+      res.json(newEvent);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
-  update: function (req, res) {
-    db.Events.findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+  update: async function (req, res) {
+    try {
+      await db.Events.update(req.body, { where: { id: req.params.id } });
+      const event = await db.Events.findByPk(req.params.id);
+      res.json(event);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
-  remove: function (req, res) {
-    db.Events.findById({ _id: req.params.id })
-      .then((dbModel) => dbModel.remove())
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+  remove: async function (req, res) {
+    try {
+      const deleted = await db.Events.destroy({ where: { id: req.params.id } });
+      res.json({ deleted });
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
 };

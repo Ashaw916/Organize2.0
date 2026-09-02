@@ -1,48 +1,21 @@
-const router = require("express").Router();
-const authController = require("../../controllers/authController");
-const Auth = require("../../models/auth");
-// auth Route
-router.post("/", (req, res) => {
-  console.log("route", req.body.user);
-  const { user, bool } = req.body;
-  const userId = req.body.user.replace(/['"]+/g, "");
-  console.log("userId", userId);
-  // authController.findOne({
-  //   user: userId,
-  // });
-  if (userId === "null") {
-    return res.send("invalid");
-  } else {
-    Auth.findOne({ user: userId }, (err, doc) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("Result : ", doc.bool);
-      }
-      // console.log("res", );
-    }).then((req, res) => {
-      console.log("doc", req);
-      if (req.bool === "false") {
-        console.log("invalid", req.bool);
-        sendInvalid();
-      }
-      console.log("valid", req.bool);
-      sendValid();
-    });
+const router = require('express').Router();
+const Auth = require('../../models').Auth;
 
-    function sendValid() {
-      return res.send("valid");
-    }
-    function sendInvalid() {
-      return res.send("invalid");
-    }
+// auth Route
+router.post('/', async (req, res) => {
+  try {
+    const userId = (req.body.user || '').replace(/['"]+/g, '');
+    if (userId === 'null' || !userId) return res.send('invalid');
+    const auth = await Auth.findOne({ where: { userId } });
+    if (!auth) return res.send('invalid');
+    return res.send(auth.bool ? 'valid' : 'invalid');
+  } catch (err) {
+    res.status(500).send('error');
   }
-  //   .catch((err) => res.status(422).json(err));
 });
 
-router.get("/", (req, res) => {
-  console.log("route", req);
-  const { user, bool } = req.body;
+router.get('/', (req, res) => {
+  res.sendStatus(200);
 });
 
 module.exports = router;

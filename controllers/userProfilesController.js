@@ -1,57 +1,56 @@
-const db = require("../models");
+const db = require('../models');
 
-// Defining methods for the articlesController
+// Defining methods for the userProfilesController
 module.exports = {
-  findAll: function (req, res) {
-    db.UserProfile.find(req.query)
-      .sort({ date: -1 })
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+  findAll: async function (req, res) {
+    try {
+      const where = Object.keys(req.query || {}).length ? req.query : undefined;
+      const profiles = await db.UserProfile.findAll({ where, order: [['date_added', 'DESC']] });
+      res.json(profiles);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
-  findOne: function (req, res) {
-    db.UserProfile.findOne({ email: req.body.email }, async (err, doc) => {
-      console.log(doc);
-      if (err) throw err;
-      if (doc) console.log("Error: Duplicate entry");
-      if (!doc) {
-        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        console.log("profile controller");
-        // console.log({
-        //   organization: req.body.organization,
-        //   website: req.body.website,
-        //   facebook: req.body.facebook,
-        //   instagram: req.body.instagram,
-        //   twitter: req.body.twitter,
-        // });
-        const newUserProfile = new db.UserProfile({
-          email: req.body.email,
-          organization: req.body.organization,
-          website: req.body.website,
-          facebook: req.body.facebook,
-          instagram: req.body.instagram,
-          twitter: req.body.twitter,
-        });
-        await newUserProfile.save();
-        // res.send("profile Success");
-      }
-    })
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+  findOne: async function (req, res) {
+    try {
+      const existing = await db.UserProfile.findOne({ where: { email: req.body.email } });
+      if (existing) return res.status(409).json({ message: 'Duplicate entry' });
+      const newUserProfile = await db.UserProfile.create({
+        email: req.body.email,
+        organization: req.body.organization,
+        website: req.body.website,
+        facebook: req.body.facebook,
+        instagram: req.body.instagram,
+        twitter: req.body.twitter,
+      });
+      res.json(newUserProfile);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
-  create: function (req, res) {
-    db.UserProfile.create(req.body)
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+  create: async function (req, res) {
+    try {
+      const profile = await db.UserProfile.create(req.body);
+      res.json(profile);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
-  update: function (req, res) {
-    db.UserProfile.findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+  update: async function (req, res) {
+    try {
+      await db.UserProfile.update(req.body, { where: { id: req.params.id } });
+      const profile = await db.UserProfile.findByPk(req.params.id);
+      res.json(profile);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
-  remove: function (req, res) {
-    db.UserProfile.findById({ _id: req.params.id })
-      .then((dbModel) => dbModel.remove())
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+  remove: async function (req, res) {
+    try {
+      const deleted = await db.UserProfile.destroy({ where: { id: req.params.id } });
+      res.json({ deleted });
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
 };

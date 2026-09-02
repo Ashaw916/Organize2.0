@@ -1,62 +1,53 @@
-require("dotenv").config();
-const db = require("../models");
+require('dotenv').config();
+const db = require('../models');
 
-// Defining methods for the articlesController
+// Defining methods for the authController
 module.exports = {
-  findAll: function (req, res) {
-    db.Auth.find(req.query)
-      .sort({ date: -1 })
-      .then((dbModel) => {
-        res.json(dbModel);
-      })
-      .catch((err) => res.status(422).json(err));
+  findAll: async function (req, res) {
+    try {
+      const where = Object.keys(req.query || {}).length ? req.query : undefined;
+      const auths = await db.Auth.findAll({ where, order: [['date', 'DESC']] });
+      res.json(auths);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
-  findOne: function (req, res) {
-    console.log("res", res);
-    console.log("req", res);
-    db.Auth.findOne({ user: req.user }, (err, doc) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("Result : ", doc.bool);
-      }
-      // console.log("res", res);
-    }).then((doc, res) => {
-      if (doc.bool === "false") {
-        res.send("invalid");
-      }
-      console.log(doc.bool);
-      res.send("valid");
-    });
-    //   .catch((err) => res.status(422).json(err));
+  findOne: async function (req, res) {
+    try {
+      const userIdentifier = req.user && req.user.id ? req.user.id : req.user;
+      const auth = await db.Auth.findOne({ where: { userId: userIdentifier } });
+      if (!auth) return res.send('invalid');
+      return res.send(auth.bool ? 'valid' : 'invalid');
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
-  create: function (req, res) {
-    console.log("hit controller", req);
-    db.Auth.create(req).then((res) => res.send(res));
-    //   .catch((err) => res.status(422).json(err));
+  create: async function (req, res) {
+    try {
+      const data = req.body || req;
+      const created = await db.Auth.create(data);
+      res.json(created);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
-  update: function (req, res) {
-    console.log("before", req);
-    // console.log({ user: req.user }, req.bool);
-
-    db.Auth.updateOne({ user: req.user }, { $set: { bool: req.bool } }).then(
-      (res) => {
-        if (!res) res.send("no res");
-        if (res) {
-          // res.send("res");
-          console.log(res);
-          return res;
-        }
-        console.log("after");
-        return res.send("logout controller");
-      }
-    );
-    //   .catch((err, res) => res.status(422).json(err));
+  update: async function (req, res) {
+    try {
+      const userIdentifier = req.user && req.user.id ? req.user.id : req.user;
+      const boolVal = req.body && typeof req.body.bool !== 'undefined' ? req.body.bool : req.bool;
+      await db.Auth.update({ bool: boolVal }, { where: { userId: userIdentifier } });
+      const updated = await db.Auth.findOne({ where: { userId: userIdentifier } });
+      res.json(updated);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
-  remove: function (req, res) {
-    db.Auth.findById({ _id: req.params.id })
-      .then((dbModel) => dbModel.remove())
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+  remove: async function (req, res) {
+    try {
+      const deleted = await db.Auth.destroy({ where: { id: req.params.id } });
+      res.json({ deleted });
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
 };
