@@ -2,7 +2,22 @@ node_modules
 password.txt
 keys.js
 .env
+.env.local
+.env.*.local
+.env.production
+.env.development
+.env.test
+.vscode/
+.DS_Store
 package-lock.json
 
+# client
 client/package-lock.json
+client/.env
+client/.env.local
+
+# SQL credential files
+db-credentials.json
+config/database.json
+config/*.secret.json
 
