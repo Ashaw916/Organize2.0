@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [26]
+        node-version: ['26.x']
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
@@ -27,6 +27,43 @@ jobs:
           else
             echo "package-lock.json not found, running npm install"
             npm install --no-audit --no-fund
+          fi
+      - name: Install client dependencies (deterministic)
+        run: |
+          if [ -f client/package-lock.json ]; then
+            echo "client/package-lock.json found, running npm ci in client"
+            cd client && npm ci --prefer-offline --no-audit --no-fund
+          else
+            echo "client/package-lock.json not found, running npm install in client"
+            cd client && npm install --no-audit --no-fund
+          fi
+      - name: Debug client deps
+        run: |
+          echo "Node $(node -v)";
+          echo "npm $(npm -v)";
+          echo "Client package.json react-scripts:";
+          node -e "const p=require('./client/package.json'); console.log(p.dependencies && p.dependencies['react-scripts'] || p.devDependencies && p.devDependencies['react-scripts'] || 'not specified')"
+          echo "client/npm ls react-scripts and ejs (top-level)";
+          cd client && npm ls react-scripts --depth=0 || true
+          cd client && npm ls ejs --depth=0 || true
+          if [ -f client/node_modules/ejs/package.json ]; then echo '--- ejs package.json ---'; cat client/node_modules/ejs/package.json; fi
+      - name: Remove ejs from client node_modules (workaround)
+        if: always()
+        run: |
+          if [ -d client/node_modules/ejs ]; then
+            echo "Removing client/node_modules/ejs to avoid bundling node-only fs dependency"
+            rm -rf client/node_modules/ejs
+          else
+            echo "client/node_modules/ejs not present"
+          fi
+      - name: Stub ejs in client node_modules (if root ejs exists)
+        run: |
+          if [ -d node_modules/ejs ] && [ ! -d client/node_modules/ejs ]; then
+            echo "Creating client/node_modules/ejs stub to shadow root ejs"
+            mkdir -p client/node_modules/ejs
+            printf "module.exports = {};" > client/node_modules/ejs/index.js
+          else
+            echo "No root ejs or client stub already present"
           fi
       - name: Build
         env:

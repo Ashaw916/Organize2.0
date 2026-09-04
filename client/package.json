@@ -8,18 +8,17 @@
     "@fullcalendar/daygrid": "^5.3.0",
     "@fullcalendar/interaction": "^5.3.1",
     "@fullcalendar/react": "^5.3.0",
-    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.20.0",
+    "axios": "^1.20.0",
     "dotenv": "^8.2.0",
     "font-awesome": "^4.7.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.3",
     "lodash": "^4.17.10",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "5.0.1",
     "react-switch": "^5.0.1"
   },
   "scripts": {
@@ -30,6 +29,10 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "browser": {
+    "ejs": false,
+    "express-ejs-layouts": false
   },
   "browserslist": {
     "production": [
@@ -47,9 +50,6 @@
     "@babel/core": "^7.11.5",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
-    "babel-loader": "^8.1.0",
-    "css-loader": "^4.2.2",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
+    "react-scripts": "^5.0.1"
   }
 }

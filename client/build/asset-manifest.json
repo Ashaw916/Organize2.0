@@ -1,34 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.0128b978.chunk.css",
-    "main.js": "/static/js/main.e7f0cf6e.chunk.js",
-    "main.js.map": "/static/js/main.e7f0cf6e.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.a5c2210b.js",
-    "runtime-main.js.map": "/static/js/runtime-main.a5c2210b.js.map",
-    "static/css/2.9ccd8201.chunk.css": "/static/css/2.9ccd8201.chunk.css",
-    "static/js/2.95629f94.chunk.js": "/static/js/2.95629f94.chunk.js",
-    "static/js/2.95629f94.chunk.js.map": "/static/js/2.95629f94.chunk.js.map",
+    "main.css": "/static/css/main.e0ba029c.css",
+    "main.js": "/static/js/main.1ecb177d.js",
+    "static/media/contactimg.png": "/static/media/contactimg.be43f56c6734fcdaae55.png",
+    "static/media/news_banner.png": "/static/media/news_banner.1fa7b2a5310bf36e158d.png",
+    "static/media/donatejumbo.png": "/static/media/donatejumbo.52aa4bef036ae98a6a9f.png",
+    "static/media/newsprotest.png": "/static/media/newsprotest.a064f9a73ce809500a08.png",
+    "static/media/newsgroup.png": "/static/media/newsgroup.aa20e13e4f0aee33a205.png",
+    "static/media/newswoman.png": "/static/media/newswoman.3b08b56d6ce4e298d0a9.png",
+    "static/media/organize_jumbo.png": "/static/media/organize_jumbo.ea3c64811d59df89918c.png",
+    "static/media/profile.png": "/static/media/profile.3cd7e87b561ed276c9c5.png",
+    "static/media/managejumbo.png": "/static/media/managejumbo.cd91d099c06e42b0ece3.png",
     "index.html": "/index.html",
-    "precache-manifest.3ebabdef8aed0678cd35174303a1b8b4.js": "/precache-manifest.3ebabdef8aed0678cd35174303a1b8b4.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.9ccd8201.chunk.css.map": "/static/css/2.9ccd8201.chunk.css.map",
-    "static/css/main.0128b978.chunk.css.map": "/static/css/main.0128b978.chunk.css.map",
-    "static/js/2.95629f94.chunk.js.LICENSE.txt": "/static/js/2.95629f94.chunk.js.LICENSE.txt",
-    "static/media/contactimg.png": "/static/media/contactimg.8f3d9c7b.png",
-    "static/media/donatejumbo.png": "/static/media/donatejumbo.5d95646d.png",
-    "static/media/Manage.css": "/static/media/managejumbo.6bcce663.png",
-    "static/media/Resources.css": "/static/media/news_banner.c1cfb3ee.png",
-    "static/media/newsgroup.png": "/static/media/newsgroup.35d090cc.png",
-    "static/media/newsprotest.png": "/static/media/newsprotest.7806434d.png",
-    "static/media/newswoman.png": "/static/media/newswoman.5393c57e.png",
-    "static/media/Landing.css": "/static/media/organize_jumbo.3267e4c7.png",
-    "static/media/Profile.css": "/static/media/profile.70543444.png"
+    "main.e0ba029c.css.map": "/static/css/main.e0ba029c.css.map",
+    "main.1ecb177d.js.map": "/static/js/main.1ecb177d.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.a5c2210b.js",
-    "static/css/2.9ccd8201.chunk.css",
-    "static/js/2.95629f94.chunk.js",
-    "static/css/main.0128b978.chunk.css",
-    "static/js/main.e7f0cf6e.chunk.js"
+    "static/css/main.e0ba029c.css",
+    "static/js/main.1ecb177d.js"
   ]
 }
